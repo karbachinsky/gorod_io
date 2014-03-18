@@ -1,0 +1,53 @@
+{% extends 'gorod/layout.html' %}
+
+{% load staticfiles %}
+
+{% block meta_title %}
+    Gorod.io - Гиперлокальная платформа для малых городов
+{% endblock %}
+
+{% block meta_description %}
+    Gorod.io - Гиперлокальная платформа для малых городов
+{% endblock %}
+
+{% block head_style %}
+    #data {
+        margin: 0;
+    }
+    #index {
+        text-align: center;
+        margin-top: 8%;
+    }
+
+    li {
+        list-style-type: none;
+    }
+    h1 {
+        font-size: 3em; 
+        color: gray;
+    }
+    a {
+        font-size: 1.4em;
+        color: #8c008c;
+    }
+{% endblock %}
+
+
+
+{% block header %}{% endblock %}
+
+{% block city_wallpaper %}{% endblock %}
+
+{% block content %}
+    <div id="index">
+        <h1>Гиперлокальная платформа для малых городов</h1>
+        <ul>
+        {% for city in cities %}
+            <li>
+                <a href="{% url 'gorod:city' city.name %}">{{ city.title }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+

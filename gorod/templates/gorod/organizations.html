@@ -1,0 +1,38 @@
+{% extends 'gorod/layout.html' %}
+
+{% load staticfiles %}
+
+{% block meta_title %}
+    {{ city.title }} - Организации
+{% endblock %}
+
+{% block meta_description %}
+    {{ city.title }} - Организации
+{% endblock %}
+
+{% block city_name%}{{ city.title }}{% endblock %}
+
+
+{% block content %}
+    <div id="organizations">
+        <ul>
+
+            {% for organization in organizations %}
+
+                <li class="organizations-item article-common">
+                    <div class="icon">
+                        <img src="{% if organization.logo %}{{ organization.logo.url}}" title="{{ organization.name}}{% endif %}" />
+                    </div>
+                    <div class="name">
+                        <h2><a href="{% url 'gorod:organization' organization.id %}">{{ organization.name }}</a></h2>
+                    </div>
+                </li>
+                <!-- /Feed item -->
+
+            {% endfor %}
+
+        </ul>
+        <div class="clear"></div>
+    </div>
+{% endblock %}
+

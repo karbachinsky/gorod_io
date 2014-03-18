@@ -1,0 +1,38 @@
+{% extends 'gorod/layout.html' %}
+
+{% load staticfiles %}
+
+{% block meta_title %}
+    {{ article.title }} - {{city.title}}
+{% endblock %}
+
+{% block meta_description %}
+    {{ article.title }} - {{city.title}}
+{% endblock %}
+
+{% block city_name%}{{ city.title }}{% endblock %}
+
+
+{% block content %}
+    <div id="article" class="article-common">
+        <div class="article-icon">
+            <img src="{% static 'gorod/img/feed_icon/city.png' %}" />
+        </div>
+
+        <div class="head">
+            <h2>{{ article.title }}</h2>
+        </div>
+        
+        <div class="author-name">
+            {{ article.user.first_name }} {{ article.user.last_name }}, {{ article.add_date }}, {{ article.rubric }}
+        </div>
+                    
+        <div class="text">
+            {% autoescape off %}
+                {{ article.text }} 
+            {% endautoescape %} 
+        </div>
+    </div>
+    <div class="clear"></div>
+{% endblock %}
+

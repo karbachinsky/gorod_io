@@ -1,0 +1,59 @@
+body{
+	min-width: 580px;
+}
+.b-header{
+	background: #20202f;
+	padding: 20px 3%;
+	vertical-align: top;
+	line-height: 16px;
+
+	font-size: 12px;
+	a{
+		font-weight: 300;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+}
+.b-header__city{
+	float:left;
+	color:#2ecc71;
+}
+.b-header__menu{
+	float:left;
+	height:16px;
+
+	li{
+		@include inline-block;
+		vertical-align: top;
+		margin-left: 30px;
+
+		a{
+			line-height: 16px;
+			color:#bdc3c7;
+		}
+	}
+}
+.b-header__add{
+	float:right;
+	@include inline-block;
+	padding:6px 16px;
+	border:1px solid #2ecc71;
+	color:#2ecc71;
+	@include border-radius(17px);
+	margin:-7px 0;
+
+}
+.b-footer{
+}
+
+@media screen and (max-width: 900px) { 
+	.b-header{
+		font-size: 11px;
+	}
+}
+@media screen and (max-width: 750px) { 
+	.b-header{
+		font-size: 9px;
+	}
+}

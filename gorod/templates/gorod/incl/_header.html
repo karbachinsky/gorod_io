@@ -1,0 +1,15 @@
+{% load staticfiles %}
+<div class="b-header">
+   	<a class="b-header__city" href="{% url 'gorod:city' city.name %}">{{city.title}}</a>
+	<ul class="b-header__menu">
+		<li><a href="/">События</a></li>
+		<li><a href="/">Галерея</a></li>
+		<li><a href="/">Афиша</a></li>
+		<li><a href="/">Объявления</a></li>
+		<li><a href="/">Организации</a></li>
+	</ul>
+	{% if request.user.is_superuser %}
+        <a href="/admingorod/article/add/" class="b-header__add" target="blank">Добавить</a>
+	{% endif %}
+	<div class="clear"></div>
+</div>

@@ -2,55 +2,32 @@
 
 {% load staticfiles %}
 
-{% block meta_title %}
-    {{ city.title }} - события дня
-{% endblock %}
+{% block meta_title %}{{ city.title }} - события дня{% endblock %}
 
-{% block meta_description %}
-    {{ city.title }} - события дня
-{% endblock %}
-
-{% block city_name%}{{ city.title }}{% endblock %}
-
+{% block meta_description %}{{ city.title }} - события дня{% endblock %}
 
 {% block content %}
-    <div id="feed">
-        <ul>
+    <div class="b-feed">
+        <ul class="b-feed__list">
+            <div class="grid-sizer"></div>
+            <div class="gutter-sizer"></div>
 
             {% for article in articles %}
-
-                <!-- Feed item -->
-                <li class="feed-item article-common">
-                    <div class="article-icon">
-                        <img src="{% static 'gorod/img/feed_icon/city.png' %}" />
-                    </div>
-                    <div class="head">
-                        <h2><a href="{% url 'gorod:article' article.id %}">{{ article.title }}</a></h2>
-                    </div>
-                                
-                    <div class="brief">
-                        <span>
-                            {% autoescape off %}
-                            {{ article.text|striptags|truncatechars:255 }} 
-                            {% endautoescape %}
-                            <a href="{% url 'gorod:article' article.id %}">Подробнее</a>
-                        </span>
-                        <div class="clear brief-line"></div>
-                    </div>
-
-                    <div class="author">
-                        <div class="author-avatar" style="background: #c1c1c1 url({% static 'gorod/img/people/laima.png' %}) center no-repeat;"></div>
-                        <div class="author-name">{{ article.user.first_name }} {{ article.user.last_name }}</div>
-                        <div class="clear"></div>
-                    </div>
-
+                <li class="b-feed-item">
+                    <h2 class="b-feed-item__header">
+                        <a href="{% url 'gorod:article' article.id %}">{{ article.title }}</a>
+                    </h2>                        
+                    <p class="b-feed-item__text">
+                        {% autoescape off %}
+                        {{ article.text|striptags|truncatechars:255 }} 
+                        {% endautoescape %}
+                        <a href="{% url 'gorod:article' article.id %}">Подробнее</a>
+                    </p>
+                    <span class="author-name">{{ article.user.first_name }} {{ article.user.last_name }}</span>
+                 
                 </li>
-                <!-- /Feed item -->
-
             {% endfor %}
-
         </ul>
-        <div class="clear"></div>
     </div>
 {% endblock %}
 

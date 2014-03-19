@@ -1,0 +1,9 @@
+{
+  "name": "gorod.io",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-compass": "latest"
+  }
+}

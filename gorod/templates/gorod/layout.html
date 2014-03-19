@@ -10,94 +10,23 @@
     <meta name="keywords" content="{% block meta_keywords %}gorod.io{% endblock %}" />
     <meta name="description" content="{% block meta_description %}gorod.io{% endblock %}" />    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-    <link href="{% static 'gorod/css/style.css' %}" rel="stylesheet" type="text/css" />
-    <link rel="SHORTCUT ICON" href="{% static 'gorod/img/favicon.ico' %}" />
-    <style>{% block head_style %}{% endblock %}</style>
+    {% include "gorod/incl/_static.html" %}
 </head>
 
 <body>
-
-
-    <div id="main">
-    
-        {% block header %}
-        <div id="header">
-            <div class="top">
-				<div id="header-data">
-					<div id="menu">
-						<ul>
-							<li><a href="{% url 'gorod:city' city.name %}" class="current">Лента</a></li>
-							<li><a href="{% url 'gorod:organizations' city.name %}" >Организации</a></li>
-							<!-- <li><a href="">События</a></li>
-							<li><a href="">Афиша</a></li>
-							<li><a href="">Фотографии</a></li>
-							<li><a href="">Объявления</a></li> -->
-						</ul>
-					</div>
-					{% if request.user.is_superuser %}
-                        <a href="/admingorod/article/add/" id="add" target="blank">
-                            Добавить
-                        </a>
-					{% endif %}
-					<div class="clear"></div>
-				</div>
-            </div>
-            {% block header_append %}
-                <div id="city-bg" style="background-image: url(
-                    {% block city_wallpaper %}
-                        {% if city and city.wallpaper %}
-                            {{ city.wallpaper.url}}
-                        {% else %}
-                            {% static 'gorod/img/city_bg.png' %}
-                        {% endif %}
-                    {% endblock %}
-                );">
-
-
-                    <h1 class="city-name"> {% block city_name %}{% endblock %} </h1>
-                </div>
-                <div class="bottom">
-                    <div id="today">
-                        Сегодня
-                    </div>
-                </div>
-            {% endblock%}
-        </div>
-        {% endblock %}
-
-        <div id="data">
-            {% block content %}{% endblock %}
-        </div>
-
-
-        {% block footer %}
-        <div id="footer">
-
-        </div>
-        {% endblock %}
- 
-        <a href="/" id="logo">
-		    <img src="{% static 'gorod/img/logo.png' %}" width="50" title="Gorod.in" />
-        </a>
-
-    </div>
-    {% block counters %}
-        <div class="hidden">
-            <!--LiveInternet counter--><script type="text/javascript"><!--
-            document.write("<a href='http://www.liveinternet.ru/click' "+
-            "target=_blank><img src='//counter.yadro.ru/hit?t26.6;r"+
-            escape(document.referrer)+((typeof(screen)=="undefined")?"":
-            ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-            screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-            ";"+Math.random()+
-            "' alt='' title='LiveInternet: показано число посетителей за"+
-            " сегодня' "+
-            "border='0' width='88' height='15'><\/a>")
-            //--></script><!--/LiveInternet-->
-        </div>
-
+    {% block header %}
+        {% include "gorod/incl/_header.html" %}
     {% endblock %}
+
+    {% block content %}{% endblock %}
+
+
+    {% block footer %}
+        {% include "gorod/incl/_footer.html" %}
+    {% endblock %}
+    
+    {% include "gorod/incl/_counters.html" %}
+
 </body>
 
 </html>

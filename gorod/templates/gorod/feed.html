@@ -16,7 +16,10 @@
                 <li class="b-feed-item">
                     <h2 class="b-feed-item__header">
                         <a href="{% url 'gorod:article' article.id %}">{{ article.title }}</a>
-                    </h2>                        
+                    </h2>             
+                    {% if article.picture %}
+                        <img class="b-feed-item__picture" src="{{article.picture.url}}" />
+                    {% endif %}           
                     <p class="b-feed-item__text">
                         {% autoescape off %}
                         {{ article.text|striptags|truncatechars:255 }} 

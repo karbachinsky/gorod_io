@@ -10,13 +10,16 @@
 		margin: 0;
 	}
 }
-
+img.b-feed-item__picture{
+	width:100%;
+}
 .grid-sizer{
 	width:22%;
 }
 .gutter-sizer{
 	width:4%;
 }
+
 @media screen and (max-width: 900px) { 
 	.b-feed-item{
 		width:46%;

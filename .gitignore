@@ -2,3 +2,4 @@
 *.swp
 *.swo
 settings.py
+gorod_io/settings.py

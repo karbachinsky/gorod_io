@@ -1,9 +1,8 @@
 {% load staticfiles %}
 <div class="b-header">
-   	<a class="b-header__city" href="{% url 'gorod:city' city.name %}">{{city.title}}</a>
 	<ul class="b-header__menu">
-		<!--<li><a href="/">События</a></li>
-		<li><a href="/">Галерея</a></li>
+		<li class="b-header__menu-item_current"><a href="{% url 'gorod:city' city.name %}">{{city.title}}</a></li>
+		<!--<li><a href="/">Галерея</a></li>
 		<li><a href="/">Афиша</a></li>
 		<li><a href="/">Объявления</a></li>-->
 		<li><a href="/">Организации</a></li>

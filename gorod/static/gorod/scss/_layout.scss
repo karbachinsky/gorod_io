@@ -7,7 +7,7 @@ body{
 	vertical-align: top;
 	line-height: 16px;
 
-	font-size: 12px;
+	font-size: 14px;
 	a{
 		font-weight: 300;
 		text-decoration: none;
@@ -45,15 +45,4 @@ body{
 
 }
 .b-footer{
-}
-
-@media screen and (max-width: 900px) { 
-	.b-header{
-		font-size: 11px;
-	}
-}
-@media screen and (max-width: 750px) { 
-	.b-header{
-		font-size: 9px;
-	}
 }

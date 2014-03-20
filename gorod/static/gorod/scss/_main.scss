@@ -1,5 +1,6 @@
-.container{
+.b-index__container{
 	width:1140px;
+	padding:0 20px;
 	margin:auto;
 }
 
@@ -16,13 +17,13 @@
 .b-index-top__column{
 	width:380px;
 	float:left;
-	font-size: 11px;
+	font-size: 13px;
 	line-height: 22px;
 	color:#333333;
 }
 .b-index-top__column h2{
 	color:#7f8c8d;
-	font-size: 30px;
+	font-size: 32px;
 	line-height: 38px;
 	font-weight: 400;
 	margin: 0;
@@ -37,7 +38,7 @@
 .b-index-top__column h4{
 	color:#2ecc71;
 	font-weight: 400;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 27px;
 	margin: 0 0 6px;
 }

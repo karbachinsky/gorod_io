@@ -2,15 +2,9 @@
 
 {% load staticfiles %}
 
-{% block meta_title %}
-    {{ article.title }} - {{city.title}}
-{% endblock %}
+{% block meta_title %}{{ article.title }} - {{city.title}}{% endblock %}
 
-{% block meta_description %}
-    {{ article.title }} - {{city.title}}
-{% endblock %}
-
-{% block city_name%}{{ city.title }}{% endblock %}
+{% block meta_description %}{{ article.title }} - {{city.title}}{% endblock %}
 
 
 {% block content %}

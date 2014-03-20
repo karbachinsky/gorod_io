@@ -13,24 +13,52 @@
             <div class="gutter-sizer"></div>
 
             {% for article in articles %}
-                <li class="b-feed-item">
-                    <h2 class="b-feed-item__header">
-                        <a href="{% url 'gorod:article' article.id %}">{{ article.title }}</a>
-                    </h2>             
-                    {% if article.picture %}
-                        <img class="b-feed-item__picture" src="{{article.picture.url}}" />
-                    {% endif %}           
-                    <p class="b-feed-item__text">
-                        {% autoescape off %}
-                        {{ article.text|striptags|truncatechars:255 }} 
-                        {% endautoescape %}
-                        <a href="{% url 'gorod:article' article.id %}">Подробнее</a>
-                    </p>
-                    <span class="author-name">{{ article.user.first_name }} {{ article.user.last_name }}</span>
-                 
-                </li>
+
+                {# galery without picture not working #}
+                {% if article.rubric.name != "galery" or article.picture %}
+                    <li class="b-feed-item  b-feed-item_{{article.rubric}}" >
+                
+                        {# not galery img #}
+                        {% if article.picture and article.rubric.name != "galery" %}
+                            <img class="b-feed-item__picture" src="{{article.picture.url}}" />
+                        {% endif %} 
+                        
+                        {# rubric #}
+                        <span class="b-feed-item__rubrik">{{ article.rubric }}</span>
+                        
+                        {# galery author #}
+                        {% if article.picture and article.rubric.name == "galery"%}
+                            <span class="b-feed-item__author">{{ article.user }}</span>
+                        {% endif %} 
+
+
+                        {# not galery title #}
+                        {% if article.rubric.name != "galery" %}
+                            <h2 class="b-feed-item__title">
+                                <a href="{% url 'gorod:article' article.id %}">{{ article.title }}</a>
+                            </h2> 
+                        {% endif %}         
+
+                        {# galery img #}    
+                        {% if article.picture and article.rubric.name == "galery"%}
+                            <img class="b-feed-item__picture" src="{{article.picture.url}}" />
+                        {% endif %}           
+                        
+
+                        {# not galery text #} 
+                        {% if article.text and article.rubric.name != "galery"%}  
+                            <p class="b-feed-item__text">
+                                {% autoescape off %}
+                                {{ article.text|striptags|truncatechars:255 }} 
+                                {% endautoescape %}
+                            </p>
+                        {% endif %} 
+                     
+                    </li>
+                {% endif %}
             {% endfor %}
         </ul>
     </div>
+
 {% endblock %}
 

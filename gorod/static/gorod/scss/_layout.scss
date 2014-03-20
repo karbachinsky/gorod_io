@@ -6,7 +6,6 @@ body{
 	padding: 20px 3%;
 	vertical-align: top;
 	line-height: 16px;
-
 	font-size: 14px;
 	a{
 		font-weight: 300;
@@ -17,7 +16,6 @@ body{
 }
 .b-header__city{
 	float:left;
-	color:#2ecc71;
 }
 .b-header__menu{
 	float:left;
@@ -28,9 +26,18 @@ body{
 		vertical-align: top;
 		margin-left: 30px;
 
+		&:first-child{
+			margin-left: 0;
+		}
 		a{
 			line-height: 16px;
 			color:#bdc3c7;
+		}
+
+		&.b-header__menu-item_current{
+			a{
+				color:#2ecc71;
+			}
 		}
 	}
 }

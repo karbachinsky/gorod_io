@@ -8,25 +8,21 @@
 
 
 {% block content %}
-    <div id="article" class="article-common">
-        <div class="article-icon">
-            <img src="{% static 'gorod/img/feed_icon/city.png' %}" />
-        </div>
+    <div class="b-article">
 
-        <div class="head">
-            <h2>{{ article.title }}</h2>
+        <div class="b-article__info">
+            <span class="b-article__author">{{ article.user.first_name }} {{ article.user.last_name }},</span>
+            <span class="b-article__date">{{ article.add_date }},</span>
+            <span class="b-article__rubric">{{ article.rubric }}</span>
         </div>
         
-        <div class="author-name">
-            {{ article.user.first_name }} {{ article.user.last_name }}, {{ article.add_date }}, {{ article.rubric }}
-        </div>
+        <h2 class="b-article__title">{{ article.title }}</h2>
                     
-        <div class="text">
+        <div class="b-article__text">
             {% autoescape off %}
                 {{ article.text }} 
             {% endautoescape %} 
         </div>
     </div>
-    <div class="clear"></div>
 {% endblock %}
 

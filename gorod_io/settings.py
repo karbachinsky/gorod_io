@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'gorod_io.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gorodin',
+        'NAME': 'gorod_in',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
@@ -89,7 +89,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = None
 
@@ -105,25 +105,23 @@ ADMINS = (('Igor', 'igorkarbachinsky@mail.ru'))
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_ROOT = 'C:/gorod.in/static/'
+STATIC_ROOT = '/home/igor/git/working_copy/gorod.in/static/'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    'C:/gorod.in/gorod/static',
-    'C:/python27/Lib/site-packages/django/contrib/admin/static',
-    'C:/python27/Lib/site-packages/django_ckeditor_updated-4.2.7-py2.7.egg/ckeditor/static'
+    '/home/igor/git/working_copy/gorod.in/gorod/static',
+    '/usr/local/lib/python2.7/dist-packages/django/contrib/admin/static',
+    '/usr/local/lib/python2.7/dist-packages/ckeditor/static'
 )
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
 )
 
-CKEDITOR_UPLOAD_PATH = "C:/gorod.in/media/uploads/"
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
-MEDIA_ROOT = 'C:/gorod.in/media/'
+MEDIA_ROOT = '/home/igor/git/working_copy/gorod.in/media/'
 MEDIA_URL = '/media/'
-#ADMIN_MEDIA_PREFIX = '/uploads_admin/'
-
 
 CKEDITOR_CONFIGS = {
     "default": {

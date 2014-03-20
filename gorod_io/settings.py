@@ -20,9 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'w1^2-jaji&(1h0n17_!d8-cqz4ot8^vjtv5qq%trq04pvm7li#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['.gorod.io','gorod.io','.gorod.io.fstest.ru','gorod.in.fstest.ru']
 

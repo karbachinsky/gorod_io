@@ -21,6 +21,7 @@ class City(models.Model):
 class ArticleRubric(models.Model):
     """ ArticleRubric class """
     name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.name

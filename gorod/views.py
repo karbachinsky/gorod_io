@@ -8,7 +8,7 @@ from gorod.models import City, Article, Organization
 
 # Main page
 def index(request):
-    cities = City.objects.all
+    cities = City.objects.order_by('title').all
 
     context = {
         'cities': cities

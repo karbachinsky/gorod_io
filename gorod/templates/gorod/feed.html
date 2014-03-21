@@ -17,47 +17,51 @@
             {% for article in articles %}
 
                 {# photo without picture not working #}
-                {% if article.rubric.name != "photo" or article.picture %}
-                    <li class="b-feed-item  b-feed-item_{{article.rubric}}" >
-                
-                        {# not photo img #}
-                        {% if article.picture and article.rubric.name != "photo" %}
-                            <img class="b-feed-item__picture" src="{{article.picture.url}}" />
-                        {% endif %} 
-                        
-                        {# rubric #}
-                        <span class="b-feed-item__rubrik">{{ article.rubric.title }}</span>
-                        
-                        {# photo author #}
-                        {% if article.picture and article.rubric.name == "photo"%}
-                            <span class="b-feed-item__author">{{ article.user }}</span>
-                        {% endif %} 
+                <li class="b-feed-item  b-feed-item_{{article.rubric}}" >
+            
+                    {# not photo img #}
+                    {% if article.picture and article.rubric.name != "photo" %}
+                        <a href="{% url 'gorod:article' article.id %}" class="b-feed-item__picture">
+                            <img  src="{{article.picture.url}}" />
+                        </a>
+                    {% endif %} 
+                    
+                    {# rubric #}
+                    <span class="b-feed-item__rubrik">{{ article.rubric.title }}</span>
+                    
+                    {# photo author #}
+                    {% if article.picture and article.rubric.name == "photo"%}
+                        <span class="b-feed-item__author">{{ article.user }}</span>
+                    {% endif %} 
 
 
-                        {# not photo title #}
-                        {% if article.rubric.name != "photo" %}
-                            <h2 class="b-feed-item__title">
-                                <a href="{% url 'gorod:article' article.id %}">{{ article.title }}</a>
-                            </h2> 
-                        {% endif %}         
+                    {# photo img #}    
+                    {% if article.picture and article.rubric.name == "photo"%}
+                        <a href="{% url 'gorod:article' article.id %}" class="b-feed-item__picture">
+                            <img  src="{{article.picture.url}}" />
+                        </a>
+                    {% endif %} 
 
-                        {# photo img #}    
-                        {% if article.picture and article.rubric.name == "photo"%}
-                            <img class="b-feed-item__picture" src="{{article.picture.url}}" />
-                        {% endif %}           
-                        
+                    {# title #}
+                    {#{% if article.rubric.name != "photo" %}#}
+                        <h2 class="b-feed-item__title">
+                            <a href="{% url 'gorod:article' article.id %}">{{ article.title }}</a>
+                        </h2> 
+                    {#{% endif %}  #}         
+                    
 
-                        {# not photo text #} 
-                        {% if article.text and article.rubric.name != "photo"%}  
-                            <p class="b-feed-item__text">
+                    {# not photo text #} 
+                    {% if article.text and article.rubric.name != "photo"%}  
+                        <p class="b-feed-item__text">
+                            <a href="{% url 'gorod:article' article.id %}">
                                 {% autoescape off %}
                                 {{ article.text|striptags|truncatechars:255 }} 
                                 {% endautoescape %}
-                            </p>
-                        {% endif %} 
-                     
-                    </li>
-                {% endif %}
+                            </a>
+                        </p>
+                    {% endif %} 
+                 
+                </li>
             {% endfor %}
         </ul>
     </div>

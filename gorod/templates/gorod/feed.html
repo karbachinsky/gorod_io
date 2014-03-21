@@ -6,6 +6,8 @@
 
 {% block meta_description %}{{ city.title }} - события дня{% endblock %}
 
+{% block meta_additional %}<meta name="viewport" content="width=device-width" />{% endblock %}
+
 {% block content %}
     <div class="b-feed">
         <ul class="b-feed__list">
@@ -14,39 +16,39 @@
 
             {% for article in articles %}
 
-                {# galery without picture not working #}
-                {% if article.rubric.name != "galery" or article.picture %}
+                {# photo without picture not working #}
+                {% if article.rubric.name != "photo" or article.picture %}
                     <li class="b-feed-item  b-feed-item_{{article.rubric}}" >
                 
-                        {# not galery img #}
-                        {% if article.picture and article.rubric.name != "galery" %}
+                        {# not photo img #}
+                        {% if article.picture and article.rubric.name != "photo" %}
                             <img class="b-feed-item__picture" src="{{article.picture.url}}" />
                         {% endif %} 
                         
                         {# rubric #}
-                        <span class="b-feed-item__rubrik">{{ article.rubric }}</span>
+                        <span class="b-feed-item__rubrik">{{ article.rubric.title }}</span>
                         
-                        {# galery author #}
-                        {% if article.picture and article.rubric.name == "galery"%}
+                        {# photo author #}
+                        {% if article.picture and article.rubric.name == "photo"%}
                             <span class="b-feed-item__author">{{ article.user }}</span>
                         {% endif %} 
 
 
-                        {# not galery title #}
-                        {% if article.rubric.name != "galery" %}
+                        {# not photo title #}
+                        {% if article.rubric.name != "photo" %}
                             <h2 class="b-feed-item__title">
                                 <a href="{% url 'gorod:article' article.id %}">{{ article.title }}</a>
                             </h2> 
                         {% endif %}         
 
-                        {# galery img #}    
-                        {% if article.picture and article.rubric.name == "galery"%}
+                        {# photo img #}    
+                        {% if article.picture and article.rubric.name == "photo"%}
                             <img class="b-feed-item__picture" src="{{article.picture.url}}" />
                         {% endif %}           
                         
 
-                        {# not galery text #} 
-                        {% if article.text and article.rubric.name != "galery"%}  
+                        {# not photo text #} 
+                        {% if article.text and article.rubric.name != "photo"%}  
                             <p class="b-feed-item__text">
                                 {% autoescape off %}
                                 {{ article.text|striptags|truncatechars:255 }} 

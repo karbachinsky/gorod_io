@@ -1,6 +1,9 @@
 static
 media
+templates
 *.pyc
 *.swp
 *.swo
 gorod_io/settings.py
+gorod/migrations/
+

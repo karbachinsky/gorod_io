@@ -44,6 +44,9 @@ execute_remote() {
 
     server=`echo "$host" | sed "s/.*@//g"`
 
+    # GOVNOKOD
+    command="~/env.sh; $command"
+
     if [ "$server" != "localhost" ]; then
         sshpass -p $password ssh $ssh_opts $ssh_key "$ssh_user"@"$host" "$command"
     else
@@ -72,7 +75,11 @@ execute_remote() {
 
 
 # Updating files
-execute_remote $host  "cd $app_dir; git reset --hard; git pull origin"
+execute_remote $host  "cd $app_dir; git reset --hard; git clean -f -d"
+execute_remote $host  "cd $app_dir; git pull origin"
+
+# Updating settings.py
+execute_remote $host "cd $app_dir; cp gorod_io/settings.py.production gorod_io/settings.py"
 
 # Updating db
 execute_remote $host "cd $app_dir; ./manage.py schemamigration gorod --auto"
@@ -81,8 +88,6 @@ execute_remote $host "cd $app_dir; /manage.py migrate gorod"
 # Updating static
 execute_remote $host "cd $app_dir; ./manage.py collectstatic"
 
-# Updating settings.py
-execute_remote $host "cd $app_dir; cp gorod_io/settings.py.production gorod_io/settings.py"
 
 # Restart wsgi
 execute_remote $host "cd $app_dir; touch index.wsgi"

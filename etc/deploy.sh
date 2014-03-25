@@ -9,9 +9,8 @@ set -o pipefail
 set -x
 
 
-# production server
-host="81.222.134.119"
-# ssh port
+# production serverhost="81.222.134.119"
+host="localhost"
 port=2222
 # ssh user
 ssh_user="gorodin"
@@ -21,13 +20,13 @@ app_dir="/home/g/gorodin/gorod.in"
 ssh_opts="-p $port"
 ssh_key=""
 
-read -s -p "ssh password: " password
+#read -s -p "ssh password: " password
 
 
-if [ -z "$password" ]; then
-    echo "Plese specify ssh password! ./deploy.sh *******" >&2 
-    exit 1
-fi
+#if [ -z "$password" ]; then
+#    echo "Plese specify ssh password! ./deploy.sh *******" >&2 
+#    exit 1
+#fi
 
 
 execute_remote() {

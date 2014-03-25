@@ -1,9 +1,8 @@
-static
-media
-templates
+/static
+/media
 *.pyc
 *.swp
 *.swo
-gorod_io/settings.py
-gorod/migrations/
+/gorod_io/settings.py
+/gorod/migrations/
 

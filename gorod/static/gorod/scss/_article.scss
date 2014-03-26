@@ -1,9 +1,35 @@
 .b-article{
-	padding:50px 30px;
-	width:800px;
+	padding:60px 30px;
+	width:650px;
 	margin: auto;
 }
 .b-article__title{
-	margin:100px 0 40px; 
-	width: 100%;
+	margin:60px 0 30px; 
+	font-weight: 500;
+	font-size: 26px;
+
+	color:#444;
 } 
+.b-article__author{
+	color:#aaa;
+	font-size: 14px;
+}
+.b-article__date{
+	color:#333;
+	font-size: 14px;
+
+}
+.b-article__picture{
+	width:100%;
+}
+.b-article__text{
+	font-size: 14px;
+	color:#444;
+
+	p{
+		margin:1.5em 0;
+	}
+	img{
+		width:100%;
+	}
+}

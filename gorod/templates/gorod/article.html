@@ -11,13 +11,17 @@
     <div class="b-article">
 
         <div class="b-article__info">
-            <span class="b-article__author">{{ article.user.first_name }} {{ article.user.last_name }},</span>
-            <span class="b-article__date">{{ article.add_date }},</span>
-            <span class="b-article__rubric">{{ article.rubric }}</span>
+            <span class="b-article__author">{{ article.user.first_name }} {{ article.user.last_name }}</span><br />
+            <span class="b-article__date">{{ article.add_date }}</span>
+            {#<span class="b-article__rubric">{{ article.rubric }}</span>#}
         </div>
         
         <h2 class="b-article__title">{{ article.title }}</h2>
                     
+        {% if article.picture and article.picture.url %}
+            <img class="b-article__picture" src="{{article.picture.url}}" />
+        {% endif %}
+
         <div class="b-article__text">
             {% autoescape off %}
                 {{ article.text }} 

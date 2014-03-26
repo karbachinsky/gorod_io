@@ -1,1 +1,25 @@
-<h1 align="center">Ololo! Страница не найдена!</h1>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+    <title>Gorod.io</title>
+    <meta name="robots" content="all" />
+    <meta name="author" content="gorod.io" />
+    <meta name="copyright" content="Gorod.io" />
+    <meta name="distribution" content="global" />
+    <meta name="keywords" content="gorod.io" />
+    <meta name="description" content="gorod.io" />    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="{% static 'gorod/css/style.css' %}" rel="stylesheet" type="text/css" />
+	<link rel="SHORTCUT ICON" href="{% static 'gorod/img/favicon.ico' %}" />
+	<style>
+		html,body{
+			height:100%;
+		}
+		body{
+			background:url("{% static 'gorod/img/404.jpg' %}");
+			background-size: cover;
+		}
+	</style>
+<body>
+</head>

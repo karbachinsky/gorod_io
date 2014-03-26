@@ -5,7 +5,7 @@
 		<!--<li><a href="/">Галерея</a></li>
 		<li><a href="/">Афиша</a></li>
 		<li><a href="/">Объявления</a></li>-->
-		<li><a href="/">Организации</a></li>
+		<li><a href="{% url 'gorod:organizations' city.name %}">Организации</a></li>
 	</ul>
 	{% if request.user.is_superuser %}
         <a href="/admingorod/article/add/" class="b-header__add" target="blank">Добавить</a>

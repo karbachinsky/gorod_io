@@ -2,33 +2,23 @@
 
 {% load staticfiles %}
 
-{% block meta_title %}
-    {{ city.title }} - Организации
-{% endblock %}
+{% block meta_title %}{{ city.title }} - Организации{% endblock %}
 
-{% block meta_description %}
-    {{ city.title }} - Организации
-{% endblock %}
+{% block meta_description %}{{ city.title }} - Организации{% endblock %}
 
-{% block city_name%}{{ city.title }}{% endblock %}
+{% block meta_additional %}<meta name="viewport" content="width=device-width" />{% endblock %}
 
 
 {% block content %}
-    <div id="organizations">
-        <ul>
+    <div class="b-orgs">
+        <ul class="b-orgs__list">
+            <div class="grid-sizer"></div>
+            <div class="gutter-sizer"></div>
 
             {% for organization in organizations %}
-
-                <li class="organizations-item article-common">
-                    <div class="icon">
-                        <img src="{% if organization.logo %}{{ organization.logo.url}}" title="{{ organization.name}}{% endif %}" />
-                    </div>
-                    <div class="name">
-                        <h2><a href="{% url 'gorod:organization' organization.id %}">{{ organization.name }}</a></h2>
-                    </div>
+                <li class="b-orgs__item">
+                    <a href="{% url 'gorod:organization' organization.id %}">{{ organization.name }}</a>                 
                 </li>
-                <!-- /Feed item -->
-
             {% endfor %}
 
         </ul>

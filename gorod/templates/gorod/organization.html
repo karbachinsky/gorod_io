@@ -2,68 +2,55 @@
 
 {% load staticfiles %}
 
-{% block meta_title %}
-    {{ organization.name }} - {{city.title}}
-{% endblock %}
+{% block meta_title %}{{ organization.name }} - {{city.title}}{% endblock %}
 
-{% block meta_description %}
-    {{ organization.name }} - {{city.title}}
-{% endblock %}
-
-{% block city_name%}{{ city.title }}{% endblock %}
-
+{% block meta_description %}{{ organization.name }} - {{city.title}}{% endblock %}
 
 {% block content %}
-    <div id="organization">
-        <div class="logo">
-            <img src="{% if organization.logo %}{{ organization.logo.url}}" title="{{ organization.name}}{% endif %}" />
-        </div>
+    <div class="b-organization">
 
-        <div class="name">
-            <h2>{{ organization.name }}</h2>
-        </div>
+        {% if organization.logo %}
+            <img class="b-organization__logo" src="{{ organization.logo.url}}" title="{{ organization.name}}" />
+        {% endif %}
 
-        <div class="description">
-            {% autoescape off %}
-                {{ organization.description }} 
-            {% endautoescape %} 
+        <h2 class="b-organization__name">{{ organization.name }}</h2>
 
-        </div>
- 
-        <div class="phone">
-            <p>{{ organization.phone }}</p>
-        </div>
- 
-        <div class="address">
-            <p>{{ organization.address }}</p>
-        </div>
- 
-        <div class="web-site">
-            <p>
-                <a href="{{ organization.web_site }}" target="blank">{{ organization.web_site }}</a>
-            </p>
-        </div>
- 
-        <div class="map">
-            <!-- Yandex map-->
-            <script type="text/javascript" 
-                charset="utf-8" 
-                src="{{ organization.map_link }}">
-            </script>
-        </div>
+        {% if organization.phone or organization.web_site %}
+            <div class="b-organization__info">
+                {% if organization.phone %}
+                    <span>{{ organization.phone }}</span>
+                {% endif %}
 
+                {% if organization.web_site %}
+                    <a href="{{ organization.web_site }}"  target="blank">{{ organization.web_site }}</a>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if organization.address %}
+            <div class="b-organization__address">{{ organization.address }}</div>
+        {% endif %}
+
+        {% if organization.description %}
+            <div class="b-organization__description">
+                {% autoescape off %}
+                    {{ organization.description }} 
+                {% endautoescape %} 
+            </div>
+        {% endif %}
+ 
+
+        {% if organization.map_link %}
+            <div class="b-organization__map">
+                <!-- Yandex map-->
+                <script type="text/javascript" 
+                    charset="utf-8" 
+                    src="{{ organization.map_link }}">
+                </script>
+            </div>
+        {% endif %}
 
         
-        <div class="author-name">
-            {{ article.user.first_name }} {{ article.user.last_name }}, {{ article.add_date }}, {{ article.rubric }}
-        </div>
-                    
-        <div class="text">
-            {% autoescape off %}
-                {{ article.text }} 
-            {% endautoescape %} 
-        </div>
     </div>
-    <div class="clear"></div>
 {% endblock %}
 

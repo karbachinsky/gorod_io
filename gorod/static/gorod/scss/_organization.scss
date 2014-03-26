@@ -1,0 +1,40 @@
+.b-organization{
+	padding:60px 30px;
+	width:650px;
+	margin: auto;
+	color:#444;
+	font-size: 14px;
+}
+.b-organization__logo{
+	max-width: 200px;
+	margin-bottom: 25px;
+}
+.b-organization__name{
+	margin:0px 0 25px; 
+	font-weight: 500;
+	font-size: 26px;
+} 
+
+.b-organization__info{
+	margin-bottom: 25px;
+
+	span{
+		display: block;
+	}
+	a{
+		text-decoration: none;
+	}
+}
+.b-organization__address{
+	margin-bottom: 25px;
+}
+.b-organization__date{
+	color:#333;
+	font-size: 14px;
+
+}
+.b-organization__description{
+	p{
+		margin:0 0 25px 0;
+	}
+}

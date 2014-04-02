@@ -4,6 +4,14 @@
 	margin: auto;
 	color:#444;
 	font-size: 14px;
+	position: relative;
+
+	.edit-link{
+		@include inline-block;
+		position: absolute;
+		top:30px;
+		left:30px;
+	}
 }
 .b-organization__logo{
 	max-width: 200px;

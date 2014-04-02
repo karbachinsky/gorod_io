@@ -8,7 +8,11 @@
 
 {% block content %}
     <div class="b-organization">
-
+        
+        {% if request.user.is_superuser %}
+            <a class="edit-link" href="#">Редактировать</a>
+        {% endif %}
+        
         {% if organization.logo %}
             <img class="b-organization__logo" src="{{ organization.logo.url}}" title="{{ organization.name}}" />
         {% endif %}

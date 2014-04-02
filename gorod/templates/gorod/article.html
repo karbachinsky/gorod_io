@@ -9,9 +9,15 @@
 
 {% block content %}
     <div class="b-article">
-
+        
         <div class="b-article__info">
-            <span class="b-article__author">{{ article.user.first_name }} {{ article.user.last_name }}</span><br />
+            <span class="b-article__author">{{ article.user.first_name }} {{ article.user.last_name }}</span>
+            {% if request.user.is_superuser %}
+                <a class="edit-link" href="#">Редактировать</a>
+            {% endif %}
+
+            <br />
+            
             <span class="b-article__date">{{ article.add_date }}</span>
             {#<span class="b-article__rubric">{{ article.rubric }}</span>#}
         </div>

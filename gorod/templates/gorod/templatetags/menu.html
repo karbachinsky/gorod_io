@@ -1,0 +1,9 @@
+<ul class="b-header__menu">
+    {% for menuitem in menu %}
+        <li {% if menuitem.is_active %}class="b-header__menu-item_current" {% endif %}>
+            <a href="{{menuitem.link}}">
+                {{menuitem.title}}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

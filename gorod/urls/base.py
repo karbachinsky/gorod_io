@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     url(r'^town/(?P<city>\w+)/feed/?$', base.feed, name='feed'),
     # Article(s)
     url(r'^article/(?P<article_id>\d+)/?$', base.article, name='article'),
+    url(r'^town/(?P<city>\w+)/feed/rubric/(?P<rubric_name>\w+)/?', base.feed, name='feed_rubric'),
     # Organzation(s)
     url(r'^town/(?P<city>\w+)/organizations/?$', organizations.organizations, name='organizations'),
     url(r'^organization/(?P<organization_id>\d+)/?$', organizations.organization, name='organization'),

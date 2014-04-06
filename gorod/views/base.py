@@ -19,7 +19,6 @@ def index(request):
 
 # One city main page (feed)
 def feed(request, city_name='belev', rubric_name=None):
-    raise Exception(request)
     city = get_object_or_404(City, name=city_name)
   
     filters = {'city': city.id}

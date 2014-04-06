@@ -10,16 +10,25 @@ urlpatterns = patterns('',
     #url(r'^town/(?P<city>\w+)/?$', RedirectView.as_view(url='/town/kashin'), name='index'),
     #url(r'^$', RedirectView.as_view(url='/town/kashin'), name='index'),
 
-    url(r'^$', base.index, name='index'),
     # City main page
-    url(r'^town/(?P<city>\w+)/feed/?$', base.feed, name='feed'),
-    # Article(s)
+    url(r'^$', base.feed, name='city_main_page'),
+
+    # City feed page. The same as main page
+    url(r'^feed/?$', base.feed, name='feed'),
+
+    ## Articles
+
+    # One article page
     url(r'^article/(?P<article_id>\d+)/?$', base.article, name='article'),
-    url(r'^town/(?P<city>\w+)/feed/rubric/(?P<rubric_name>\w+)/?', base.feed, name='feed_rubric'),
-    # Organzation(s)
-    url(r'^town/(?P<city>\w+)/organizations/?$', organizations.organizations, name='organizations'),
+    # Rubric feed list page 
+    url(r'^feed/rubric/(?P<rubric_name>\w+)/?$', base.feed, name='feed_rubric'),
+
+    ## Organzations
+
+    # Organizations list page
+    url(r'^organizations/?$', organizations.organizations, name='organizations'),
+    # One organization page
     url(r'^organization/(?P<organization_id>\d+)/?$', organizations.organization, name='organization'),
 
-    url(r'^town/(?P<city>\w+)/?', base.feed, name='city'),
 )
 

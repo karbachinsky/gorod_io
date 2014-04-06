@@ -2,7 +2,8 @@
 
 {% load menu %}
 <div class="b-header">
-        {% menu city %}
+    {% menu city %}
+
 	{% if request.user.is_superuser %}
         <a href="/admingorod/article/add/" class="b-header__add" target="blank">Добавить</a>
 	{% endif %}

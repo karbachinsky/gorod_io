@@ -7,8 +7,8 @@ from gorod.models import City, Organization
 
 
 # City organizations 
-def organizations(request, city):
-    city = get_object_or_404(City, name=city)
+def organizations(request, city_name):
+    city = get_object_or_404(City, name=city_name)
    
     organizations = Organization.objects.filter(city=city.id).order_by('name').all 
 
@@ -22,10 +22,9 @@ def organizations(request, city):
 
 
 # One organization view
-def organization(request, organization_id): 
-    organization = get_object_or_404(Organization, pk=organization_id)
-
-    city = get_object_or_404(City, id=organization.city.id)
+def organization(request, city_name, organization_id): 
+    city = get_object_or_404(City, name=city_name)
+    organization = get_object_or_404(Organization, pk=organization_id, city=city.id)
 
     context = {
         'organization': organization,

@@ -18,8 +18,9 @@ def index(request):
 
 
 # One city main page (feed)
-def feed(request, city, rubric_name=None):
-    city = get_object_or_404(City, name=city)
+def feed(request, city_name='belev', rubric_name=None):
+    raise Exception(request)
+    city = get_object_or_404(City, name=city_name)
   
     filters = {'city': city.id}
 
@@ -38,10 +39,10 @@ def feed(request, city, rubric_name=None):
 
 
 # Article view
-def article(request, article_id): 
-    article = get_object_or_404(Article, pk=article_id)
+def article(request, city_name, article_id): 
+    city = get_object_or_404(City, name=city_name)
+    article = get_object_or_404(Article, pk=article_id, city=city.id)
 
-    city = get_object_or_404(City, id=article.city.id)
 
     context = {
         'article': article,

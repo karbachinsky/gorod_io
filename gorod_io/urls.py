@@ -12,7 +12,7 @@ from django.conf.urls.static import static
 urlpatterns = patterns('',
     url(r'^admin/?', include(admin.site.urls)),
     (r'^ckeditor/', include('ckeditor.urls')),
-    url(r'^', include('gorod.urls.base', namespace='gorod'))
+    url(r'^', include('gorod.urls'))
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -65,6 +65,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
+    'gorod.context_processors.base.base_params',
 )
 
 ROOT_URLCONF = 'gorod_io.urls'

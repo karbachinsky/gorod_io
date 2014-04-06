@@ -21,7 +21,7 @@
             
                     {# not photo img #}
                     {% if article.picture and article.rubric.name != "photo" %}
-                        <a href="{% url 'gorod:article' article.id %}" class="b-feed-item__picture">
+                        <a href="{% url 'gorod:article' city.name article.id %}" class="b-feed-item__picture">
                             <img  src="{{article.picture.url}}" />
                         </a>
                     {% endif %} 
@@ -37,7 +37,7 @@
 
                     {# photo img #}    
                     {% if article.picture and article.rubric.name == "photo"%}
-                        <a href="{% url 'gorod:article' article.id %}" class="b-feed-item__picture">
+                        <a href="{% url 'gorod:article' city.name article.id %}" class="b-feed-item__picture">
                             <img  src="{{article.picture.url}}" />
                         </a>
                     {% endif %} 
@@ -45,7 +45,7 @@
                     {# title #}
                     {#{% if article.rubric.name != "photo" %}#}
                         <h2 class="b-feed-item__title">
-                            <a href="{% url 'gorod:article' article.id %}">{{ article.title }}</a>
+                            <a href="{% url 'gorod:article' city.name article.id %}">{{ article.title }}</a>
                         </h2> 
                     {#{% endif %}  #}         
                     
@@ -53,7 +53,7 @@
                     {# not photo text #} 
                     {% if article.text and article.rubric.name != "photo"%}  
                         <p class="b-feed-item__text">
-                            <a href="{% url 'gorod:article' article.id %}">
+                            <a href="{% url 'gorod:article' city.name article.id %}">
                                 {% autoescape off %}
                                 {{ article.text|striptags|truncatechars:255 }} 
                                 {% endautoescape %}

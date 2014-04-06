@@ -61,7 +61,7 @@
             <ul class="b-index-footer__list">
                 {% for city in cities %}
                     <li>
-                        <a href="{% url 'gorod:city' city.name %}">{{ city.title }}</a>
+                        <a href="{% url 'gorod:city_main_page' city.name %}">{{ city.title }}</a>
                     </li>
                 {% endfor %}
             </ul>

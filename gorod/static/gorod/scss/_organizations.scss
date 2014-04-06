@@ -47,7 +47,10 @@
 }
 @media screen and (max-width: 570px) { 
 	.b-orgs{
-		width: 250px;
+		width: 90%;
+	}
+	.b-orgs__item{
+		width: 100%;
 	}
 }
 

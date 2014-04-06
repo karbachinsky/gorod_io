@@ -45,6 +45,7 @@
 	display:block;
 	color:#a5a5a5;
 	font-weight: 500;
+	text-transform: uppercase;
 	
 	.b-feed-item_event &{
 		color:#3498db;
@@ -80,7 +81,10 @@
 }
 @media screen and (max-width: 570px) { 
 	.b-feed{
-		width: 250px;
+		width: 90%;
+	}
+	.b-feed-item{
+		width: 100%;
 	}
 }
 

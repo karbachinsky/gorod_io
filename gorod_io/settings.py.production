@@ -131,3 +131,5 @@ CKEDITOR_CONFIGS = {
         "removePlugins": "stylesheetparser",
     }
 }
+
+DATE_FORMAT = 'd.m.Y'

@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 
 from django.views.generic.base import RedirectView
 
-from gorod.views import base, organizations
+from gorod.views import base, organizations, city_info
 
 urlpatterns = patterns('',
     # Main page    
@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     # One article page
     url(r'^article/(?P<article_id>\d+)/?$', base.article, name='article'),
     # Rubric feed list page 
-    url(r'^feed/rubric/(?P<rubric_name>\w+)/?$', base.feed, name='feed_rubric'),
+    url(r'^feed/rubric/(?P<rubric_name>\w+)/?$', base.feed, name='feed-rubric'),
 
     ## Organzations
 
@@ -30,5 +30,7 @@ urlpatterns = patterns('',
     # One organization page
     url(r'^organization/(?P<organization_id>\d+)/?$', organizations.organization, name='organization'),
 
+    ## City info/about
+    url(r'^info/?$', city_info.info, name='city-info'),
 )
 

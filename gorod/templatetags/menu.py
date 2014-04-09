@@ -46,8 +46,8 @@ def menu(context, city):
     for rubric in list(active_rubrics):
         menuitem = {
             'title': rubric['rubric__title'],
-            'url_name': 'feed_rubric_' + rubric['rubric__name'],
-            'link': reverse('gorod:feed_rubric', kwargs={ 
+            'url_name': 'feed-rubric_' + rubric['rubric__name'],
+            'link': reverse('gorod:feed-rubric', kwargs={ 
                 'city_name': city.name, 
                 'rubric_name': rubric['rubric__name']
             }),
@@ -63,6 +63,16 @@ def menu(context, city):
         'link': reverse('gorod:organizations', kwargs={'city_name': city.name}),
         'is_active': 0
     })
+
+    # Adding about (city info module)
+    menu.append({
+        'title': 'О городе',
+        'url_name': 'city-info',
+        'link': reverse('gorod:city-info', kwargs={'city_name': city.name}),
+        'is_active': 0
+    })
+
+
 
     # Setting active
     for menuitem in menu:

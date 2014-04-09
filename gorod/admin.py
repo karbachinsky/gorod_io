@@ -1,9 +1,13 @@
 from django.contrib import admin
 
-from gorod.models import City, Article, ArticleRubric, Organization 
+from gorod.models import City, Article, ArticleRubric, Organization, CityInfo
 
 class CityAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'title', 'add_date')
+
+
+class CityInfoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'city')
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -20,6 +24,7 @@ class OrganizationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(City, CityAdmin)
+admin.site.register(CityInfo, CityInfoAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleRubric, ArticleRubrucAdmin)
 admin.site.register(Organization, OrganizationAdmin)

@@ -18,6 +18,12 @@ class City(models.Model):
         return self.name
 
 
+class CityInfo(models.Model):
+    """ Module About or city info """
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    text = RichTextField(max_length=25000)
+
+
 class ArticleRubric(models.Model):
     """ ArticleRubric class """
     name = models.CharField(max_length=255)

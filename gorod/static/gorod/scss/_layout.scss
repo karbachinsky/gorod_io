@@ -3,7 +3,7 @@ body{
 }
 .b-header{
 	background: #20202f;
-	padding: 20px 3%;
+	padding: 20px 30px;
 	vertical-align: top;
 	line-height: 16px;
 	font-size: 14px;
@@ -16,6 +16,9 @@ body{
 }
 .b-header__city{
 	float:left;
+}
+.b-header__menu-wrapper{
+	position: relative;
 }
 .b-header__menu{
 	float:left;
@@ -41,6 +44,13 @@ body{
 		}
 	}
 }
+@media screen and (max-width: 1000px) { 
+	.b-header__menu{
+		
+	}
+}
+
+
 .b-header__add{
 	float:right;
 	@include inline-block;
@@ -54,6 +64,9 @@ body{
 .b-footer{
 }
 
+
+/*-------------popup---------------*/
+/*-------to do:  вынести в отдельный стиль*/
 .b-popup{
 	position: fixed;
 	top:0;

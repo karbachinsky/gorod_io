@@ -82,7 +82,7 @@ execute_remote $host "cd $app_dir; cp gorod_io/settings.py.production gorod_io/s
 
 # Updating db
 execute_remote $host "cd $app_dir; ./manage.py schemamigration gorod --auto"
-execute_remote $host "cd $app_dir; /manage.py migrate gorod"
+execute_remote $host "cd $app_dir; ./manage.py migrate gorod"
 
 # Updating static
 execute_remote $host "cd $app_dir; ./manage.py collectstatic"

@@ -13,7 +13,7 @@
         <div class="b-article__info">
             <span class="b-article__author">{{ article.user.first_name }} {{ article.user.last_name }}</span>
             {% if request.user.is_superuser %}
-                <a class="edit-link" href="#">Редактировать</a>
+                <a class="edit-link" target="_blank" href="{% url 'admin:gorod_article_change' article.id %}">Редактировать</a>
             {% endif %}
 
             <br />

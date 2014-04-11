@@ -7,15 +7,17 @@
 {% block meta_description %}О городе {{city.title}}{% endblock %}
 
 {% block content %}
-    <div class="b-city__info">
+    <div class="b-city-info">
         
         {% if request.user.is_superuser %}
             <a class="edit-link" target="_blank" href="{% url 'admin:gorod_cityinfo_change' info.id %}">Редактировать</a>
         {% endif %}
        
         <!-- Kirill, please fixme -->
-        <div class="b-city__info-text">
-            {{info.text}}
+        <div class="b-city-info__text">
+            {% autoescape off %}
+                {{ info.text }} 
+            {% endautoescape %} 
         </div>
 
     </div>

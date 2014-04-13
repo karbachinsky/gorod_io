@@ -2,9 +2,12 @@
 
 {% load menu %}
 <div class="b-header">
-	<div class="b-header__menu-wrapper b-header__menu-wrapper_l">
-    	{% menu city %}
-	</div>
+	<span class="b-header__menu-btn">
+		<i></i>
+		<a href="{% url 'gorod:city_main_page' city.name %}">{{city.title}}</a>
+	</span>
+    {% menu city %}
+	
 
 	{% if request.user.is_superuser %}
         <a href="#" class="b-header__add" >Добавить</a>

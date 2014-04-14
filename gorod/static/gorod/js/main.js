@@ -9,6 +9,33 @@
 	});
 })();
 
+(window.menu = function(){
+	var $btn = $('.b-header__menu-btn i'),
+		$menu = $('.b-header__menu');
+
+	$btn.on('click', function(){
+		$menu.addClass('active');
+		var docHeight = $(document).height(),
+			menuPadding = parseInt($menu.css('paddingTop')) + parseInt($menu.css('paddingBottom'));
+			menuHeight = docHeight - menuPadding;
+
+		$menu.height(menuHeight);
+
+		return false;
+
+	});
+	$(document).on('click', function(e) {
+		$self = $(e.target);
+		if($menu.hasClass('active') && !($self.closest('.b-header__menu').length )) {
+			$menu.removeClass('active');
+		}
+	});
+	$(window).resize(function(){
+		$menu.removeClass('active');
+		$menu.height('auto');
+	});
+})();
+
 
 
 $(function(){
@@ -26,7 +53,8 @@ $(function(){
 	  gutter : '.gutter-sizer'
 	});
 
-	addPopup();
+	window.addPopup();
+	window.menu();
 
 
 });

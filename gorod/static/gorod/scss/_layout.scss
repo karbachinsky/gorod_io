@@ -3,10 +3,11 @@ body{
 }
 .b-header{
 	background: #20202f;
-	padding: 20px 3%;
+	padding: 20px 30px;
 	vertical-align: top;
 	line-height: 16px;
 	font-size: 14px;
+	position: relative;
 	a{
 		font-weight: 300;
 		text-decoration: none;
@@ -14,12 +15,37 @@ body{
 	}
 
 }
-.b-header__city{
+
+.b-header__menu-btn{
+	display:none;
 	float:left;
+	i{
+		@include inline-block;
+		width:16px;
+		height:7px;
+		border-top: 1px solid #2ecc71;
+		border-bottom: 1px solid #2ecc71;
+		vertical-align: top;
+		margin-top: 3px;
+		margin-right: 4px;
+		position: relative;
+		cursor: pointer;
+		&:after{
+			content:"";
+			width: 100%;
+			height: 1px;
+			background: #2ecc71;
+			position: absolute;
+			top:3px;
+		}
+	}
+	a{
+		color: #2ecc71;
+	}
+	
 }
 .b-header__menu{
 	float:left;
-	height:16px;
 
 	li{
 		@include inline-block;
@@ -41,6 +67,37 @@ body{
 		}
 	}
 }
+@media screen and (max-width: 1130px) { 
+	.b-header__menu-btn{
+		@include inline-block;
+	}
+	.b-header__menu{
+		display: none;
+		position: absolute;
+		top:0;
+		left:0;
+		background: #20202f;
+		width:285px;
+		height:auto;
+		float: none;
+		padding: 13px 0;
+		z-index: 2;
+		li{
+			display: block;
+			height:30px;
+			line-height: 30px;
+			padding-left: 25px;
+			margin:0;
+
+		}
+
+		&.active{
+			display: block;
+		}
+	}
+}
+
+
 .b-header__add{
 	float:right;
 	@include inline-block;
@@ -54,6 +111,9 @@ body{
 .b-footer{
 }
 
+
+/*-------------popup---------------*/
+/*-------to do:  вынести в отдельный стиль*/
 .b-popup{
 	position: fixed;
 	top:0;

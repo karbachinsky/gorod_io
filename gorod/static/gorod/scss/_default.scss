@@ -1,4 +1,7 @@
 
+$green-color: #2ecc71;
+
+
 .b-hidden{
 	display: none;
 }
@@ -12,6 +15,6 @@
 
 .edit-link{
 	font-size: 14px;
-	color:#2ecc71;
+	color: $green-color;
 	text-decoration: none;
 }

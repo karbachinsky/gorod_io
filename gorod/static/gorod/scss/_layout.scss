@@ -23,8 +23,8 @@ body{
 		@include inline-block;
 		width:16px;
 		height:7px;
-		border-top: 1px solid #2ecc71;
-		border-bottom: 1px solid #2ecc71;
+		border-top: 1px solid $green-color;
+		border-bottom: 1px solid $green-color;
 		vertical-align: top;
 		margin-top: 3px;
 		margin-right: 4px;
@@ -34,13 +34,13 @@ body{
 			content:"";
 			width: 100%;
 			height: 1px;
-			background: #2ecc71;
+			background: $green-color;
 			position: absolute;
 			top:3px;
 		}
 	}
 	a{
-		color: #2ecc71;
+		color: $green-color;
 	}
 	
 }
@@ -62,7 +62,7 @@ body{
 
 		&.b-header__menu-item_current{
 			a{
-				color:#2ecc71;
+				color: $green-color;
 			}
 		}
 	}
@@ -102,7 +102,7 @@ body{
 	float:right;
 	@include inline-block;
 	padding:6px 16px;
-	border:1px solid #2ecc71;
+	border:1px solid $green-color;
 	color:#2ecc71;
 	@include border-radius(17px);
 	margin:-7px 0;
@@ -158,7 +158,7 @@ body{
 		background: #20202f;
 		width:200px;
 		float: left;
-		color:#2ecc71;
+		color: $green-color;
 		vertical-align: middle;
 		line-height: 200px;
 		font-size: 13px;
@@ -172,7 +172,7 @@ body{
 		}
 
 		&:hover{
-			background: #2ecc71;
+			background: $green-color;
 			color:#fff;
 		}
 	}

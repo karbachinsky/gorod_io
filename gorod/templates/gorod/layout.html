@@ -11,7 +11,7 @@
     <meta name="keywords" content="{% block meta_keywords %}gorod.io{% endblock %}" />
     <meta name="description" content="{% block meta_description %}gorod.io{% endblock %}" />    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    {% block meta_additional %}{% endblock %}
+    {% block meta_additional %}<meta name="viewport" content="width=device-width" />{% endblock %}
 
     {% include "gorod/incl/_static.html" %}
 </head>

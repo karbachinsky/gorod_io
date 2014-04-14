@@ -20,7 +20,7 @@
 
 }
 .b-article__picture{
-	width:100%;
+	width:100% !important;
 }
 .b-article__text{
 	font-size: 14px;
@@ -30,6 +30,6 @@
 		margin:25px 0;
 	}
 	img{
-		width:100%;
+		width:100% !important;
 	}
 }

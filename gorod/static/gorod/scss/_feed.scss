@@ -50,18 +50,22 @@
 	text-decoration: none;
 	font-size: 18px;
 	font-weight: 500;
-	margin-bottom: 4px;
+	margin-bottom: 3px;
 	
 }
 
 .b-feed-item__picture{
 	display: block;
 	width:100%;
+	margin-bottom: 7px;
 
+	.b-feed-item_photo &{
+		margin-bottom:0
+	}
 }
 .b-feed-item__text{
-	margin:0 0 0;
-	font-size: 12px;
+	margin:0 ;
+	font-size: 13px;
 	text-decoration: none;
 	color:#000;
 	line-height: 20px;

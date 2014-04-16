@@ -29,6 +29,7 @@
 	text-transform: uppercase;
 	text-decoration: none;
 	font-size: 13px;
+	letter-spacing: 1.2px;
 
 	.b-feed-item_event &{
 		color:#3498db;
@@ -69,6 +70,8 @@
 	text-decoration: none;
 	color:#000;
 	line-height: 20px;
+	word-break: break-word;
+
 }
 
 .b-feed-item__author{

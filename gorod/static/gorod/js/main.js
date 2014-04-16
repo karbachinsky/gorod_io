@@ -42,15 +42,17 @@ $(function(){
 	
 	$('.b-feed__list').imagesLoaded( function() {
 		$('.b-feed__list').masonry({
-		  columnWidth: '.grid-sizer',
-		  itemSelector: '.b-feed-item',
-		  gutter : '.gutter-sizer'
+			columnWidth: '.grid-sizer',
+			itemSelector: '.b-feed-item',
+			gutter : '.gutter-sizer',
+			transitionDuration: 0
 		});
 	});
 	$('.b-orgs__list').masonry({
-	  columnWidth: '.grid-sizer',
-	  itemSelector: '.b-orgs__item',
-	  gutter : '.gutter-sizer'
+		columnWidth: '.grid-sizer',
+		itemSelector: '.b-orgs__item',
+		gutter : '.gutter-sizer',
+		transitionDuration: 0
 	});
 
 	window.addPopup();

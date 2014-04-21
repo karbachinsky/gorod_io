@@ -68,9 +68,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'gorod.context_processors.base.base_params',
 )
 
-ROOT_URLCONF = 'gorod_io.urls'
+ROOT_URLCONF = 'urls'
 
-WSGI_APPLICATION = 'gorod_io.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database

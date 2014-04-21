@@ -129,7 +129,17 @@ MEDIA_URL = '/media/'
 CKEDITOR_CONFIGS = {
     "default": {
         "removePlugins": "stylesheetparser",
+        "forcePasteAsPlainText": True,
+        "ShiftEnterMode": 'p', 
+        "pasteFromWordRemoveFontStyles": True,
+        "removeFormatTag": "b,big,code,del,dfn,em,font,i,ins,kbd,q,samp,small,span,strike,strong,sub,sup,tt,u,var,br",
+        "ignoreEmptyParagraph": True,
+        "extraPlugins": "link",
+        'toolbar': [
+            ['Format','Bold', 'Italic', 'Link','Unlink', 'Image','Source'],
+        ],
     }
 }
+
 
 DATE_FORMAT = 'd.m.Y'

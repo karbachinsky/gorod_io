@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-#from tinymce.models import HTMLField
 from ckeditor.fields import RichTextField
+from django.utils.safestring import mark_safe
+
+from mptt.models import MPTTModel, TreeForeignKey
 
 import validators
 
@@ -11,7 +12,7 @@ class City(models.Model):
     """ City class """
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
-    add_date = models.DateTimeField()
+    add_date = models.DateTimeField(editable=False, auto_now_add=True)
     wallpaper = models.ImageField(max_length=255, upload_to='wallpapers/', default='')
 
     def __unicode__(self):
@@ -36,7 +37,7 @@ class ArticleRubric(models.Model):
 class Article(models.Model):
     """ Article class """
     title = models.CharField(max_length=255)
-    add_date = models.DateTimeField()
+    add_date = models.DateTimeField(editable=False, auto_now_add=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     rubric = models.ForeignKey(ArticleRubric, default=1)
     user = models.ForeignKey(User) 
@@ -49,18 +50,34 @@ class Article(models.Model):
         return self.title
 
 
+class OrganizationCategory(MPTTModel):
+    """Organization category tree"""
+    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
+
+    def __unicode__(self):
+        return mark_safe("%s%s" % ("&nbsp;" * 4 * self.level ,self.title))
+
+
 class Organization(models.Model):
     """ City organization class """
-    add_date = models.DateTimeField()
+    add_date = models.DateTimeField(editable=False, auto_now_add=True)
     name = models.CharField(max_length=255)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    logo = models.ImageField(max_length=255, upload_to='organizations/', default='', blank=True)
     user = models.ForeignKey(User)
-    description = RichTextField(max_length=10000)
+    logo = models.ImageField(max_length=255, upload_to='organizations/', default='', blank=True)
+    category = models.ForeignKey(OrganizationCategory, on_delete=models.PROTECT)
     address = models.CharField(max_length=255, blank=True)
     phone = models.CharField(max_length=255, blank=True)
     web_site = models.URLField(blank=True)
-    map_link = models.CharField(blank=True, max_length=255)
+    email = models.EmailField(blank=True)
+    description = RichTextField(max_length=10000)
+    #map_link = models.CharField(blank=True, max_length=255)
+    twitter_link= models.URLField(blank=True)
+    vk_link= models.URLField(blank=True)
+    ok_link= models.URLField(blank=True)
+    my_mail_link= models.URLField(blank=True)
 
     def __unicode__(self):
         return self.name

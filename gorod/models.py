@@ -5,6 +5,8 @@ from django.utils.safestring import mark_safe
 
 from mptt.models import MPTTModel, TreeForeignKey
 
+import gorod.fields.schedule
+
 import validators
 
 
@@ -72,12 +74,13 @@ class Organization(models.Model):
     phone = models.CharField(max_length=255, blank=True)
     web_site = models.URLField(blank=True)
     email = models.EmailField(blank=True)
-    description = RichTextField(max_length=10000)
     #map_link = models.CharField(blank=True, max_length=255)
-    twitter_link= models.URLField(blank=True)
-    vk_link= models.URLField(blank=True)
-    ok_link= models.URLField(blank=True)
-    my_mail_link= models.URLField(blank=True)
+    twitter_link = models.URLField(blank=True)
+    vk_link = models.URLField(blank=True)
+    ok_link = models.URLField(blank=True)
+    my_mail_link = models.URLField(blank=True)
+    schedule_weekdays = gorod.fields.schedule.DayScheduleField(blank=True, verbose_name='Schedule Weekdays')
+    schedule_weekends = gorod.fields.schedule.DayScheduleField(blank=True, verbose_name='Schedule Weekends')
 
     def __unicode__(self):
         return self.name

@@ -1,14 +1,12 @@
 """ Working time Django custom field """
 
 from django.db import models
-from django.forms import widgets
+from django.forms import widgets, MultiValueField
+from django.core.validators import RegexValidator
 
 from south.modelsinspector import add_introspection_rules
 
-import pickle
-import logging
-
-add_introspection_rules([], ["^gorod\.fields\.schedule\.ScheduleField"])
+#add_introspection_rules([], ["^gorod\.fields\.schedule\.ScheduleField"])
 add_introspection_rules([], ["^gorod\.fields\.schedule\.DayScheduleField"])
 
 

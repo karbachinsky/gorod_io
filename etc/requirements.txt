@@ -1,0 +1,5 @@
+south
+django-ckeditor
+django-mptt
+yaml
+pickle

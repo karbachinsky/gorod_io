@@ -78,7 +78,7 @@ execute_remote $host  "cd $app_dir; git reset --hard; git clean -f -d"
 execute_remote $host  "cd $app_dir; git pull origin"
 
 # Updating settings.py
-execute_remote $host "cd $app_dir; cp gorod_io/settings.py.production gorod_io/settings.py"
+execute_remote $host "cd $app_dir; cp settings.py.production settings.py"
 
 # Updating db
 execute_remote $host "cd $app_dir; ./manage.py schemamigration gorod --auto"

@@ -15,7 +15,6 @@ class City(models.Model):
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
-    wallpaper = models.ImageField(max_length=255, upload_to='wallpapers/', default='')
 
     def __unicode__(self):
         return self.name

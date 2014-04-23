@@ -7,6 +7,9 @@
 	$('.b-popup-add .b-popup__overlay').on('click',function(){
 		$('.b-popup-add').removeClass('b-popup_shown');
 	});
+	$('.b-popup__window a').on('click',function(){
+		$('.b-popup-add').removeClass('b-popup_shown');
+	});
 })();
 
 (window.menu = function(){

@@ -4,6 +4,6 @@
 *.swp
 *.swo
 *.scssc
-/gorod_io/settings.py
+/settings.py
 /gorod/migrations/
 

@@ -1,19 +1,19 @@
 .b-feed{
 	padding:30px 0 50px;
-	width: 1650px;
+	width: 1350px;
 	margin:auto;
 	
 	.grid-sizer{
-		width:250px;
+		width:300px;
 	}
 	.gutter-sizer{
-		width:30px;
+		width:50px;
 	}
 }
 
 .b-feed-item{
 	display: block;
-	width:250px;
+	width:300px;
 	margin-bottom: 35px;
 
 	&:hover{
@@ -28,7 +28,7 @@
 	font-weight: 500;
 	text-transform: uppercase;
 	text-decoration: none;
-	font-size: 13px;
+	font-size: 12px;
 	letter-spacing: 1.2px;
 
 	.b-feed-item_event &{
@@ -45,7 +45,7 @@
 
 .b-feed-item__title{
 	margin:0;
-	line-height: 21px;
+	line-height: 25px;
 	vertical-align: top;
 	color:#444444 ;
 	text-decoration: none;
@@ -67,7 +67,7 @@
 }
 .b-feed-item__text{
 	margin:0 ;
-	font-size: 13px;
+	font-size: 14px;
 	text-decoration: none;
 	color:#000;
 	line-height: 20px;
@@ -80,29 +80,20 @@
 	display: block;
 }
 
-@media screen and (max-width: 1690px) { 
+@media screen and (max-width: 1500px) { 
 	.b-feed{
-		width: 1370px;
+		width: 1000px;
 	}
 }
-@media screen and (max-width: 1410px) { 
+@media screen and (max-width: 1150px) { 
 	.b-feed{
-		width: 1090px;
+		width: 650px;
 	}
 }
-@media screen and (max-width: 1130px) { 
+@media screen and (max-width: 800px) { 
+	
 	.b-feed{
-		width: 810px;
-	}
-}
-@media screen and (max-width: 850px) { 
-	.b-feed{
-		width: 530px;
-	}
-}
-@media screen and (max-width: 570px) { 
-	.b-feed{
-		width: 90%;
+		width: 80%;
 	}
 	.b-feed-item{
 		width: 100%;

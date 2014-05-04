@@ -10,7 +10,7 @@
     <div class="b-organization">
         
         {% if request.user.is_superuser %}
-            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_organization_change' organization.id %}">Редактировать</a>
+            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_organization_change' organization.id %}?source=main">Редактировать</a>
         {% endif %}
         
         {% if organization.logo %}

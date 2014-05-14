@@ -3,3 +3,5 @@ django-ckeditor
 django-mptt
 yaml
 pickle
+mysqldb
+django-phonenumber-field

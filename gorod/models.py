@@ -4,6 +4,7 @@ from ckeditor.fields import RichTextField
 from django.utils.safestring import mark_safe
 
 from mptt.models import MPTTModel, TreeForeignKey
+from phonenumber_field.modelfields import PhoneNumberField
 
 import gorod.fields.schedule
 
@@ -52,13 +53,30 @@ class Article(models.Model):
 
 
 class OrganizationCategory(MPTTModel):
-    """Organization category tree"""
+    """ Organization category tree """
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
 
     def __unicode__(self):
         return mark_safe("%s%s" % ("&nbsp;" * 4 * self.level ,self.title))
+
+
+class OrganizationPhone(models.Model):
+    """ Organization phone list """
+    number = models.CharField(blank=True, max_length=100)
+    organization = models.ForeignKey('Organization', related_name='+')
+
+    def __unicode__(self):
+        return self.number
+
+class OrganizationAddress(models.Model):
+    """ Organization addresses list """
+    address = models.CharField(max_length=255, blank=True)
+    organization = models.ForeignKey('Organization', related_name='+')
+
+    def __unicode__(self):
+        return self.address
 
 
 class Organization(models.Model):
@@ -69,8 +87,6 @@ class Organization(models.Model):
     user = models.ForeignKey(User)
     logo = models.ImageField(max_length=255, upload_to='organizations/', default='', blank=True)
     category = models.ForeignKey(OrganizationCategory, on_delete=models.PROTECT)
-    address = models.CharField(max_length=255, blank=True)
-    phone = models.CharField(max_length=255, blank=True)
     web_site = models.URLField(blank=True)
     email = models.EmailField(blank=True)
     #map_link = models.CharField(blank=True, max_length=255)

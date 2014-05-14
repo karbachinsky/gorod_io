@@ -2,7 +2,16 @@ from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from gorod.models import City, Article, ArticleRubric, Organization, OrganizationCategory, CityInfo
+from gorod.models import City
+from gorod.models import Article
+from gorod.models import ArticleRubric
+
+from gorod.models import Organization
+from gorod.models import OrganizationCategory
+from gorod.models import OrganizationAddress
+from gorod.models import OrganizationPhone
+
+from gorod.models import CityInfo
 
 
 class GorodAdminBase(admin.ModelAdmin):
@@ -50,12 +59,32 @@ class ArticleRubrucAdmin(GorodAdminBase):
     list_display = ('id', 'name')
 
 
+class OrganizationAddressInline(admin.StackedInline):
+    model = OrganizationAddress
+    extra = 1
+
+class OrganizationPhoneInline(admin.StackedInline):
+    model = OrganizationPhone
+    extra = 1
+
+
 class OrganizationAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'city', 'user', 'add_date')
+    inlines = [OrganizationAddressInline, OrganizationPhoneInline]
+
 
 class OrganizationCategoryAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'title')
 
+
+"""
+class OrganizationPhoneAdmin(GorodAdminBase):
+    list_display = ('id', 'number')
+
+
+class OrganizationAddressAdmin(GorodAdminBase):
+    list_display = ('id', 'address')
+"""
 
 
 admin.site.register(City, CityAdmin)

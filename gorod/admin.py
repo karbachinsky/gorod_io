@@ -10,6 +10,7 @@ from gorod.models import Organization
 from gorod.models import OrganizationCategory
 from gorod.models import OrganizationAddress
 from gorod.models import OrganizationPhone
+from gorod.models import OrganizationSchedule
 
 from gorod.models import CityInfo
 
@@ -67,24 +68,17 @@ class OrganizationPhoneInline(admin.StackedInline):
     model = OrganizationPhone
     extra = 1
 
+class OrganizationScheduleInline(admin.StackedInline):
+    model = OrganizationSchedule
+    extra = 2
 
 class OrganizationAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'city', 'user', 'add_date')
-    inlines = [OrganizationAddressInline, OrganizationPhoneInline]
+    inlines = [OrganizationAddressInline, OrganizationPhoneInline, OrganizationScheduleInline]
 
 
 class OrganizationCategoryAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'title')
-
-
-"""
-class OrganizationPhoneAdmin(GorodAdminBase):
-    list_display = ('id', 'number')
-
-
-class OrganizationAddressAdmin(GorodAdminBase):
-    list_display = ('id', 'address')
-"""
 
 
 admin.site.register(City, CityAdmin)

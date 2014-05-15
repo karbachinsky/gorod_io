@@ -78,6 +78,13 @@ class OrganizationAddress(models.Model):
     def __unicode__(self):
         return self.address
 
+class OrganizationSchedule(models.Model):
+    """ Organization day schedule """
+    schedule = gorod.fields.schedule.DayScheduleField(blank=True, verbose_name='Schedule Weekdays')
+    organization = models.ForeignKey('Organization', related_name='+')
+
+    def __unicode__(self):
+        return self.schedule
 
 class Organization(models.Model):
     """ City organization class """
@@ -94,8 +101,7 @@ class Organization(models.Model):
     vk_link = models.URLField(blank=True)
     ok_link = models.URLField(blank=True)
     my_mail_link = models.URLField(blank=True)
-    schedule_weekdays = gorod.fields.schedule.DayScheduleField(blank=True, verbose_name='Schedule Weekdays')
-    schedule_weekends = gorod.fields.schedule.DayScheduleField(blank=True, verbose_name='Schedule Weekends')
+    description = RichTextField(max_length=25000, blank=True)
 
     def __unicode__(self):
         return self.name

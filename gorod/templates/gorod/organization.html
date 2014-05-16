@@ -10,49 +10,79 @@
     <div class="b-organization">
         
         {% if request.user.is_superuser %}
-            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_organization_change' organization.id %}?source=main">Редактировать</a>
+            <a class="edit-link" href="{% url 'admin:gorod_organization_change' organization.id %}?source=main">Редактировать</a>
         {% endif %}
         
         {% if organization.logo %}
-            <img class="b-organization__logo" src="{{ organization.logo.url}}" title="{{ organization.name}}" />
+            <div class="b-organization__logo">
+                <img  src="{{ organization.logo.url}}" title="{{ organization.name}}" />
+            </div>
         {% endif %}
 
         <h2 class="b-organization__name">{{ organization.name }}</h2>
 
-        {% if organization.phone or organization.web_site %}
-            <div class="b-organization__info">
-                {% if organization.phone %}
+        
+        <ul class="b-organization__info">
+
+            {% if organization.address %}
+                <li class="b-organization__address">
+                    <i class="b-organization__icon"></i>
+                    <span>{{ organization.address }}</span>
+                </li>
+            {% endif %}
+
+            {% if organization.phones %}
+                <li class="b-organization__phone">
+                    <i class="b-organization__icon"></i>
                     <span>{{ organization.phone }}</span>
-                {% endif %}
+                </li>
+            {% endif %}
 
-                {% if organization.web_site %}
+            {% if organization.web_site %}
+                <li class="b-organization__web-site">
+                    <i class="b-organization__icon"></i>
                     <a href="{{ organization.web_site }}"  target="blank">{{ organization.web_site }}</a>
-                {% endif %}
-            </div>
-        {% endif %}
+                </li>
+            {% endif %}
 
-        {% if organization.address %}
-            <div class="b-organization__address">{{ organization.address }}</div>
-        {% endif %}
+            {% if organization.email %}
+                <li class="b-organization__email">
+                    <i class="b-organization__icon"></i>
+                    <a href="mailto:{{ organization.email }}"  target="blank">{{ organization.email }}</a>
+                </li>
+            {% endif %}
+            
 
-        {% if organization.description %}
-            <div class="b-organization__description">
-                {% autoescape off %}
-                    {{ organization.description }} 
-                {% endautoescape %} 
-            </div>
-        {% endif %}
- 
+            
+            {% if organization.twitter_link or organization.vk_link or organization.ok_link or organization.my_mail_link %}
+                <li class="b-organization__social-links">
+                    {% if organization.twitter_link %}
+                        <a href="{{ organization.twitter_link }}"  target="blank">Twitter</a>
+                    {% endif %}
+                    {% if organization.vk_link %}
+                        <a href="{{ organization.vk_link }}"  target="blank">Вконтакте</a>
+                    {% endif %}
+                    {% if organization.ok_link %}
+                        <a href="{{ organization.ok_link }}"  target="blank">Одноклассники</a>
+                    {% endif %}
+                    {% if organization.my_mail_link %}
+                        <a href="{{ organization.my_mail_link }}"  target="blank">Мой мир</a>
+                    {% endif %}
+                </li>
+            {% endif %}
 
-        {% if organization.map_link %}
-            <div class="b-organization__map">
-                <!-- Yandex map-->
-                <script type="text/javascript" 
-                    charset="utf-8" 
-                    src="{{ organization.map_link }}">
-                </script>
-            </div>
-        {% endif %}
+
+
+            {% if organization.description %}
+                <li class="b-organization__description">
+                    {% autoescape off %}
+                        {{ organization.description }} 
+                    {% endautoescape %} 
+                </li>
+            {% endif %}
+        </ul>
+        
+
 
         
     </div>

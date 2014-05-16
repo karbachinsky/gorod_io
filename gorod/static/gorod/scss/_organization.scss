@@ -1,5 +1,5 @@
 .b-organization{
-	padding:60px 30px;
+	padding:80px 30px;
 	max-width:650px;
 	margin: auto;
 	color:#444;
@@ -14,35 +14,72 @@
 	}
 }
 .b-organization__logo{
-	max-width: 200px;
+	text-align: center;
 	margin-bottom: 25px;
+
+	img{
+		max-width: 200px;
+	}
 }
 .b-organization__name{
-	margin:0px 0 25px; 
+	margin:0px 0 10px; 
 	font-weight: 500;
 	font-size: 26px;
 } 
 
 .b-organization__info{
-	margin-bottom: 25px;
+	padding: 0;
+	margin: 30px 0;	
+	font-size: 16px;
+	color:#444;
 
-	span{
-		display: block;
-	}
 	a{
+		color:#1188c0;
 		text-decoration: none;
 	}
-}
-.b-organization__address{
-	margin-bottom: 25px;
-}
-.b-organization__date{
-	color:#333;
-	font-size: 14px;
-
-}
-.b-organization__description{
-	p{
-		margin:0 0 25px 0;
+	
+	li{
+		position: relative;
+		padding-left: 40px;
+		margin:0 0 20px;
 	}
 }
+.b-organization__icon{
+	position: absolute;
+	top:4px;
+	left:0;
+	display: block;
+	width:20px;
+	height: 20px;
+	background: url(../img/sprite.png) no-repeat 0 0;
+
+	.b-organization__address &{
+		background-position: 0 0;
+	}
+	.b-organization__phone &{
+		background-position: 0 -25px;
+	}
+	.b-organization__web-site &{
+		background-position: 0 -50px;
+	}
+	.b-organization__email &{
+		background-position: 0 -75px;
+	}
+}
+.b-organization__email{
+
+}
+.b-organization__social-links{
+	a{
+		margin-right:30px;
+	}
+}
+li.b-organization__description{
+	margin:40px 0 20px;
+
+	p{
+		margin:10px 0;
+	}
+}
+
+

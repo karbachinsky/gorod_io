@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'gorod',
     'ckeditor',
     'south',
+    'mptt'
 )
 
 MIDDLEWARE_CLASSES = (

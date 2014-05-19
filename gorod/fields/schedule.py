@@ -45,8 +45,10 @@ class DayScheduleWidget(widgets.MultiWidget):
 
     def value_from_datadict(self, data, files, name):
         # FIXME
-        return DaySchedule(data[name + '_0'], data[name + '_1'], data[name + '_2'])
-
+        try:
+            return DaySchedule(data[name + '_0'], data[name + '_1'], data[name + '_2'])
+        except ValueError:
+            return ''
 
 
 class DaySchedule(object):
@@ -59,12 +61,20 @@ class DaySchedule(object):
         self.time_from = time_from
         self.time_to = time_to    
 
-
     def as_list(self):
         return [self.day_name, self.time_from, self.time_to]
 
     def __unicode__(self):
-        return ','.join(map(lambda(x): str(x), self.as_list()))
+        is_empty = True
+        for elem in self.as_list():
+            if elem:
+                is_empty = False
+                break
+
+        if is_empty:
+            return ''
+        else:
+            return ','.join(map(lambda(x): str(x), self.as_list()))
 
     def __str__(self):
         return unicode(self).encode('utf-8')
@@ -88,14 +98,13 @@ class DayScheduleField(models.Field):
         elif isinstance(value, DaySchedule):
             return value
         else:
-            schedule_times = value.split(',')
-            return DaySchedule(*schedule_times)
+            schedule_opts = value.split(',')
+            return DaySchedule(*schedule_opts)
     
     def get_prep_value(self, value):
         if isinstance(value, DaySchedule):
             return value
-
-        return value
+        return ''
         
     def formfield(self, **kwargs):
         defaults = {'widget': DayScheduleWidget}

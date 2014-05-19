@@ -8,7 +8,14 @@
 
 {% block content %}
     <div class="b-organization">
-        
+
+        <!-- Kirill, fixme :) -->
+        <div class="b-organization__breadcrumbs">
+            {% for breadcrumb in organization.category_breadcrumbs %}
+                <span>{{ breadcrumb }}</span>
+            {% endfor %}
+        </div>
+
         {% if request.user.is_superuser %}
             <a class="edit-link" href="{% url 'admin:gorod_organization_change' organization.id %}?source=main">Редактировать</a>
         {% endif %}
@@ -24,18 +31,22 @@
         
         <ul class="b-organization__info">
 
-            {% if organization.address %}
-                <li class="b-organization__address">
-                    <i class="b-organization__icon"></i>
-                    <span>{{ organization.address }}</span>
-                </li>
+            {% if organization.addresses %}
+                {% for address in organization.addresses %}
+                    <li class="b-organization__address">
+                        <i class="b-organization__icon"></i>
+                        <span>{{ address }}</span>
+                    </li>
+                {% endfor %}
             {% endif %}
 
             {% if organization.phones %}
-                <li class="b-organization__phone">
-                    <i class="b-organization__icon"></i>
-                    <span>{{ organization.phone }}</span>
-                </li>
+                {% for phone in organization.phones %}
+                    <li class="b-organization__phone">
+                        <i class="b-organization__icon"></i>
+                        <span>{{ phone }}</span>
+                    </li>
+                {% endfor %}
             {% endif %}
 
             {% if organization.web_site %}
@@ -53,7 +64,6 @@
             {% endif %}
             
 
-            
             {% if organization.twitter_link or organization.vk_link or organization.ok_link or organization.my_mail_link %}
                 <li class="b-organization__social-links">
                     {% if organization.twitter_link %}

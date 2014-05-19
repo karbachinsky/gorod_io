@@ -59,7 +59,8 @@ class OrganizationCategory(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
 
     def __unicode__(self):
-        return mark_safe("%s%s" % ("&nbsp;" * 4 * self.level ,self.title))
+        return self.title
+        #return mark_safe("%s%s" % ("&nbsp;" * 4 * self.level, self.title))
 
 
 class OrganizationPhone(models.Model):
@@ -70,6 +71,7 @@ class OrganizationPhone(models.Model):
     def __unicode__(self):
         return self.number
 
+
 class OrganizationAddress(models.Model):
     """ Organization addresses list """
     address = models.CharField(max_length=255, blank=True)
@@ -78,13 +80,15 @@ class OrganizationAddress(models.Model):
     def __unicode__(self):
         return self.address
 
+
 class OrganizationSchedule(models.Model):
     """ Organization day schedule """
-    schedule = gorod.fields.schedule.DayScheduleField(blank=True, verbose_name='Schedule Weekdays')
+    schedule = gorod.fields.schedule.DayScheduleField()
     organization = models.ForeignKey('Organization', related_name='+')
 
     def __unicode__(self):
         return self.schedule
+
 
 class Organization(models.Model):
     """ City organization class """
@@ -93,7 +97,7 @@ class Organization(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     user = models.ForeignKey(User)
     logo = models.ImageField(max_length=255, upload_to='organizations/', default='', blank=True)
-    category = models.ForeignKey(OrganizationCategory, on_delete=models.PROTECT)
+    category = TreeForeignKey(OrganizationCategory, on_delete=models.PROTECT)
     web_site = models.URLField(blank=True)
     email = models.EmailField(blank=True)
     #map_link = models.CharField(blank=True, max_length=255)
@@ -102,6 +106,38 @@ class Organization(models.Model):
     ok_link = models.URLField(blank=True)
     my_mail_link = models.URLField(blank=True)
     description = RichTextField(max_length=25000, blank=True)
+
+    def _get_phones(self):
+        """
+            List of organization phone objects
+        """
+        return OrganizationPhone.objects.filter(organization=self.id).all
+
+    phones = property(_get_phones)
+
+    def _get_addresses(self):
+        """
+            List of organization address objects
+        """
+        return OrganizationAddress.objects.filter(organization=self.id).all
+
+    addresses = property(_get_addresses)
+
+    def _get_schedules(self):
+        """
+            Organization schedules
+        """
+        return OrganizationSchedule.objects.filter(organization=self.id).all
+
+    schedules = property(_get_schedules)
+
+    def _get_category_breadcrumbs(self):
+        """
+            List of categories from root to current category leaf
+        """
+        return map(lambda x: x, self.category.get_ancestors(include_self=True))
+
+    category_breadcrumbs = property(_get_category_breadcrumbs)
 
     def __unicode__(self):
         return self.name

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from mptt.admin import MPTTModelAdmin
 
 from gorod.models import City
 from gorod.models import Article
@@ -75,10 +76,12 @@ class OrganizationScheduleInline(admin.StackedInline):
 class OrganizationAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'city', 'user', 'add_date')
     inlines = [OrganizationAddressInline, OrganizationPhoneInline, OrganizationScheduleInline]
+    mptt_indent_field = "category"
 
 
-class OrganizationCategoryAdmin(GorodAdminBase):
+class OrganizationCategoryAdmin(MPTTModelAdmin):
     list_display = ('id', 'name', 'title')
+    mptt_level_indent = 20
 
 
 admin.site.register(City, CityAdmin)

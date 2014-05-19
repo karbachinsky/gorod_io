@@ -1,14 +1,16 @@
+# coding=utf-8
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.utils.safestring import mark_safe
+from django.core.validators import RegexValidator
 
 from mptt.models import MPTTModel, TreeForeignKey
-from phonenumber_field.modelfields import PhoneNumberField
+#from phonenumber_field.modelfields import PhoneNumberField
 
-import gorod.fields.schedule
+#import gorod.fields.schedule
 
-import validators
+# -*- coding: utf-8 -*-
 
 
 class City(models.Model):
@@ -81,11 +83,39 @@ class OrganizationAddress(models.Model):
 
 class OrganizationSchedule(models.Model):
     """ Organization day schedule """
-    data = gorod.fields.schedule.DayScheduleField()
+    _time_validator = RegexValidator(
+        regex='^[0-9]{1,2}:[0-9]{1,2}$',
+        message='Time must be in format hh:mm',
+    )
+
+    _days = [
+        ('weekdays', u'Будние дни'),
+        ('weekend', u'Выходные'),
+        ('monday', u'Понедельник'),
+        ('tuesday', u'Вторник'),
+        ('wednesday', u'Среда'),
+        ('thursday', u'Четверг'),
+        ('friday', u'Пятница'),
+        ('saturday', u'Суббота'),
+        ('sunday', u'Воскресенье'),
+    ]
+
+    time_from = models.CharField(max_length=255, blank=False, validators=[_time_validator],
+                                 help_text='format: 9:00')
+    time_to = models.CharField(max_length=255, blank=False, validators=[_time_validator],
+                               help_text='format: 16:00')
+    day_name = models.CharField(choices=_days, max_length=100, default='weekdays')
     organization = models.ForeignKey('Organization', related_name='+')
 
+    @property
+    def day_name_rus(self):
+        try:
+            return filter(lambda x: x[0] == self.day_name, self.__class__._days)[0][1]
+        except:
+            return self.day_name
+
     def __unicode__(self):
-        return self.data
+        return self.day_name + self.time_from + self.time_to
 
 
 class Organization(models.Model):
@@ -125,7 +155,7 @@ class Organization(models.Model):
         """
             Organization schedules
         """
-        return map(lambda x: x.data, OrganizationSchedule.objects.filter(organization=self.id))
+        return OrganizationSchedule.objects.filter(organization=self.id)
 
     schedules = property(_get_schedules)
 

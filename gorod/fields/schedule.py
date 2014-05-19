@@ -6,6 +6,9 @@
 from django.db import models
 from django.forms import widgets
 from south.modelsinspector import add_introspection_rules
+from django.core.exceptions import ValidationError
+
+from gorod.utils.validators import DayScheduleValidator
 
 add_introspection_rules([], ["^gorod\.fields\.schedule\.DayScheduleField"])
 
@@ -55,7 +58,7 @@ class DayScheduleWidget(widgets.MultiWidget):
 
 class DaySchedule(object):
     """ One day schedule """
-    def __init__(self, time_from=None, time_to=None, day_name=None):
+    def __init__(self,  day_name=None, time_from=None, time_to=None):
 
         self.day_name = day_name
         self.time_from = time_from
@@ -64,20 +67,10 @@ class DaySchedule(object):
     def as_list(self):
         return [self.day_name, self.time_from, self.time_to]
 
-    def __unicode__(self):
-        is_empty = True
-        for elem in self.as_list():
-            if elem:
-                is_empty = False
-                break
-
-        if is_empty:
-            return ''
-        else:
-            return ','.join(map(lambda(x): str(x), self.as_list()))
-
-    def __str__(self):
-        return unicode(self).encode('utf-8')
+    def validate(self):
+        for param in self.as_list():
+            if not param:
+                raise ValidationError('Not all fields are filled!')
 
     @property
     def day_name_rus(self):
@@ -89,10 +82,19 @@ class DaySchedule(object):
         except:
             return self.day_name
 
+    def __unicode__(self):
+        return ','.join(map(lambda(x): str(x), self.as_list()))
 
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
+    def __getitem__(self, item):
+        return self
 
 
 class DayScheduleField(models.Field):
+    #default_validators = [DayScheduleValidator]
+    empty_strings_allowed = False
     description = "One day schedule field type for django"
 
     __metaclass__ = models.SubfieldBase
@@ -106,13 +108,20 @@ class DayScheduleField(models.Field):
 
     def to_python(self, value):
         if value is None:
-            return DaySchedule()
+            return None
         elif isinstance(value, DaySchedule):
             return value
         else:
             schedule_opts = value.split(',')
             return DaySchedule(*schedule_opts)
-    
+
+    #def validate(self, value, model_instance):
+    #    if self.blank:
+    #        return
+    #
+    #    if isinstance(value, DaySchedule):
+    #        return value.validate()
+
     def get_prep_value(self, value):
         if isinstance(value, DaySchedule):
             return value
@@ -124,6 +133,10 @@ class DayScheduleField(models.Field):
         return super(DayScheduleField, self).formfield(**defaults)
 
     def value_to_string(self, obj):
+        #if isinstance(obj, DaySchedule):
+        #    return unicode(obj)
+
         value = self._get_val_from_obj(obj)
         return self.get_prep_value(value)
+
 

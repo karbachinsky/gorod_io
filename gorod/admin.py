@@ -84,6 +84,12 @@ class OrganizationCategoryAdmin(MPTTModelAdmin):
     mptt_level_indent = 20
 
 
+class OrganizationScheduleAdmin(GorodAdminBase):
+    list_display = ('id', 'time_from')
+
+admin.site.register(OrganizationSchedule, OrganizationScheduleAdmin)
+
+
 admin.site.register(City, CityAdmin)
 admin.site.register(CityInfo, CityInfoAdmin)
 admin.site.register(Article, ArticleAdmin)

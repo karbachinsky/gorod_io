@@ -9,13 +9,6 @@
 {% block content %}
     <div class="b-organization">
 
-        <!-- Kirill, fixme :) -->
-        <div class="b-organization__breadcrumbs">
-            {% for breadcrumb in organization.category_breadcrumbs %}
-                <span>{{ breadcrumb }}</span>
-            {% endfor %}
-        </div>
-
         {% if request.user.is_superuser %}
             <a class="edit-link" href="{% url 'admin:gorod_organization_change' organization.id %}?source=main">Редактировать</a>
         {% endif %}
@@ -27,26 +20,31 @@
         {% endif %}
 
         <h2 class="b-organization__name">{{ organization.name }}</h2>
-
+        <div class="b-organization__breadcrumbs">
+            {% for breadcrumb in organization.category_breadcrumbs %}
+                {% if not forloop.first %}/{% endif %}
+                <span>{{ breadcrumb }}</span>
+            {% endfor %}
+        </div>
         
         <ul class="b-organization__info">
 
             {% if organization.addresses %}
-                {% for address in organization.addresses %}
-                    <li class="b-organization__address">
-                        <i class="b-organization__icon"></i>
+                <li class="b-organization__address">
+                    <i class="b-organization__icon"></i>
+                    {% for address in organization.addresses %}
                         <span>{{ address }}</span>
-                    </li>
-                {% endfor %}
+                    {% endfor %}
+                </li>
             {% endif %}
 
             {% if organization.phones %}
-                {% for phone in organization.phones %}
-                    <li class="b-organization__phone">
-                        <i class="b-organization__icon"></i>
+                <li class="b-organization__phone">
+                    <i class="b-organization__icon"></i>
+                    {% for phone in organization.phones %}
                         <span>{{ phone }}</span>
-                    </li>
-                {% endfor %}
+                    {% endfor %}
+                </li>
             {% endif %}
 
             {% if organization.web_site %}
@@ -63,6 +61,25 @@
                 </li>
             {% endif %}
             
+            {% if organization.schedules %}
+                <li class="b-organization__schedules">
+                    <i class="b-organization__icon"></i>
+                    {% for schedule in organization.schedules %}
+                        <div class="b-organization__schedule">
+                            <span class="b-organization__schedule-day">
+                                {{ schedule.day_name_rus }}:
+                            </span>
+                            <span class="b-organization__schedule-time_from">
+                                {{ schedule.time_from }}
+                            </span>
+                            -
+                            <span class="b-organization__schedule-time_to">
+                               {{ schedule.time_to }}
+                            </span>
+                        </div>
+                    {% endfor %}
+                </li>
+            {% endif %}
 
             {% if organization.twitter_link or organization.vk_link or organization.ok_link or organization.my_mail_link %}
                 <li class="b-organization__social-links">
@@ -81,22 +98,7 @@
                 </li>
             {% endif %}
 
-            <!-- FIXME, Kirill!-->
-            <div class="b-organization__schedules">
-                {% for schedule in organization.schedules %}
-                    <div class="b-organization__schedule">
-                        <span class="b-organization__schedule-day">
-                            {{ schedule.day_name_rus }}
-                        </span>
-                        <span class="b-organization__schedule-time_from">
-                            {{ schedule.time_from }}
-                        </span>
-                        <span class="b-organization__schedule-time_to">
-                           {{ schedule.time_to }}
-                        </span>
-                    </div>
-                {% endfor %}
-            </div>
+            
 
             {% if organization.description %}
                 <li class="b-organization__description">

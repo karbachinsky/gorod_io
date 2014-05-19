@@ -44,9 +44,7 @@ class Article(models.Model):
     rubric = models.ForeignKey(ArticleRubric, default=1)
     user = models.ForeignKey(User) 
     picture = models.ImageField(max_length=255, upload_to='pictures/', default='', blank=True)
-    #text = models.TextField()
     text = RichTextField()
-    #text = HTMLField()
 
     def __unicode__(self):
         return self.title
@@ -83,11 +81,11 @@ class OrganizationAddress(models.Model):
 
 class OrganizationSchedule(models.Model):
     """ Organization day schedule """
-    schedule = gorod.fields.schedule.DayScheduleField()
+    data = gorod.fields.schedule.DayScheduleField()
     organization = models.ForeignKey('Organization', related_name='+')
 
     def __unicode__(self):
-        return self.schedule
+        return self.data
 
 
 class Organization(models.Model):
@@ -127,7 +125,7 @@ class Organization(models.Model):
         """
             Organization schedules
         """
-        return OrganizationSchedule.objects.filter(organization=self.id).all
+        return map(lambda x: x.data, OrganizationSchedule.objects.filter(organization=self.id))
 
     schedules = property(_get_schedules)
 

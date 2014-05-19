@@ -81,7 +81,22 @@
                 </li>
             {% endif %}
 
-
+            <!-- FIXME, Kirill!-->
+            <div class="b-organization__schedules">
+                {% for schedule in organization.schedules %}
+                    <div class="b-organization__schedule">
+                        <span class="b-organization__schedule-day">
+                            {{ schedule.day_name_rus }}
+                        </span>
+                        <span class="b-organization__schedule-time_from">
+                            {{ schedule.time_from }}
+                        </span>
+                        <span class="b-organization__schedule-time_to">
+                           {{ schedule.time_to }}
+                        </span>
+                    </div>
+                {% endfor %}
+            </div>
 
             {% if organization.description %}
                 <li class="b-organization__description">

@@ -9,22 +9,24 @@ from south.modelsinspector import add_introspection_rules
 
 add_introspection_rules([], ["^gorod\.fields\.schedule\.DayScheduleField"])
 
+_days = [
+    ('weekdays', u'Будние дни'),
+    ('weekend', u'Выходные'),
+    ('monday', u'Понедельник'),
+    ('tuesday', u'Вторник'),
+    ('wednesday', u'Среда'),
+    ('thursday', u'Четверг'),
+    ('friday', u'Пятница'),
+    ('saturday', u'Суббота'),
+    ('sunday', u'Воскресенье'),
+]
+
 class DayScheduleWidget(widgets.MultiWidget):
     """ Widget for Day Schedule Field """
     def __init__(self, attrs=None):
         _input_attrs = {"size": 5, "placeholder": "9:00"}
         _select_attrs = {}
-        _days = [
-            ('weekdays', u'Будние дни'),
-            ('weekend', u'Выходные'),
-            ('monday', u'Понедельник'),
-            ('tuesday', u'Вторник'),
-            ('wednesday', u'Среда'),
-            ('thursday', u'Четверг'),
-            ('friday', u'Пятница'),
-            ('saturday', u'Суббота'),
-            ('sunday', u'Воскресенье'),
-        ]
+
         _widgets = (
             widgets.Select(attrs=_select_attrs, choices=_days),
             widgets.TextInput(attrs=_input_attrs),
@@ -54,12 +56,10 @@ class DayScheduleWidget(widgets.MultiWidget):
 class DaySchedule(object):
     """ One day schedule """
     def __init__(self, time_from=None, time_to=None, day_name=None):
-        #if day_name is None:
-        #raise Exception('Specify name for Dayschedule!')
 
         self.day_name = day_name
         self.time_from = time_from
-        self.time_to = time_to    
+        self.time_to = time_to
 
     def as_list(self):
         return [self.day_name, self.time_from, self.time_to]
@@ -79,6 +79,18 @@ class DaySchedule(object):
     def __str__(self):
         return unicode(self).encode('utf-8')
 
+    @property
+    def day_name_rus(self):
+        """
+            Russian day name
+        """
+        try:
+            return filter(lambda x: x[0] == self.day_name, _days)[0][1]
+        except:
+            return self.day_name
+
+
+
 
 class DayScheduleField(models.Field):
     description = "One day schedule field type for django"
@@ -93,7 +105,7 @@ class DayScheduleField(models.Field):
         super(DayScheduleField, self).__init__(*args, **kwargs)
 
     def to_python(self, value):
-        if not value:
+        if value is None:
             return DaySchedule()
         elif isinstance(value, DaySchedule):
             return value
@@ -104,11 +116,14 @@ class DayScheduleField(models.Field):
     def get_prep_value(self, value):
         if isinstance(value, DaySchedule):
             return value
-        return ''
+        return None
         
     def formfield(self, **kwargs):
         defaults = {'widget': DayScheduleWidget}
         defaults.update(kwargs)
         return super(DayScheduleField, self).formfield(**defaults)
 
+    def value_to_string(self, obj):
+        value = self._get_val_from_obj(obj)
+        return self.get_prep_value(value)
 

@@ -18,6 +18,7 @@ class City(models.Model):
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
+    region = models.CharField(max_length=255, blank=True)
 
     def __unicode__(self):
         return self.name

@@ -12,6 +12,8 @@ from django.conf.urls.static import static
 urlpatterns = patterns('',
     url(r'^admin/?', include(admin.site.urls)),
     (r'^ckeditor/', include('ckeditor.urls')),
+    # Auth
+    url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^', include('gorod.urls'))
 )
 

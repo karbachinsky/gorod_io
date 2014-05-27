@@ -7,7 +7,14 @@
 		<a href="{% url 'gorod:city_main_page' city.name %}">{{city.title}}</a>
 	</span>
     {% menu city %}
-	
+
+
+	{% if request.user.is_superuser %}
+    <span class="b-header__auth" style="color:blue; margin-left: 100px;">Авторизация:
+        <a href="{% url 'social:begin' "vk-oauth2" %}" class="vk sn-logo">VK</a>
+        <a href="{% url 'social:begin' "odnoklassniki-oauth2" %}" class="ok sn-logo">OK</a>
+    </span>
+    {% endif %}
 
 	{% if request.user.is_superuser %}
         <a href="#" class="b-header__add" >Добавить</a>

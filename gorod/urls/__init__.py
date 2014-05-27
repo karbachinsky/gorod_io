@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     # One City pages
     url(r'^town/(?P<city_name>\w+)/', include('gorod.urls.city', namespace='gorod')),
 
-    # Main gorod.io page
+    # Project main page
     url(r'^$', base.index, name='index')
 )
 

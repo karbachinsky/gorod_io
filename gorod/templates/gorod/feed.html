@@ -1,6 +1,7 @@
 {% extends 'gorod/layout.html' %}
 
 {% load staticfiles %}
+{% load thumbnail %}
 
 {% block meta_title %}{{ city.title }} — события города{% endblock %}
 
@@ -19,7 +20,9 @@
                 <li class="b-feed-item  b-feed-item_{{article.rubric}}" >
             
                     {# rubric #}
-                    <a class="b-feed-item__rubrik" href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}">{{ article.rubric.title }}</a>
+                    <a class="b-feed-item__rubrik" href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}">
+                        {{ article.rubric.title }}
+                    </a>
                     
                     <a class="b-feed-item__link" href="{% url 'gorod:article' city.name article.id %}">
                         {# title photo #}
@@ -29,14 +32,13 @@
 
                         {#  img #}    
                         {% if article.picture %}
-                            <img class="b-feed-item__picture" src="{{article.picture.url}}" />              
+                            <img class="b-feed-item__picture" src="{{ article.picture|thumbnail_url:'feed_image' }}" />
                         {% endif %} 
 
                         {# title not photo #}
                         {% if article.rubric.name != "photo" %}
                             <h2 class="b-feed-item__title">{{ article.title }}</h2> 
                         {% endif %} 
-                        
 
                         {# not photo text #} 
                         {% if article.text and article.rubric.name != "photo"%}  

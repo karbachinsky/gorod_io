@@ -5,3 +5,5 @@ yaml
 pickle
 mysqldb
 django-phonenumber-field
+easy-thumbnails
+python-social-auth

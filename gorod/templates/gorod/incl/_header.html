@@ -2,22 +2,23 @@
 
 {% load menu %}
 <div class="b-header">
-	<span class="b-header__menu-btn">
-		<i></i>
-		<a href="{% url 'gorod:city_main_page' city.name %}">{{city.title}}</a>
-	</span>
-    {% menu city %}
+	<div class="b-header__content">
+		<span class="b-header__menu-btn"></span>
+		<span class="b-header__city" href="{% url 'gorod:city_main_page' city.name %}">{{city.title}}</span>
 
-
-	{% if request.user.is_superuser %}
-    <span class="b-header__auth" style="color:blue; margin-left: 100px;">Авторизация:
-        <a href="{% url 'social:begin' "vk-oauth2" %}" class="vk sn-logo">VK</a>
-        <a href="{% url 'social:begin' "odnoklassniki-oauth2" %}" class="ok sn-logo">OK</a>
-    </span>
-    {% endif %}
-
-	{% if request.user.is_superuser %}
-        <a href="#" class="b-header__add" >Добавить</a>
-	{% endif %}
-	<div class="clear"></div>
+		{% if request.user.is_superuser %}
+			<div class="b-header__btns">
+		        <a href="#" class="b-header__add" >+ Добавить</a>
+		        <a href="{% url 'social:begin' "vk-oauth2" %}" class="b-header__vk sn-logo">Войти</a>
+		    </div>
+		{% endif %}
+		<div class="clear"></div>
+	</div>
+	<div class="b-header__menu">
+		{% menu city %}
+		<div class="b-header__btns">
+	        <a href="#" class="b-header__add" >+ Добавить</a>
+	        <a href="{% url 'social:begin' "vk-oauth2" %}" class="b-header__vk sn-logo">Войти</a>
+	    </div>
+	</div>
 </div>

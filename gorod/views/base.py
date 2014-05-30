@@ -28,7 +28,7 @@ def feed(request, city_name='belev', rubric_name=None):
         rubric = get_object_or_404(ArticleRubric, name=rubric_name)
         filters['rubric'] = rubric.id 
 
-    articles = Article.objects.filter(**filters).order_by('-add_date').all 
+    articles = Article.objects.filter(**filters).order_by('-add_date').select_related()
 
     context = {
         'articles': articles,

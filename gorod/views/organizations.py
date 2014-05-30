@@ -10,7 +10,7 @@ from gorod.models import City, Organization
 def organizations(request, city_name):
     city = get_object_or_404(City, name=city_name)
    
-    organizations = Organization.objects.filter(city=city.id).order_by('name').all 
+    organizations = Organization.objects.filter(city=city.id).order_by('name').select_related()
 
     context = {
         'organizations': organizations,

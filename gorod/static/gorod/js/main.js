@@ -12,31 +12,21 @@
 	});
 })();
 
+
+
 (window.menu = function(){
-	var $btn = $('.b-header__menu-btn i'),
-		$menu = $('.b-header__menu');
+	var $btn = $('.b-header__menu-btn'),
+		$menu = $('.b-header__menu'),
+		$content = $('.b-js-content');
 
 	$btn.on('click', function(){
-		$menu.addClass('active');
-		var docHeight = $(document).height(),
-			menuPadding = parseInt($menu.css('paddingTop')) + parseInt($menu.css('paddingBottom'));
-			menuHeight = docHeight - menuPadding;
 
-		$menu.height(menuHeight);
+		$menu.toggleClass('active');
 
 		return false;
 
 	});
-	$(document).on('click', function(e) {
-		$self = $(e.target);
-		if($menu.hasClass('active') && !($self.closest('.b-header__menu').length )) {
-			$menu.removeClass('active');
-		}
-	});
-	$(window).resize(function(){
-		$menu.removeClass('active');
-		$menu.height('auto');
-	});
+	
 })();
 
 

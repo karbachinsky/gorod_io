@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load thumbnail %}
+{% load humanize %}
 
 {% block meta_title %}{{ city.title }} — события города{% endblock %}
 
@@ -20,11 +21,12 @@
                     {# photo without picture not working #}
                     <li class="b-feed-item  b-feed-item_{{article.rubric}}" >
                 
-                        {# rubric #}
-                        <a class="b-feed-item__rubrik" href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}">
-                            {{ article.rubric.title }}
-                        </a>
-                            {#{{ article.add_date }}#}
+                        <div class="b-feed-item__top">
+                            <a class="b-feed-item__rubric" href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}">
+                                {{ article.rubric.title }}
+                            </a>
+                            <span class="b-feed-item__date">{{ article.add_date|naturalday }}</span>
+                        </div>
                         <a class="b-feed-item__link" href="{% url 'gorod:article' city.name article.id %}">
                             {# title photo #}
                             {% if article.rubric.name == "photo" %}

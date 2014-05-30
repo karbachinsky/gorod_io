@@ -22,6 +22,7 @@ def feed(request, city_name='belev', rubric_name=None):
     city = get_object_or_404(City, name=city_name)
   
     filters = {'city': city.id}
+    rubric = None
 
     if rubric_name:
         rubric = get_object_or_404(ArticleRubric, name=rubric_name)
@@ -31,7 +32,8 @@ def feed(request, city_name='belev', rubric_name=None):
 
     context = {
         'articles': articles,
-        'city': city 
+        'city': city,
+        'rubric': rubric
     }
 
     return render(request, 'gorod/feed.html', context)

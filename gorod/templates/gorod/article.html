@@ -1,6 +1,7 @@
 {% extends 'gorod/layout.html' %}
 
 {% load staticfiles %}
+{% load humanize %}
 
 {% block meta_title %}{{ article.title }} - {{city.title}}{% endblock %}
 
@@ -18,7 +19,7 @@
 
             <br />
             
-            <span class="b-article__date">{{ article.add_date|date }}</span>
+            <span class="b-article__date">{{ article.add_date|naturalday }}</span>
             {#<span class="b-article__rubric">{{ article.rubric }}</span>#}
         </div>
         

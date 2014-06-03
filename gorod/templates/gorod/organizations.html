@@ -6,9 +6,10 @@
 
 {% block meta_description %}Новости {{ city.title }}, каталог организаций, полезная информация{% endblock %}
 
-
+{% block body-class %}body_organizations{% endblock %}
 
 {% block content %}
+    <h1 class="b-orgs__title">Организации</h1>
     <div class="b-orgs">
         <ul class="b-orgs__list">
             <div class="grid-sizer"></div>

@@ -16,7 +16,7 @@
     {% include "gorod/incl/_static.html" %}
 </head>
 
-<body>
+<body class="{% block body-class %}{% endblock %}">
     {% block header %}
         {% include "gorod/incl/_header.html" %}
     {% endblock %}

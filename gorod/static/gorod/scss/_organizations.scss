@@ -20,7 +20,7 @@
 	font-weight: 100;
 	font-size: 44px;
 	color:#fff;
-	background: #fc3d13;
+	background: $red-color;
 	letter-spacing: 7px;
 	text-transform: uppercase;
 }
@@ -39,7 +39,7 @@
 		font-weight: 700;
 
 		&:hover{
-			color:#fc3d13;
+			color:$red-color;
 		}
 	}
 }

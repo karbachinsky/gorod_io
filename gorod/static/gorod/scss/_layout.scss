@@ -16,7 +16,7 @@ body{
 	z-index: 2;
 	letter-spacing: 1.2px;
 	text-align: center;
-	@include box-shadow(0 0px 15px #444);
+	@include box-shadow(0 0px 10px rgba(0,0,0,0.1));
 
 	a{
 		
@@ -37,12 +37,16 @@ body{
 
 	.b-header__btns{
 		a{
+
+			font-weight: 500;
 			color:$green-color;
+			&:hover{
+				color:$green-color-dark;
+			}
 		}
 		position: absolute;
 		top: 30px;
 		right: 30px;
-		font-weight: 500;
 	}
 	.b-header__vk{
 		margin-left: 30px;
@@ -51,33 +55,44 @@ body{
 }
 .b-header__menu-btn{
 	float:left;
-	text-align: left;
-	@include inline-block;
-	width:12px;
-	height:10px;
-	border-top: 2px solid $green-color;
-	border-bottom: 2px solid $green-color;
-	vertical-align: top;
-	margin-top: 2px;
 	position: absolute;
 	top: 30px;
 	left: 30px;
 	cursor: pointer;
-	&:after{
-		content:"";
-		width: 100%;
-		height: 2px;
-		background: $green-color;
-		position: absolute;
-		top:4px;
+	color:$green-color;
+
+	i{
+		@include inline-block;
+		width:12px;
+		height:9px;
+		border-top: 3px solid $green-color;
+		border-bottom: 3px solid $green-color;
+		vertical-align: top;
+		margin-top: 2px;
+		margin-right: 8px;
+		&:after{
+			content:"";
+			width: 12px;
+			height: 3px;
+			background: $green-color;
+			position: absolute;
+			top:8px;
+			left:0;
+		}
 	}
+	
+	
 	
 }
 .b-header__city{
 	color:#000;
 	font-size:23px;
 	font-weight: 700;
-	text-transform: uppercase;;
+	text-transform: uppercase;
+
+	&:hover{
+		color:#737373;
+	}
 }
 
 

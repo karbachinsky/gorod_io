@@ -9,18 +9,18 @@
 	font-weight: 100;
 	font-size: 44px;
 	color:#fff;
-	background: #571a9d;
+	background: $violet-color;
 	letter-spacing: 7px;
 	text-transform: uppercase;
 
 	&.b-feed__rubric-title_afisha{
-		background:#571a9d;
+		background:$violet-color;
 	}
 	&.b-feed__rubric-title_event{
 		background: #000;
 	}
 	&.b-feed__rubric-title_photo{
-		background: #32d3b2;
+		background: $green-color;
 	}
 }
 .b-feed{
@@ -48,19 +48,19 @@
 }
 
 .b-feed-item__top{
-	background: #571a9d;
+	background: $violet-color;
 	padding: 4px 20px;
 	line-height: 25px;
 
 
 	.b-feed-item_afisha &{
-		background:#571a9d;
+		background:$violet-color;
 	}
 	.b-feed-item_event &{
 		background:#000;
 	}
 	.b-feed-item_photo &{
-		color:#32d3b2;
+		background:$green-color;
 	}
 }
 
@@ -72,6 +72,16 @@
 	text-decoration: none;
 	font-size: 13px;
 	letter-spacing: 1.2px;
+
+	.b-feed-item_afisha &:hover{
+		color:$green-color;
+	}
+	.b-feed-item_event &:hover{
+		color:$red-color;
+	}
+	.b-feed-item_photo &:hover{
+		color:$violet-color
+	}
 }
 .b-feed-item__date{
 	font-size: 12px;
@@ -85,6 +95,9 @@
 	text-decoration: none;
 	padding: 8px 0 6px;
 	background: #fff;
+	&:hover .b-feed-item__title{
+		color:$green-color;
+	}
 }
 
 .b-feed-item__title{
@@ -97,6 +110,7 @@
 	font-weight: 700;
 	margin-bottom: 3px;
 	padding: 0 20px;
+
 	
 }
 

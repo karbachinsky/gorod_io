@@ -3,8 +3,8 @@
 {% load menu %}
 <div class="b-header">
 	<div class="b-header__content">
-		<span class="b-header__menu-btn"></span>
-		<span class="b-header__city" href="{% url 'gorod:city_main_page' city.name %}">{{city.title}}</span>
+		<span class="b-header__menu-btn"><i></i>МЕНЮ</span>
+		<a class="b-header__city" href="{% url 'gorod:city_main_page' city.name %}">{{city.title}}</a>
 
 		{% if request.user.is_superuser %}
 			<div class="b-header__btns">

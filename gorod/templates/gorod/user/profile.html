@@ -1,0 +1,13 @@
+<p>
+    {{ user }}
+</p>
+
+<p>
+    {{ user_city }}
+</p>
+
+<p>Last feeds:</p>
+{% for article in user_last_feeds %}
+    <p>{{ article }}</p>
+{% endfor %}
+

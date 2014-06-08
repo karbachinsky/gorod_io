@@ -25,12 +25,14 @@ def menu(context, city):
     url_named_params = request.resolver_match.kwargs;
 
     # First element is city
-    menu = [{
-        'title': city.title,
-        'url_name': 'city_main_page',
-        'link': reverse('gorod:city_main_page', kwargs={ 'city_name': city.name }),
-        'is_active': 0
-    }]
+    #menu = [{
+    #    'title': city.title,
+    #    'url_name': 'city_main_page',
+    #    'link': reverse('gorod:city_main_page', kwargs={ 'city_name': city.name }),
+    #    'is_active': 0
+    #}]
+
+    menu = []
 
     if url_named_params.get('rubric_name'):
         current_url_name += '_' + url_named_params['rubric_name']

@@ -1,14 +1,12 @@
 # coding=utf-8
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from django.utils.safestring import mark_safe
 from django.core.validators import RegexValidator
+from django.conf import settings
 
 from mptt.models import MPTTModel, TreeForeignKey
-#from phonenumber_field.modelfields import PhoneNumberField
-
-#import gorod.fields.schedule
 
 # -*- coding: utf-8 -*-
 
@@ -22,6 +20,14 @@ class City(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class User(AbstractUser):
+    """
+        Custom User: adding city and other
+        profile information to default Django User model.
+    """
+    city = models.ForeignKey(City, blank=True, null=True, on_delete=models.SET_NULL)
 
 
 class CityInfo(models.Model):
@@ -45,7 +51,7 @@ class Article(models.Model):
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     rubric = models.ForeignKey(ArticleRubric, default=1)
-    user = models.ForeignKey(User) 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     picture = models.ImageField(max_length=255, upload_to='pictures/', default='', blank=True)
     text = RichTextField()
 
@@ -124,7 +130,7 @@ class Organization(models.Model):
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
     name = models.CharField(max_length=255)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     logo = models.ImageField(max_length=255, upload_to='organizations/', default='', blank=True)
     category = TreeForeignKey(OrganizationCategory, on_delete=models.PROTECT)
     web_site = models.URLField(blank=True)

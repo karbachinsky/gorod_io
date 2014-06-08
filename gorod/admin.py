@@ -1,8 +1,15 @@
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import ugettext, ugettext_lazy as _
+
+from django import forms
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
 from mptt.admin import MPTTModelAdmin
 
+from gorod.models import User
 from gorod.models import City
 from gorod.models import Article
 from gorod.models import ArticleRubric
@@ -43,6 +50,35 @@ class GorodAdminBase(admin.ModelAdmin):
     def _url_name_by_object(self, obj):
         """ get url name for object by it's class name"""
         return obj.__class__.__name__.lower()
+
+
+class GorodUserCreationForm(UserCreationForm):
+    pass
+
+
+class GorodUserChangeForm(UserChangeForm):
+    pass
+
+
+class GorodUserAdmin(UserAdmin):
+    form = GorodUserChangeForm
+    add_form = GorodUserCreationForm
+
+    # Redefining fields adding profile fields like city
+    # May we should just append these fields to default?
+    fieldsets = (
+        (None, {'fields': ('username', 'password', 'city')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        (_('Groups'), {'fields': ('groups',)}),
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'password1', 'password2', 'city')}
+        ),
+    )
 
 
 class CityAdmin(GorodAdminBase):
@@ -90,6 +126,7 @@ class OrganizationScheduleAdmin(GorodAdminBase):
 admin.site.register(OrganizationSchedule, OrganizationScheduleAdmin)
 
 
+admin.site.register(User, GorodUserAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(CityInfo, CityInfoAdmin)
 admin.site.register(Article, ArticleAdmin)

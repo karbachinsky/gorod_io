@@ -2,10 +2,14 @@
 
 from django.conf.urls import patterns, include, url
 
-from gorod.views import base
+from gorod.views import base, user
 
 
 urlpatterns = patterns('',
+    # User profile
+    url(r'^profile/(?P<user_id>\d+)/?$', user.profile, name='profile'),
+    url(r'^logout/?$', user.logout_view, name='logout'),
+
     # One City pages
     url(r'^town/(?P<city_name>\w+)/', include('gorod.urls.city', namespace='gorod')),
 

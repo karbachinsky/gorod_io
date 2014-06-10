@@ -7,10 +7,9 @@
 		<a class="b-header__city" href="{% url 'gorod:city_main_page' city.name %}">{{city.title}}</a>
 
 			<div class="b-header__btns">
-		        <a href="#" class="b-header__add" >+ Добавить</a>
-
                 {% if user.is_authenticated %}
-                    <a href="{% url 'profile' user.id %}">{{ user.username }}</a>
+                    <a href="#" class="b-header__add" >+ Добавить</a>
+                    <a href="{% url 'gorod:user' user.city.name user.id %}">{{ user.username }}</a>
                     <a href="{% url 'logout' %}">Выйти</a>
                 {% else %}
                     <a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" class="b-header__vk sn-logo">Войти</a>

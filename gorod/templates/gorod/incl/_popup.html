@@ -2,8 +2,12 @@
 <div class="b-popup b-popup-add">
 	<div class="b-popup__overlay"></div>
 	<div class="b-popup__window">
-		<a class="b-popup-add__left" href="{% url 'admin:gorod_article_add' %}?source=main">Запись</a>
-		<a class="b-popup-add__right" href="{% url 'admin:gorod_organization_add' %}?source=main">Организацию</a>
+        {% if user.is_superuser %}
+		    <a class="b-popup-add__left" href="{% url 'admin:gorod_article_add' %}?source=main">Запись</a>
+		    <a class="b-popup-add__right" href="{% url 'admin:gorod_organization_add' %}?source=main">Организацию</a>
+        {% else %}
+		    <a class="b-popup-add__left" href="{% url 'gorod:article-add' city.name %}">Запись</a>
+        {% endif %}
 		<div class="clear"></div>
 	</div>
 </div>

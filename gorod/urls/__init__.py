@@ -7,7 +7,6 @@ from gorod.views import base, user
 
 urlpatterns = patterns('',
     # User profile
-    url(r'^profile/(?P<user_id>\d+)/?$', user.profile, name='profile'),
     url(r'^logout/?$', user.logout_view, name='logout'),
 
     # One City pages

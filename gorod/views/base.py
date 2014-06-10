@@ -53,6 +53,10 @@ def article(request, city_name, article_id):
     return render(request, 'gorod/article.html', context)
 
 
+# Add article by user
+def add_article(request, city_name):
+    pass
+
 
 def handler404(request):
     return render(request, '404.html')

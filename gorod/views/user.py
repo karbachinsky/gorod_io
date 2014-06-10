@@ -8,8 +8,8 @@ from gorod.models import Article
 USER_LAST_FEEDS_CNT = 10
 
 # User profile page
-def profile(request, user_id):
-    user = get_object_or_404(get_user_model(), id=user_id)
+def profile(request, city_name, user_id):
+    user = get_object_or_404(get_user_model(), id=user_id, city__name=city_name)
 
     user_last_feeds = Article.objects.filter(user__id=user_id).order_by('-add_date').select_related().all()[:USER_LAST_FEEDS_CNT]
 

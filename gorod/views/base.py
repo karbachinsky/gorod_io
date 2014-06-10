@@ -2,9 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 
+from django.contrib.auth.decorators import login_required
 
 from gorod.models import City, Article, ArticleRubric
-
+from gorod.utils.forms.article import ArticleAddForm
 
 # Main page
 def index(request):
@@ -42,20 +43,35 @@ def feed(request, city_name='belev', rubric_name=None):
 # Article view
 def article(request, city_name, article_id): 
     city = get_object_or_404(City, name=city_name)
-    article = get_object_or_404(Article, pk=article_id, city=city.id)
-
+    article_item = get_object_or_404(Article, pk=article_id, city=city.id)
 
     context = {
-        'article': article,
+        'article': article_item,
         'city': city
     }
 
     return render(request, 'gorod/article.html', context)
 
 
-# Add article by user
-def add_article(request, city_name):
-    pass
+# Page with form to add article by user
+@login_required
+def add_article_form(request, city_name):
+    city = get_object_or_404(City, name=city_name)
+
+    # TODO: check is user trying to add article to his city
+
+    if request.method == 'POST':
+        form = ArticleAddForm(request.POST)
+        if form.is_valid():
+            # Process the data in form.cleaned_data
+            # ...
+            return HttpResponseRedirect('/thanks/')
+    else:
+        form = ArticleAddForm
+
+    return render(request, 'gorod/forms/article_add.html', {
+        'form': form,
+    })
 
 
 def handler404(request):

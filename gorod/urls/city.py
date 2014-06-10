@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     # Rubric feed list page 
     url(r'^feed/rubric/(?P<rubric_name>\w+)/?$', base.feed, name='feed-rubric'),
     # Add article by user
-    url(r'^article/add/?$', base.feed, name='article-add'),
+    url(r'^article/add/?$', base.add_article_form, name='article-add'),
 
     ## Organzations
 

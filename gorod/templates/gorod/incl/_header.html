@@ -9,7 +9,10 @@
 			<div class="b-header__btns">
                 {% if user.is_authenticated %}
                     <a href="#" class="b-header__add" >+ Добавить</a>
-                    <a href="{% url 'gorod:user' user.city.name user.id %}">{{ user.username }}</a>
+                    {% if user.city %}
+                        <!-- FIXME later -->
+                        <a href="{% url 'gorod:user' user.city.name user.id %}">{{ user.username }}</a>
+                    {% endif %}
                     <a href="{% url 'logout' %}">Выйти</a>
                 {% else %}
                     <a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" class="b-header__vk sn-logo">Войти</a>

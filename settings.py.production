@@ -167,12 +167,29 @@ AUTH_PROFILE_MODULE = 'gorod.User'
 SOCIAL_AUTH_VK_OAUTH2_KEY = '4377733'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'BCPF9FkSOGmjnC4zujpp'
 SOCIAL_AUTH_VK_APP_USER_MODE = 2
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'photos']
 
 # Authentication
 AUTHENTICATION_BACKENDS = (
     'social.backends.vk.VKOAuth2',
     'django.contrib.auth.backends.ModelBackend'
 )
+
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    # Avatar saver
+    'gorod.utils.auth_pipelines.save_avatar',
+)
+
 
 SOCIAL_AUTH_AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS
 

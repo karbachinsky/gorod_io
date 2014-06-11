@@ -28,7 +28,7 @@ class User(AbstractUser):
         profile information to default Django User model.
     """
     city = models.ForeignKey(City, blank=True, null=True, on_delete=models.SET_NULL)
-
+    avatar = models.CharField(max_length=255, blank=True, null=True)
 
 class CityInfo(models.Model):
     """ Module About or city info """

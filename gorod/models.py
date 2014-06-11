@@ -53,7 +53,7 @@ class Article(models.Model):
     rubric = models.ForeignKey(ArticleRubric, default=1)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     picture = models.ImageField(max_length=255, upload_to='pictures/', default='', blank=True)
-    text = RichTextField()
+    text = RichTextField(blank=True)
 
     def __unicode__(self):
         return self.title

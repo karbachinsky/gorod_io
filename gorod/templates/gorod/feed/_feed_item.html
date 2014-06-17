@@ -1,0 +1,28 @@
+{% load staticfiles %}
+{% load thumbnail %}
+{% load humanize %}
+<li class="b-feed-item  b-feed-item_{{article.rubric}}" >
+                
+    <div class="b-feed-item__top">
+        <a class="b-feed-item__rubric" href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}">
+            {{ article.rubric.title }}
+        </a>
+        <span class="b-feed-item__date">{{ article.add_date|naturalday }}</span>
+    </div>
+    <a class="b-feed-item__link" href="{% url 'gorod:article' city.name article.id %}">
+        {# title photo #}
+        <h2 class="b-feed-item__title">{{ article.title }}</h2> 
+        {% if article.text %}  
+            <p class="b-feed-item__text">
+                {% autoescape off %}
+                {{ article.text|striptags|truncatechars:255 }} 
+                {% endautoescape %}
+            </p>
+        {% endif %} 
+
+        {# img #}    
+        {% if article.picture %}
+            <img class="b-feed-item__picture" src="{{ article.picture|thumbnail_url:'feed_image' }}" />
+        {% endif %} 
+    </a>
+</li>

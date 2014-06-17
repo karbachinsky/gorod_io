@@ -1,13 +1,30 @@
-<p>
-    {{ user }}
-</p>
+{% extends 'gorod/layout.html' %}
 
-<p>
-    {{ user_city }}
-</p>
+{% load staticfiles %}
 
-<p>Last feeds:</p>
-{% for article in user_last_feeds %}
-    <p>{{ article }}</p>
-{% endfor %}
+{% block content %}
+	<div class="b-profile__wrapper">
+		<div class="b-profile">
+			<div class="b-profile__avatar"><img src="{{ user.avatar }}" /></div>
+			<div class="b-profile__text">
+			    <span class="b-profile__name">{{ user }}</span>
+			    <a class="b-profile__logout" href="{% url 'logout' %}">Выйти</a>
+		    </div>
+		    <div class="clear"></div>
+		</div>
+	</div>
+	<div class="b-feed__wrapper">
+        <div class="b-feed b-feed_profile">
+            <ul class="b-feed__list">
+                <div class="grid-sizer"></div>
+                <div class="gutter-sizer"></div>
 
+                {% for article in user_last_feeds %}
+                    {% include "gorod/feed/_feed_item.html" %}
+                {% endfor %}
+            </ul>
+            
+        </div>
+    </div>
+
+{% endblock %}

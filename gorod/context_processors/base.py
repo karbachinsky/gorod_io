@@ -28,5 +28,3 @@ def base_params(request):
 
     return context
 
-
-

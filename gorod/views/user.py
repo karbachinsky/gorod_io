@@ -15,7 +15,6 @@ def profile(request, city_name, user_id):
 
     context = {
         'user_info': user,
-        'user_city': user.city,
         'user_last_feeds': user_last_feeds
     }
 

@@ -68,7 +68,7 @@ class GorodUserAdmin(UserAdmin):
     # May we should just append these fields to default?
     fieldsets = (
         (None, {'fields': ('username', 'password', 'city')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email', 'avatar')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
         (_('Groups'), {'fields': ('groups',)}),

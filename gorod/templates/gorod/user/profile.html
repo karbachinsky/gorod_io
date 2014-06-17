@@ -5,10 +5,18 @@
 {% block content %}
 	<div class="b-profile__wrapper">
 		<div class="b-profile">
-			<div class="b-profile__avatar"><img src="{{ user.avatar }}" /></div>
+			<div class="b-profile__avatar"><img src="{{ user_info.avatar }}" /></div>
 			<div class="b-profile__text">
-			    <span class="b-profile__name">{{ user }}</span>
-			    <a class="b-profile__logout" href="{% url 'logout' %}">Выйти</a>
+			    <span class="b-profile__name">
+                    {% if user_info.first_name %}
+                        {{ user_info.first_name }} {{ user_info.last_name }}
+                    {% else %}
+                        {{ user_info }}
+                    {% endif %}
+                </span>
+                {% if user_info == user %}
+			        <a class="b-profile__logout" href="{% url 'logout' %}">Выйти</a>
+                {% endif %}
 		    </div>
 		    <div class="clear"></div>
 		</div>

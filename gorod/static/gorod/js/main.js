@@ -1,19 +1,30 @@
 (window.addPopup = function(e){
-	$('.b-header__add').on('click',function(){
-		$('.b-popup-add').addClass('b-popup_shown');
-		return false;
+
+	$popup = $('.b-popup-add'),
+	$window = $popup.find('.b-popup__window'),
+	$addBtn = $('.b-header__add'),
+	$overlay = $popup.find('.b-popup__overlay'),
+	shownClass = 'b-popup_shown';
+
+	$addBtn.on('click',function(e){
+		$.get('/town/PK/article/add',function(html){
+			$window.html(html);
+		})
+		$popup.addClass(shownClass);
+		$overlay.height($('body').outerHeight());
+		e.preventDefault();
 	});
 
-	$('.b-popup-add .b-popup__overlay').on('click',function(){
-		$('.b-popup-add').removeClass('b-popup_shown');
+	$overlay.on('click',function(){
+		$popup.removeClass(shownClass);
 	});
-	$('.b-popup__window a').on('click',function(){
+	/*$('.b-popup__window a').on('click',function(){
 		$('.b-popup-add').removeClass('b-popup_shown');
-	});
+	});*/
 
 	$(document).keydown(function(e) {
 	    if( e.keyCode === 27 ) {
-	        $('.b-popup-add').removeClass('b-popup_shown');
+	        $popup.removeClass(shownClass);
 	        return false;
 	    }
 	});
@@ -47,6 +58,9 @@
 	$topLine = $('.b-header__content'),
 	$menu = $('.b-header__menu');
 
+	$('.b-header__avatar').on('click',function(e){
+		e.stopPropagation();
+	})
 	$topLine.on('click',function(e){
 		if(!$menu.hasClass('active') && !$(e.target).hasClass('b-header__city')){
 			$('body').animate({scrollTop:0},300);

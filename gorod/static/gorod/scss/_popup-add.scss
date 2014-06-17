@@ -1,7 +1,7 @@
 
 /*-------------popup---------------*/
 .b-popup{
-	position: fixed;
+	position: absolute;
 	top:0;
 	left: 0;
 	right: 0;
@@ -17,12 +17,12 @@
 	z-index: 1;
 	height: 100%;
 	width: 100%;
-	background: rgba(159,159,159,0.7);
+	background: rgba(230,230,230,0.65);
 }
 .b-popup__window{
 	z-index: 2;
 	position: absolute;
-	top:35%;
+	top:15%;
 	left:0;
 	right:0;
 	margin: auto;
@@ -32,35 +32,11 @@
 
 .b-popup-add {
 	.b-popup__window{
-		width:401px;
-		height:200px;
-		@include border-radius(35px);
+		width:500px;
+		height:700px;
+		@include border-radius(5px);
 		overflow: hidden;
-	}
-
-	a{
-		display: block;
-		height:100%;
-		background: #20202f;
-		width:200px;
-		float: left;
-		color: $green-color;
-		vertical-align: middle;
-		line-height: 200px;
-		font-size: 13px;
-		text-align: center;
-		text-decoration: none;
-		text-transform: uppercase;
-		letter-spacing: 2px;
-
-		&.b-popup-add__right{
-			border-left: 1px solid #a5a5a5;
-		}
-
-		&:hover{
-			background: $green-color;
-			color:#fff;
-		}
+		background: #fff;
 	}
 }
 

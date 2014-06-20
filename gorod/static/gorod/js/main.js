@@ -6,14 +6,37 @@
 	$overlay = $popup.find('.b-popup__overlay'),
 	shownClass = 'b-popup_shown';
 
+    formAjaxUrl = '/town/PK/article/add';
+
 	$addBtn.on('click',function(e){
-		$.get('/town/PK/article/add',function(html){
+		$.get(formAjaxUrl, function(html){
 			$window.html(html);
 		})
 		$popup.addClass(shownClass);
 		$overlay.height($('body').outerHeight());
 		e.preventDefault();
 	});
+
+    $window.on('submit', 'form', function(e){
+        e.preventDefault();
+
+        var data = new FormData($window.find('form')[0]);
+
+        console.log(data);
+
+        var Deferred = $.ajax({
+            url: formAjaxUrl,
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'POST'
+        });
+
+        Deferred.done(function(html){
+            $window.html(html);
+        });
+    });
 
 	$overlay.on('click',function(){
 		$popup.removeClass(shownClass);

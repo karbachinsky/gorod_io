@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from gorod.models import City, Article, ArticleRubric
 from gorod.utils.forms.article import ArticleAddForm
 
+from django.core.urlresolvers import reverse
+
 # Main page
 def index(request):
     cities = City.objects.order_by('title').all
@@ -65,7 +67,11 @@ def add_article_form(request, city_name):
         if form.is_valid():
             # Process the data in form.cleaned_data
             # ...
-            return HttpResponseRedirect('/thanks/')
+            return render(request, 'gorod/forms/article_add_ok.html')
+        else:
+            return render(request, 'gorod/forms/article_add.html', {
+                'form': form,
+            })
     else:
         form = ArticleAddForm
 

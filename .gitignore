@@ -1,9 +1,11 @@
 /static
+/templates
 /media
 *.pyc
 *.swp
 *.swo
+*.swn
 *.scssc
 /settings.py
 /gorod/migrations/
-
+.idea

@@ -36,6 +36,7 @@
         Deferred.done(function(html){
             $window.html(html);
         });
+
     });
 
 	$overlay.on('click',function(){

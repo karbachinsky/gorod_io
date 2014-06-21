@@ -54,6 +54,13 @@ class Article(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     picture = models.ImageField(max_length=255, upload_to='pictures/', default='', blank=True)
     text = RichTextField(blank=True)
+    is_published = models.BooleanField(default=True)
+    is_checked = models.BooleanField(default=True)
+
+    class Meta:
+        permissions = (
+            ("article_create_wo_check", "Can create article without admin checking"),
+        )
 
     def __unicode__(self):
         return self.title

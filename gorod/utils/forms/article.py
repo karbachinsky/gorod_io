@@ -10,4 +10,5 @@ class ArticleAddForm(ModelForm):
     class Meta:
         model = Article
         fields = ['picture', 'title', 'rubric', 'text']
+        localized_fields = ['picture', 'title', 'rubric', 'text']
 

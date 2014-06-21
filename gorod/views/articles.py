@@ -77,7 +77,7 @@ class AddView(View):
         form = None
 
         if request.method == 'POST':
-            form = ArticleAddForm(request.POST)
+            form = ArticleAddForm(request.POST, request.FILES)
             if form.is_valid():
                 user_article = form.save(commit=False)
 

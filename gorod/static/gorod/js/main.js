@@ -35,8 +35,6 @@
 
         var data = new FormData($window.find('form')[0]);
 
-        console.log(data);
-
         var Deferred = $.ajax({
             url: formAjaxUrl,
             data: data,

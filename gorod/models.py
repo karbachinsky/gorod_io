@@ -52,7 +52,7 @@ class Article(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     rubric = models.ForeignKey(ArticleRubric, default=1)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    picture = models.ImageField(max_length=255, upload_to='pictures/', default='', blank=True)
+    picture = models.ImageField(max_length=255, upload_to='pictures/%Y/%m/', null=True, blank=True)
     text = RichTextField(blank=True)
     is_published = models.BooleanField(default=True)
     is_checked = models.BooleanField(default=True)

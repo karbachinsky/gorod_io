@@ -33,7 +33,7 @@ urlpatterns = patterns('',
     url(r'^organization/(?P<organization_id>\d+)/?$', organizations.OrganizationView.as_view(), name='organization'),
 
     ## City info/about
-    url(r'^info/?$', city_info.info, name='city-info'),
+    url(r'^info/?$', city_info.CityInfoView.as_view(), name='city-info'),
 
     ## City user
     url(r'^user/(?P<user_id>\d+)/?$', user.ProfileView.as_view(), name='user'),

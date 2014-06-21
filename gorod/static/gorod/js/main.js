@@ -1,3 +1,16 @@
+(window.getEnv = function(var_name, default_value) {
+    if(typeof(window[var_name]) != 'undefined') {
+        return window[var_name];
+    }
+
+    if(typeof(default_value) != 'undefined') {
+        return default_value;
+    }
+
+    return;
+});
+
+
 (window.addPopup = function(e){
 
 	$popup = $('.b-popup-add'),
@@ -6,7 +19,7 @@
 	$overlay = $popup.find('.b-popup__overlay'),
 	shownClass = 'b-popup_shown';
 
-    formAjaxUrl = '/town/PK/article/add';
+    formAjaxUrl = window.getEnv('article_add_url');
 
 	$addBtn.on('click',function(e){
 		$.get(formAjaxUrl, function(html){

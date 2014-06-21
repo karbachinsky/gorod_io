@@ -4,4 +4,14 @@
 <script src="{% static 'gorod/js/jquery.js' %}" ></script>
 <script src="{% static 'gorod/js/masonry.js' %}"></script>
 <script src="{% static 'gorod/js/imagesloaded.js' %}"></script>
+
+{% if city %}
+
+<script>
+    var city_name = '{{ city.name }}';
+    var article_add_url = '{% url 'gorod:article-add' city.name %}'
+</script>
+
+{% endif %}
+
 <script src="{% static 'gorod/js/main.js' %}" ></script>

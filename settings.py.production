@@ -53,6 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'gorod.middleware.base.UserCityMiddleware',
+    'gorod.middleware.base.RedirectOldCityUrlsMiddleware',
 )
 
 

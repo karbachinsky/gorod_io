@@ -8,10 +8,10 @@ from gorod.views import base, user
 
 urlpatterns = patterns('',
     # Project main page
-    url(r'^$', base.index, name='index'),
+    url(r'^$', base.IndexView.as_view(), name='index'),
 
     # User profile
-    url(r'^logout/?$', user.logout_view, name='logout'),
+    url(r'^logout/?$', user.LogoutView.as_view(), name='logout'),
 
     # One City pages
     url(r'^(?P<city_name>\w+)/', include('gorod.urls.city', namespace='gorod')),

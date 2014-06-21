@@ -1,3 +1,6 @@
+from django.core.urlresolvers import resolve, Resolver404
+from django.http import HttpResponsePermanentRedirect
+from django.http import Http404
 from gorod.models import City
 
 class UserCityMiddleware(object):
@@ -30,3 +33,19 @@ class UserCityMiddleware(object):
 
         return None
 
+
+class RedirectOldCityUrlsMiddleware(object):
+    """
+        Redirect old urls with /town/$city/*  to /$city/*
+    """
+    def process_request(self, request):
+
+        if not request.path.startswith('/town'):
+            return None
+
+        redirect_url = request.path.replace('/town', '', 1)
+        try:
+            resolve(redirect_url)
+            return HttpResponsePermanentRedirect(redirect_url)
+        except Resolver404:
+            raise Http404('Pad url')

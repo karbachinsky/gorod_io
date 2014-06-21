@@ -60,6 +60,7 @@ class Article(models.Model):
     class Meta:
         permissions = (
             ("article_create_wo_check", "Can create article without admin checking"),
+            ("article_see_not_checked", "Can sen not approved articles"),
         )
 
     def __unicode__(self):

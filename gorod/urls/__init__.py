@@ -13,6 +13,9 @@ urlpatterns = patterns('',
     # User profile
     url(r'^logout/?$', user.LogoutView.as_view(), name='logout'),
 
+    # Captcha
+    url(r'^captcha/', include('captcha.urls')),
+
     # One City pages
     url(r'^(?P<city_name>\w+)/', include('gorod.urls.city', namespace='gorod')),
 )

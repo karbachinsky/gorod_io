@@ -1,4 +1,5 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
@@ -8,7 +9,6 @@ from django.conf import settings
 
 from mptt.models import MPTTModel, TreeForeignKey
 
-# -*- coding: utf-8 -*-
 
 
 class City(models.Model):
@@ -47,13 +47,13 @@ class ArticleRubric(models.Model):
 
 class Article(models.Model):
     """ Article class """
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, help_text=u'Заголовок')
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    rubric = models.ForeignKey(ArticleRubric, default=1)
+    rubric = models.ForeignKey(ArticleRubric, default=1, help_text=u'Рубрика')
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    picture = models.ImageField(max_length=255, upload_to='pictures/%Y/%m/', null=True, blank=True)
-    text = RichTextField(blank=True)
+    picture = models.ImageField(max_length=255, upload_to='pictures/%Y/%m/', null=True, blank=True, help_text=u'Изображение')
+    text = RichTextField(blank=True, help_text=u'Текст')
     is_published = models.BooleanField(default=True)
     is_checked = models.BooleanField(default=True)
 

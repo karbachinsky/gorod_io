@@ -149,6 +149,8 @@ CKEDITOR_CONFIGS = {
         'toolbar': [
             ['Format', 'Bold', 'Italic', 'Link', 'Unlink', 'Image', 'Source', 'NumberedList', 'BulletedList'],
         ],
+        'width' : '80%',
+        'resize_enabled' : False
     }
 }
 

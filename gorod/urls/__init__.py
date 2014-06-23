@@ -3,6 +3,7 @@
 """
 
 from django.conf.urls import patterns, include, url
+from django.views.generic import RedirectView
 
 from gorod.views import base, user
 
@@ -18,5 +19,8 @@ urlpatterns = patterns('',
 
     # One City pages
     url(r'^(?P<city_name>\w+)/', include('gorod.urls.city', namespace='gorod')),
+
+    # Redirects
+    url('r^(towns|archive)/', RedirectView.as_view(url='/')),
 )
 

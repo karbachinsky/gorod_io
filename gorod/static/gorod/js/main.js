@@ -1,6 +1,6 @@
 (window.getEnv = function(var_name, default_value) {
-    if(typeof(window[var_name]) != 'undefined') {
-        return window[var_name];
+    if(typeof(globals[var_name]) != 'undefined') {
+        return globals[var_name];
     }
 
     if(typeof(default_value) != 'undefined') {
@@ -9,59 +9,6 @@
 
     return;
 });
-
-
-(window.addPopup = function(e){
-
-	var $popup = $('.b-popup-add'),
-	$window = $popup.find('.b-popup__window'),
-	$addBtn = $('.b-header__add'),
-	$overlay = $popup.find('.b-popup__overlay'),
-	shownClass = 'b-popup_shown',
-    formAjaxUrl = window.getEnv('article_add_url');
-
-	$addBtn.on('click',function(e){
-		$.get(formAjaxUrl, function(html){
-			$window.html(html);
-		})
-		$popup.addClass(shownClass);
-		$overlay.height($('body').outerHeight());
-		e.preventDefault();
-	});
-
-    $window.on('submit', 'form', function(e){
-        e.preventDefault();
-
-        var data = new FormData($window.find('form')[0]),
-        Deferred = $.ajax({
-            url: formAjaxUrl,
-            data: data,
-            cache: false,
-            contentType: false,
-            processData: false,
-            type: 'POST'
-        });
-
-        Deferred.done(function(html){
-            $window.html(html);
-        });
-
-    });
-
-	$overlay.on('click',function(){
-		$popup.removeClass(shownClass);
-	});
-
-	$(document).keydown(function(e) {
-	    if( e.keyCode === 27 ) {
-	        $popup.removeClass(shownClass);
-	        return false;
-	    }
-	});
-
-})();
-
-
 
 (window.menu = function(){
 	var $btn = $('.b-header__menu-btn'),
@@ -83,7 +30,7 @@
 		},50)
 	});
 	
-})();
+});
 
 (window.topScrolling = function(){
 	var $topLine = $('.b-header__content'),

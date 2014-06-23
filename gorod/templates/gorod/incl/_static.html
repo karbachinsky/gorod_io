@@ -1,18 +1,18 @@
 {% load staticfiles %}
 <link href="{% static 'gorod/css/style.css' %}?v=2" rel="stylesheet" type="text/css" />
 <link rel="SHORTCUT ICON" href="{% static 'gorod/img/favicon.ico' %}" />
+
+{% if city %}
+	<script>
+	    var globals = {
+	    	cityName : '{{ city.name }}',
+	    	articleAddUrl : '{% url 'gorod:article-add' city.name %}'
+	    };
+	</script>
+{% endif %}
 <script src="{% static 'gorod/js/jquery.js' %}" ></script>
 <script src="{% static 'gorod/js/masonry.js' %}"></script>
 <script src="{% static 'gorod/js/imagesloaded.js' %}"></script>
 <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
-
-{% if city %}
-
-<script>
-    var city_name = '{{ city.name }}';
-    var article_add_url = '{% url 'gorod:article-add' city.name %}'
-</script>
-
-{% endif %}
-
+<script src="{% static 'gorod/js/addpopup.js' %}" ></script>
 <script src="{% static 'gorod/js/main.js' %}" ></script>

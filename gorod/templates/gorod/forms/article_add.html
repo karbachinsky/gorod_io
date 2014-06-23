@@ -1,23 +1,33 @@
-<form action="" method="post" enctype="multipart/form-data">
+<form action="" method="post" enctype="multipart/form-data" class="b-form">
     {% csrf_token %}
 
-	{{ form.picture }}
-	<span class="err">{{ form.title.errors }}</span>
-	{{ form.title }}
-	{% if form.title.errors %}<b>err</b>{% endif %}
-	{{ form.rubric }}
-	{{ form.text }}
-	{{ form.captcha }}
+	<div class="b-form__preview-wrapper">	
+		<div class="b-form__preview"></div>
+	</div>
+	<div class="b-form__picture">{{ form.picture }}</div>
 
-	
-    <input type="submit" value="Submit" />
-
-
-    {% comment %}
-    {% for field in form %}
-        {{ field.errors }}
-        {{ field }}
-    {% endfor %}
-    {% endcomment %}
-
+	<div class="b-form__bordered">
+		<div class="b-form__title">
+			{% if form.title.errors %}
+				<span class="b-form__error">{{ form.title.errors }}</span>
+			{% endif %}
+			<label>Заголовок: {{ form.title }}</label>
+		</div>	
+		<div class="b-form__rubric">
+			<label>Рубрика: {{ form.rubric }}</label>
+		</div>
+		<div class="clear"></div>
+	</div>	
+	<div class="b-form__text">
+		{{ form.text }}
+	</div>
+	<div class="b-form__captcha">
+		{% if form.captcha.errors %}
+			<span class="b-form__error">{{ form.captcha.errors }}</span>
+		{% endif %}
+		{{ form.captcha }}
+	</div>
+	<div class="b-form__submit">
+    	<input type="submit" value="Сохранить" />
+    </div>
 </form>

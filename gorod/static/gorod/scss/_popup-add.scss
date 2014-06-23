@@ -13,6 +13,12 @@
 		display: block;
 	}
 }
+
+@media screen and (max-width: 700px) { 
+	.b-popup_shown{
+		display: none !important;
+	}
+}
 .b-popup__overlay{
 	z-index: 1;
 	height: 100%;

@@ -6,6 +6,10 @@
 	font-size: 14px;
 	position: relative;
 
+	img{
+		width: 100%;
+	}
+
 	.edit-link{
 		@include inline-block;
 		position: absolute;

@@ -10,7 +10,6 @@
                 {% if user.is_authenticated %}
                     <a href="#" class="b-header__add" >+ Добавить</a>
                     {% if user.city %}
-                        <!-- FIXME later -->
                         <a href="{% url 'gorod:user' user.city.name user.id %}" class="b-header__avatar"><img src="{{ user.avatar }}" /></a>
                     {% endif %}
                 {% else %}
@@ -22,9 +21,16 @@
 	</div>
 	<div class="b-header__menu">
 		{% menu city %}
+
+		{% if user.is_authenticated and user.city %}
+            <a href="{% url 'gorod:user' user.city.name user.id %}" class="b-header__avatar"><img src="{{ user.avatar }}" /></a>
+        {% endif %}
 		<div class="b-header__btns">
-	        <a href="#" class="b-header__add" >+ Добавить</a>
-	        <a href="{% url 'social:begin' "vk-oauth2" %}" class="b-header__vk sn-logo">Войти</a>
+			{% if user.is_authenticated %}
+	        	<a href="#" class="b-header__add" >+ Добавить</a>
+	        {% else %}
+	        	<a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" class="b-header__login sn-logo">Войти</a>
+	        {% endif %}
 	    </div>
 	</div>
 </div>

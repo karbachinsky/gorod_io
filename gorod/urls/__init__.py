@@ -17,10 +17,10 @@ urlpatterns = patterns('',
     # Captcha
     url(r'^captcha/', include('captcha.urls')),
 
+    # Redirects
+    url('r^(towns|archive)/?$', RedirectView.as_view(url='/')),
+
     # One City pages
     url(r'^(?P<city_name>\w+)/', include('gorod.urls.city', namespace='gorod')),
-
-    # Redirects
-    url('r^(towns|archive)/', RedirectView.as_view(url='/')),
 )
 

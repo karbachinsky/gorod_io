@@ -90,7 +90,7 @@ class CityInfoAdmin(GorodAdminBase):
 
 
 class ArticleAdmin(GorodAdminBase):
-    list_display = ('id', 'add_date', 'title', 'city', 'rubric', 'user')
+    list_display = ('id', 'add_date', 'title', 'city', 'rubric', 'user', 'is_checked')
 
 
 class ArticleRubrucAdmin(GorodAdminBase):

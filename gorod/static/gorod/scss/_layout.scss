@@ -139,7 +139,7 @@ body{
 	}
 	
 	ul{
-		margin-bottom: 150px;
+		margin-bottom: 120px;
 	}
 	li{
 		display:block;		
@@ -214,18 +214,33 @@ body{
 
 
 
-@media screen and (max-width: 700px) { 
+@media screen and (max-width: 630px) { 
+
+	.b-header__city{
+		font-size:20px;
+	}
+
+
 	.b-header__content{
 		.b-header__btns{
 			display: none;
 		}
 	}
 	.b-header__menu{
+
+		li{
+			a{
+				font-size:20px;
+			}
+		}
 		.b-header__avatar{
 			display: block;
 		}
 		.b-header__btns{
 			display: block;
+		}
+		.b-header__add{
+			display: none !important;
 		}
 	}
 }

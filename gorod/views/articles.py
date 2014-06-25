@@ -49,6 +49,7 @@ class FeedView(View):
             json_data = serializers.serialize('json', articles.all()[lim_start:lim_end])
             return HttpResponse(json_data, mimetype='application/json')
         else:
+            context['articles'] = context['articles'].all()[0:1000]
             return render(request, 'gorod/feed.html', context)
 
 

@@ -8,3 +8,4 @@ django-phonenumber-field
 easy-thumbnails
 python-social-auth
 django-simple-captcha
+simplejson

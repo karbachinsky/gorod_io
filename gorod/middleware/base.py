@@ -39,6 +39,9 @@ class RedirectOldCityUrlsMiddleware(object):
         Redirect old urls with /town/$city/*  to /$city/*
     """
     def process_request(self, request):
+        if request.path in ('/towns/', '/archive/'):
+            return HttpResponsePermanentRedirect('/')
+
         if not request.path.startswith('/town'):
             return None
 

@@ -21,16 +21,21 @@
 	line-height: 22px;
 	color:#333333;
 }
-.b-index-top__column h2{
+.b-index-top__column h1{
 	color:#7f8c8d;
-	font-size: 32px;
-	line-height: 38px;
+	font-size: 16px;
 	font-weight: 400;
 	margin: 0;
+	width: 330px;
+	line-height: 30px;
+	margin-bottom: 30px;
 }
-.b-index-top__column h2 b{
+.b-index-top__column h1 b{
 	color:#2ecc71;
 	font-weight: 400;
+	font-size: 32px;
+	display: inline-block;
+	margin-bottom: 10px;
 }
 .b-index-top__map-img{
 	margin:20px 0 32px 25px;

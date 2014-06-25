@@ -1,9 +1,12 @@
-from django.shortcuts import render, get_object_or_404, Http404
+from django.shortcuts import render, get_object_or_404, Http404, HttpResponse
 from django.db import IntegrityError, DatabaseError
 from django.views.generic import View
+from django.core import serializers
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
+import simplejson
 
 from gorod.models import City, Article, ArticleRubric
 from gorod.utils.forms.article import ArticleAddForm
@@ -36,7 +39,17 @@ class FeedView(View):
             'rubric': rubric
         }
 
-        return render(request, 'gorod/feed.html', context)
+        # FIXME
+        if request.GET.get('json'):
+            page = int(request.GET.get('page', 0))
+            limit = int(request.GET.get('limit', 15))
+            #assert False, "%s %s" % (page, limit)
+            lim_start = page*limit
+            lim_end = lim_start + limit
+            json_data = serializers.serialize('json', articles.all()[lim_start:lim_end])
+            return HttpResponse(json_data, mimetype='application/json')
+        else:
+            return render(request, 'gorod/feed.html', context)
 
 
 class ArticleView(View):
@@ -59,6 +72,7 @@ class ArticleView(View):
         context = {
             'article': article_item,
         }
+
 
         return render(request, 'gorod/article.html', context)
 

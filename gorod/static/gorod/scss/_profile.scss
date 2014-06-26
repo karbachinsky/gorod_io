@@ -49,7 +49,9 @@
 @media screen and (max-width: 630px) { 
 	
 	.b-profile{
-		width: 90%;
+		width: auto;
+		padding-left: 30px;
+		padding-right: 30px;
 	}
 	.b-profile__text{
 		clear:left;

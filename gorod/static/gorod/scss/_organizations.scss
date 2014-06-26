@@ -60,7 +60,9 @@
 @media screen and (max-width: 630px) { 
 	
 	.b-orgs{
-		width: 90%;
+		width: auto;
+		padding-left: 30px;
+		padding-right: 30px;
 	}
 	.b-orgs__item{
 		width: 100%;

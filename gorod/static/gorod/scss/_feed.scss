@@ -153,10 +153,16 @@
 @media screen and (max-width: 630px) { 
 	
 	.b-feed{
-		width: 90%;
+		width: auto;
+		padding-left: 30px;
+		padding-right: 30px;
 	}
 	.b-feed-item{
 		width: 100%;
+	}
+	.b-feed-item__top{
+		padding-top: 10px;
+		padding-bottom: 10px;
 	}
 }
 

@@ -219,7 +219,17 @@ body{
 	.b-header__city{
 		font-size:20px;
 	}
-
+	.b-header__menu-btn{
+		i{
+			width:18px;
+			&:after{
+				width: 18px;
+			}
+		}
+		span{
+			display: none;
+		}
+	}
 
 	.b-header__content{
 		.b-header__btns{

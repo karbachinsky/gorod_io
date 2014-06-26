@@ -93,6 +93,7 @@
 	color:#fff;
 	opacity: 0.7;
 	text-transform: uppercase;
+	vertical-align: bottom;
 }
 .b-feed-item__link{
 	display: block;
@@ -163,6 +164,21 @@
 	.b-feed-item__top{
 		padding-top: 10px;
 		padding-bottom: 10px;
+	}
+	.b-feed-item__rubric{
+		font-size: 16px;
+	}
+
+	.b-feed-item__date{
+		font-size: 14px;
+	}
+	.b-feed-item__title{
+		line-height: 27px;
+		font-size: 20px;
+	}
+	.b-feed-item__text{
+		font-size: 15px;
+		line-height: 22px;
 	}
 }
 

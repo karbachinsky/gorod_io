@@ -32,6 +32,7 @@ body{
 	left: 30px;
 	cursor: pointer;
 	color:$green-color;
+	font-weight: 600;
 
 	i{
 		@include inline-block;
@@ -56,7 +57,7 @@ body{
 .b-header__city{
 	color:#000;
 	font-size:23px;
-	font-weight: 700;
+	font-weight: 800;
 	text-transform: uppercase;
 
 	&:hover{
@@ -79,7 +80,7 @@ body{
 	.b-header__btns{
 		a{
 			vertical-align: top;
-			font-weight: 500;
+			font-weight: 600;
 			color:$green-color;
 			&:hover{
 				color:$green-color-dark;
@@ -150,7 +151,7 @@ body{
 			line-height: 16px;
 			font-size:23px;
 			color:#fff;
-			font-weight: 700;
+			font-weight: 800;
 
 			&:hover{
 				color:#d0f2ea;

@@ -10,61 +10,92 @@
     Сервис для жителей городов, где вы можете публиковать местные новости, фотографии, информацию об организациях и полезные советы
 {% endblock %}
 
-{% block meta_additional %}<meta name="viewport" content="width=1200" />{% endblock %}
+{#{% block meta_additional %}<meta name="viewport" content="width=1200" />{% endblock %}#}
+
+{% block body-class %}body_main{% endblock %}
 
 {% block header %}{% endblock %}
 
 {% block content %}
 <div class="b-index">
-    <div class="b-index-top">
-        <div class="b-index__container">
-            <a href="#" class="b-index-top__logo"><img src="{% static 'gorod/img/logo.png' %}"></a>
-            <div class="clear"></div>
-            <div class="b-index-top__column-wrapper">
-                <div class="b-index-top__column">
-                    <h1><b>Платформа "Город"</b><br /> Сервис для жителей городов, где вы можете публиковать местные новости, фотографии, информацию об организациях и полезные советы.</h1>
-                    <p>В России свыше 1000 населенных пунктов с населением меньше 200 тыс. человек. В этих городах и поселках живут люди. Они учатся, работают, участвуют в соревнованиях, конкурсах и жизни своего города. Цель нашей платформы &ndash; предоставить удобный инструмент общения для жителей этих городов.</p>
-                </div>
-                <div class="b-index-top__column">
-                    <h4>Платформа + сообщество <br>+ локальные ресурсы</h4>
+    <div class="b-index-header">
+        <span class="b-index-header__city">ГОРОД</span>
+        <span class="b-index-header__paltform">платформа</span>
+    </div>    
+    <div class="b-index-cities">
+        <ul class="b-index-cities__list">
+            {% for city in cities %}
+                <li class="b-index-cities__item">
+                    <a href="{% url 'gorod:city_main_page' city.name %}">
+                        <span class="b-index-cities__title">{{ city.title }}</span>
+                        <span class="b-index-cities__region">{{ city.region }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>   
+    <div class="b-index-info">
+        <div class="b-index-info__logo"></div>
+        <div class="b-index-info__descr">Сервис для жителей городов, где вы можете<br />публиковать местные новости, фотографии, информацию<br />об организациях и полезные советы</div>
+        <div class="b-index-info__devider"></div>
+
+        <div class="b-index-info__text">
+            <div class="b-index-info__column b-index-info__column_left">
+                <div>
+                    <h3>Платформа – это:</h3>
                     <ul>
-                        <li>быстрая публикация местных новостей, событий, объявлений</li>
-                        <li>консолидация информации о местных организациях и услугах</li>
+                        <li>быстрая публикация местных новостей, событий</li>
+                        <li>объединение информации о местных организациях и услугах</li>
                         <li>площадка для общения и совместных действия для жителей города или поселка</li>
                     </ul>
-                    <img src="{% static 'gorod/img/index-icons.png' %}" class="b-index-top__icons" />
-
-                    <h4>Лента города</h4>
-                    <p>События, афиша, фотографии города, опубликованные местными жителями</p>
-
-                    <h4>Каталог организаций города</h4>
-                    <p>Информация об организациях, услугах, контактная<br> информация</p>
                 </div>
-                <div class="b-index-top__column">
-                    <h4>Как это всё работает?</h4>
-                    <p>Местные жители, используя сайт или мобильное приложение, могут легко и быстро публиковать местные новости, информацию о мероприятиях, важных городских событиях. Это полноценный сайт города с набором всех необходимых инструментов для общения местных жителей.</p>
-
-                    <h4>У нашего города уже есть сайт.<br> Зачем ещё один?</h4>
-                    <p>Городские сайты создаются энтузиастами, которым приходится решать много технических вопросов: оплата хостинга, настройка и модерация форума. Довольно частно найти что-то полезное и свежее на таких сайтах не представляется возможным.<br> Цель нашей платформы &ndash; дать весь арсенал средств для успешного взаимодействия местных жителей.</p>
-
-                    <h4>Как мне начать использовать<br> платформу для своего города?</h4>
-                    <p>Нужно написать письмо по адресу <a href="mailto:hola@gorod.io">hola@gorod.io</a></p>
+            </div>
+            <div class="b-index-info__column b-index-info__column_right">
+                <div>
+                    <h3>Лента города</h3>
+                    <p>События, афиша, фотографии города, опубликованные местными жителями</p>
+                </div>
+                <div>
+                    <h3>Каталог организаций города</h3>
+                    <p>Информация об организациях, услугах, контактная информация</p>
                 </div>
             </div>
             <div class="clear"></div>
         </div>
+
+
+        <div class="b-index-info__text">
+            <div class="b-index-info__column b-index-info__column_left">
+                <div>
+                    <h3>У нашего города уже есть сайт. Зачем ещё один?</h3>
+                    <p>Городские сайты создаются энтузиастами, которым приходится решать много технических вопросов: оплата хостинга, настройка и модерация форума. Благодаря нашей платформе такие вопросы даже не возникнут.</p> 
+                    <p>Довольно частно найти что-то полезное и свежее на таких сайтах не представляется возможным.</p>
+                </div>
+            </div>
+            <div class="b-index-info__column b-index-info__column_right">
+                <div>
+                    <h3>Как это всё работает?</h3>
+                    <p>Местные жители, используя сайт или мобильное приложение, могут легко и быстро публиковать местные новости, информацию о мероприятиях, важных городских событиях. Это полноценный сайт города с набором всех необходимых инструментов для общения местных жителей.</p>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="b-index-info__descr">Цель нашей платформы – это предоставить жителям <br/> этих городов удобную площадку для общения <br/>и обмена информацией</div>
+        <div class="b-index-info__devider"></div>
+
+        <div class="b-index-info__how">
+            <i></i>
+            <p>Как мне начать использовать платформу<br />для своего города?</p>
+            <p>Нужно написать письмо по адресу<br /><a href="mailto:hola@gorod.io">hola@gorod.io</a></p>
+        </div>
+
+
     </div>
     <div class="b-index-footer">
-        <div class="b-index__container">
-            <h5>Выберите город:</h5>
-            <ul class="b-index-footer__list">
-                {% for city in cities %}
-                    <li>
-                        <a href="{% url 'gorod:city_main_page' city.name %}">{{ city.title }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+        <a target="_blank" href="http://localhub.tumblr.com/">НАШ БЛОГ</a>
+        <!--<a href="#">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</a>
+        <a class="b-index-footer__error" href="#">СООБЩИТЬ ОБ ОШИБКЕ</a>-->
     </div>
 </div>
 {% endblock %}

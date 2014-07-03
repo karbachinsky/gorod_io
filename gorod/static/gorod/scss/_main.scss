@@ -1,91 +1,176 @@
-.b-index__container{
-	width:1140px;
-	padding:0 20px;
-	margin:auto;
+.body_main{
+	padding: 0;
+	background: #f3f3f3;
 }
 
-.b-index{
-	background: #34495e;
-}
-.b-index-top{
+.b-index-header{
+	height:78px;
 	background: #fff;
+	text-align: center;
 }
-.b-index-top__logo{
-	@include inline-block; 
-	margin:25px 0 40px 0;
-}
-.b-index-top__column{
-	width:380px;
-	float:left;
-	font-size: 13px;
+.b-index-header__city{
+	display: block;
+	color: #000;
+	font-size: 23px;
+	font-weight: 800;
+	text-transform: uppercase;
+	padding: 20px 0 0;
 	line-height: 22px;
-	color:#333333;
 }
-.b-index-top__column h1{
-	color:#7f8c8d;
-	font-size: 16px;
-	font-weight: 400;
-	margin: 0;
-	width: 330px;
-	line-height: 30px;
+.b-index-header__paltform{
+	color: #999999;
+	font-weight: 600;
+	font-size: 12px;
+}
+.b-index-cities{
+	background: url(../img/main.jpg) no-repeat  center center;
+	min-height: 350px;
+	background-size: cover;
+	padding: 40px 0;
+}
+.b-index-cities__list{
+	width:350px;
+	margin: auto;
+}
+.b-index-cities__item{
+
+	width: 255px;
+	margin:0 auto 5px;
+	a{
+		display: block;
+		padding: 10px 25px;
+		text-decoration: none;
+		color:#fff;
+		@include border-radius(5px);
+		&:hover{
+			background: #fff;
+			color:#fc3d13;
+		}
+	}
+}
+.b-index-cities__title{
+	display: block;
+	font-size: 20px;
+	line-height: 20px;
+}
+.b-index-cities__region{
+	font-size: 14px;
+}
+.b-index-info{
+	width:570px;
+	margin: auto;
+	padding: 80px 30px 140px;
+}
+.b-index-info__logo{
+	width: 122px;
+	height: 107px;
+	background: url(../img/logo.png) no-repeat  center center;
+	margin: auto;
+}
+.b-index-info__descr{
+	color:#888888;
+	font-size: 20px;
+	text-align: center;
+	padding: 40px 0px 70px;
+}
+.b-index-info__devider{
+	width: 60%;
+	margin: auto;
+	border-top:1px solid #cccccc;
+	@include box-shadow(0px -1px 1px #ddd);
+	margin-bottom: 90px;
+}
+.b-index-info__text{
 	margin-bottom: 30px;
 }
-.b-index-top__column h1 b{
-	color:#2ecc71;
-	font-weight: 400;
-	font-size: 32px;
-	display: inline-block;
-	margin-bottom: 10px;
-}
-.b-index-top__map-img{
-	margin:20px 0 32px 25px;
-}
-.b-index-top__column h4{
-	color:#2ecc71;
-	font-weight: 400;
-	font-size: 18px;
-	line-height: 27px;
-	margin: 0 0 6px;
-}
-.b-index-top__column p{
-	margin: 0 0 25px;
-	width:330px;
-}
-.b-index-top__column ul{
-	list-style: disc outside;
-	padding-left: 17px;
-	width:330px;
-	margin-bottom: 5px;
+.b-index-info__column {
+	width:265px;
+	color:#444444;
+	font-size: 15px;
+	line-height: 25px;
+	font-weight: 300;
+	h3{
+		font-weight: 400;
+		margin: 0 0 9px;
+		font-size: 22px;
+		line-height: 29px;
+	}
+	ul{
+		list-style-type: disc;
+		list-style-position: inside;
+		li{
+			margin-bottom: 7px;
+		}
+	}
+	p{
+		margin: 0 0 15px;
+	}
+	&>div{
+		margin-bottom: 30px;
+	}
+	&.b-index-info__column_left{
+		float: left;
+	}
+	&.b-index-info__column_right{
+		float: right;
+	}
 }
 
-.b-index-top__column a{
-	color: #2980b9;
-	text-decoration: none;
+.b-index-info__how{
+	background: #fff;
+	padding: 30px 50px 15px;
+	@include border-radius(8px);
+	color:#444444;
+	font-size: 19px;
+	text-align: center;
+	p{
+		margin:25px 0 ;
+		line-height: 30px;
+	}
+	i{
+		display: block;
+		width: 34px;
+		height: 33px;
+		background: url(../img/wtf.png) no-repeat  center center;
+		margin: auto;
+	}
+	a{
+		color: $green-color;
+		&:hover{
+			color:$green-color-dark;
+		}
+	}
 }
-
-
 .b-index-footer{
-	padding:40px 0 100px;
+	text-align: center;
+	padding-bottom: 15px;
+	a{
+		color:#777777;
+		font-weight: 700;
+		font-size: 13px;
+		margin: 0 40px;
+		text-decoration: none;
+		&.b-index-footer__error{
+			color:#fc3d13;
+		}
+	}
 }
-.b-index-footer h5{
-	margin:0 0 25px;
-	font-weight: 400;
-	font-size: 16px;
-	color:#2ecc71;
+
+@media screen and (max-width: 630px) { 
+	.b-index-info{
+		width:auto;
+	}
+	.b-index-info__column {
+		width:auto;
+		float:none;
+	}
 }
-.b-index-footer__list{
-	width: 790px;
-}
-.b-index-footer__list li{
-	@include inline-block; 
-	width:378px;
-}
-.b-index-footer__list a{
-	text-decoration: none;
-	color:#bdc3c7;
-	text-transform: uppercase;
-	line-height: 33px;
-}
-.b-index-footer__list a:hover{
-	color:#fff;
-}
+
+
+
+
+
+
+
+
+

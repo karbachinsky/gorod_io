@@ -63,6 +63,9 @@
 		transitionDuration: 0
 	});
 });
+(window.ajaxFeed = function(){
+	
+});
 
 $(function(){
 	
@@ -71,5 +74,6 @@ $(function(){
 	window.addPopup();
 	window.menu();
 	window.topScrolling();
+	window.ajaxFeed();
 
 });

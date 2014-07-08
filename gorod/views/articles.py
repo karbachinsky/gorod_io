@@ -55,11 +55,11 @@ class FeedView(View):
 
             json_data = serializers.serialize('json', articles,
                 indent=4,
-                extras=('url', 'thumbnail', 'short_text'),
+                extras=('url', 'thumbnail', 'short_text', 'human_add_date'),
                 relations={'rubric': {
                     'extras': ('url',)
                 }},
-                excludes=('user', 'text', 'is_checked', 'is_published')
+                excludes=('user', 'text', 'is_checked', 'is_published', 'add_date', 'city')
             )
             return HttpResponse(json_data, mimetype='application/json')
         else:

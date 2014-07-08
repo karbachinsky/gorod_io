@@ -119,6 +119,15 @@ class Article(models.Model):
         from django.utils.html import strip_tags
         return strip_tags(self.text)[0:255]  # Fix magic constant please
 
+    @property
+    def human_add_date(self):
+        """
+            Add date in human readable format
+        """
+        from django.contrib.humanize.templatetags.humanize import naturalday
+        return naturalday(self.add_date)
+
+
     #@property
     #def rubric_url(self):
     #    return self.rubric.get_absolute_url(self.city)

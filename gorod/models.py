@@ -3,9 +3,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
-from django.utils.safestring import mark_safe
 from django.core.validators import RegexValidator
 from django.conf import settings
+
+from django.core.urlresolvers import reverse
+
+from easy_thumbnails.templatetags.thumbnail import thumbnail_url
 
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -30,6 +33,12 @@ class User(AbstractUser):
     city = models.ForeignKey(City, blank=True, null=True, on_delete=models.SET_NULL)
     avatar = models.CharField(max_length=255, blank=True, null=True)
 
+    #def natural_key(self):
+    #    return {
+    #        'avatar': self.avatar
+    #    }
+
+
 class CityInfo(models.Model):
     """ Module About or city info """
     city = models.ForeignKey(City, on_delete=models.CASCADE)
@@ -43,6 +52,21 @@ class ArticleRubric(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self, city=None):
+        try:
+            return reverse('gorod:feed-rubric', kwargs={
+                'city_name': city.name,
+                'rubric_name': self.name
+            })
+        except:
+            return ''
+
+    def natural_key(self):
+        return {
+            'name': self.name,
+            'title': self.title
+        }
 
 
 class Article(models.Model):
@@ -66,6 +90,40 @@ class Article(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_absolute_url(self):
+        """
+            Http Link to this article object
+        """
+        return reverse('gorod:article', kwargs={
+            'city_name': self.city.name,
+            'article_id': self.id
+        })
+
+    url = property(get_absolute_url)
+
+    @property
+    def thumbnail(self):
+        """
+            Picture thumbnail url
+        """
+        if self.picture:
+            return thumbnail_url(self.picture, 'feed_image')
+        else:
+            return None
+
+    @property
+    def short_text(self):
+        """
+            Returns short text for article preview
+        """
+        from django.utils.html import strip_tags
+        return strip_tags(self.text)[0:255]  # Fix magic constant please
+
+    #@property
+    #def rubric_url(self):
+    #    return self.rubric.get_absolute_url(self.city)
+
+
 
 class OrganizationCategory(MPTTModel):
     """ Organization category tree """
@@ -75,7 +133,6 @@ class OrganizationCategory(MPTTModel):
 
     def __unicode__(self):
         return self.title
-        #return mark_safe("%s%s" % ("&nbsp;" * 4 * self.level, self.title))
 
 
 class OrganizationPhone(models.Model):

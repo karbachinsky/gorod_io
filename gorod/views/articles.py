@@ -6,7 +6,8 @@ from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-import simplejson
+from django.core.urlresolvers import reverse
+
 
 from gorod.models import City, Article, ArticleRubric
 from gorod.utils.forms.article import ArticleAddForm
@@ -43,10 +44,23 @@ class FeedView(View):
         if request.GET.get('json'):
             page = int(request.GET.get('page', 0))
             limit = int(request.GET.get('limit', 15))
-            #assert False, "%s %s" % (page, limit)
             lim_start = page*limit
             lim_end = lim_start + limit
-            json_data = serializers.serialize('json', articles.all()[lim_start:lim_end])
+
+            # Adding additional data to each json item: rubric url, thumb url, etc
+            articles = articles.all()[lim_start:lim_end]
+
+            for article in articles:
+                article.rubric.url = article.rubric.get_absolute_url(city)
+
+            json_data = serializers.serialize('json', articles,
+                indent=4,
+                extras=('url', 'thumbnail', 'short_text'),
+                relations={'rubric': {
+                    'extras': ('url',)
+                }},
+                excludes=('user', 'text', 'is_checked', 'is_published')
+            )
             return HttpResponse(json_data, mimetype='application/json')
         else:
             context['articles'] = context['articles'].all()[0:1000]

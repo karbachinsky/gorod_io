@@ -204,3 +204,7 @@ THUMBNAIL_ALIASES = {
         'feed_image': {'size': (265, 0)},
     },
 }
+
+SERIALIZATION_MODULES = {
+    'json': 'wadofstuff.django.serializers.json'
+}

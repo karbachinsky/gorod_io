@@ -100,4 +100,9 @@ li.b-organization__description{
 	}
 }
 
-
+@media screen and (max-width: 630px) { 
+	.b-organization{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+}

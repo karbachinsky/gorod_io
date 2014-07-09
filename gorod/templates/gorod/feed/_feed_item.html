@@ -1,28 +1,24 @@
-{% load staticfiles %}
-{% load thumbnail %}
-{% load humanize %}
-<li class="b-feed-item  b-feed-item_{{article.rubric}}" >
-                
-    <div class="b-feed-item__top">
-        <a class="b-feed-item__rubric" href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}">
-            {{ article.rubric.title }}
-        </a>
-        <span class="b-feed-item__date">{{ article.add_date|naturalday }}</span>
-    </div>
-    <a class="b-feed-item__link" href="{{ article.get_absolute_url }}">
-        {# title photo #}
-        <h2 class="b-feed-item__title">{{ article.title }}</h2> 
-        {% if article.text %}  
-            <p class="b-feed-item__text">
-                {% autoescape off %}
-                {{ article.text|striptags|truncatechars:255 }} 
-                {% endautoescape %}
-            </p>
-        {% endif %} 
+{% verbatim %}
+<script id="feed-item-template" type="text/x-handlebars-template">
+    <li class="b-feed-item  b-feed-item_{{fields.rubric.fields.name}}" >           
+        <div class="b-feed-item__top">
+            <a class="b-feed-item__rubric" href="{{ fields.rubric.extras.url }}">
+                {{ fields.rubric.fields.title }}
+            </a>
+            <span class="b-feed-item__date">{{ extras.human_add_date }}</span>
+        </div>
+        <a class="b-feed-item__link" href="{{ extras.url }}">
+            <h2 class="b-feed-item__title">{{ fields.title }}</h2>   
+            {{#if extras.short_text}}
+                <p class="b-feed-item__text">
+                    {{{ extras.short_text }}}
+                </p>
+            {{/if}} 
 
-        {# img #}    
-        {% if article.picture %}
-            <img class="b-feed-item__picture" src="{{ article.thumbnail }}" />
-        {% endif %} 
-    </a>
-</li>
+            {{#if extras.thumbnail }}
+                <img class="b-feed-item__picture" src="{{ extras.thumbnail }}" />
+            {{/if}} 
+        </a>
+    </li>
+</script>
+{% endverbatim %}

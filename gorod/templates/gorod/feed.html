@@ -15,18 +15,17 @@
         {% if rubric %}
         <h1 class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}">{{rubric.title}}</h1>
         {% endif %}
+
+        {% include "gorod/feed/_feed_item.html" %}
+        
         <div class="b-feed">
             <ul class="b-feed__list">
                 <div class="grid-sizer"></div>
                 <div class="gutter-sizer"></div>
-
-                {% for article in articles %}
-                    {% include "gorod/feed/_feed_item.html" %}
-                {% endfor %}
             </ul>
-            
+            <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
+           
         </div>
     </div>
-
 {% endblock %}
 

@@ -63,7 +63,7 @@ class FeedView(View):
             )
             return HttpResponse(json_data, mimetype='application/json')
         else:
-            context['articles'] = context['articles'].all()[0:1000]
+            context['articles'] = context['articles'].all()[0:0]
             return render(request, 'gorod/feed.html', context)
 
 

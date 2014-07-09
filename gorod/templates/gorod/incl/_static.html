@@ -5,6 +5,7 @@
 	var globals = {
 		{% if city %}
 	    	cityName : '{{ city.name }}',
+	    	url : '{{ request.path }}',
 	    	articleAddUrl : '{% url 'gorod:article-add' city.name %}'
 		{% endif %}
 	};
@@ -13,5 +14,6 @@
 <script src="{% static 'gorod/js/masonry.js' %}"></script>
 <script src="{% static 'gorod/js/imagesloaded.js' %}"></script>
 <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script src="{% static 'gorod/js/handlebars.js' %}"></script>
 <script src="{% static 'gorod/js/addpopup.js' %}" ></script>
 <script src="{% static 'gorod/js/main.js' %}" ></script>

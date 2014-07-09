@@ -17,10 +17,10 @@
 	letter-spacing: 7px;
 	text-transform: uppercase;
 
-	&.b-feed__rubric-title_afisha{
+	&.b-feed__rubric-title_event{
 		background:$violet-color;
 	}
-	&.b-feed__rubric-title_event{
+	&.b-feed__rubric-title_message{
 		background: #000;
 	}
 	&.b-feed__rubric-title_photo{
@@ -58,10 +58,10 @@
 	line-height: 25px;
 
 
-	.b-feed-item_afisha &{
+	.b-feed-item_event &{
 		background:$violet-color;
 	}
-	.b-feed-item_event &{
+	.b-feed-item_message &{
 		background:#000;
 	}
 	.b-feed-item_photo &{
@@ -78,10 +78,10 @@
 	font-size: 13px;
 	letter-spacing: 1.2px;
 
-	.b-feed-item_afisha &:hover{
+	.b-feed-item_event &:hover{
 		color:$green-color;
 	}
-	.b-feed-item_event &:hover{
+	.b-feed-item_message &:hover{
 		color:$red-color;
 	}
 	.b-feed-item_photo &:hover{

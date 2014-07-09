@@ -6,8 +6,6 @@ from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-from django.core.urlresolvers import reverse
-
 import json
 
 from gorod.models import City, Article, ArticleRubric
@@ -95,7 +93,6 @@ class ArticleView(View):
             'article': article_item,
         }
 
-
         return render(request, 'gorod/article.html', context)
 
 
@@ -106,11 +103,9 @@ class AddView(View):
 
     @method_decorator(login_required)
     def dispatch(self, request, city_name):
-
         city = get_object_or_404(City, name=city_name)
 
         # TODO: check is user trying to add article to his city
-        form = None
 
         if request.method == 'POST':
             form = ArticleAddForm(request.POST, request.FILES)
@@ -129,9 +124,16 @@ class AddView(View):
                     raise e
 
                 return render(request, 'gorod/forms/article_add_ok.html')
+            else:
+                # Send errors
+                if form.errors:
+                    json_response = dict(success=False, errors=form.errors.items())
+                else:
+                    json_response = dict(success=True)
+                return HttpResponse(json.dumps(json_response), content_type='application/json')
         else:
+            # Show form
             form = ArticleAddForm()
-
-        return render(request, 'gorod/forms/article_add.html', {
-            'form': form,
-        })
+            return render(request, 'gorod/forms/article_add.html', {
+                'form': form,
+            })

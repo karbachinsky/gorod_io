@@ -13,7 +13,8 @@
                         <a href="{% url 'gorod:user' user.city.name user.id %}" class="b-header__avatar"><img src="{{ user.avatar }}" /></a>
                     {% endif %}
                 {% else %}
-                    <a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" class="b-header__login sn-logo">Войти</a>
+                    <span class="b-header__login sn-logo">Добавить запись</span>
+	        	<!--<a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" class="b-header__login sn-logo">Войти</a>-->
                 {% endif %}
 
 		    </div>

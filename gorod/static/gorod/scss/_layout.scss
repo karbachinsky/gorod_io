@@ -78,10 +78,12 @@ body{
 	background: #fff;
 
 	.b-header__btns{
-		a{
+		a, span{
 			vertical-align: top;
 			font-weight: 600;
 			color:$green-color;
+			cursor: pointer;
+			text-transform: uppercase;
 			&:hover{
 				color:$green-color-dark;
 			}
@@ -217,10 +219,14 @@ body{
 
 @media screen and (max-width: 630px) { 
 
+	.b-header{
+		padding: 30px 10px;
+	}
 	.b-header__city{
 		font-size:20px;
 	}
 	.b-header__menu-btn{
+		left:10px;
 		i{
 			width:18px;
 			&:after{
@@ -233,6 +239,7 @@ body{
 	}
 
 	.b-header__content{
+		padding: 30px 10px;
 		.b-header__btns{
 			display: none;
 		}

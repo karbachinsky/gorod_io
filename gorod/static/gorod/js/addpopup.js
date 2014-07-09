@@ -4,7 +4,7 @@
 	$window = $popup.find('.b-popup__window'),
 	$addBtn = $('.b-header__add'),
 	$overlay = $popup.find('.b-popup__overlay'),
-	shownClass = 'b-popup_shown';
+	shownClass = 'b-popup_shown',
     formAjaxUrl = window.getEnv('articleAddUrl');
 
 	$addBtn.on('click',function(e){

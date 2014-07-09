@@ -17,10 +17,10 @@
 	letter-spacing: 7px;
 	text-transform: uppercase;
 
-	&.b-feed__rubric-title_afisha{
+	&.b-feed__rubric-title_event{
 		background:$violet-color;
 	}
-	&.b-feed__rubric-title_event{
+	&.b-feed__rubric-title_message{
 		background: #000;
 	}
 	&.b-feed__rubric-title_photo{
@@ -30,6 +30,7 @@
 .b-feed{
 	padding:30px 0 50px;
 	width: 1180px;
+	height: 1000500px;
 	margin:auto;
 	
 	.grid-sizer{
@@ -57,10 +58,10 @@
 	line-height: 25px;
 
 
-	.b-feed-item_afisha &{
+	.b-feed-item_event &{
 		background:$violet-color;
 	}
-	.b-feed-item_event &{
+	.b-feed-item_message &{
 		background:#000;
 	}
 	.b-feed-item_photo &{
@@ -77,10 +78,10 @@
 	font-size: 13px;
 	letter-spacing: 1.2px;
 
-	.b-feed-item_afisha &:hover{
+	.b-feed-item_event &:hover{
 		color:$green-color;
 	}
-	.b-feed-item_event &:hover{
+	.b-feed-item_message &:hover{
 		color:$red-color;
 	}
 	.b-feed-item_photo &:hover{
@@ -140,6 +141,21 @@
 	padding:3px 0 5px;
 	display: block;
 }
+.b-feed__more_wrapper{
+	text-align: center;
+	padding: 20px;
+
+}
+.b-feed__more{
+	color:$green-color-dark;
+	@include inline-block;
+	background: #fff;
+	padding: 10px 25px;
+	@include border-radius(25px);
+	font-weight: 700;
+	cursor: pointer;
+	border:2px solid $green-color-dark;
+}
 
 @media screen and (max-width: 1240px) { 
 	.b-feed{
@@ -155,8 +171,8 @@
 	
 	.b-feed{
 		width: auto;
-		padding-left: 30px;
-		padding-right: 30px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 	.b-feed-item{
 		width: 100%;

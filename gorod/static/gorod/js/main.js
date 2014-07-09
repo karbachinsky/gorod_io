@@ -48,14 +48,14 @@
 });
 
 (window.grid = function(){
-	$('.b-feed__list').imagesLoaded( function() {
+	/*$('.b-feed__list').imagesLoaded( function() {
 		$('.b-feed__list').masonry({
 			columnWidth: '.grid-sizer',
 			itemSelector: '.b-feed-item',
 			gutter : '.gutter-sizer',
 			transitionDuration: 0
 		});
-	});
+	});*/
 	$('.b-orgs__list').masonry({
 		columnWidth: '.grid-sizer',
 		itemSelector: '.b-orgs__item',
@@ -64,16 +64,113 @@
 	});
 });
 (window.ajaxFeed = function(){
+	var getData = function(page,limit){
+		return $.ajax({
+			url : globals.url,
+			data : {
+				json : 1,
+				limit : limit,
+				page :page
+			}
+		});
+	},
+	appendElems = function(data){	
+		var appendedHtml= $(''),
+		curElem;
+
+		$.each(data,function(index, elem){
+			curElem = $(template(elem));
+			appendedHtml = appendedHtml.add(curElem);
+		});
+		
+		$container.append(appendedHtml);
+		$container.masonry( 'appended', appendedHtml );
+		$container.imagesLoaded( function() {
+			$container.masonry();
+
+		});	
+		//$('.b-feed__more').show();
+	},
+	uploadNew = function(){
+		getData(curPage,LIMIT).done(appendElems).done(function(){
+			if(curPage+1 < pagesLen){
+				$('.b-feed__more').show();
+			}else{
+				//$('.b-feed__more').hide();
+			}
+			curPage++;
+		});
+	},
+	source   = $("#feed-item-template").html(),
+	template = Handlebars.compile(source),
+	curPage=0,
+	LIMIT = 10,
+	$container = $('.b-feed__list'),
+	def = $.ajax({
+		url : globals.url,
+		data : {
+			json : 1
+		},
+		success : function(data){
+			pagesLen = data.length%LIMIT > 0 ? parseInt(data.length/LIMIT)+1 : data.length%LIMIT;
+		}
+	}),
+	pagesLen;
+
+	$('.b-feed__list').masonry({
+		columnWidth: '.grid-sizer',
+		itemSelector: '.b-feed-item',
+		gutter : '.gutter-sizer',
+		transitionDuration: 0
+	});
+	$('.b-feed__more').hide();
+
+	def.done(function(){
+		uploadNew();
+		$('.b-feed__more').on('click',function(){
+			uploadNew();
+		});
+		$('.b-feed').height('auto');
+	});
 	
+
 });
+
+(window.loginPopup = function(e){
+
+	var $popup = $('.b-popup-login'),
+	$window = $popup.find('.b-popup__window'),
+	$loginBtn = $('.b-header__content .b-header__login'),
+	$overlay = $popup.find('.b-popup__overlay'),
+	shownClass = 'b-popup_shown';
+
+	$loginBtn.on('click',function(e){
+		$popup.addClass(shownClass);
+		$overlay.height($('body').outerHeight());
+		e.preventDefault();
+	});
+
+	$overlay.on('click',function(){
+		$popup.removeClass(shownClass);
+	});
+
+	$(document).keydown(function(e) {
+	    if( e.keyCode === 27 ) {
+	        $popup.removeClass(shownClass);
+	        return false;
+	    }
+	});
+
+});
+
 
 $(function(){
 	
 	
 	window.grid();
+	window.loginPopup();
 	window.addPopup();
 	window.menu();
 	window.topScrolling();
-	window.ajaxFeed();
 
 });

@@ -1,6 +1,11 @@
-{% load staticfiles %}
 <div class="b-popup b-popup-add">
 	<div class="b-popup__overlay"></div>
 	<div class="b-popup__window">
+	</div>
+</div>
+<div class="b-popup b-popup-login">
+	<div class="b-popup__overlay"></div>
+	<div class="b-popup__window">
+		<a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" >Войти через контакт</a>
 	</div>
 </div>

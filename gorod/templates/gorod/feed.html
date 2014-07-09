@@ -17,6 +17,11 @@
         {% endif %}
 
         {% include "gorod/feed/_feed_item.html" %}
+        <script>
+            $(function(){
+                window.ajaxFeed();
+            });
+        </script>
         
         <div class="b-feed">
             <ul class="b-feed__list">

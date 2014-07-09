@@ -112,7 +112,7 @@
 			json : 1
 		},
 		success : function(data){
-			pagesLen = data.length%LIMIT > 0 ? data.length%LIMIT+1 : data.length%LIMIT;
+			pagesLen = data.length%LIMIT > 0 ? parseInt(data.length/LIMIT)+1 : data.length%LIMIT;
 		}
 	}),
 	pagesLen;
@@ -143,6 +143,5 @@ $(function(){
 	window.addPopup();
 	window.menu();
 	window.topScrolling();
-	window.ajaxFeed();
 
 });

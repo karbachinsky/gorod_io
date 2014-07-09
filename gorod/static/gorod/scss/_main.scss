@@ -11,7 +11,7 @@
 .b-index-header__city{
 	display: block;
 	color: #000;
-	font-size: 23px;
+	font-size: 28px;
 	font-weight: 800;
 	text-transform: uppercase;
 	padding: 20px 0 0;
@@ -20,7 +20,7 @@
 .b-index-header__paltform{
 	color: #999999;
 	font-weight: 600;
-	font-size: 12px;
+	font-size: 13px;
 }
 .b-index-cities{
 	background: url(../img/main.jpg) no-repeat  center center;
@@ -59,7 +59,7 @@
 .b-index-info{
 	width:570px;
 	margin: auto;
-	padding: 80px 30px 140px;
+	padding: 110px 30px 140px;
 }
 .b-index-info__logo{
 	width: 122px;
@@ -71,7 +71,7 @@
 	color:#888888;
 	font-size: 20px;
 	text-align: center;
-	padding: 40px 0px 70px;
+	padding: 40px 0px 90px;
 }
 .b-index-info__devider{
 	width: 60%;
@@ -89,10 +89,11 @@
 	font-size: 15px;
 	line-height: 25px;
 	font-weight: 300;
+	letter-spacing: 0.4px;
 	h3{
-		font-weight: 400;
+		font-weight: 300;
 		margin: 0 0 9px;
-		font-size: 22px;
+		font-size: 23px;
 		line-height: 29px;
 	}
 	ul{
@@ -152,6 +153,9 @@
 		text-decoration: none;
 		&.b-index-footer__error{
 			color:#fc3d13;
+		}
+		&:hover{
+			color:$violet-color;
 		}
 	}
 }

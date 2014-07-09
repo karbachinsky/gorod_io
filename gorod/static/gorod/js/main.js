@@ -136,10 +136,39 @@
 
 });
 
+(window.loginPopup = function(e){
+
+	var $popup = $('.b-popup-login'),
+	$window = $popup.find('.b-popup__window'),
+	$loginBtn = $('.b-header__content .b-header__login'),
+	$overlay = $popup.find('.b-popup__overlay'),
+	shownClass = 'b-popup_shown';
+
+	$loginBtn.on('click',function(e){
+		$popup.addClass(shownClass);
+		$overlay.height($('body').outerHeight());
+		e.preventDefault();
+	});
+
+	$overlay.on('click',function(){
+		$popup.removeClass(shownClass);
+	});
+
+	$(document).keydown(function(e) {
+	    if( e.keyCode === 27 ) {
+	        $popup.removeClass(shownClass);
+	        return false;
+	    }
+	});
+
+});
+
+
 $(function(){
 	
 	
 	window.grid();
+	window.loginPopup();
 	window.addPopup();
 	window.menu();
 	window.topScrolling();

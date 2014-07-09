@@ -78,10 +78,12 @@ body{
 	background: #fff;
 
 	.b-header__btns{
-		a{
+		a, span{
 			vertical-align: top;
 			font-weight: 600;
 			color:$green-color;
+			cursor: pointer;
+			text-transform: uppercase;
 			&:hover{
 				color:$green-color-dark;
 			}

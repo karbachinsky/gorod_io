@@ -96,7 +96,7 @@
 			if(curPage+1 < pagesLen){
 				$('.b-feed__more').show();
 			}else{
-				$('.b-feed__more').hide();
+				//$('.b-feed__more').hide();
 			}
 			curPage++;
 		});

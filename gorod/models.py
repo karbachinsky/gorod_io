@@ -117,7 +117,7 @@ class Article(models.Model):
             Returns short text for article preview
         """
         from django.utils.html import strip_tags
-        return strip_tags(self.text)[0:255]  # Fix magic constant please
+        return strip_tags(self.text)[0:120]  # Fix magic constant please
 
     @property
     def human_add_date(self):

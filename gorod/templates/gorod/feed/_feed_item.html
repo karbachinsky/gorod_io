@@ -1,12 +1,16 @@
 {% verbatim %}
 <script id="feed-item-template" type="text/x-handlebars-template">
     <li class="b-feed-item  b-feed-item_{{fields.rubric.fields.name}}" >           
-        <div class="b-feed-item__top">
+        <div class="b-feed-item__top"></div>
+        <div class="b-feed-item__info">
             <a class="b-feed-item__rubric" href="{{ fields.rubric.extras.url }}">
                 {{ fields.rubric.fields.title }}
             </a>
             <span class="b-feed-item__date">{{ extras.human_add_date }}</span>
         </div>
+        
+        
+        
         <a class="b-feed-item__link" href="{{ extras.url }}">
             <h2 class="b-feed-item__title">{{ fields.title }}</h2>   
             {{#if extras.short_text}}

@@ -78,7 +78,7 @@
 		var appendedHtml= $(''),
 		curElem;
 
-		$.each(data,function(index, elem){
+		$.each(data.feed,function(index, elem){
 			curElem = $(template(elem));
 			appendedHtml = appendedHtml.add(curElem);
 		});
@@ -96,7 +96,7 @@
 			if(curPage+1 < pagesLen){
 				$('.b-feed__more').show();
 			}else{
-				//$('.b-feed__more').hide();
+				$('.b-feed__more').hide();
 			}
 			curPage++;
 		});
@@ -112,7 +112,7 @@
 			json : 1
 		},
 		success : function(data){
-			pagesLen = data.length%LIMIT > 0 ? parseInt(data.length/LIMIT)+1 : data.length%LIMIT;
+			pagesLen = data.total%LIMIT > 0 ? parseInt(data.total/LIMIT)+1 : parseInt(data.total/LIMIT);
 		}
 	}),
 	pagesLen;

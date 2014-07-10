@@ -52,7 +52,15 @@
 		@include box-shadow(0px 2px 0px #bbb);
 	}
 }
+.b-feed-item_info{
+	height:333px;
+	background: url(../img/feed-info.png) no-repeat 0 0;
 
+	.b-feed-item__title{
+		padding-top: 25px;
+		padding-bottom: 3px;
+	}
+}
 .b-feed-item__top{
 	background: $violet-color;
 	height:3px;
@@ -127,7 +135,6 @@
 	line-height: 20px;
 	word-break: break-word;
 	padding: 0 20px 3px;
-	font-family: "Arial";
 
 }
 

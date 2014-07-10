@@ -123,14 +123,11 @@ class AddView(View):
                 except (DatabaseError, IntegrityError) as e:
                     raise e
 
-                return render(request, 'gorod/forms/article_add_ok.html')
+                json_response = dict(success=True)
             else:
-                # Send errors
-                if form.errors:
-                    json_response = dict(success=False, errors=form.errors.items())
-                else:
-                    json_response = dict(success=True)
-                return HttpResponse(json.dumps(json_response), content_type='application/json')
+                json_response = dict(success=False, errors=form.errors.items())
+
+            return HttpResponse(json.dumps(json_response), content_type='application/json')
         else:
             # Show form
             form = ArticleAddForm()

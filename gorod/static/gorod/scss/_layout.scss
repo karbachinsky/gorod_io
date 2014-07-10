@@ -79,19 +79,30 @@ body{
 	background: #fff;
 
 	.b-header__btns{
-		a, span{
+		span{
 			vertical-align: top;
 			font-weight: 600;
-			color:$green-color;
+			color:#fff;
 			cursor: pointer;
 			text-transform: uppercase;
+			padding: 9px 19px 8px;
+			background: $green-color;
+			@include box-shadow(0px 2px 0px #ddd);
 			&:hover{
-				color:$green-color-dark;
+				background:$green-color-dark;
 			}
+			
 		}
 		position: absolute;
 		top: 30px;
 		right: 30px;
+	}
+	.b-header__add-wrapper{
+		@include inline-block;
+		position: relative;
+		vertical-align: top;
+		padding: 9px 0 8px;
+		margin-top: -9px;
 	}
 	.b-header__login{
 		margin-left: 30px;
@@ -108,6 +119,16 @@ body{
 			height:35px;
 			display: block;
 		}
+	}
+	.b-header__add-list{
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 100%;
+		background: $green-color;;
+		border-top: 1px solid rgba(255,255,255,0.7);
+		text-align: left;
 	}
 
 }

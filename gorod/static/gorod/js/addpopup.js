@@ -29,8 +29,19 @@
             type: 'POST'
         });
 
-        Deferred.done(function(html){
-            $window.html(html);
+        Deferred.done(function(json){
+            //$window.html(html);
+            var $elem;
+            if(!json.success){
+            	$.each(json.errors,function(index, elem){
+            		$elem = $window.find('[name="'+elem[0]+'"]').closest('div');
+            		$.each(elem[1],function(index, errorText){
+            			$('<span/>').addClass('b-form__error').text(errorText).appendTo($elem);
+            		});
+            	});
+            }else{
+            	$window.html('yes yes yeah');
+            }
         });
 
     });

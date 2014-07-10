@@ -147,7 +147,7 @@ CKEDITOR_CONFIGS = {
         "ignoreEmptyParagraph": True,
         "extraPlugins": "link",
         'toolbar': [
-            ['Format', 'Bold', 'Italic', 'Link', 'Unlink', 'Image', 'Source', 'NumberedList', 'BulletedList'],
+            [ 'Bold', 'Italic', 'Image', 'BulletedList'],
         ],
         'width' : '95%',
         'height': '240',

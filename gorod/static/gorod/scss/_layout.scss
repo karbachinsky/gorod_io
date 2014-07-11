@@ -210,9 +210,7 @@ body{
 		background: $green-color;
 
 		.b-header__btns{
-			a{
-				color: #fff;
-			}
+			display: none;
 		}
 	}
 	.b-header__menu-btn{

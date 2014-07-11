@@ -18,7 +18,5 @@ urlpatterns = patterns('',
 
     # One City pages
     url(r'^(?P<city_name>\w+)/', include('gorod.urls.city', namespace='gorod')),
-
-    url('^towns/?$', base.IndexView.as_view())
 )
 

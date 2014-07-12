@@ -96,6 +96,7 @@ class Article(models.Model):
         """
         return reverse('gorod:article', kwargs={
             'city_name': self.city.name,
+            'rubric_name': self.rubric.name,
             'article_id': self.id
         })
 

@@ -76,10 +76,14 @@ class ArticleView(View):
     """
         One article page.
     """
-    def dispatch(self, request, city_name, article_id):
-        article_item = get_object_or_404(Article, pk=int(article_id),\
-                                                  city__name=city_name,\
-                                                  is_published=True)
+    def dispatch(self, request, city_name, rubric_name, article_id):
+        article_item = get_object_or_404(
+            Article,
+            pk=int(article_id),
+            city__name=city_name,
+            rubric__name=rubric_name,
+            is_published=True
+        )
 
         if not article_item.is_checked:
             # If user is article author - he can see it anyway. Else - checking

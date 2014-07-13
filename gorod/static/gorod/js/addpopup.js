@@ -4,17 +4,37 @@
 	$window = $popup.find('.b-popup__window'),
 	$addBtn = $('.b-header__add'),
 	$overlay = $popup.find('.b-popup__overlay'),
+    $addList = $('.b-header__add-list'),
+    $wrapper = $window.find('#b-form__wrapper'),
 	shownClass = 'b-popup_shown',
     formAjaxUrl = window.getEnv('articleAddUrl');
 
 	$addBtn.on('click',function(e){
-		$.get(formAjaxUrl, function(html){
-			$window.html(html);
-		})
-		$popup.addClass(shownClass);
-		$overlay.height($('body').outerHeight());
-		e.preventDefault();
+		$addList.addClass('active');
 	});
+    $(document).on('click',function(e){
+        if( ! $(e.target).hasClass('b-header__add') ){
+            $addList.removeClass('active');
+        }
+    });
+
+    $addList.find('li').on('click',function(e){
+        var name  = $(this).attr('data-name'),
+        title = $(this).attr('data-title');
+
+        $.get(formAjaxUrl, function(html){
+            $window.html(html); 
+                $wrapper = $window.find('#b-form__wrapper');
+                $wrapper.attr('class','').addClass('b-form__wrapper_'+name);
+                $wrapper.find('.b-form__type span').text(title);
+                $wrapper.find('#id_rubric').find('option').removeAttr('selected').filter(':contains("'+name+'")').attr("selected", "selected");
+            
+        })
+        $popup.addClass(shownClass);
+        $overlay.height($('body').outerHeight());
+    });
+
+
 
     $window.on('submit', 'form', function(e){
         e.preventDefault();
@@ -56,6 +76,9 @@
 	        return false;
 	    }
 	});
+    $window.on('click', '.b-form__close', function(){
+        $popup.removeClass(shownClass);
+    });
 
 
 	/*previw*/

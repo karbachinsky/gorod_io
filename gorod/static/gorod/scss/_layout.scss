@@ -118,6 +118,19 @@ body{
 		background: $green-color;;
 		border-top: 1px solid rgba(255,255,255,0.7);
 		text-align: left;
+
+		li{
+			color:#fff;
+			padding: 6px 19px;
+			font-size: 12px;
+			cursor: pointer;
+			&:hover{
+				background: $green-color-dark;
+			}
+		}
+		&.active{
+			display: block;
+		}
 	}
 
 }

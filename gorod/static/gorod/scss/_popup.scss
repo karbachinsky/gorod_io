@@ -23,7 +23,7 @@
 	z-index: 1;
 	height: 100%;
 	width: 100%;
-	background: rgba(230,230,230,0.65);
+	background: rgba(100,100,100,0.75);
 }
 .b-popup__window{
 	z-index: 2;
@@ -42,13 +42,14 @@
 .b-popup-add {
 	.b-popup__window{
 		top:10%;
-		width:530px;
-		height:750px;
+		width:650px;
+		height:700px;
 	}
 
 	.b-form__header{
 		padding: 15px 40px;
-		border-bottom: 1px solid #aaa;
+		border-bottom: 1px solid #f4f4f4;
+		@include box-shadow(inset 0px -1px 0px rgba(244,244,244,0.3));
 		position: relative;
 	}
 	.b-form__close{
@@ -65,6 +66,14 @@
 		}
 
 	}
+	.b-form__type{
+		font-size: 10px;
+		font-weight: 700;
+		color: #2a7980;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
 	.b-form__preview-wrapper{
 		padding-bottom: 20px;
 		position: relative;
@@ -81,40 +90,32 @@
 	}
 	.b-form__preview{
 		height:200px;
-		background: #ddd;
 		background-size: cover;
 		background-position: center;
 		cursor: pointer;
+		padding: 7px 5px;
+		width: 560px;
+		@include border-radius(2px);		
+		border: 1px solid #bbbbbb;
+
+		
 	}
 	.b-form__picture{
 		display: none;
 	}
 
-	.b-form__bordered{
-		border-top: 1px solid #ddd;
-		border-bottom: 1px solid #ddd;
-		padding: 20px 0;
-
-		label{
-			font-size: 11px;
-			color: #777;
-		}
-	}
-
 	.b-form__title{
-		float:left;
 		position: relative;
 		input{
-			width: 160px;
-			margin-left: 5px;
+			display: block;
+			padding: 7px 5px;
+			width: 560px;
+			@include border-radius(2px);		
+			border: 1px solid #bbbbbb;
 		}
 	}
 	.b-form__rubric{
-		float:right;
-		select{
-			width: 100px;
-			margin-left: 5px;
-		}
+		display: none;
 	}
 
 	.b-form__text{
@@ -123,34 +124,12 @@
 			margin: auto;
 		}
 	}
-
-	.b-form__captcha{
-		text-align: center;
-		position: relative;
-		padding-top: 10px;
-		
-		img{
-			height: 35px;
-		}
-		input[type="text"]{
-			vertical-align: top;
-			height: 29px;
-			width:150px;
-			margin-left: 10px;
-		}
-	}
 	.b-form__submit{
 		text-align: center;
 		padding: 10px;
 		input{
-			background: #fff;
-			border: 1px solid #ddd;
-			@include border-radius(10px);
-			border-radius: 20px;
-			padding: 7px 15px;
-			color:$green-color;
-			font-size: 13px;
-			text-transform: uppercase;
+			@extend .btn;
+			border: 0;
 			outline: none;
 		}
 	}
@@ -165,7 +144,6 @@
 .b-add__ok{
 	padding: 30px;
 }
-
 
 
 /*---------login--------------*/

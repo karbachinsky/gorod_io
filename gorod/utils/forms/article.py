@@ -5,6 +5,7 @@ from django.forms import ModelForm, Textarea, TextInput, FileInput
 
 from gorod.models import Article
 
+
 class ArticleAddForm(ModelForm):
     """
         Article add form

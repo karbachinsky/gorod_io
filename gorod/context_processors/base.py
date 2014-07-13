@@ -3,7 +3,7 @@
 from django.core.context_processors import request
 from django.shortcuts import get_object_or_404
 
-from gorod.models import City
+from gorod.models import City, ArticleRubric
 
  
 def base_params(request):
@@ -25,6 +25,8 @@ def base_params(request):
     if current_url_params.get('rubric'):
         context['article_rubric'] = current_url_params['article_rubric']           
 
+    # Always sending article rubrics to templates
+    context['rubrics'] = ArticleRubric.objects.all()
 
     return context
 

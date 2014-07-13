@@ -148,14 +148,7 @@
 
 }
 .b-feed__more{
-	color:$green-color-dark;
-	@include inline-block;
-	background: #fff;
-	padding: 10px 25px;
-	@include border-radius(25px);
-	font-weight: 700;
-	cursor: pointer;
-	border:2px solid $green-color-dark;
+	@extend .btn;
 }
 
 @media screen and (max-width: 1240px) { 

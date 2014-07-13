@@ -24,3 +24,18 @@ $red-color:#fc3d13;
 	color: $green-color;
 	text-decoration: none;
 }
+.btn{
+	font-size: 13px;
+	letter-spacing: 1.2px;
+	vertical-align: top;
+	font-weight: 600;
+	color:#fff;
+	cursor: pointer;
+	text-transform: uppercase;
+	padding: 9px 19px 8px;
+	background: $green-color;
+	@include box-shadow(0px 2px 0px #ddd);
+	&:hover{
+		background:$green-color-dark;
+	}
+}

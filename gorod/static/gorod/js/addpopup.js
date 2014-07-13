@@ -21,15 +21,14 @@
     $addList.find('li').on('click',function(e){
         var name  = $(this).attr('data-name'),
         title = $(this).attr('data-title');
-
+        $wrapper.html(''); 
+        $wrapper.attr('class','').addClass('b-form__wrapper_'+name);
         $.get(formAjaxUrl, function(html){
-            $window.html(html); 
-                $wrapper = $window.find('#b-form__wrapper');
-                $wrapper.attr('class','').addClass('b-form__wrapper_'+name);
-                $wrapper.find('.b-form__type span').text(title);
-                $wrapper.find('#id_rubric').find('option').removeAttr('selected').filter(':contains("'+name+'")').attr("selected", "selected");
-            
-        })
+            $wrapper.html(html); 
+            $wrapper.find('#id_title').attr('placeholder', 'Введите название...');
+            $wrapper.find('.b-form__type span').text(title);
+            $wrapper.find('#id_rubric').find('option').removeAttr('selected').filter(':contains("'+name+'")').attr("selected", "selected");        
+        });
         $popup.addClass(shownClass);
         $overlay.height($('body').outerHeight());
     });

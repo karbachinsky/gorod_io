@@ -43,7 +43,6 @@
 	.b-popup__window{
 		top:10%;
 		width:650px;
-		height:700px;
 	}
 
 	.b-form__header{
@@ -51,28 +50,33 @@
 		border-bottom: 1px solid #f4f4f4;
 		@include box-shadow(inset 0px -1px 0px rgba(244,244,244,0.3));
 		position: relative;
+
 	}
 	.b-form__close{
 		position: absolute;
-		top:15px;
+		top:7px;
 		right:20px;
 		display: block;
 		cursor: pointer;
+		font-style: normal;
+		font-size: 24px;
 	}
 	.b-form{
-		padding: 30px 40px;
+		padding: 20px 40px;
 		&>div{
-			margin: 0 auto 15px;
+			margin: 0 auto 20px;
 		}
 
 	}
 	.b-form__type{
-		font-size: 10px;
+		font-size: 11px;
 		font-weight: 700;
-		color: #2a7980;
+		color: $mareen-color;
 		text-transform: uppercase;
 		letter-spacing: 1px;
+
 	}
+	
 
 	.b-form__preview-wrapper{
 		padding-bottom: 20px;
@@ -89,7 +93,7 @@
 		cursor: pointer;
 	}
 	.b-form__preview{
-		height:200px;
+		height:245px;
 		background-size: cover;
 		background-position: center;
 		cursor: pointer;
@@ -97,6 +101,7 @@
 		width: 560px;
 		@include border-radius(2px);		
 		border: 1px solid #bbbbbb;
+		background-image: url(../img/photo-bg.png);
 
 		
 	}
@@ -112,6 +117,7 @@
 			width: 560px;
 			@include border-radius(2px);		
 			border: 1px solid #bbbbbb;
+			font-size: 14px;
 		}
 	}
 	.b-form__rubric{
@@ -140,6 +146,28 @@
 		font-size: 10px;
 		color:red;
 	}
+
+
+
+
+	/*----diff----*/
+	.b-form__wrapper_message .b-form__type{
+		color: $mareen-color;
+	}
+	.b-form__wrapper_photo {
+
+		.b-form__type{
+			color:$yellow-color;
+		}
+		.b-form__text{
+			display: none;
+		}
+	}
+	.b-form__wrapper_event .b-form__type{
+		color:$violet-color;
+	}
+
+
 }
 .b-add__ok{
 	padding: 30px;

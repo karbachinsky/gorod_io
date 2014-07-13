@@ -4,7 +4,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext, ugettext_lazy as _
 
-from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from mptt.admin import MPTTModelAdmin
@@ -24,7 +23,6 @@ from gorod.models import CityInfo
 
 
 class GorodAdminBase(admin.ModelAdmin):
-
     def response_add(self, request, obj):
         """ Redirect to object's page after add if exists param source  = main """
         return self._response_add_and_change(request, obj)
@@ -76,8 +74,8 @@ class GorodUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'city')}
-        ),
+            'fields': ('username', 'password1', 'password2', 'city')
+        }),
     )
 
 
@@ -101,13 +99,16 @@ class OrganizationAddressInline(admin.StackedInline):
     model = OrganizationAddress
     extra = 1
 
+
 class OrganizationPhoneInline(admin.StackedInline):
     model = OrganizationPhone
     extra = 1
 
+
 class OrganizationScheduleInline(admin.StackedInline):
     model = OrganizationSchedule
     extra = 2
+
 
 class OrganizationAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'city', 'user', 'add_date')

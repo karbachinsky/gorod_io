@@ -1,15 +1,14 @@
 from django.shortcuts import render, get_object_or_404, Http404, HttpResponse
 from django.db import IntegrityError, DatabaseError
 from django.views.generic import View
-from django.core import serializers
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-import json
-
 from gorod.models import City, Article, ArticleRubric
 from gorod.utils.forms.article import ArticleAddForm
+
+import json
 
 
 class FeedView(View):
@@ -30,45 +29,19 @@ class FeedView(View):
             rubric = get_object_or_404(ArticleRubric, name=rubric_name)
             filters['rubric'] = rubric.id
 
-        articles = Article.objects.filter(**filters)\
-                                  .order_by('-add_date')\
-                                  .select_related()
-
         context = {
-            'articles': articles,
             'rubric': rubric
         }
 
-        # FIXME
+        # FIXME using Django rest framework
         if request.GET.get('json'):
             page = int(request.GET.get('page', 0))
             limit = int(request.GET.get('limit', 15))
-            lim_start = page*limit
-            lim_end = lim_start + limit
 
-            total_cnt = articles.count()
-
-            # Adding additional data to each json item: rubric url, thumb url, etc
-            articles = articles.all()[lim_start:lim_end]
-
-            for article in articles:
-                article.rubric.url = article.rubric.get_absolute_url(city)
-
-            json_feed = serializers.serialize('json', articles,
-                indent=4,
-                extras=('url', 'thumbnail', 'short_text', 'human_add_date'),
-                relations={'rubric': {
-                    'extras': ('url',)
-                }},
-                excludes=('user', 'text', 'is_checked', 'is_published', 'add_date', 'city')
-            )
-
-            # FIXME! GOVNOKOD! Use django rest framework
-            json_response = '{"total": %d, "feed": %s}' % (total_cnt, json_feed)
+            json_response = Article.objects.get_json_feed(filters, page, limit)
 
             return HttpResponse(json_response, mimetype='application/json')
         else:
-            context['articles'] = context['articles'].all()[0:0]
             return render(request, 'gorod/feed.html', context)
 
 

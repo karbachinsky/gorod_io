@@ -18,7 +18,7 @@ class ArticleAddForm(ModelForm):
         localized_fields = ['picture', 'title', 'rubric', 'text']
         widgets = {
             'text': Textarea(attrs={'placeholder': 'Текст'}),
-            'title': TextInput(attrs={'placeholder': 'Заголовок'}),
+            'title': TextInput(attrs={'placeholder': 'Заголовок2222'}),
             'picture': FileInput(attrs={'placeholder': 'Изображение'}),
         }
 

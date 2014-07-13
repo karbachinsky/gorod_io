@@ -1,34 +1,33 @@
-<div id="b-form__wrapper">
-	<div class="b-form__header">
-		<span class="b-form__type">Добавить <span></span></span>
-		<i class="b-form__close">x</i>
-	</div>
-	<form action="" method="post" enctype="multipart/form-data" class="b-form">
-	    {% csrf_token %}
-		<div class="b-form__rubric">
-			{{ form.rubric }}
-		</div>
-		
-		<div class="b-form__title">
-			{% if form.title.errors %}
-				<span class="b-form__error">{{ form.title.errors }}</span>
-			{% endif %}
-			{{ form.title }}
-		</div>	
 
-		
-
-		<div class="b-form__text">
-			{{ form.text }}
-		</div>
-
-		<div class="b-form__preview-wrapper">	
-			<div class="b-form__preview"></div>
-		</div>
-		<div class="b-form__picture">{{ form.picture }}</div>
-
-		<div class="b-form__submit">
-	    	<input type="submit" value="Сохранить" />
-	    </div>
-	</form>
+<div class="b-form__header">
+	<span class="b-form__type">Добавить <span></span></span>
+	<i class="b-form__close">x</i>
 </div>
+<form action="" method="post" enctype="multipart/form-data" class="b-form">
+    {% csrf_token %}
+	<div class="b-form__rubric">
+		{{ form.rubric }}
+	</div>
+	
+	<div class="b-form__title">
+		{% if form.title.errors %}
+			<span class="b-form__error">{{ form.title.errors }}</span>
+		{% endif %}
+		{{ form.title }}
+	</div>	
+
+	
+
+	<div class="b-form__text">
+		{{ form.text }}
+	</div>
+
+	<div class="b-form__preview-wrapper">	
+		<div class="b-form__preview"></div>
+	</div>
+	<div class="b-form__picture">{{ form.picture }}</div>
+
+	<div class="b-form__submit">
+    	<input type="submit" value="Сохранить" />
+    </div>
+</form>

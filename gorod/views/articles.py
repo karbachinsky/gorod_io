@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 
 from gorod.models import City, Article, ArticleRubric
 from gorod.utils.forms.article import ArticleAddForm
+from gorod.utils.exceptions import FeedError
 
 import json
 
@@ -18,31 +19,15 @@ class FeedView(View):
     def dispatch(self, request, city_name, rubric_name=None):
         city = get_object_or_404(City, name=city_name)
 
-        filters = {
-            'city': city.id,
-            'is_published': True,
-            'is_checked': True
-        }
-
         rubric = None
         if rubric_name:
             rubric = get_object_or_404(ArticleRubric, name=rubric_name)
-            filters['rubric'] = rubric.id
 
         context = {
             'rubric': rubric
         }
 
-        # FIXME using Django rest framework
-        if request.GET.get('json'):
-            page = int(request.GET.get('page', 0))
-            limit = int(request.GET.get('limit', 15))
-
-            json_response = Article.objects.get_json_feed(filters, page, limit)
-
-            return HttpResponse(json_response, mimetype='application/json')
-        else:
-            return render(request, 'gorod/feed.html', context)
+        return render(request, 'gorod/feed.html', context)
 
 
 class ArticleView(View):
@@ -111,3 +96,38 @@ class AddView(View):
             return render(request, 'gorod/forms/article_add.html', {
                 'form': form,
             })
+
+
+class FeedAPIView(View):
+    """
+        Get json feed by specifying filters via post parameters
+    """
+    def dispatch(self, request):
+        city_name = request.GET.get('city')
+        rubric_name = request.GET.get('rubric')
+        user_id = request.GET.get('user')
+
+        page = int(request.GET.get('page', 0))
+        limit = int(request.GET.get('limit', 15))
+
+        city = get_object_or_404(City, name=city_name)
+
+        filters = {
+            'city': city.id,
+            'is_published': True,
+            'is_checked': True
+        }
+
+        if rubric_name:
+            rubric = get_object_or_404(ArticleRubric, name=rubric_name)
+            filters['rubric'] = rubric.id
+
+        if user_id:
+            filters['user'] = user_id
+
+        try:
+            json_response = Article.objects.get_json_feed(filters, page, limit)
+        except FeedError:
+            return HttpResponse("{}", mimetype='application/json', status=404)
+
+        return HttpResponse(json_response, mimetype='application/json')

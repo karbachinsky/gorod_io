@@ -6,7 +6,13 @@
 		{% if city %}
 	    	cityName : '{{ city.name }}',
 	    	url : '{{ request.path }}',
-	    	articleAddUrl : '{% url 'gorod:article-add' city.name %}'
+	    	articleAddUrl : '{% url 'gorod:article-add' city.name %}',
+            {% if rubric %}
+                rubric: {{ rubric }},
+            {% endif %}
+            {% if user_info %}
+                profileUserId: {{ user_info.id }},
+            {% endif %}
 		{% endif %}
 	};
 </script>

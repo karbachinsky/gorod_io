@@ -42,5 +42,7 @@ urlpatterns = patterns('',
     url(r'^(?P<rubric_name>\w+)/?$', articles.FeedView.as_view(), name='feed-rubric'),
     # Add article by user
     url(r'^article/add/?$', articles.AddView.as_view(), name='article-add'),
+
+
 )
 

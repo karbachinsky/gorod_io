@@ -145,13 +145,14 @@ CKEDITOR_CONFIGS = {
         "pasteFromWordRemoveFontStyles": True,
         "removeFormatTag": "b,big,code,del,dfn,em,font,i,ins,kbd,q,samp,small,span,strike,strong,sub,sup,tt,u,var,br",
         "ignoreEmptyParagraph": True,
-        "extraPlugins": "link",
+        "extraPlugins": "link,confighelper",
         'toolbar': [
-            ['Bold', 'Link', 'BulletedList'],
+            ['Bold', 'Link', 'NumberedList', 'BulletedList'],
         ],
         'width' : '100%',
         'height': '160',
-        'resize_enabled' : False
+        'resize_enabled' : False,
+        'placeholder': u'Текст'
     }
 }
 

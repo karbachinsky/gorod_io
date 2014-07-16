@@ -9,6 +9,7 @@ from easy_thumbnails.templatetags.thumbnail import thumbnail_url
 from ckeditor.fields import RichTextField
 
 from gorod.models import City
+from gorod.utils.exceptions import FeedError
 
 
 class ArticleRubric(models.Model):
@@ -48,12 +49,17 @@ class ArticleManager(models.Manager):
         """
             Article list in json format
         """
+
+        if page < 0 or limit <= 0:
+            raise FeedError('Bad page and limit parameters!')
+
         articles = self.model.objects.filter(**filters)\
                              .order_by('-add_date')\
                              .select_related()
 
         lim_start = page*limit
         lim_end = lim_start + limit
+
         total_cnt = articles.count()
 
         articles = articles.all()[lim_start:lim_end]
@@ -61,14 +67,15 @@ class ArticleManager(models.Manager):
         for article in articles:
             article.rubric.url = article.rubric.get_absolute_url(article.city)
 
-            json_feed = serializers.serialize('json', articles,
-                indent=4,
-                extras=('url', 'thumbnail', 'short_text', 'human_add_date'),
-                relations={'rubric': {
-                    'extras': ('url',)
-                }},
-                excludes=('user', 'text', 'is_checked', 'is_published', 'add_date', 'city')
-            )
+        # FIXME: add try-catch
+        json_feed = serializers.serialize('json', articles,
+            indent=4,
+            extras=('url', 'thumbnail', 'short_text', 'human_add_date'),
+            relations={'rubric': {
+                'extras': ('url',)
+            }},
+            excludes=('user', 'text', 'is_checked', 'is_published', 'add_date', 'city')
+        )
 
         # FIXME! GOVNOKOD! Use django rest framework
         json_response = '{"total": %d, "feed": %s}' % (total_cnt, json_feed)

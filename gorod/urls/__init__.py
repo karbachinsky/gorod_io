@@ -16,6 +16,9 @@ urlpatterns = patterns('',
     # Captcha
     url(r'^captcha/', include('captcha.urls')),
 
+    ## API urls
+    url(r'^api/', include('gorod.urls.api', namespace='gorodapi')),
+
     # One City pages
     url(r'^(?P<city_name>\w+)/', include('gorod.urls.city', namespace='gorod')),
 )

@@ -11,6 +11,7 @@ from django.conf.urls.static import static
 
 urlpatterns = patterns('',
     url(r'^admin/?', include(admin.site.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     (r'^ckeditor/', include('ckeditor.urls')),
     # Auth
     url('', include('social.apps.django_app.urls', namespace='social')),

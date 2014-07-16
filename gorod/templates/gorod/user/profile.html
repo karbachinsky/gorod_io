@@ -23,16 +23,23 @@
 		</div>
 	</div>
 	<div class="b-feed__wrapper">
-        <div class="b-feed b-feed_profile">
+        {% include "gorod/feed/_feed_item.html" %}
+        <script>
+            $(function(){
+                window.ajaxFeed();
+            });
+        </script>
+        <div class="b-feed">
             <ul class="b-feed__list">
                 <div class="grid-sizer"></div>
                 <div class="gutter-sizer"></div>
-
-                {% for article in user_last_feeds %}
-                    {% include "gorod/feed/_feed_item.html" %}
-                {% endfor %}
+                <li class="b-feed-item b-feed-item_info">
+                     <h2 class="b-feed-item__title">Welcome "ГОРОД"</h2>   
+                     <p class="b-feed-item__text">Все о платформе. Как начать с ней работать. Как добавлять публикации, фотографии и события города.</p>
+                </li>
             </ul>
-            
+            <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
+           
         </div>
     </div>
 

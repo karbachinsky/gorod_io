@@ -8,7 +8,7 @@
 	    	url : '{{ request.path }}',
 	    	articleAddUrl : '{% url 'gorod:article-add' city.name %}',
             {% if rubric %}
-                rubric: {{ rubric }},
+                rubric: '{{ rubric.name }}',
             {% endif %}
             {% if user_info %}
                 profileUserId: {{ user_info.id }},
@@ -22,4 +22,5 @@
 <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script src="{% static 'gorod/js/handlebars.js' %}"></script>
 <script src="{% static 'gorod/js/addpopup.js' %}?v=2" ></script>
+<script src="{% static 'gorod/js/ajaxfeed.js' %}?v=1" ></script>
 <script src="{% static 'gorod/js/main.js' %}?v=2" ></script>

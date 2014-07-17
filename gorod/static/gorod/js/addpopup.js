@@ -25,7 +25,7 @@
         $wrapper.attr('class','').addClass('b-form__wrapper_'+name);
         $.get(formAjaxUrl, function(html){
             $wrapper.html(html); 
-            $wrapper.find('#id_title').attr('placeholder', 'Введите название...');
+            $wrapper.find('#id_title').attr('placeholder', 'Заголовок');
             $wrapper.find('.b-form__type span').text(title);
             $wrapper.find('#id_rubric').find('option').removeAttr('selected').filter(':contains("'+name+'")').attr("selected", "selected");        
         });
@@ -59,7 +59,8 @@
             		});
             	});
             }else{
-            	$window.html('yes yes yeah');
+                var okText = $('<div />').addClass('b-form__ok').text('Ваше сообщение будет добавлено после модерации');
+            	$window.html(okText).append('<i class="b-form__close"></i>');
             }
         });
 

@@ -1,21 +1,17 @@
 {% extends 'gorod/layout.html' %}
 
 {% load staticfiles %}
-{% load thumbnail %}
-{% load humanize %}
 
 {% block meta_title %}{{ city.title }} — события города{% endblock %}
 
 {% block meta_description %}Новости {{ city.title }}, каталог организаций, полезная информация{% endblock %}
 
-{% block body-class %}body_feed{% endblock %}
 
 {% block content %}
-    <div class="b-feed__wrapper">
-        {% if rubric %}
+    {% if rubric %}
         <h1 class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}">{{rubric.title}}</h1>
-        {% endif %}
-
+    {% endif %}
+    <div class="b-feed__wrapper">
         {% include "gorod/feed/_feed_item.html" %}
         <script>
             $(function(){
@@ -27,10 +23,6 @@
             <ul class="b-feed__list">
                 <div class="grid-sizer"></div>
                 <div class="gutter-sizer"></div>
-                <li class="b-feed-item b-feed-item_info">
-                     <h2 class="b-feed-item__title">Welcome "ГОРОД"</h2>   
-                     <p class="b-feed-item__text">Все о платформе. Как начать с ней работать. Как добавлять публикации, фотографии и события города.</p>
-                </li>
             </ul>
             <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
            

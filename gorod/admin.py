@@ -80,7 +80,12 @@ class CityWelcomeAdmin(GorodAdminBase):
 
 
 class ArticleAdmin(GorodAdminBase):
-    list_display = ('id', 'add_date', 'title', 'city', 'rubric', 'user', 'is_checked')
+    def view_link(self, obj):
+        obj_url = obj.url
+        return u"<a href='%s' target='blank'>%s</a>" % (obj_url, obj_url)
+
+    view_link.allow_tags = True
+    list_display = ('id', 'add_date', 'title', 'city', 'rubric', 'user', 'view_link', 'is_checked')
 
 
 class ArticleRubrucAdmin(GorodAdminBase):

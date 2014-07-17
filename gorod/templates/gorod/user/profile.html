@@ -1,12 +1,16 @@
 {% extends 'gorod/layout.html' %}
 
 {% load staticfiles %}
-{% block body-class %}body_feed{% endblock %}
-
 {% block content %}
 	<div class="b-profile__wrapper">
 		<div class="b-profile">
-			<div class="b-profile__avatar"><img src="{{ user_info.avatar }}" /></div>
+			<div class="b-profile__avatar">
+                {% if user_info.avatar %}
+                    <img src="{{ user_info.avatar }}" />
+                {% else %}
+                    <img src="{% static 'gorod/img/userava.png' %}" />
+                {% endif %}
+            </div>
 			<div class="b-profile__text">
 			    <span class="b-profile__name">
                     {% if user_info.first_name %}
@@ -23,16 +27,19 @@
 		</div>
 	</div>
 	<div class="b-feed__wrapper">
-        <div class="b-feed b-feed_profile">
+        {% include "gorod/feed/_feed_item.html" %}
+        <script>
+            $(function(){
+                window.ajaxFeed();
+            });
+        </script>
+        <div class="b-feed">
             <ul class="b-feed__list">
                 <div class="grid-sizer"></div>
                 <div class="gutter-sizer"></div>
-
-                {% for article in user_last_feeds %}
-                    {% include "gorod/feed/_feed_item.html" %}
-                {% endfor %}
             </ul>
-            
+            <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
+           
         </div>
     </div>
 

@@ -88,10 +88,17 @@
 	text-decoration: none;
 	font-size: 10px;
 	letter-spacing: 0.9px;
-
-	&:hover{
-		color:#666666;
+	
+	.b-feed-item_event &{
+		color:$yellow-color;
 	}
+	.b-feed-item_message &{
+		color: $mareen-color;
+	}
+	.b-feed-item_photo &{
+		color:$violet-color;
+	}
+
 }
 .b-feed-item__date{
 	font-size: 10px;
@@ -102,7 +109,7 @@
 .b-feed-item__link{
 	display: block;
 	text-decoration: none;
-	padding: 6px 0 6px;
+	padding: 6px 0 13px;
 	&:hover .b-feed-item__title{
 		color:$green-color;
 	}
@@ -115,7 +122,7 @@
 	color:#000 ;
 	text-decoration: none;
 	font-size: 18px;
-	font-weight: 700;
+	font-weight: 600;
 	margin-bottom: 3px;
 	padding: 0 20px;
 
@@ -126,6 +133,7 @@
 	display: block;
 	width:100%;
 	margin-top: 7px;
+	margin-bottom: -7px;
 }
 .b-feed-item__text{
 	margin:0 ;
@@ -171,20 +179,21 @@
 	.b-feed-item{
 		width: 100%;
 	}
-	.b-feed-item__top{
-		padding-top: 10px;
-		padding-bottom: 10px;
+	.b-feed-item_info{
+		background-size: cover;
+		background-position: bottom center;
 	}
 	.b-feed-item__rubric{
-		font-size: 16px;
+		font-size: 13px;
 	}
 
 	.b-feed-item__date{
-		font-size: 14px;
+		font-size: 12px;
 	}
 	.b-feed-item__title{
-		line-height: 27px;
-		font-size: 20px;
+		line-height: 32px;
+		font-size: 22px;
+		margin-bottom: 5px;
 	}
 	.b-feed-item__text{
 		font-size: 15px;

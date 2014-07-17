@@ -10,13 +10,12 @@
     <div class="b-city-info">
         
         {% if request.user.is_superuser %}
-            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_cityinfo_change' info.id %}">Редактировать</a>
+            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_citywelcome_change' welcome.id %}">Редактировать</a>
         {% endif %}
-       
-        <!-- Kirill, please fixme -->
-        <div class="b-city-info__text">
+
+        <div class="b-city-welcome__text">
             {% autoescape off %}
-                {{ info.text }} 
+                {{ welcome.text }}
             {% endautoescape %} 
         </div>
 

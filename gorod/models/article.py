@@ -82,6 +82,9 @@ class ArticleManager(models.Manager):
 
         return json_response
 
+    def get_all_published(self):
+        return self.model.objects.filter(is_published=True).all()
+
 
 class Article(models.Model):
     """

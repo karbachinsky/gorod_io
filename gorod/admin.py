@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext, ugettext_lazy as _
 
@@ -8,18 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from mptt.admin import MPTTModelAdmin
 
-from gorod.models import User
-from gorod.models import City
-from gorod.models import Article
-from gorod.models import ArticleRubric
-
-from gorod.models import Organization
-from gorod.models import OrganizationCategory
-from gorod.models import OrganizationAddress
-from gorod.models import OrganizationPhone
-from gorod.models import OrganizationSchedule
-
-from gorod.models import CityInfo
+from gorod.models import *
 
 
 class GorodAdminBase(admin.ModelAdmin):
@@ -84,6 +72,10 @@ class CityAdmin(GorodAdminBase):
 
 
 class CityInfoAdmin(GorodAdminBase):
+    list_display = ('id', 'city')
+
+
+class CityWelcomeAdmin(GorodAdminBase):
     list_display = ('id', 'city')
 
 

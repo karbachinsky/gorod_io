@@ -1,0 +1,24 @@
+{% extends 'gorod/layout.html' %}
+
+{% load staticfiles %}
+
+{% block meta_title %}Добро пожаловать в {{city.title}}{% endblock %}
+
+{% block meta_description %}Добро пожаловать в {{city.title}}{% endblock %}
+
+{% block content %}
+    <div class="b-city-info">
+        
+        {% if request.user.is_superuser %}
+            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_citywelcome_change' welcome.id %}">Редактировать</a>
+        {% endif %}
+
+        <div class="b-city-welcome__text">
+            {% autoescape off %}
+                {{ welcome.text }}
+            {% endautoescape %} 
+        </div>
+
+    </div>
+{% endblock %}
+

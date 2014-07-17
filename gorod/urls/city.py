@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 
 from django.views.generic.base import RedirectView
 
-from gorod.views import base, organizations, city_info, user, articles, redirects
+from gorod.views import base, organizations, city_info, user, articles, redirects, city_welcome
 
 urlpatterns = patterns('',
     # Main page    
@@ -12,6 +12,8 @@ urlpatterns = patterns('',
 
     # City main page
     url(r'^$', articles.FeedView.as_view(), name='city_main_page'),
+
+    url(r'^welcome/?$', city_welcome.CityWelcomeView.as_view(), name='city-welcome'),
 
     # City feed page. The same as main page
     #url(r'^feed/?$', articles.FeedView.as_view(), name='feed'),

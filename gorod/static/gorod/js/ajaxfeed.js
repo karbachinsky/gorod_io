@@ -45,7 +45,7 @@
 	source   = $("#feed-item-template").html(),
 	template = Handlebars.compile(source),
 	curPage=0,
-	LIMIT = 10,
+	LIMIT = 20,
 	$container = $('.b-feed__list'),
 	pagesLen;
 

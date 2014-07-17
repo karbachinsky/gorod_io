@@ -6,32 +6,42 @@
 		<span class="b-header__menu-btn"><i></i><span>МЕНЮ</span></span>
 		<a class="b-header__city" href="{% url 'gorod:city_main_page' city.name %}">{{city.title}}</a>
 
-			<div class="b-header__btns">
-                {% if user.is_authenticated %}
-                	<div class="b-header__add-wrapper" >
-                    	<span class="b-header__add" >Добавить</span>
-						<ul class="b-header__add-list">	
-							<li class="b-header__add-item" data-name="message" data-title="сообщение">Сообщение</li>
-							<li class="b-header__add-item" data-name="event" data-title="мероприятие">Мероприятие</li>
-							<li class="b-header__add-item" data-name="photo" data-title="фото">Фото</li>
-						</ul>
-                    </div>
-                    {% if user.city %}
-                        <a href="{% url 'gorod:user' user.city.name user.id %}" class="b-header__avatar"><img src="{{ user.avatar }}" /></a>
-                    {% endif %}
-                {% else %}
-                    <span class="b-header__login">+ Добавить сообщение</span>
-	        	<!--<a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" class="b-header__login sn-logo">Войти</a>-->
+		<div class="b-header__btns">
+            {% if user.is_authenticated %}
+            	<div class="b-header__add-wrapper" >
+                	<span class="b-header__add" >Добавить</span>
+					<ul class="b-header__add-list">	
+						<li class="b-header__add-item" data-name="message" data-title="сообщение">Сообщение</li>
+						<li class="b-header__add-item" data-name="event" data-title="мероприятие">Мероприятие</li>
+					</ul>
+                </div>
+                {% if user.city %}
+                    <a href="{% url 'gorod:user' user.city.name user.id %}" class="b-header__avatar">
+                    	{% if user.avatar %}
+                    		<img src="{{ user.avatar }}" />
+                    	{% else %}
+                    		<img src="{% static 'gorod/img/userava.png' %}" />
+                    	{% endif %}
+                    </a>
                 {% endif %}
+            {% else %}
+                <span class="b-header__login">+ Добавить сообщение</span>
+            {% endif %}
 
-		    </div>
+	    </div>
 		<div class="clear"></div>
 	</div>
 	<div class="b-header__menu">
 		{% menu city %}
 
 		{% if user.is_authenticated and user.city %}
-            <a href="{% url 'gorod:user' user.city.name user.id %}" class="b-header__avatar"><img src="{{ user.avatar }}" /></a>
+            <a href="{% url 'gorod:user' user.city.name user.id %}" class="b-header__avatar">
+				{% if user.avatar %}
+            		<img src="{{ user.avatar }}" />
+            	{% else %}
+            		<img src="{% static 'gorod/img/userava.png' %}" />
+            	{% endif %}
+            </a>
         {% endif %}
 		<div class="b-header__btns">
 			{% if user.is_authenticated %}

@@ -1,12 +1,16 @@
 {% extends 'gorod/layout.html' %}
 
 {% load staticfiles %}
-{% block body-class %}body_feed{% endblock %}
-
 {% block content %}
 	<div class="b-profile__wrapper">
 		<div class="b-profile">
-			<div class="b-profile__avatar"><img src="{{ user_info.avatar }}" /></div>
+			<div class="b-profile__avatar">
+                {% if user_info.avatar %}
+                    <img src="{{ user_info.avatar }}" />
+                {% else %}
+                    <img src="{% static 'gorod/img/userava.png' %}" />
+                {% endif %}
+            </div>
 			<div class="b-profile__text">
 			    <span class="b-profile__name">
                     {% if user_info.first_name %}
@@ -34,8 +38,8 @@
                 <div class="grid-sizer"></div>
                 <div class="gutter-sizer"></div>
                 <li class="b-feed-item b-feed-item_info">
-                     <h2 class="b-feed-item__title">Welcome "ГОРОД"</h2>   
-                     <p class="b-feed-item__text">Все о платформе. Как начать с ней работать. Как добавлять публикации, фотографии и события города.</p>
+                    <h2 class="b-feed-item__title">Добро пожаловать<br /> в «ГОРОД»</h2>   
+                    <p class="b-feed-item__text">Все о платформе. Как начать с ней работать. Как добавлять публикации, фотографии и события города.</p>
                 </li>
             </ul>
             <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>

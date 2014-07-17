@@ -7,6 +7,7 @@
 <div class="b-popup b-popup-login">
 	<div class="b-popup__overlay"></div>
 	<div class="b-popup__window">
-		<a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" >Войти через контакт</a>
+		<span class="">ВХОД</span>
+		<a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" >Войти через вконтакте</a>
 	</div>
 </div>

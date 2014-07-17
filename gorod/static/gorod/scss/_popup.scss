@@ -182,24 +182,41 @@
 .b-popup-login {
 	.b-popup__window{
 		width:530px;
-		height:250px;
+		height:280px;
 		top:20%;
+
+		text-align: center;
 	}
+	span{
+		display: block;
+		margin: auto;
+		margin-bottom: 20px;
+		color: #000;
+		font-size: 35px;
+		padding-top: 62px;
+		letter-spacing: 6px;
+		font-weight: 300;
+
+	}
+	
 	a{
 		display: block;
-		width: 50%;
-		height: 40px;
-		line-height: 40px;
-		background: blue;
-		color:#fff;
+		width: 57%;
+		height: 60px;
+		line-height: 66px;
+		background: #5c83a8;
+		border-bottom: 2px solid #416588;
+		color: #fff;
 		text-decoration: none;
 		position: absolute;
-		top: 0;
+		top: 50px;
 		left: 0;
 		right: 0;
 		bottom: 0;
 		margin: auto;
-		text-align: center;
+		text-transform: uppercase;
+		font-size: 12px;
+		font-weight: 600;
 	}
 }
 

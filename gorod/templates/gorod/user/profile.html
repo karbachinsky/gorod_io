@@ -4,7 +4,13 @@
 {% block content %}
 	<div class="b-profile__wrapper">
 		<div class="b-profile">
-			<div class="b-profile__avatar"><img src="{{ user_info.avatar }}" /></div>
+			<div class="b-profile__avatar">
+                {% if user_info.avatar %}
+                    <img src="{{ user_info.avatar }}" />
+                {% else %}
+                    <img src="{% static 'gorod/img/userava.png' %}" />
+                {% endif %}
+            </div>
 			<div class="b-profile__text">
 			    <span class="b-profile__name">
                     {% if user_info.first_name %}

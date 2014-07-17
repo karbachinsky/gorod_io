@@ -16,7 +16,13 @@
 
                 <div class="b-article__info">
                     <div class="b-article__author">
-                        <a href="{% url 'gorod:user' article.user.city.name article.user.id %}" class="b-article__avatar"><img src="{{ article.user.avatar }}" /></a>
+                        <a href="{% url 'gorod:user' article.user.city.name article.user.id %}" class="b-article__avatar">
+                            {% if article.user.avatar %}
+                                <img src="{{ article.user.avatar }}" />
+                            {% else %}
+                                <img src="{% static 'gorod/img/userava.png' %}" />
+                            {% endif %}
+                        </a>
                         <a href="{% url 'gorod:user' article.user.city.name article.user.id %}" class="b-article__author-name">{{ article.user.first_name }} {{ article.user.last_name }}</a>
                     </div>
                     

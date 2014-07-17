@@ -17,7 +17,13 @@
 						</ul>
                     </div>
                     {% if user.city %}
-                        <a href="{% url 'gorod:user' user.city.name user.id %}" class="b-header__avatar"><img src="{{ user.avatar }}" /></a>
+                        <a href="{% url 'gorod:user' user.city.name user.id %}" class="b-header__avatar">
+                        	{% if user.avatar %}
+                        		<img src="{{ user.avatar }}" />
+                        	{% else %}
+                        		<img src="{% static 'gorod/img/userava.png' %}" />
+                        	{% endif %}
+                        </a>
                     {% endif %}
                 {% else %}
                     <span class="b-header__login">+ Добавить сообщение</span>
@@ -31,7 +37,13 @@
 		{% menu city %}
 
 		{% if user.is_authenticated and user.city %}
-            <a href="{% url 'gorod:user' user.city.name user.id %}" class="b-header__avatar"><img src="{{ user.avatar }}" /></a>
+            <a href="{% url 'gorod:user' user.city.name user.id %}" class="b-header__avatar">
+				{% if user.avatar %}
+            		<img src="{{ user.avatar }}" />
+            	{% else %}
+            		<img src="{% static 'gorod/img/userava.png' %}" />
+            	{% endif %}
+            </a>
         {% endif %}
 		<div class="b-header__btns">
 			{% if user.is_authenticated %}

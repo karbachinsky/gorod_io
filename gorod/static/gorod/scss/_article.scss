@@ -67,6 +67,16 @@
 	font-weight: 600;
 	margin-right: 10px;
 	text-decoration: none;
+
+	.b-article_event &{
+		color:$yellow-color;
+	}
+	.b-article_message &{
+		color: $mareen-color;
+	}
+	.b-article_photo &{
+		color:$violet-color;
+	}
 }
 .b-article__date{
 	color:#666666;

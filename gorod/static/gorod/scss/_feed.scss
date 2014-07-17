@@ -88,10 +88,17 @@
 	text-decoration: none;
 	font-size: 10px;
 	letter-spacing: 0.9px;
-
-	&:hover{
-		color:#666666;
+	
+	.b-feed-item_event &{
+		color:$yellow-color;
 	}
+	.b-feed-item_message &{
+		color: $mareen-color;
+	}
+	.b-feed-item_photo &{
+		color:$violet-color;
+	}
+
 }
 .b-feed-item__date{
 	font-size: 10px;

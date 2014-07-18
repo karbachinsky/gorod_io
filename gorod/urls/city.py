@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     # City main page
     url(r'^$', articles.FeedView.as_view(), name='city_main_page'),
 
-    url(r'^welcome/?$', city_welcome.CityWelcomeView.as_view(), name='city-welcome'),
+    url(r'^welcome/?$', city_welcome.CityWelcomeView.as_view(), name='welcome'),
 
     # City feed page. The same as main page
     #url(r'^feed/?$', articles.FeedView.as_view(), name='feed'),

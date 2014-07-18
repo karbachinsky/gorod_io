@@ -41,6 +41,7 @@ class CityWelcome(models.Model):
     """
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     text = RichTextField(max_length=25000)
+    add_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         app_label = 'gorod'
@@ -50,7 +51,7 @@ class CityWelcome(models.Model):
         """
             Http Link to this page
         """
-        return reverse('gorod:city-welcome', kwargs={
+        return reverse('gorod:welcome', kwargs={
             'city_name': self.city.name,
         })
 

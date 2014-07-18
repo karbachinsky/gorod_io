@@ -2,10 +2,31 @@
     Sitemap.xml generator.
 """
 
-from django.contrib.sitemaps import Sitemap
-from gorod.models import Article, Organization
+from django.contrib.sitemaps import Sitemap, GenericSitemap
+from gorod.models import Article, Organization, CityWelcome
 
+articles_info = {
+    'queryset': Article.objects.get_all_published(),
+    'date_field': 'add_date'
+}
 
+organizations_info = {
+    'queryset': Organization.objects.get_all_published(),
+    'date_field': 'add_date'
+}
+
+citywelcomes_info = {
+    'queryset': CityWelcome.objects.all(),
+    'date_field': 'add_date'
+}
+
+sitemaps = {
+    'articles': GenericSitemap(articles_info, priority=0.9, changefreq='monthly'),
+    'organizations': GenericSitemap(organizations_info, priority=0.9, changefreq='weekly'),
+    'citywelcomes': GenericSitemap(citywelcomes_info, priority=0.5, changefreq='monthly')
+}
+
+"""
 class ArticleSitemap(Sitemap):
     changefreq = 'yearly'
     priority = 0.9
@@ -26,9 +47,4 @@ class OrganizationSitemap(Sitemap):
 
     def lastmode(self, obj):
         return obj.add_date
-
-
-sitemaps = {
-    'articles': ArticleSitemap(),
-    'organizations': OrganizationSitemap()
-}
+"""

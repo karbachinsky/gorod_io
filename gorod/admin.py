@@ -25,11 +25,11 @@ class GorodAdminBase(admin.ModelAdmin):
 
         if (isinstance(response, HttpResponseRedirect) and
             request.GET.get('source') == 'main'):
-                response['location'] = reverse(
-                    'gorod:' + self._url_name_by_object(obj), 
-                    args=[obj.city.name, obj.id]
-                    #kwargs={'article_id': obj.id, 'city_name': obj.city.name}
-                )
+                try:  
+                    response['location'] = obj.get_absolute_url()
+                # FIXME
+                except Exception:
+                    pass
 
         return response
 

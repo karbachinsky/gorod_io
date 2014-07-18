@@ -39,7 +39,7 @@ class CityWelcome(models.Model):
     """
         City Welcome page for new users
     """
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, unique=True)
     text = RichTextField(max_length=25000)
     add_date = models.DateTimeField(auto_now_add=True)
 

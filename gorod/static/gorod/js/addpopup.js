@@ -48,12 +48,20 @@
             type: 'POST'
         });
 
+        $window.find('form>div').removeClass('error');
+        $('.b-form__error').remove();
+
         Deferred.done(function(json){
             //$window.html(html);
             var $elem;
             if(!json.success){
             	$.each(json.errors,function(index, elem){
-            		$elem = $window.find('[name="'+elem[0]+'"]').closest('div');
+                    if(elem[0]=='picture'){
+                        $elem = $window.find('.b-form__preview-wrapper');
+                    }else{
+                        $elem = $window.find('[name="'+elem[0]+'"]').closest('div');
+                    }
+                    $elem.addClass('error');
             		$.each(elem[1],function(index, errorText){
             			$('<span/>').addClass('b-form__error').text(errorText).appendTo($elem);
             		});

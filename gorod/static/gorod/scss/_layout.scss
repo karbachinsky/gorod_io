@@ -250,9 +250,11 @@ body{
 	.b-header__menu-btn{
 		left:10px;
 		i{
-			width:18px;
+			width:30px;
+			margin-top: 0;
+			height: 13px;
 			&:after{
-				width: 18px;
+				width: 30px;
 			}
 		}
 		span{

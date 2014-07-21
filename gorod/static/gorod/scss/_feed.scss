@@ -55,7 +55,12 @@
 .b-feed-item_info{
 	height:333px;
 	background: url(../img/feed-info.png) no-repeat 0 0;
-
+	
+	a{
+		display: block;
+		text-decoration: none;
+		height:333px;
+	}
 	.b-feed-item__title{
 		padding-top: 25px;
 		padding-bottom: 3px;

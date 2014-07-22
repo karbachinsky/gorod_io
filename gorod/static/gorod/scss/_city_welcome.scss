@@ -1,4 +1,4 @@
-.b-city-info{
+.b-city-welcome{
 	padding:60px 30px;
 	max-width:650px;
 	margin: auto;
@@ -19,7 +19,7 @@
 		left:30px;
 	}
 }
-.b-city-info__text{
+.b-city-welcome__text{
 	ul{
 		list-style-type: disc;
 		padding: 0 0 0 20px;
@@ -28,9 +28,12 @@
 		list-style-type: decimal;
 		padding: 0 0 0 20px;
 	}
+	a{
+		color:#005fc5;
+	}
 }
 @media screen and (max-width: 630px) { 
-	.b-city-info{
+	.b-city-welcome{
 		padding-left: 10px;
 		padding-right: 10px;
 	}

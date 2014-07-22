@@ -9,7 +9,13 @@
 
 {% block content %}
     {% if rubric %}
-        <h1 class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}">{{rubric.title}}</h1>
+        <h1 class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}">
+            {% if rubric.title_plural %}
+                {{rubric.title_plural}}
+            {% else %}
+                {{ rubric.title }}
+            {% endif %}
+        </h1>
     {% endif %}
     <div class="b-feed__wrapper">
         {% include "gorod/feed/_feed_item.html" %}

@@ -18,6 +18,7 @@ class ArticleRubric(models.Model):
     """
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
+    title_plural = models.CharField(max_length=255, null=True)
 
     class Meta:
         app_label = 'gorod'

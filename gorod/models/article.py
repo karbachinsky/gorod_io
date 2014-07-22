@@ -90,6 +90,9 @@ class Article(models.Model):
     """
         Article class
     """
+    # Size of truncated text preview in article list
+    _SHORT_TEXT_LENGTH = 120
+
     title = models.CharField(max_length=255, help_text=u'Заголовок')
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
@@ -139,8 +142,20 @@ class Article(models.Model):
         """
             Returns short text for article preview
         """
+
+        # FIXME. HTML entities!
         from django.utils.html import strip_tags
-        return strip_tags(self.text)[0:120]  # Fix magic constant please
+
+        text = strip_tags(self.text)
+        if len(text) <= self._SHORT_TEXT_LENGTH:
+            return text
+
+        if text[self._SHORT_TEXT_LENGTH-1] == u'.':
+            return text[0:self._SHORT_TEXT_LENGTH]
+        elif text[self._SHORT_TEXT_LENGTH-1] == u' ':
+            return text[0:self._SHORT_TEXT_LENGTH-1] + u'...'
+        else:
+            return text[0:self._SHORT_TEXT_LENGTH] + u'...'
 
     @property
     def human_add_date(self):

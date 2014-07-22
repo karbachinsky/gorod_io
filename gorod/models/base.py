@@ -12,6 +12,7 @@ class City(models.Model):
     """
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
+    short_title = models.CharField(max_length=255, null=True)
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
     region = models.CharField(max_length=255, blank=True)
 

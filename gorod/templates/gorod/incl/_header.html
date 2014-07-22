@@ -4,7 +4,13 @@
 <div class="b-header">
 	<div class="b-header__content">
 		<span class="b-header__menu-btn"><i></i><span>МЕНЮ</span></span>
-		<a class="b-header__city" href="{% url 'gorod:city_main_page' city.name %}">{{city.title}}</a>
+		<a class="b-header__city" href="{% url 'gorod:city_main_page' city.name %}">
+            {% if city.short_title %}
+                {{ city.short_title }}
+            {% else %}
+                {{ city.title }}
+            {% endif %}
+        </a>
 
 		<div class="b-header__btns">
             {% if user.is_authenticated %}

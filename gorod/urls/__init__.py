@@ -3,6 +3,7 @@
 """
 
 from django.conf.urls import patterns, include, url
+from django.views.generic import TemplateView
 
 from gorod.views import base, user
 from gorod.utils.sitemap import sitemaps
@@ -22,6 +23,9 @@ urlpatterns = patterns('',
 
     # Sitemap.xml
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name='sitemap'),
+
+    ## Static pages
+    url(r'^rules/?', TemplateView.as_view(template_name="gorod/rules.html"), name='rules'),
 
     # One City pages
     url(r'^(?P<city_name>\w+)/', include('gorod.urls.city', namespace='gorod')),

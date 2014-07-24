@@ -3,7 +3,7 @@
 """
 
 from django.contrib.sitemaps import Sitemap, GenericSitemap
-from gorod.models import Article, Organization, CityWelcome
+from gorod.models import Article, Organization, CityWelcome, CityInfoQuestion
 
 articles_info = {
     'queryset': Article.objects.get_all_published(),
@@ -20,10 +20,16 @@ citywelcomes_info = {
     'date_field': 'add_date'
 }
 
+cityinfo_questions_info = {
+    'queryset': CityInfoQuestion.objects.all().select_related(),
+    'date_field': 'add_date'
+}
+
 sitemaps = {
     'articles': GenericSitemap(articles_info, priority=0.9, changefreq='monthly'),
     'organizations': GenericSitemap(organizations_info, priority=0.9, changefreq='weekly'),
-    'citywelcomes': GenericSitemap(citywelcomes_info, priority=0.5, changefreq='monthly')
+    'citywelcomes': GenericSitemap(citywelcomes_info, priority=0.5, changefreq='monthly'),
+    'cityinfo_questions': GenericSitemap(cityinfo_questions_info, priority=0.5, changefreq='monthly')
 }
 
 """

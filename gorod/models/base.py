@@ -50,6 +50,13 @@ class CityInfoQuestion(models.Model):
         #unique_together = ('cityinfo', 'question(20)')
         db_table = 'gorod_cityinfoquestion'
 
+    def get_absolute_url(self):
+        return reverse('gorod:city-info-question', kwargs={
+            'city_name': self.cityinfo.city.name,
+            'question_id': self.id
+        })
+
+
 
 class CityWelcome(models.Model):
     """

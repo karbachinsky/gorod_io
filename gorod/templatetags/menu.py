@@ -68,20 +68,17 @@ def menu(context, city):
 
     # Adding about (city info module)
     menu.append({
-        'title': 'О городе',
+        'title': 'Полезная информация',
         'url_name': 'city-info',
         'link': reverse('gorod:city-info', kwargs={'city_name': city.name}),
         'is_active': 0
     })
-
-
 
     # Setting active
     for menuitem in menu:
         if menuitem['url_name'] == current_url_name:
             menuitem['is_active'] = 1
             break
-
 
     return {'menu': menu}
 

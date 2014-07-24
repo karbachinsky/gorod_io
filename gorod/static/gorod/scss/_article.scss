@@ -11,21 +11,7 @@
 	margin: auto;	
 	padding: 40px 30px 100px;
 }
-.b-article__top{
-	background: $violet-color;
-	height:4px;
 
-
-	.b-article_event &{
-		background:$yellow-color;
-	}
-	.b-article_message &{
-		background: $mareen-color;
-	}
-	.b-article_photo &{
-		background:$violet-color;
-	}
-}
 .b-article__title{
 	margin:45px 0 30px; 
 	font-weight: 600;
@@ -34,7 +20,8 @@
 	color:#000;
 } 
 .b-article__author{
-	float: left;
+	float: right;
+	text-align: right;
 }
 .b-article__author-name{
 	color:#666666;
@@ -55,7 +42,7 @@
 	}
 }
 .b-article__descr{
-	float: right;
+	float: left;
 	text-align: right;
 	padding-top: 4px;
 
@@ -117,4 +104,10 @@
 		padding-left: 10px;
 		padding-right: 10px;
 	}
+	.b-article__author{
+		float: left;
+		clear: left;
+		margin-top: 10px;
+	}
+
 }

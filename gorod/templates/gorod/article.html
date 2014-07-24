@@ -11,10 +11,14 @@
 {% block content %}
     <div class="b-article__wrapper">
         <div class="b-article b-article_{{article.rubric.name}}">
-            <div class="b-article__top "></div>
+            
             <div class="b-article__content">
 
                 <div class="b-article__info">
+                    <div class="b-article__descr">
+                        <a href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}" class="b-article__rubric">{{ article.rubric.title }}</a>
+                        <span class="b-article__date">{{ article.add_date|naturalday }}</span>
+                    </div>
                     <div class="b-article__author">
                         <a href="{% url 'gorod:user' article.user.city.name article.user.id %}" class="b-article__avatar">
                             {% if article.user.avatar %}
@@ -24,16 +28,12 @@
                             {% endif %}
                         </a>
                         <a href="{% url 'gorod:user' article.user.city.name article.user.id %}" class="b-article__author-name">{{ article.user.first_name }} {{ article.user.last_name }}</a>
-                    </div>
-                    
-                    <div class="b-article__descr">
-                        <a href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}" class="b-article__rubric">{{ article.rubric.title }}</a>
-                        <span class="b-article__date">{{ article.add_date|naturalday }}</span>
-                        <br />
+
                         {% if request.user.is_superuser %}
+                            <br />
                             <a class="edit-link" target="_blank" href="{% url 'admin:gorod_article_change' article.id %}?source=main">Редактировать</a>
                         {% endif %}
-                    </div>
+                    </div>  
                     <div class="clear"></div>
                 </div>
                 

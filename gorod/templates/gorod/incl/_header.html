@@ -4,7 +4,10 @@
 <div class="b-header">
 	<div class="b-header__content">
 		<span class="b-header__menu-btn"><i></i><span>МЕНЮ</span></span>
-		<a class="b-header__city" href="{% url 'gorod:city_main_page' city.name %}">
+		<a class="b-header__city b-header__city_desktop" href="{% url 'gorod:city_main_page' city.name %}">
+            {{ city.title }}
+        </a>
+        <a class="b-header__city b-header__city_mobile" href="{% url 'gorod:city_main_page' city.name %}">
             {% if city.short_title %}
                 {{ city.short_title }}
             {% else %}
@@ -31,7 +34,7 @@
                     </a>
                 {% endif %}
             {% else %}
-                <span class="b-header__login">+ Добавить сообщение</span>
+                <span class="b-header__login">Добавить сообщение</span>
             {% endif %}
 
 	    </div>

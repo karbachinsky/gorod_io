@@ -64,6 +64,9 @@ body{
 	&:hover{
 		color:#737373;
 	}
+	&.b-header__city_mobile{
+		display: none;
+	}
 }
 
 
@@ -284,6 +287,14 @@ body{
 	}
 }
 
+@media screen and (max-width: 800px) { 
+.b-header__city{
+		&.b-header__city_mobile{
+			display: inline;
+		}
+		&.b-header__city_desktop{
+			display: none;
+		}
+	}
 
-
-
+}

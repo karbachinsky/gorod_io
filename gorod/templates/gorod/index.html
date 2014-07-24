@@ -28,8 +28,8 @@
                 <li class="b-index-cities__item">
                     <a href="{% url 'gorod:city_main_page' city.name %}">
                         <span class="b-index-cities__title">{{ city.title }}</span>
-                        <span class="b-index-cities__region">{{ city.region }}</span>
-                    </a>
+                        <span class="b-index-cities__region">{{ city.region }}</span>     
+                    </a>      
                 </li>
             {% endfor %}
             <div class="clear"></div>
@@ -41,7 +41,6 @@
         <div class="b-index-info__devider"></div>
 
         <div class="b-index-info__text">
-            <div class="b-index-info__column b-index-info__column_left">
                 <div>
                     <h3>Платформа – это:</h3>
                     <ul>
@@ -50,8 +49,6 @@
                         <li>площадка для общения и совместных действия для жителей города или поселка</li>
                     </ul>
                 </div>
-            </div>
-            <div class="b-index-info__column b-index-info__column_right">
                 <div>
                     <h3>Лента города</h3>
                     <p>События, афиша, фотографии города, опубликованные местными жителями</p>
@@ -60,26 +57,15 @@
                     <h3>Каталог организаций города</h3>
                     <p>Информация об организациях, услугах, контактная информация</p>
                 </div>
-            </div>
-            <div class="clear"></div>
-        </div>
-
-
-        <div class="b-index-info__text">
-            <div class="b-index-info__column b-index-info__column_left">
                 <div>
                     <h3>У нашего города уже есть сайт. Зачем ещё один?</h3>
                     <p>Городские сайты создаются энтузиастами, которым приходится решать много технических вопросов: оплата хостинга, настройка и модерация форума. Благодаря нашей платформе такие вопросы даже не возникнут.</p> 
                     <p>Довольно часто найти что-то полезное и свежее на таких сайтах не представляется возможным.</p>
                 </div>
-            </div>
-            <div class="b-index-info__column b-index-info__column_right">
                 <div>
                     <h3>Как это всё работает?</h3>
                     <p>Местные жители, используя сайт или мобильное приложение, могут легко и быстро публиковать местные новости, информацию о мероприятиях, важных городских событиях. Это полноценный сайт города с набором всех необходимых инструментов для общения местных жителей.</p>
                 </div>
-            </div>
-            <div class="clear"></div>
         </div>
 
         <div class="b-index-info__descr">Цель нашей платформы – предоставить жителям <br/> городов удобную площадку для общения <br/>и обмена информацией</div>
@@ -87,16 +73,15 @@
 
         <div class="b-index-info__how">
             <i></i>
-            <p>Как мне начать использовать платформу<br />для своего города?</p>
-            <p>Нужно написать письмо по адресу<br /><a href="mailto:hola@gorod.io">hola@gorod.io</a></p>
+            <p><a href="mailto:hola-gorod@yandex.ru">Напишите нам</a> для активации платформы в своем городе</p>
         </div>
 
 
     </div>
     <div class="b-index-footer">
         <a target="_blank" href="http://localhub.tumblr.com/">НАШ БЛОГ</a>
-        <!--<a href="#">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</a>
-        <a class="b-index-footer__error" href="#">СООБЩИТЬ ОБ ОШИБКЕ</a>-->
+        <a href="#">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</a>
+        <!--<a class="b-index-footer__error" href="#">СООБЩИТЬ ОБ ОШИБКЕ</a>-->
     </div>
 </div>
 {% endblock %}

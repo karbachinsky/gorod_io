@@ -23,43 +23,46 @@
 	font-size: 13px;
 }
 .b-index-cities{
-	background: url(../img/main.jpg) no-repeat  center center;
+	background: $green-color;
 	min-height: 350px;
 	background-size: cover;
 	padding: 40px 0;
 }
 .b-index-cities__list{
-	width:350px;
+	max-width:650px;
 	margin: auto;
+	text-align: center;
 }
 .b-index-cities__item{
 
-	width: 255px;
-	margin:0 auto 5px;
+	width: 198px;
+	margin:0;
+	@include inline-block;
+	text-align: left;
+	padding: 20px 0 20px 118px;
 	a{
-		display: block;
-		padding: 10px 25px;
+		@include inline-block;
 		text-decoration: none;
 		color:#fff;
-		@include border-radius(5px);
 		&:hover{
-			background: #fff;
-			color:#fc3d13;
+			color:#333;
 		}
 	}
 }
 .b-index-cities__title{
-	display: block;
 	font-size: 20px;
 	line-height: 20px;
+	margin-bottom: 10px;
+	
 }
 .b-index-cities__region{
 	font-size: 14px;
+	display: block;
 }
 .b-index-info{
-	width:570px;
+	width:580px;
 	margin: auto;
-	padding: 110px 30px 140px;
+	padding: 110px 25px 140px;
 }
 .b-index-info__logo{
 	width: 122px;
@@ -82,9 +85,6 @@
 }
 .b-index-info__text{
 	margin-bottom: 30px;
-}
-.b-index-info__column {
-	width:265px;
 	color:#444444;
 	font-size: 15px;
 	line-height: 25px;
@@ -109,6 +109,10 @@
 	&>div{
 		margin-bottom: 30px;
 	}
+}
+.b-index-info__column {
+	width:265px;
+	
 	&.b-index-info__column_left{
 		float: left;
 	}
@@ -137,6 +141,7 @@
 	}
 	a{
 		color: $green-color;
+		text-decoration: none;
 		&:hover{
 			color:$green-color-dark;
 		}
@@ -149,18 +154,21 @@
 		color:#777777;
 		font-weight: 700;
 		font-size: 13px;
-		margin: 0 40px;
+		margin: 0 20px;
 		text-decoration: none;
 		&.b-index-footer__error{
 			color:#fc3d13;
 		}
 		&:hover{
-			color:$violet-color;
+			color:$green-color-dark;
 		}
 	}
 }
 
 @media screen and (max-width: 630px) { 
+	.b-index-cities__item{
+		padding-left: 95px;
+	}
 	.b-index-info{
 		width:auto;
 	}

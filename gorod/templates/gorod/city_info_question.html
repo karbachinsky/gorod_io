@@ -1,0 +1,41 @@
+{% extends 'gorod/layout.html' %}
+
+{% load staticfiles %}
+
+{% block meta_title %}{{city.title}} - {{ question.question }}{% endblock %}
+
+{% block meta_description %}{{city.title}} - {{ question.question }}{% endblock %}
+
+{% block content %}
+    <div class="b-city-info b-city-info_question">
+        {% if request.user.is_superuser %}
+            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_cityinfo_change' question.cityinfo.id %}">Редактировать</a>
+        {% endif %}
+
+        <h2 class="b-city-info_question__title">
+            {{ question.question }}
+        </h2>
+
+        <p class="b-city-info_question_answer">
+            {% autoescape off %}
+                {{ question.answer }}
+            {% endautoescape %}
+        </p>
+
+        <noindex>
+            <div class="b-city-info_question_other">
+                <h2>Другие вопросы</h2>
+                <div class="b-city-info__questions">
+                    {% for other_question in other_questions %}
+                        <p class="b-city-info_question">
+                            <a href="{% url 'gorod:city-info-question' city.name other_question.id %}">
+                                {{ other_question.question }}
+                            </a>
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </noindex>
+    </div>
+{% endblock %}
+

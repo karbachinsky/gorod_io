@@ -29,11 +29,26 @@ class CityInfo(models.Model):
         City info
     """
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    text = RichTextField(max_length=25000)
+    text = RichTextField(max_length=25000, help_text="Some questions preface")
 
     class Meta:
         app_label = 'gorod'
         db_table = 'gorod_cityinfo'
+
+
+class CityInfoQuestion(models.Model):
+    """
+        One city question-answer pair
+    """
+    cityinfo = models.ForeignKey(CityInfo, on_delete=models.CASCADE)
+    question = models.CharField(max_length=500)
+    answer = RichTextField(max_length=25000)
+    add_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        app_label = 'gorod'
+        #unique_together = ('cityinfo', 'question(20)')
+        db_table = 'gorod_cityinfoquestion'
 
 
 class CityWelcome(models.Model):

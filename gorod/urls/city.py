@@ -27,7 +27,8 @@ urlpatterns = patterns('',
 
 
     ## City info/about
-    url(r'^info/?$', city_info.CityInfoView.as_view(), name='city-info'),
+    url(r'^hub/?$', city_info.CityInfoView.as_view(), name='city-info'),
+    url(r'^hub/(?P<question_id>\d+)/?$', city_info.CityInfoQuestionView.as_view(), name='city-info-question'),
 
     ## City user
     url(r'^user/(?P<user_id>\d+)/?$', user.ProfileView.as_view(), name='user'),

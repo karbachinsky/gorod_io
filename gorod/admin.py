@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.contrib.auth.admin import UserAdmin
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
@@ -71,13 +71,24 @@ class CityAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'title', 'add_date')
 
 
+## CITYINFO
+
+
+class CityInfoQuestionInline(admin.StackedInline):
+    model = CityInfoQuestion
+    extra = 2
+
+
 class CityInfoAdmin(GorodAdminBase):
     list_display = ('id', 'city')
+    inlines = [CityInfoQuestionInline]
 
 
 class CityWelcomeAdmin(GorodAdminBase):
     list_display = ('id', 'city')
 
+
+## ARTICLES
 
 class ArticleAdmin(GorodAdminBase):
     def view_link(self, obj):
@@ -91,6 +102,8 @@ class ArticleAdmin(GorodAdminBase):
 class ArticleRubrucAdmin(GorodAdminBase):
     list_display = ('id', 'name')
 
+
+## ORGANIZATIONS
 
 class OrganizationAddressInline(admin.StackedInline):
     model = OrganizationAddress

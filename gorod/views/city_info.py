@@ -30,7 +30,7 @@ class CityInfoQuestionView(View):
         question = get_object_or_404(CityInfoQuestion, cityinfo__city__name=city_name, id=question_id)
 
         # Other questions
-        questions = CityInfoQuestion.objects.filter(cityinfo=question.cityinfo)
+        questions = CityInfoQuestion.objects.filter(cityinfo=question.cityinfo).exclude(id=question.id)
 
         context = {
             'question': question,

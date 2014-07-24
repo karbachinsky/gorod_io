@@ -29,7 +29,7 @@ class CityInfo(models.Model):
         City info
     """
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    text = RichTextField(max_length=25000, help_text="Some questions preface")
+    text = RichTextField(max_length=25000, help_text="Some questions preface", null=True)
 
     class Meta:
         app_label = 'gorod'

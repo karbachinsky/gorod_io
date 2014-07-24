@@ -22,20 +22,22 @@
             {% endautoescape %}
         </p>
 
-        <noindex>
-            <div class="b-city-info_question_other">
-                <h2>Другие вопросы</h2>
-                <div class="b-city-info__questions">
-                    {% for other_question in other_questions %}
-                        <p class="b-city-info_question">
-                            <a href="{% url 'gorod:city-info-question' city.name other_question.id %}">
-                                {{ other_question.question }}
-                            </a>
-                        </p>
-                    {% endfor %}
+        {% if other_questions %}
+            <noindex>
+                <div class="b-city-info_question_other">
+                    <h2>Другие вопросы</h2>
+                    <div class="b-city-info__questions">
+                        {% for other_question in other_questions %}
+                            <p class="b-city-info_question">
+                                <a href="{% url 'gorod:city-info-question' city.name other_question.id %}">
+                                    {{ other_question.question }}
+                                </a>
+                            </p>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-        </noindex>
+            </noindex>
+        {% endif %}
     </div>
 {% endblock %}
 

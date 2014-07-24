@@ -13,15 +13,16 @@
             <a class="edit-link" target="_blank" href="{% url 'admin:gorod_cityinfo_change' info.id %}">Редактировать</a>
         {% endif %}
 
-        <div class="b-city-info__questions">
+        <h3>Список вопросов:</h3>
+        <ul class="b-city-info__questions">
             {% for question in questions %}
-                <p class="b-city-info_question">
+                <li class="b-city-info__question">
                     <a href="{% url 'gorod:city-info-question' city.name question.id %}">
                         {{ question.question }}
                     </a>
-                </p>
+                </li>
             {% endfor %}
-        </div>
+        </ul>
     </div>
 {% endblock %}
 

@@ -1,0 +1,16 @@
+
+<div class="b-form__header">
+	<span class="b-form__type"><span></span></span>
+	<i class="b-form__close"></i>
+</div>
+<form action="" method="post" enctype="multipart/form-data" class="b-form">
+    {% csrf_token %}
+
+    <!-- Kirill - that's for you! check uf user is authorized and show his email in email input. -->
+    {% if user.is_authenticated %}
+        <p>User email: {{ user.email }}</p>
+    {% endif %}
+
+    {{ form.as_p }}
+    <input type="submit" value="Отправить" />
+</form>

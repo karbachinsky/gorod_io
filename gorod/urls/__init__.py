@@ -5,7 +5,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 
-from gorod.views import base, user
+from gorod.views import base, user, complaint
 from gorod.utils.sitemap import sitemaps
 
 urlpatterns = patterns('',
@@ -26,6 +26,9 @@ urlpatterns = patterns('',
 
     ## Static pages
     url(r'^rules/?', TemplateView.as_view(template_name="gorod/rules.html"), name='rules'),
+
+    # Complaint add
+    url(r'^complaint/?', complaint.ComplaintAddView.as_view(), name='complaint'),
 
     # One City pages
     url(r'^(?P<city_name>\w+)/', include('gorod.urls.city', namespace='gorod')),

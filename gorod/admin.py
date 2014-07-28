@@ -134,9 +134,12 @@ class OrganizationCategoryAdmin(MPTTModelAdmin):
 class OrganizationScheduleAdmin(GorodAdminBase):
     list_display = ('id', 'time_from')
 
+
+class ComplaintAdmin(GorodAdminBase):
+    list_display = ('id', 'city', 'email', 'add_date')
+
+
 admin.site.register(OrganizationSchedule, OrganizationScheduleAdmin)
-
-
 admin.site.register(User, GorodUserAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(CityInfo, CityInfoAdmin)
@@ -145,4 +148,5 @@ admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleRubric, ArticleRubrucAdmin)
 admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(OrganizationCategory, OrganizationCategoryAdmin)
+admin.site.register(Complaint, ComplaintAdmin)
 

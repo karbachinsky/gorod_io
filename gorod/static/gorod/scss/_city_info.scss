@@ -27,6 +27,17 @@
 		left:30px;
 	}
 }
+.b-city-info__title{
+	margin: 0;
+	text-align: center;
+	padding: 38px 30px;
+	font-weight: 100;
+	font-size: 44px;
+	color:#fff;
+	background: $mareen-color;
+	letter-spacing: 7px;
+	text-transform: uppercase;
+}
 
 .b-city-info__questions{
 	a{
@@ -56,7 +67,7 @@
 }
 .b-city-info__questions-other-wrapper{
 	margin: 40px 0 60px;
-	border-top: 1px solid $gray-color;
+	border-top: 1px solid #eee;
 }
 .b-city-info__questions-other{
 	padding:40px 30px;

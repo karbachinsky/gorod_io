@@ -7,6 +7,7 @@
 {% block meta_description %}{{city.title}} - {{ question.question }}{% endblock %}
 
 {% block content %}
+    <h1 class="b-city-info__title">Полезная информация</h1>
     <div class="b-city-info b-city-info-question">
         {% if request.user.is_superuser %}
             <a class="edit-link" target="_blank" href="{% url 'admin:gorod_cityinfo_change' question.cityinfo.id %}">Редактировать</a>

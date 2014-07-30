@@ -71,7 +71,9 @@
 
 }
 .b-article__picture{
-	width:100% !important;
+	max-width:100% !important;
+	margin: auto;
+	display: block;
 }
 .b-article__text{
 	font-size: 16px;

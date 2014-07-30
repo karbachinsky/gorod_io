@@ -41,7 +41,7 @@
 
 .b-popup-add {
 	.b-popup__window{
-		top:10%;
+		top:8%;
 		width:650px;
 	}
 
@@ -68,7 +68,7 @@
 	.b-form{
 		padding: 20px 40px;
 		&>div{
-			margin: 0 auto 25px;
+			margin: 0 auto 20px;
 		}
 
 	}
@@ -83,7 +83,7 @@
 	
 
 	.b-form__preview-wrapper{
-		padding-bottom: 20px;
+		padding-bottom: 10px;
 		position: relative;
 	}
 	.b-form__preview-del{
@@ -97,7 +97,7 @@
 		cursor: pointer;
 	}
 	.b-form__preview{
-		height:245px;
+		height:225px;
 		background-size: cover;
 		background-position: center;
 		cursor: pointer;
@@ -136,7 +136,8 @@
 	}
 	.b-form__submit{
 		text-align: center;
-		padding: 10px;
+		padding: 0px 0 20px;
+		margin-bottom: 0px !important;
 		input{
 			@extend .btn;
 			border: 0;

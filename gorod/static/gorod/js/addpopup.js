@@ -68,7 +68,7 @@
             	});
             }else{
                 var okText = $('<div />').addClass('b-form__ok').text('Ваше сообщение будет добавлено после модерации');
-            	$window.html(okText).append('<i class="b-form__close"></i>');
+            	$wrapper.html(okText).append('<i class="b-form__close"></i>');
             }
         });
 

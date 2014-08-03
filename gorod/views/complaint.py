@@ -57,12 +57,13 @@ class ComplaintAddView(View):
 
         mail = EmailMessage(
             subject="%s %s" % (self.MAIL_SUBJECT_PREFIX, sender),
-            body="%s\n\nReason: %s\nLocation:%s" % (
+            body="Sendner: %s\n\n%s\n\nReason: %s\nLocation: %s" % (
+                sender,
                 complaint_form.comment,
                 Complaint.COMPLAINT_TYPES[complaint_form.type][1],
                 complaint_form.url
             ),
-            from_email=sender,
+            from_email=settings.DEFAULT_FROM_EMAIL,
             to=[manager[1] for manager in enumerate(settings.MANAGERS) if manager[0] % 2 == 1]
         )
 

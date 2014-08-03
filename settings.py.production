@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'w1^2-jaji&(1h0n17_!d8-cqz4ot8^vjtv5qq%trq04pvm7li#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = False
 
@@ -124,6 +124,9 @@ MANAGERS = (('Manager', 'hola@gorod.io'))
 
 EMAIL_HOST = 'smtp.fullspace.ru'
 EMAIL_PORT = 25
+EMAIL_HOST_USER = 'admin@gorod.io'
+EMAIL_HOST_PASSWORD = 'z6LOuB'
+DEFAULT_FROM_EMAIL = 'admin@gorod.io'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/

@@ -3,6 +3,7 @@ from django.db import IntegrityError, DatabaseError
 from django.views.generic import View
 from django.conf import settings
 
+from gorod.models import Complaint
 from gorod.utils.forms.complaint import ComplaintAddForm
 from gorod.utils.exceptions import ComplaintError
 
@@ -56,8 +57,9 @@ class ComplaintAddView(View):
 
         mail = EmailMessage(
             subject="%s %s" % (self.MAIL_SUBJECT_PREFIX, sender),
-            body="%s\n\nLocation:%s" % (
+            body="%s\n\nReason: %s\nLocation:%s" % (
                 complaint_form.comment,
+                Complaint.COMPLAINT_TYPES[complaint_form.type][1],
                 complaint_form.url
             ),
             from_email=sender,

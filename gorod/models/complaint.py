@@ -15,19 +15,19 @@ class Complaint(models.Model):
     TYPE_COPYRIGHT = 3
     TYPE_OTHER = 4
 
-    _COMPLAINT_TYPES = (
-        (TYPE_SPAM, 'Спам, Мошеничество'),
-        (TYPE_ADULT_ONLY, 'Пост для взрослых'),
-        (TYPE_UNRELIABLE, 'Недостовреная информация'),
-        (TYPE_COPYRIGHT, 'Нарушение авторских прав'),
-        (TYPE_OTHER, 'Другое')
+    COMPLAINT_TYPES = (
+        (TYPE_SPAM, u'Спам, Мошеничество'),
+        (TYPE_ADULT_ONLY, u'Пост для взрослых'),
+        (TYPE_UNRELIABLE, u'Недостовреная информация'),
+        (TYPE_COPYRIGHT, u'Нарушение авторских прав'),
+        (TYPE_OTHER, u'Другое')
     )
 
     email = models.EmailField()
     comment = models.TextField(max_length=1000)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     url = models.CharField(max_length=255)
-    type = models.SmallIntegerField(choices=_COMPLAINT_TYPES)
+    type = models.SmallIntegerField(choices=COMPLAINT_TYPES)
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
 
     class Meta:

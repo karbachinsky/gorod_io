@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.forms import ModelForm, Textarea, EmailInput, RadioSelect
+from django.forms import ModelForm, Textarea, EmailInput, RadioSelect, HiddenInput
 from gorod.models import Complaint
 
 
@@ -17,5 +17,7 @@ class ComplaintAddForm(ModelForm):
             'type': RadioSelect(attrs={'placeholder': 'Текст'}),
             'email': EmailInput(attrs={'placeholder': 'Введите ваш email'}),
             'comment': Textarea(attrs={'placeholder': 'Комментарий'}),
+            'city': HiddenInput(),
+            'url': HiddenInput()
         }
 

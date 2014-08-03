@@ -26,7 +26,7 @@ class Complaint(models.Model):
     email = models.EmailField()
     comment = models.TextField(max_length=1000)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    url = models.URLField()
+    url = models.CharField(max_length=255)
     type = models.SmallIntegerField(choices=_COMPLAINT_TYPES)
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
 

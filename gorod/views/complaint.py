@@ -1,12 +1,10 @@
-from django.shortcuts import render, get_object_or_404, Http404, HttpResponse
+from django.shortcuts import render, HttpResponse
 from django.db import IntegrityError, DatabaseError
 from django.views.generic import View
+from django.conf import settings
 
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-
-from gorod.models import City, Complaint
 from gorod.utils.forms.complaint import ComplaintAddForm
+from gorod.utils.exceptions import ComplaintError
 
 import json
 
@@ -15,8 +13,8 @@ class ComplaintAddView(View):
     """
         Add complaint
     """
+    MAIL_SUBJECT_PREFIX = "Complaint from"
 
-    @method_decorator(login_required)
     def dispatch(self, request):
         if request.method == 'POST':
             return self._save_complaint(request)
@@ -27,8 +25,7 @@ class ComplaintAddView(View):
                 'form': form,
             })
 
-    @staticmethod
-    def _save_complaint(request):
+    def _save_complaint(self,request):
         """
             Save complaint from POST data
         """
@@ -41,8 +38,33 @@ class ComplaintAddView(View):
             except (DatabaseError, IntegrityError) as e:
                 raise e
 
+            self._send_complaint_form_to_mail(complaint)
+
             json_response = dict(success=True)
         else:
             json_response = dict(success=False, errors=form.errors.items())
 
         return HttpResponse(json.dumps(json_response), content_type='application/json')
+
+    def _send_complaint_form_to_mail(self, complaint_form):
+        """
+            Sends complaint to managers
+        """
+        from django.core.mail import EmailMessage, BadHeaderError
+
+        sender = complaint_form.email
+
+        mail = EmailMessage(
+            subject="%s %s" % (self.MAIL_SUBJECT_PREFIX, sender),
+            body="%s\n\nLocation:%s" % (
+                complaint_form.comment,
+                complaint_form.url
+            ),
+            from_email=sender,
+            to=[manager[1] for manager in enumerate(settings.MANAGERS) if manager[0] % 2 == 1]
+        )
+
+        try:
+            mail.send()
+        except BadHeaderError as e:
+            raise ComplaintError(e)

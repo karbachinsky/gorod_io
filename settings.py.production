@@ -77,6 +77,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
+    'django.core.context_processors.csrf',
     'django.contrib.messages.context_processors.messages',
     # Auth
     'social.apps.django_app.context_processors.backends',
@@ -119,6 +120,10 @@ USE_TZ = True
 
 ADMINS = (('Igor', 'igorkarbachinsky@mail.ru'))
 
+MANAGERS = (('Manager', 'hola@gorod.io'))
+
+EMAIL_HOST = 'smtp.fullspace.ru'
+EMAIL_PORT = 25
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/

@@ -4,6 +4,8 @@
 <script>
 	var globals = {
 		{% if city %}
+            cityId: '{{ city.id }}',
+            currentUrlPath: '{{ request.path }}',
 	    	cityName : '{{ city.name }}',
 	    	url : '{{ request.path }}',
 	    	articleAddUrl : '{% url 'gorod:article-add' city.name %}',

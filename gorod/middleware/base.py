@@ -38,6 +38,31 @@ class RedirectOldCityUrlsMiddleware(object):
         Redirect old urls with /town/$city/*  to /$city/*
     """
     def process_request(self, request):
+
+        redirects = ('_redirect_towns', '_redirect_pk')
+
+        for func in redirects:
+            redirect = getattr(self, func)(request)
+            if redirect:
+                return redirect
+
+        return None
+
+    def _redirect_pk(self, request):
+        """
+            PK -> pk
+        """
+        if not '/PK' in request.path:
+            return None
+
+        redirect_url = request.path.replace('/PK', '/pk', 1)
+
+        return self._resolve_redirect_url(redirect_url)
+
+    def _redirect_towns(self, request):
+        """
+            Redirect /towns/ /archive /town/*
+        """
         if request.path in ('/towns/', '/archive/'):
             return HttpResponsePermanentRedirect('/')
 
@@ -46,8 +71,12 @@ class RedirectOldCityUrlsMiddleware(object):
 
         redirect_url = request.path.replace('/town', '', 1)
 
+        return self._resolve_redirect_url(redirect_url)
+
+    @staticmethod
+    def _resolve_redirect_url(url):
         try:
-            resolve(redirect_url)
-            return HttpResponsePermanentRedirect(redirect_url)
+            resolve(url)
+            return HttpResponsePermanentRedirect(url)
         except Resolver404:
-            raise Http404('Bad url')
+            raise Http404('Bad url!')

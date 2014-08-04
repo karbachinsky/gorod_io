@@ -22,6 +22,7 @@ class OrganizationCategory(MPTTModel):
     class Meta:
         app_label = 'gorod'
         db_table = 'gorod_organizationcategory'
+        verbose_name_plural = 'organization categories'
 
     def __unicode__(self):
         return self.title

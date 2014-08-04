@@ -19,6 +19,7 @@ class City(models.Model):
     class Meta:
         app_label = 'gorod'
         db_table = 'gorod_city'
+        verbose_name_plural = 'cities'
 
     def __unicode__(self):
         return self.name
@@ -29,11 +30,13 @@ class CityInfo(models.Model):
         City info
     """
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    text = RichTextField(max_length=25000, help_text="Some questions preface", null=True)
+    #text = RichTextField(max_length=25000, help_text="Some questions preface", null=True)
 
     class Meta:
         app_label = 'gorod'
         db_table = 'gorod_cityinfo'
+        verbose_name = 'city hub'
+        verbose_name_plural = 'city hub'
 
 
 class CityInfoQuestion(models.Model):
@@ -55,7 +58,6 @@ class CityInfoQuestion(models.Model):
             'city_name': self.cityinfo.city.name,
             'question_id': self.id
         })
-
 
 
 class CityWelcome(models.Model):

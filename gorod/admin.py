@@ -50,6 +50,8 @@ class GorodUserAdmin(UserAdmin):
     form = GorodUserChangeForm
     add_form = GorodUserCreationForm
 
+    list_display = ('id', 'email', 'first_name', 'last_name', 'date_joined', 'city', 'is_staff')
+
     # Redefining fields adding profile fields like city
     # May we should just append these fields to default?
     fieldsets = (
@@ -137,6 +139,28 @@ class OrganizationScheduleAdmin(GorodAdminBase):
 
 class ComplaintAdmin(GorodAdminBase):
     list_display = ('id', 'city', 'email', 'add_date')
+
+
+# Change list display for social auths.
+from social.apps.django_app.default.admin import UserSocialAuthOption
+
+
+def social_user_city(self, obj):
+    return obj.user.city
+
+
+def social_user_email(self, obj):
+    return obj.user.email
+
+
+def social_user_date_joined(self, obj):
+    return obj.user.date_joined
+
+setattr(UserSocialAuthOption, 'city', social_user_city)
+setattr(UserSocialAuthOption, 'email', social_user_email)
+setattr(UserSocialAuthOption, 'date_joined', social_user_date_joined)
+UserSocialAuthOption.list_display = ('id', 'user', 'email', 'provider', 'city', 'date_joined')
+
 
 
 admin.site.register(OrganizationSchedule, OrganizationScheduleAdmin)

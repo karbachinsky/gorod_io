@@ -15,3 +15,6 @@ class User(AbstractUser):
     class Meta:
         app_label = 'gorod'
         db_table = 'gorod_user'
+
+    #def __unicode__(self):
+    #    return self.email

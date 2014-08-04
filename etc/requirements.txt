@@ -9,3 +9,4 @@ easy-thumbnails
 python-social-auth
 django-simple-captcha
 wadofstuff-django-serializers
+django-smart-selects

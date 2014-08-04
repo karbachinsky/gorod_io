@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^admin/?', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     (r'^ckeditor/', include('ckeditor.urls')),
+    url(r'^chaining/', include('smart_selects.urls')),
     # Auth
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^', include('gorod.urls'))

@@ -92,13 +92,44 @@ class CityWelcomeAdmin(GorodAdminBase):
 
 ## ARTICLES
 
+class ArticleChangeForm(UserChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(ArticleChangeForm, self).__init__(*args, **kwargs)
+
+        #self.fields['title'] = forms.ModelChoiceField(queryset=User.objects.all().order_by('user__city'))
+
+from django import forms
+from string import Template
+from django.utils.safestring import mark_safe
+
+
+class ArticleUserWidget(forms.Select):
+    def render(self, name, value, attrs=None):
+        assert False, value
+        tpl = Template(u"""<h1>There would be a colour widget here, for value $colour</h1>""")
+        return mark_safe(tpl.substitute(colour=value))
+
+
 class ArticleAdmin(GorodAdminBase):
+    form = ArticleChangeForm
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "user":
+            pass
+            #assert False, kwargs
+            #kwargs["queryset"] = User.objects.select_related()
+            #kwargs["widget"] = ArticleUserWidget
+
+        return super(ArticleAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
     def view_link(self, obj):
         obj_url = obj.url
         return u"<a href='%s' target='blank'>%s</a>" % (obj_url, obj_url)
 
     view_link.allow_tags = True
     list_display = ('id', 'add_date', 'title', 'city', 'rubric', 'user', 'view_link', 'is_checked')
+    save_on_top = True
+    view_on_site = True
 
 
 class ArticleRubrucAdmin(GorodAdminBase):
@@ -126,7 +157,7 @@ class OrganizationAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'city', 'user', 'add_date')
     inlines = [OrganizationAddressInline, OrganizationPhoneInline, OrganizationScheduleInline]
     mptt_indent_field = "category"
-
+    save_on_top = True
 
 class OrganizationCategoryAdmin(MPTTModelAdmin):
     list_display = ('id', 'name', 'title')
@@ -139,6 +170,7 @@ class OrganizationScheduleAdmin(GorodAdminBase):
 
 class ComplaintAdmin(GorodAdminBase):
     list_display = ('id', 'city', 'email', 'add_date')
+    readonly_fields = ('comment', 'city', 'add_date', 'url', 'type', 'email')
 
 
 # Change list display for social auths.
@@ -160,6 +192,7 @@ setattr(UserSocialAuthOption, 'city', social_user_city)
 setattr(UserSocialAuthOption, 'email', social_user_email)
 setattr(UserSocialAuthOption, 'date_joined', social_user_date_joined)
 UserSocialAuthOption.list_display = ('id', 'user', 'email', 'provider', 'city', 'date_joined')
+UserSocialAuthOption.list_select_related = ('user',)
 
 
 

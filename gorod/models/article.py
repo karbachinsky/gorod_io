@@ -10,7 +10,7 @@ from ckeditor.fields import RichTextField
 
 from gorod.models import City
 from gorod.utils.exceptions import FeedError
-
+from smart_selects.db_fields import ChainedForeignKey
 
 class ArticleRubric(models.Model):
     """
@@ -98,7 +98,14 @@ class Article(models.Model):
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     rubric = models.ForeignKey(ArticleRubric, default=1, help_text=u'Рубрика')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    #user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = ChainedForeignKey(
+        settings.AUTH_USER_MODEL,
+        chained_field="city",
+        chained_model_field="city",
+        show_all=False,
+        auto_choose=True
+    )
     picture = models.ImageField(max_length=255, upload_to='pictures/%Y/%m/', null=True, blank=True, help_text=u'Изображение')
     text = RichTextField(blank=True, help_text=u'Текст')
     is_published = models.BooleanField(default=True)

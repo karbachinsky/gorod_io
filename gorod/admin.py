@@ -50,7 +50,7 @@ class GorodUserAdmin(UserAdmin):
     form = GorodUserChangeForm
     add_form = GorodUserCreationForm
 
-    list_display = ('id', 'email', 'first_name', 'last_name', 'date_joined', 'city', 'is_staff')
+    list_display = ('id', 'username', 'email', 'first_name', 'last_name', 'date_joined', 'city', 'is_staff')
 
     # Redefining fields adding profile fields like city
     # May we should just append these fields to default?

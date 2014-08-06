@@ -64,8 +64,9 @@ class AddView(View):
     """
 
     @method_decorator(login_required)
-    def dispatch(self, request, city_name):
+    def dispatch(self, request, city_name, rubric_name):
         city = get_object_or_404(City, name=city_name)
+        rubric = get_object_or_404(Rubric, name=rubric_name)
 
         # TODO: check is user trying to add article to his city
 

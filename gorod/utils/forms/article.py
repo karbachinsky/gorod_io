@@ -3,6 +3,7 @@
 from django.forms import ModelForm, Textarea, TextInput, FileInput
 #from captcha.fields import CaptchaField
 
+from django.forms import ModelForm, Textarea, TextInput, HiddenInput
 from gorod.models import Article
 
 
@@ -20,5 +21,6 @@ class ArticleAddForm(ModelForm):
             'text': Textarea(attrs={'placeholder': 'Текст'}),
             'title': TextInput(attrs={'placeholder': 'Заголовок'}),
             'picture': FileInput(attrs={'placeholder': 'Изображение'}),
+            'rubric': HiddenInput(),
         }
 

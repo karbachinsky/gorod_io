@@ -8,9 +8,8 @@
             currentUrlPath: '{{ request.path }}',
 	    	cityName : '{{ city.name }}',
 	    	url : '{{ request.path }}',
+            articleAddUrl : '{% url 'gorod:article-add' city.name 'event' %}',
             {% if rubric %}
-                // Temporary replaced. FIXME
-                articleAddUrl : '{% url 'gorod:article-add' city.name rubric.name %}',
                 rubric: '{{ rubric.name }}',
             {% endif %}
             {% if user_info %}

@@ -2,6 +2,7 @@ from django.core.urlresolvers import resolve, Resolver404
 from django.http import HttpResponsePermanentRedirect, Http404
 from gorod.models import City
 
+
 class UserCityMiddleware(object):
     """ 
         Set user city if he is authorized 

@@ -12,6 +12,7 @@ from gorod.models import City
 from gorod.utils.exceptions import FeedError
 from smart_selects.db_fields import ChainedForeignKey
 
+
 class ArticleRubric(models.Model):
     """
         ArticleRubric class

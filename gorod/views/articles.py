@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, Http404, HttpResponse
+from django.shortcuts import render, get_object_or_404, Http404, HttpResponse, HttpResponsePermanentRedirect
 from django.db import IntegrityError, DatabaseError
 from django.views.generic import View
 
@@ -17,8 +17,6 @@ class FeedView(View):
         Show list of articles for the certain city and rubric.
     """
     def dispatch(self, request, city_name, rubric_name=None):
-        city = get_object_or_404(City, name=city_name)
-
         rubric = None
         if rubric_name:
             rubric = get_object_or_404(ArticleRubric, name=rubric_name)
@@ -35,24 +33,26 @@ class ArticleView(View):
         One article page.
     """
     def dispatch(self, request, city_name, rubric_name, article_id):
-        article_item = get_object_or_404(
-            Article,
+        article = get_object_or_404(
+            Article.objects.select_related(),
             pk=int(article_id),
-            city__name=city_name,
-            rubric__name=rubric_name,
             is_published=True
         )
 
-        if not article_item.is_checked:
+        # If bad city or bad rubric was specified for article, then redirect to right url
+        if article.city.name != city_name or article.rubric.name != rubric_name:
+            return HttpResponsePermanentRedirect(article.url)
+
+        if not article.is_checked:
             # If user is article author - he can see it anyway. Else - checking
-            if article_item.user != request.user:
+            if article.user != request.user:
                 # Checking if user can se not approved articles
                 if not request.user.has_perm('gorod.article_see_not_checked'):
                     raise Http404
                     #pass
 
         context = {
-            'article': article_item,
+            'article': article,
         }
 
         return render(request, 'gorod/article.html', context)

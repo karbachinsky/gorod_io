@@ -14,7 +14,10 @@ class ProfileView(View):
        User profile .age/
     """
     def dispatch(self, request, city_name, user_id):
-        user = get_object_or_404(get_user_model(), id=user_id, city__name=city_name)
+        user = get_object_or_404(get_user_model().objects.select_related(), id=user_id)
+
+        if user.city.name != city_name:
+            return HttpResponsePermanentRedirect(user.get_absolute_url())
 
         user_last_feeds = Article.objects.filter(user__id=user_id)\
                                          .filter(is_published=True)\

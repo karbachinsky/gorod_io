@@ -30,6 +30,9 @@ urlpatterns = patterns('',
     # Complaint add
     url(r'^complaint/?', complaint.ComplaintAddView.as_view(), name='complaint'),
 
+    # Old User redirects
+    url(r'^user/(?P<user_id>\d+)/?', user.OldUserRedirectView.as_view(), name='old-user'),
+
     # One City pages
     url(r'^(?P<city_name>\w+)/', include('gorod.urls.city', namespace='gorod')),
 )

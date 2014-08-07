@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.urlresolvers import reverse, NoReverseMatch
 
 from gorod.models.base import City
 
@@ -15,6 +16,15 @@ class User(AbstractUser):
     class Meta:
         app_label = 'gorod'
         db_table = 'gorod_user'
+
+    def get_absolute_url(self, city=None):
+        try:
+            return reverse('gorod:user', kwargs={
+                'user_id': self.id,
+                'city_name': self.city.name,
+            })
+        except NoReverseMatch:
+            return '/'
 
     #def __unicode__(self):
     #    return self.email

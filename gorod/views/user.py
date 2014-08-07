@@ -1,4 +1,4 @@
-from django.shortcuts import render,  get_object_or_404
+from django.shortcuts import render,  get_object_or_404, HttpResponsePermanentRedirect
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user_model
@@ -37,4 +37,15 @@ class LogoutView(View):
     def dispatch(self, request):
         logout(request)
         # FIXME please
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+class OldUserRedirectView(View):
+    """
+        Redirect urls like /user/12 -> /city/user/12
+    """
+    def dispatch(self, request, user_id):
+        user = get_object_or_404(get_user_model(), pk=user_id)
+
+        redirect_url = user.get_absolute_url()
+        return HttpResponsePermanentRedirect(redirect_url)

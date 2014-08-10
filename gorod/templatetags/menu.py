@@ -13,7 +13,7 @@ from gorod.models import ArticleRubric, Article
 register = template.Library()
 
 
-@register.inclusion_tag('gorod/templatetags/menu.html', takes_context = True)
+@register.inclusion_tag('gorod/templatetags/menu.html', takes_context=True)
 def menu(context, city):
     """ Display menu for city """
 
@@ -69,8 +69,8 @@ def menu(context, city):
     # Adding about (city info module)
     menu.append({
         'title': 'Полезная информация',
-        'url_name': 'city-info',
-        'link': reverse('gorod:city-info', kwargs={'city_name': city.name}),
+        'url_name': 'hub',
+        'link': reverse('gorod:hub', kwargs={'city_name': city.name}),
         'is_active': 0
     })
 

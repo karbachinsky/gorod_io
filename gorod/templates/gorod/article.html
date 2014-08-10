@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load humanize %}
+{% load user %}
 
 {% block meta_title %}{{ article.title }} - {{city.title}}{% endblock %}
 
@@ -20,15 +21,7 @@
                         <span class="b-article__date">{{ article.add_date|naturalday }}</span>
                     </div>
                     <div class="b-article__author">
-                        <a href="{% url 'gorod:user' article.user.city.name article.user.id %}" class="b-article__avatar">
-                            {% if article.user.avatar %}
-                                <img src="{{ article.user.avatar }}" />
-                            {% else %}
-                                <img src="{% static 'gorod/img/userava.png' %}" />
-                            {% endif %}
-                        </a>
-                        <a href="{% url 'gorod:user' article.user.city.name article.user.id %}" class="b-article__author-name">{{ article.user.first_name }} {{ article.user.last_name }}</a>
-
+                        {% user article.user %}
                         {% if request.user.is_superuser %}
                             <br />
                             <a class="edit-link" target="_blank" href="{% url 'admin:gorod_article_change' article.id %}?source=main">Редактировать</a>

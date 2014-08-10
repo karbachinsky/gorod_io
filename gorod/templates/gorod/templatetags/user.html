@@ -1,0 +1,12 @@
+{% load staticfiles %}
+
+<div class="b-user">
+    <a href="{{ user.profile_url }}" class="b-user__avatar">
+        {% if user.avatar %}
+            <img src="{{ user.avatar }}" />
+        {% else %}
+            <img src="{% static 'gorod/img/userava.png' %}" />
+        {% endif %}
+    </a>
+    <a href="{{ user.profile_url }}" class="b-user__name">{{ user }}</a>
+</div>

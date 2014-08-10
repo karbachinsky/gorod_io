@@ -76,14 +76,26 @@ class CityAdmin(GorodAdminBase):
 ## CITYINFO
 
 
-class CityInfoQuestionInline(admin.StackedInline):
-    model = CityInfoQuestion
+#class CityInfoQuestionInline(admin.StackedInline):
+#    model = CityInfoQuestion
+#    extra = 2
+
+
+#class CityInfoAdmin(GorodAdminBase):
+#    list_display = ('id', 'city')
+#    inlines = [CityInfoQuestionInline]
+
+
+## HUB
+
+class HubAnswerInline(admin.StackedInline):
+    model = HubAnswer
     extra = 2
 
 
-class CityInfoAdmin(GorodAdminBase):
-    list_display = ('id', 'city')
-    inlines = [CityInfoQuestionInline]
+class HubQuestionAdmin(GorodAdminBase):
+    list_display = ('id', 'city', 'question')
+    inlines = [HubAnswerInline]
 
 
 class CityWelcomeAdmin(GorodAdminBase):
@@ -129,6 +141,7 @@ class OrganizationAdmin(GorodAdminBase):
     mptt_indent_field = "category"
     save_on_top = True
 
+
 class OrganizationCategoryAdmin(MPTTModelAdmin):
     list_display = ('id', 'name', 'title')
     mptt_level_indent = 20
@@ -169,7 +182,8 @@ UserSocialAuthOption.list_select_related = ('user',)
 admin.site.register(OrganizationSchedule, OrganizationScheduleAdmin)
 admin.site.register(User, GorodUserAdmin)
 admin.site.register(City, CityAdmin)
-admin.site.register(CityInfo, CityInfoAdmin)
+admin.site.register(HubQuestion, HubQuestionAdmin)
+#admin.site.register(CityInfo, CityInfoAdmin)
 admin.site.register(CityWelcome, CityWelcomeAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleRubric, ArticleRubrucAdmin)

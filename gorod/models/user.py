@@ -26,5 +26,9 @@ class User(AbstractUser):
         except NoReverseMatch:
             return '/'
 
-    #def __unicode__(self):
-    #    return self.email
+    profile_url = property(get_absolute_url)
+
+    def __unicode__(self):
+        if self.first_name and self.last_name:
+            return "%s %s" % (self.first_name, self.last_name)
+        return self.username

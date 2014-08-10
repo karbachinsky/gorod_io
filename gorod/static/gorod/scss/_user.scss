@@ -1,0 +1,22 @@
+.b-user{
+	float: right;
+	text-align: right;
+}
+.b-user__name{
+	color:#666666;
+	font-size: 14px;
+	text-decoration: none;
+}
+.b-user__avatar{
+	@include inline-block;
+	vertical-align: middle;
+	overflow: hidden;
+	border-radius: 18px;
+	margin-right: 3px;
+
+	img{
+		width:35px;
+		height:35px;
+		display: block;
+	}
+}

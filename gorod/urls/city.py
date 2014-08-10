@@ -1,8 +1,6 @@
 from django.conf.urls import patterns, url
 
-from django.views.generic.base import RedirectView
-
-from gorod.views import base, organizations, city_info, user, articles, redirects, city_welcome
+from gorod.views import base, organizations, hub, user, articles, redirects, city_welcome
 
 urlpatterns = patterns('',
     # Main page    
@@ -27,8 +25,8 @@ urlpatterns = patterns('',
 
 
     ## City info/about
-    url(r'^hub/?$', city_info.CityInfoView.as_view(), name='city-info'),
-    url(r'^hub/(?P<question_id>\d+)/?$', city_info.CityInfoQuestionView.as_view(), name='city-info-question'),
+    url(r'^hub/?$', hub.HubView.as_view(), name='hub'),
+    url(r'^hub/(?P<question_id>\d+)/?$', hub.HubQuestionView.as_view(), name='hub-question'),
 
     ## City user
     url(r'^user/(?P<user_id>\d+)/?$', user.ProfileView.as_view(), name='user'),

@@ -25,9 +25,10 @@ class City(models.Model):
         return self.name
 
 
+# OLD
 class CityInfo(models.Model):
     """
-        City info
+        City info hub
     """
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     #text = RichTextField(max_length=25000, help_text="Some questions preface", null=True)
@@ -39,6 +40,7 @@ class CityInfo(models.Model):
         verbose_name_plural = 'city hub'
 
 
+# OLD
 class CityInfoQuestion(models.Model):
     """
         One city question-answer pair

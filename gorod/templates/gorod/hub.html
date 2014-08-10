@@ -11,14 +11,14 @@
     <div class="b-city-info">
         
         {% if request.user.is_superuser %}
-            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_cityinfo_change' info.id %}">Редактировать</a>
+            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_hubquestion_changelist' %}">Редактировать</a>
         {% endif %}
 
         <h3>Список вопросов:</h3>
         <ul class="b-city-info__questions">
             {% for question in questions %}
                 <li class="b-city-info__question">
-                    <a href="{% url 'gorod:city-info-question' city.name question.id %}">
+                    <a href="{% url 'gorod:hub-question' city.name question.id %}">
                         {{ question.question }}
                     </a>
                 </li>

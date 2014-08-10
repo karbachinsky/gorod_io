@@ -19,28 +19,7 @@
 
 	color:#000;
 } 
-.b-article__author{
-	float: right;
-	text-align: right;
-}
-.b-article__author-name{
-	color:#666666;
-	font-size: 14px;
-	text-decoration: none;
-}
-.b-article__avatar{
-	@include inline-block;
-	vertical-align: middle;
-	overflow: hidden;
-	border-radius: 18px;
-	margin-right: 3px;
 
-	img{
-		width:35px;
-		height:35px;
-		display: block;
-	}
-}
 .b-article__descr{
 	float: left;
 	text-align: right;

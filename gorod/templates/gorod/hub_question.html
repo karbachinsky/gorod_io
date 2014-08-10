@@ -1,6 +1,7 @@
 {% extends 'gorod/layout.html' %}
 
 {% load staticfiles %}
+{% load user %}
 
 {% block meta_title %}{{city.title}} - {{ question.question }}{% endblock %}
 
@@ -10,19 +11,28 @@
     <h1 class="b-city-info__title">Полезная информация</h1>
     <div class="b-city-info b-city-info-question">
         {% if request.user.is_superuser %}
-            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_cityinfo_change' question.cityinfo.id %}">Редактировать</a>
+            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_hubquestion_change' question.id %}">Редактировать</a>
         {% endif %}
 
+        <div claass="b-city-info__question_author">
+            {% user answer.user %}
+        </div>
         <h2 class="b-city-info__question-title">
             {{ question.question }}
         </h2>
 
-        <div class="b-city-info__question-answer">
-            {% autoescape off %}
-                {{ question.answer }}
-            {% endautoescape %}
-        </div>
-
+        {% for answer in answers %}
+            <div class="b-city-info__answer">
+                <div claass="b-city-info__answer_author">
+                    {%  user answer.user %}
+                </div>
+                <p claass="b-city-info__answer_text">
+                    {% autoescape off %}
+                        {{ answer.text }}
+                    {% endautoescape %}
+                </p>
+            </div>
+        {% endfor %}
         
     </div>
     {% if other_questions %}
@@ -33,7 +43,7 @@
                     <ul class="b-city-info__questions">
                         {% for other_question in other_questions %}
                             <li class="b-city-info__question">
-                                <a href="{% url 'gorod:city-info-question' city.name other_question.id %}">
+                                <a href="{% url 'gorod:hub-question' city.name other_question.id %}">
                                     {{ other_question.question }}
                                 </a>
                             </li>

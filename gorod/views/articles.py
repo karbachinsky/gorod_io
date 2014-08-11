@@ -94,7 +94,7 @@ class AddView(View):
         else:
             # Show form
             defaults = {'rubric': rubric}
-            form = ArticleAddForm(**defaults)
+            form = ArticleAddForm(initial=defaults)
             return render(request, 'gorod/forms/article_add.html', {
                 'form': form,
             })

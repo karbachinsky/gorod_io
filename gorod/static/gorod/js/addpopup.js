@@ -7,7 +7,8 @@
     $addList = $('.b-header__add-list'),
     $wrapper = $window.find('#b-form__wrapper'),
 	shownClass = 'b-popup_shown',
-    formAjaxUrl = window.getEnv('articleAddUrl');
+    formAjaxUrls = window.getEnv('formAjaxUrls'),
+    name;
 
 	$addBtn.on('click',function(e){
 		$addList.addClass('active');
@@ -19,15 +20,15 @@
     });
 
     $addList.find('li').on('click',function(e){
-        var name  = $(this).attr('data-name'),
+        name  = $(this).attr('data-name'),
         title = $(this).attr('data-title');
         $wrapper.html(''); 
         $wrapper.attr('class','').addClass('b-form__wrapper_'+name);
-        $.get(formAjaxUrl, function(html){
+        $.get(formAjaxUrls[name], function(html){
             $wrapper.html(html); 
             $wrapper.find('#id_title').attr('placeholder', 'Заголовок');
             $wrapper.find('.b-form__type span').text(title);
-            $wrapper.find('#id_rubric').find('option').removeAttr('selected').filter(':contains("'+name+'")').attr("selected", "selected");        
+            //$wrapper.find('#id_rubric').find('option').removeAttr('selected').filter(':contains("'+name+'")').attr("selected", "selected");        
         });
         $popup.addClass(shownClass);
         $overlay.height($('body').outerHeight());
@@ -40,7 +41,7 @@
 
         var data = new FormData($window.find('form')[0]),
         Deferred = $.ajax({
-            url: formAjaxUrl,
+            url: formAjaxUrls[name],
             data: data,
             cache: false,
             contentType: false,

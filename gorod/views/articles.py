@@ -93,7 +93,8 @@ class AddView(View):
             return HttpResponse(json.dumps(json_response), content_type='application/json')
         else:
             # Show form
-            form = ArticleAddForm()
+            defaults = {'rubric': rubric}
+            form = ArticleAddForm(**defaults)
             return render(request, 'gorod/forms/article_add.html', {
                 'form': form,
             })

@@ -8,7 +8,11 @@
             currentUrlPath: '{{ request.path }}',
 	    	cityName : '{{ city.name }}',
 	    	url : '{{ request.path }}',
-            articleAddUrl : '{% url 'gorod:article-add' city.name 'event' %}',
+            articleAddUrls = {
+                {% for rubric in rubrics %}
+                    '{{ rubric.name }}': '{% url 'gorod:article-add' city.name rubric.name %}',
+                {% endfor %}
+            },
             {% if rubric %}
                 rubric: '{{ rubric.name }}',
             {% endif %}

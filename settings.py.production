@@ -48,7 +48,8 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'easy_thumbnails',
     'captcha',
-    'smart_selects'
+    'smart_selects',
+    'django_mptt_admin'
 )
 
 SITE_ID = 1
@@ -138,7 +139,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     '/home/g/gorodin/gorod.in/gorod/static',
     '/home/g/gorodin/.venv/lib/python2.7/site-packages/django/contrib/admin/static',
-    '/home/g/gorodin/.venv/lib/python2.7/site-packages/ckeditor/static'
+    '/home/g/gorodin/.venv/lib/python2.7/site-packages/ckeditor/static',
+    '/home/g/gorodin/.venv/lib/python2.7/site-packages/django_mptt_admin/static'
 )
 
 STATICFILES_FINDERS = (

@@ -5,7 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from mptt.admin import MPTTModelAdmin
+from django_mptt_admin.admin import DjangoMpttAdmin
+#from mptt.admin import MPTTModelAdmin
 
 from gorod.models import *
 
@@ -123,11 +124,13 @@ class ArticleRubrucAdmin(GorodAdminBase):
 class OrganizationAddressInline(admin.StackedInline):
     model = OrganizationAddress
     extra = 1
+    max_num = 1
 
 
 class OrganizationPhoneInline(admin.StackedInline):
     model = OrganizationPhone
     extra = 1
+    max_num = 1
 
 
 class OrganizationScheduleInline(admin.StackedInline):
@@ -136,13 +139,19 @@ class OrganizationScheduleInline(admin.StackedInline):
 
 
 class OrganizationAdmin(GorodAdminBase):
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "category":
+            kwargs["queryset"] = OrganizationCategory.objects.get_first_level_categories()
+        return super(OrganizationAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
     list_display = ('id', 'name', 'city', 'user', 'add_date')
-    inlines = [OrganizationAddressInline, OrganizationPhoneInline, OrganizationScheduleInline]
+    #inlines = [OrganizationAddressInline, OrganizationPhoneInline, OrganizationScheduleInline]
+    inlines = [OrganizationAddressInline, OrganizationPhoneInline]
     mptt_indent_field = "category"
     save_on_top = True
 
 
-class OrganizationCategoryAdmin(MPTTModelAdmin):
+class OrganizationCategoryAdmin(DjangoMpttAdmin):
     list_display = ('id', 'name', 'title')
     mptt_level_indent = 20
 

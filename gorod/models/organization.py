@@ -11,6 +11,14 @@ from mptt.models import MPTTModel, TreeForeignKey
 from gorod.models import City
 
 
+class OrganizationCategoryManager(models.Manager):
+    def get_first_level_categories(self):
+        """
+            Filter only first level
+        """
+        return self.model.objects.filter(level=0)
+
+
 class OrganizationCategory(MPTTModel):
     """
         Organization category tree
@@ -23,6 +31,8 @@ class OrganizationCategory(MPTTModel):
         app_label = 'gorod'
         db_table = 'gorod_organizationcategory'
         verbose_name_plural = 'organization categories'
+
+    objects = OrganizationCategoryManager()
 
     def __unicode__(self):
         return self.title
@@ -110,20 +120,20 @@ class Organization(models.Model):
     """
         City organization class
     """
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    category = TreeForeignKey(OrganizationCategory, on_delete=models.PROTECT)
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
     name = models.CharField(max_length=255)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    logo = models.ImageField(max_length=255, upload_to='organizations/', default='', blank=True)
-    category = TreeForeignKey(OrganizationCategory, on_delete=models.PROTECT)
+    description = RichTextField(max_length=25000, blank=True)
     web_site = models.URLField(blank=True)
     email = models.EmailField(blank=True)
+    logo = models.ImageField(max_length=255, upload_to='organizations/', default='', blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     #map_link = models.CharField(blank=True, max_length=255)
-    twitter_link = models.URLField(blank=True)
-    vk_link = models.URLField(blank=True)
-    ok_link = models.URLField(blank=True)
-    my_mail_link = models.URLField(blank=True)
-    description = RichTextField(max_length=25000, blank=True)
+    #twitter_link = models.URLField(blank=True)
+    #vk_link = models.URLField(blank=True)
+    #ok_link = models.URLField(blank=True)
+    #my_mail_link = models.URLField(blank=True)
 
     objects = OrganizationManager()
 

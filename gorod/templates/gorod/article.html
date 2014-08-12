@@ -23,7 +23,6 @@
                     <div class="b-article__author">
                         {% user article.user %}
                         {% if request.user.is_superuser %}
-                            <br />
                             <a class="edit-link" target="_blank" href="{% url 'admin:gorod_article_change' article.id %}?source=main">Редактировать</a>
                         {% endif %}
                     </div>  

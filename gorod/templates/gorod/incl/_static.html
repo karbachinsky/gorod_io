@@ -8,7 +8,7 @@
             currentUrlPath: '{{ request.path }}',
 	    	cityName : '{{ city.name }}',
 	    	url : '{{ request.path }}',
-            articleAddUrls = {
+            formAjaxUrls : {
                 {% for rubric in rubrics %}
                     '{{ rubric.name }}': '{% url 'gorod:article-add' city.name rubric.name %}',
                 {% endfor %}
@@ -27,6 +27,6 @@
 <script src="{% static 'gorod/js/imagesloaded.js' %}"></script>
 <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script src="{% static 'gorod/js/handlebars.js' %}"></script>
-<script src="{% static 'gorod/js/addpopup.js' %}?v=8" ></script>
+<script src="{% static 'gorod/js/addpopup.js' %}?v=9" ></script>
 <script src="{% static 'gorod/js/ajaxfeed.js' %}?v=8" ></script>
 <script src="{% static 'gorod/js/main.js' %}?v=8" ></script>

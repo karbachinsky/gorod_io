@@ -15,16 +15,19 @@
 		margin: 0;
 		text-transform: uppercase;
 	}
-	img{
-		width: 100% !important;
-		height: auto !important;
-	}
+	
 
 	.edit-link{
 		@include inline-block;
 		position: absolute;
 		top:30px;
 		left:30px;
+	}
+}
+.b-city-info__answer_text{
+	img{
+		width: 100% !important;
+		height: auto !important;
 	}
 }
 .b-city-info__title{
@@ -51,7 +54,7 @@
 }
 .b-city-info__question-title{
 	color:#000;
-	margin: 0 0 20px;
+	margin: 20px 0;
 	font-size: 26px;
 }
 .b-city-info__question-answer{

@@ -15,7 +15,7 @@
         {% endif %}
 
         <div claass="b-city-info__question_author">
-            {% user answer.user %}
+            {% user question.user %}
         </div>
         <h2 class="b-city-info__question-title">
             {{ question.question }}
@@ -26,11 +26,11 @@
                 <div claass="b-city-info__answer_author">
                     {%  user answer.user %}
                 </div>
-                <p claass="b-city-info__answer_text">
+                <div claass="b-city-info__answer_text">
                     {% autoescape off %}
                         {{ answer.text }}
                     {% endautoescape %}
-                </p>
+                </div>
             </div>
         {% endfor %}
         

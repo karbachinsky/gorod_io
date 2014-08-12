@@ -6,12 +6,16 @@
 	background: #fff;
 
 }
+
 .b-article__content{
 	max-width: 650px;
 	margin: auto;	
 	padding: 40px 30px 100px;
 }
-
+.b-article__author{
+	float: right;
+	text-align: right;
+}
 .b-article__title{
 	margin:45px 0 30px; 
 	font-weight: 600;

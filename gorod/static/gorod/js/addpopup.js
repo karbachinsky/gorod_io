@@ -8,7 +8,8 @@
     $wrapper = $window.find('#b-form__wrapper'),
 	shownClass = 'b-popup_shown',
     formAjaxUrls = window.getEnv('formAjaxUrls'),
-    name;
+    name,
+    $previewTools;
 
 	$addBtn.on('click',function(e){
 		$addList.addClass('active');
@@ -28,7 +29,6 @@
             $wrapper.html(html); 
             $wrapper.find('#id_title').attr('placeholder', 'Заголовок');
             $wrapper.find('.b-form__type span').text(title);
-            //$wrapper.find('#id_rubric').find('option').removeAttr('selected').filter(':contains("'+name+'")').attr("selected", "selected");        
         });
         $popup.addClass(shownClass);
         $overlay.height($('body').outerHeight());
@@ -91,9 +91,13 @@
 
 
 	/*previw*/
-	$window.on('click', '.b-form__preview', function(){
+	$window.on('click', '.b-form__preview, .b-form__change-preview', function(){
 		$('.b-form__picture input').click();
 	});
+    $window.on('click', '.b-form__del-preview', function(){
+        $('.b-form__preview').attr('style','');
+        $('.b-form__picture input').val('');
+    });
 	$window.on('change', '.b-form__picture input', function(){
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
@@ -104,6 +108,9 @@
  
             reader.onloadend = function(){ // set image data as background of div
                 $('.b-form__preview').css("background-image", "url("+this.result+")");
+
+                $previewTools = $popup.find('.b-form__preview-tools');
+                $previewTools.addClass('b-form__preview-tools_active');
             }
         }
     });

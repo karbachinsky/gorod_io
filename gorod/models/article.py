@@ -180,7 +180,7 @@ class Article(models.Model):
             Check is model valid
         """
         if not self.text and not self.picture:
-            self.validation_errors = ['TEXT_AND_PICTURE_EMPTY']
+            self.validation_errors = ['Текст или изображение должно быть заполнено!']
             return False
 
         return True

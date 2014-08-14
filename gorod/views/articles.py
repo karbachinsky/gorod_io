@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render, get_object_or_404, Http404, HttpResponse, HttpResponsePermanentRedirect
 from django.db import IntegrityError, DatabaseError
 from django.views.generic import View
@@ -87,13 +89,14 @@ class ArticleAddView(View):
                             raise e
 
                         request.user.make_action('add-article')
-                        json_response = dict(success=True)
+                        json_response = dict(success=True, article_url=user_article.get_absolute_url())
                     else:
-                        json_response = dict(success=False, errors=user_article.validation_errors)
+                        json_response = dict(success=False, errors=[['internal', user_article.validation_errors]])
                 else:
                     json_response = dict(success=False, errors=form.errors.items())
             else:
-                json_response = dict(success=False, errors=['LIMIT_EXCEED'])
+                json_response = dict(success=False, errors=[['internal', [
+                    u'Вы не можете добавлять новые материалы так часто! Попробуйте позже.']]])
 
             return HttpResponse(json.dumps(json_response), content_type='application/json')
         else:

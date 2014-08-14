@@ -58,11 +58,10 @@ class ArticleView(View):
         return render(request, 'gorod/article.html', context)
 
 
-class AddView(View):
+class ArticleAddView(View):
     """
         Add articles
     """
-
     @method_decorator(login_required)
     def dispatch(self, request, city_name, rubric_name):
         city = get_object_or_404(City, name=city_name)
@@ -71,24 +70,30 @@ class AddView(View):
         # TODO: check is user trying to add article to his city
 
         if request.method == 'POST':
-            form = ArticleAddForm(request.POST, request.FILES)
-            if form.is_valid():
-                user_article = form.save(commit=False)
+            if request.user.can_action('add-article'):
+                form = ArticleAddForm(request.POST, request.FILES)
+                if form.is_valid():
+                    user_article = form.save(commit=False)
 
-                user_article.city = city
-                user_article.user = request.user
-                # Article must be checked by admin if user is not admin
-                if not request.user.has_perm('gorod.article_create_wo_check'):
-                    user_article.is_checked = False
+                    if user_article.is_valid():
+                        user_article.city = city
+                        user_article.user = request.user
+                        # Article must be checked by admin if user is not admin
+                        #if not request.user.has_perm('gorod.article_create_wo_check'):
+                        #    user_article.is_checked = False
+                        try:
+                            user_article.save()
+                        except (DatabaseError, IntegrityError) as e:
+                            raise e
 
-                try:
-                    user_article.save()
-                except (DatabaseError, IntegrityError) as e:
-                    raise e
-
-                json_response = dict(success=True)
+                        request.user.make_action('add-article')
+                        json_response = dict(success=True)
+                    else:
+                        json_response = dict(success=False, errors=user_article.validation_errors)
+                else:
+                    json_response = dict(success=False, errors=form.errors.items())
             else:
-                json_response = dict(success=False, errors=form.errors.items())
+                json_response = dict(success=False, errors=['LIMIT_EXCEED'])
 
             return HttpResponse(json.dumps(json_response), content_type='application/json')
         else:
@@ -98,6 +103,28 @@ class AddView(View):
             return render(request, 'gorod/forms/article_add.html', {
                 'form': form,
             })
+
+
+class ArticleDeleteView(View):
+    """
+        Delete article
+    """
+
+    @method_decorator(login_required)
+    def dispatch(self, request, city_name, article_id):
+        article = get_object_or_404(Article, id=article_id, city__name=city_name)
+
+        if request.user != article.user:
+            raise Http404
+
+        try:
+            article.delete()
+            article.save()
+            json_response = {'success': True}
+        except IntegrityError:
+            json_response = {'success': False}
+
+        return HttpResponse(json.dumps(json_response), content_type='application/json')
 
 
 class FeedAPIView(View):

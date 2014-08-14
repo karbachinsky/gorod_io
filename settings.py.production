@@ -199,6 +199,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend'
 )
 
+GOROD_ARTICLE_MAX_ADD_IN_HOUR_CNT = 3
 
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',

@@ -19,6 +19,10 @@
             {% if user_info %}
                 profileUserId: {{ user_info.id }},
             {% endif %}
+
+            {% if article and user == article.user %}
+                articleDeleteUrl : '{% url 'gorod:article-delete' city.name article.id %}',
+            {% endif %}
 		{% endif %}
 	};
 </script>

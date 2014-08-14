@@ -41,9 +41,13 @@ urlpatterns = patterns('',
     url(r'^(?P<rubric_name>\w+)/(?P<article_id>\d+)/?$', articles.ArticleView.as_view(), name='article'),
     # Rubric feed list page
     url(r'^(?P<rubric_name>\w+)/?$', articles.FeedView.as_view(), name='feed-rubric'),
-    # Add article by user
-    url(r'^(?P<rubric_name>\w+)/add/?$', articles.AddView.as_view(), name='article-add'),
 
+    ## Ajax urls
+
+    # Add article by user
+    url(r'^ajax/(?P<rubric_name>\w+)/add/?$', articles.ArticleAddView.as_view(), name='article-add'),
+    # Delete article by user
+    url(r'^ajax/article/delete/(?P<article_id>\d+)/?$', articles.ArticleDeleteView.as_view(), name='article-delete'),
 
 )
 

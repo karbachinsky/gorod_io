@@ -113,7 +113,6 @@ class Article(models.Model):
     is_checked = models.BooleanField(default=True)
 
     objects = ArticleManager()
-    validation_errors = None
 
     class Meta:
         app_label = 'gorod'
@@ -175,15 +174,6 @@ class Article(models.Model):
         from django.contrib.humanize.templatetags.humanize import naturalday
         return naturalday(self.add_date)
 
-    def is_valid(self):
-        """
-            Check is model valid
-        """
-        if not self.text and not self.picture:
-            self.validation_errors = ['Текст или изображение должно быть заполнено!']
-            return False
-
-        return True
 
     #@property
     #def rubric_url(self):

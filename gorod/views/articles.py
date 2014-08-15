@@ -64,36 +64,23 @@ class ArticleAddView(View):
     """
         Add articles
     """
+    def __init__(self):
+        super(ArticleAddView, self).__init__()
+        self.city = None
+        self.rubric = None
+        self.request = None
+
     @method_decorator(login_required)
     def dispatch(self, request, city_name, rubric_name):
-        city = get_object_or_404(City, name=city_name)
-        rubric = get_object_or_404(ArticleRubric, name=rubric_name)
+        self.city = get_object_or_404(City, name=city_name)
+        self.rubric = get_object_or_404(ArticleRubric, name=rubric_name)
+        self.request = request
 
         # TODO: check is user trying to add article to his city
-
         if request.method == 'POST':
             if request.user.can_action('add-article'):
                 form = ArticleAddForm(request.POST, request.FILES)
-                if form.is_valid():
-                    user_article = form.save(commit=False)
-
-                    if user_article.is_valid():
-                        user_article.city = city
-                        user_article.user = request.user
-                        # Article must be checked by admin if user is not admin
-                        #if not request.user.has_perm('gorod.article_create_wo_check'):
-                        #    user_article.is_checked = False
-                        try:
-                            user_article.save()
-                        except (DatabaseError, IntegrityError) as e:
-                            raise e
-
-                        request.user.make_action('add-article')
-                        json_response = dict(success=True, article_url=user_article.get_absolute_url())
-                    else:
-                        json_response = dict(success=False, errors=[['internal', user_article.validation_errors]])
-                else:
-                    json_response = dict(success=False, errors=form.errors.items())
+                json_response = self._save_form(form)
             else:
                 json_response = dict(success=False, errors=[['internal', [
                     u'Вы не можете добавлять новые материалы так часто! Попробуйте позже.']]])
@@ -101,11 +88,57 @@ class ArticleAddView(View):
             return HttpResponse(json.dumps(json_response), content_type='application/json')
         else:
             # Show form
-            defaults = {'rubric': rubric}
-            form = ArticleAddForm(initial=defaults)
-            return render(request, 'gorod/forms/article_add.html', {
-                'form': form,
-            })
+            return self._display_form()
+
+    def _display_form(self):
+        defaults = {'rubric': self.rubric}
+        form = ArticleAddForm(initial=defaults)
+        return render(self.request, 'gorod/forms/article_add.html', {
+            'form': form,
+        })
+
+    def _save_form(self, form):
+        user = self.request.user
+        if form.is_valid():
+            user_article = form.save(commit=False)
+            user_article.city = self.city
+            user_article.user = user
+            # Article must be checked by admin if user is not admin
+            #if not request.user.has_perm('gorod.article_create_wo_check'):
+            #    user_article.is_checked = False
+            try:
+                user_article.save()
+            except (DatabaseError, IntegrityError) as e:
+                raise e
+
+            user.make_action('add-article')
+            response = dict(success=True, article_url=user_article.get_absolute_url())
+        else:
+            response = dict(success=False, errors=form.errors.items())
+
+        return response
+
+
+class ArticleEditView(ArticleAddView):
+    """
+        Edit user article
+    """
+    def __init__(self):
+        super(ArticleAddView, self).__init__()
+        self.article = None
+
+    @method_decorator(login_required)
+    def dispatch(self, request, city_name, rubric_name, article_id):
+        self.article = get_object_or_404(Article, id=article_id, city__name=city_name, rubric__name=rubric_name)
+        if not request.user.is_superuser and self.article.user != request.user:
+            raise Http404
+        return super(ArticleEditView, self).dispatch(request, city_name, rubric_name)
+
+    def _display_form(self):
+        form = ArticleAddForm(instance=self.article)
+        return render(self.request, 'gorod/forms/article_add.html', {
+            'form': form,
+        })
 
 
 class ArticleDeleteView(View):

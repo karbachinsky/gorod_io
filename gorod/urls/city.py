@@ -45,9 +45,10 @@ urlpatterns = patterns('',
     ## Ajax urls
 
     # Add article by user
-    url(r'^ajax/(?P<rubric_name>\w+)/add/?$', articles.ArticleAddView.as_view(), name='article-add'),
+    url(r'^(?P<rubric_name>\w+)/add/?$', articles.ArticleAddView.as_view(), name='article-add'),
+    # Edit article by user
+    url(r'^(?P<rubric_name>\w+)/edit/(?P<article_id>\d+)/?$', articles.ArticleEditView.as_view(), name='article-edit'),
     # Delete article by user
-    url(r'^ajax/article/delete/(?P<article_id>\d+)/?$', articles.ArticleDeleteView.as_view(), name='article-delete'),
-
+    url(r'^article/delete/(?P<article_id>\d+)/?$', articles.ArticleDeleteView.as_view(), name='article-delete'),
 )
 

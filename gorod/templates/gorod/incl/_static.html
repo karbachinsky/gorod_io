@@ -22,6 +22,7 @@
 
             {% if article and user == article.user %}
                 articleDeleteUrl : '{% url 'gorod:article-delete' city.name article.id %}',
+                articleEditUrl : '{% url 'gorod:article-edit' city.name rubric.name article.id %}',
             {% endif %}
 		{% endif %}
 	};

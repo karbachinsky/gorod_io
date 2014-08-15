@@ -24,3 +24,13 @@ class ArticleAddForm(ModelForm):
             'rubric': HiddenInput(),
         }
 
+    def is_valid(self):
+        if not super(ArticleAddForm, self).is_valid():
+            return False
+
+        if not self.cleaned_data['text'] and not self.cleaned_data['picture']:
+            self._errors['internal'] = [u'Текст или изображение должно быть заполнено!']
+            return False
+
+        return True
+

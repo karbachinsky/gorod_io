@@ -6,9 +6,11 @@
 	$overlay = $popup.find('.b-popup__overlay'),
     $addList = $('.b-header__add-list'),
     $wrapper = $window.find('#b-form__wrapper'),
+    $editLink  = $('.edit-link_article'),
 	shownClass = 'b-popup_shown',
     formAjaxUrls = window.getEnv('formAjaxUrls'),
     name,
+    formType,
     $previewTools,
 
 
@@ -17,6 +19,7 @@
         headerListHandlers();
         previwHandlers();
         submitFormHadlers();
+        editFormHandlers();
     },
 
 
@@ -36,32 +39,6 @@
         });
     },
 
-
-    headerListHandlers = function(){
-        $addBtn.on('click',function(e){
-            $addList.addClass('active');
-        });
-        $(document).on('click',function(e){
-            if( ! $(e.target).hasClass('b-header__add') ){
-                $addList.removeClass('active');
-            }
-        });
-
-        $addList.find('li').on('click',function(e){
-            name  = $(this).attr('data-name'),
-            title = $(this).attr('data-title');
-            $wrapper.html(''); 
-            $wrapper.attr('class','').addClass('b-form__wrapper_'+name);
-            $.get(formAjaxUrls[name], function(html){
-                $wrapper.html(html); 
-                $wrapper.find('#id_title').attr('placeholder', 'Заголовок');
-                $wrapper.find('.b-form__type span').text(title);
-            });
-            $popup.addClass(shownClass);
-            $overlay.height($('body').outerHeight());
-        });
-    },
-    
     previwHandlers = function(){
         /*previw*/
         $window.on('click', '.b-form__preview, .b-form__change-preview', function(){
@@ -91,13 +68,62 @@
     },
 
 
+    headerListHandlers = function(){
+        $addBtn.on('click',function(e){
+            $addList.addClass('active');
+        });
+        $(document).on('click',function(e){
+            if( ! $(e.target).hasClass('b-header__add') ){
+                $addList.removeClass('active');
+            }
+        });
+
+        $addList.find('li').on('click',function(e){
+            name  = $(this).attr('data-name');
+            var title = $(this).attr('data-title'),
+            url = formAjaxUrls[name];
+            getFormHtml(url, name, title);
+            formType = 'add';
+        });
+    },
+    editFormHandlers = function(){
+        $editLink.on('click',function(){
+            name  = window.getEnv('rubric');
+            var title  = 'title',
+            url = window.getEnv('articleEditUrl');
+            getFormHtml(url, name, title);
+            formType = 'edit';
+        });
+
+    },
+
+    getFormHtml = function(url,name,title){
+        $wrapper.html(''); 
+        $wrapper.attr('class','').addClass('b-form__wrapper_'+name);
+        $.get(url, function(html){
+            $wrapper.html(html); 
+            $wrapper.find('#id_title').attr('placeholder', 'Заголовок');
+            $wrapper.find('.b-form__type span').text(title);
+        });
+        $popup.addClass(shownClass);
+        $overlay.height($('body').outerHeight());
+    },
+    
+    
+
+
     submitFormHadlers = function(){
         $window.on('submit', 'form', function(e){
             e.preventDefault();
-
+            var url;
+            if(formType=='add'){
+                url = formAjaxUrls[name];
+            }else  if(formType=='edit'){
+                url = window.getEnv('articleEditUrl');
+            }
             var data = new FormData($window.find('form')[0]),
             Deferred = $.ajax({
-                url: formAjaxUrls[name],
+                url: url,
                 data: data,
                 cache: false,
                 contentType: false,

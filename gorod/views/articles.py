@@ -139,6 +139,7 @@ class ArticleEditView(ArticleAddView):
         form = ArticleAddForm(instance=self.article)
         return render(self.request, 'gorod/forms/article_add.html', {
             'form': form,
+            'current_image': self.article.picture
         })
 
 

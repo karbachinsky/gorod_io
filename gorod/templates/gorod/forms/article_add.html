@@ -34,7 +34,11 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<div class="b-form__picture">{{ form.picture }}</div>
+	<div class="b-form__picture">
+        {{ form.picture }}
+        {{ form.clear_picture }}
+        {{ current_image }}
+    </div>
 
 	<div class="b-form__submit">
     	<input type="submit" value="Опубликовать" />

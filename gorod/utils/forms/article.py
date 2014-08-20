@@ -39,5 +39,4 @@ class ArticleAddForm(ModelForm):
     def save(self, commit=True):
         if self.cleaned_data['clear_picture']:
             self.cleaned_data['picture'] = None
-            pass
-        super(ArticleAddForm, self).save(commit=commit)
+        return super(ArticleAddForm, self).save(commit=commit)

@@ -78,7 +78,7 @@ class ArticleAddView(View):
 
         # TODO: check is user trying to add article to his city
         if request.method == 'POST':
-            instance = self.article if hasattr(self, 'article') else None
+            instance = self.article if hasattr(self, 'article') and self.article is not None else None
             if instance or request.user.can_action('add-article'):
                 form = ArticleAddForm(request.POST, request.FILES, instance=instance)
                 json_response = self._save_form(form)

@@ -15,9 +15,18 @@
             },
             {% if rubric %}
                 rubric: '{{ rubric.name }}',
-            {% elif article.rubric %}
-                rubric: '{{ article.rubric.name }}',
             {% endif %}
+
+            {% if article %}
+                articleInfo :{
+                    {% if article.rubric and article.rubric.name %}
+                        rubricName: '{{ article.rubric.name }}',
+                    {% endif %}
+                    {% if article.rubric and article.rubric.title %}
+                        rubricTitle: '{{ article.rubric.name }}',
+                    {% endif %}
+                },
+            {% endif %}    
             
             {% if user_info %}
                 profileUserId: {{ user_info.id }},

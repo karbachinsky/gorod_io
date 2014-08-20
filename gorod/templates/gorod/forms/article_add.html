@@ -36,8 +36,10 @@
 	</div>
 	<div class="b-form__picture">
         {{ form.picture }}
-        {{ form.clear_picture }}
-        {{ current_image }}
+        <div class="b-form__del-picture">{{ form.clear_picture }}</div>
+        
+        <div class="b-form__prev-picture">{{ current_image }}</div>
+        
     </div>
 
 	<div class="b-form__submit">

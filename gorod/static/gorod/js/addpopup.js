@@ -44,9 +44,10 @@
         $window.on('click', '.b-form__preview, .b-form__change-preview', function(){
             $('.b-form__picture input').click();
         });
-        $window.on('click', '.b-form__del-preview', function(){
-            $('.b-form__preview').attr('style','');
-            $('.b-form__picture input').val('');
+        $window.on('click', '.b-form__preview, .b-form__del-preview', function(){
+            $('.b-form__del-picture input').attr('checked', 'checked');
+            $('#id_picture').val('');
+            $('.b-form__preview').css("background-image", "");
         });
         $window.on('change', '.b-form__picture input', function(){
             var files = !!this.files ? this.files : [];
@@ -61,6 +62,7 @@
 
                     $previewTools = $popup.find('.b-form__preview-tools');
                     $previewTools.addClass('b-form__preview-tools_active');
+                    $('.b-form__del-picture input').removeAttr('checked');
                 }
             }
         });
@@ -88,22 +90,28 @@
     },
     editFormHandlers = function(){
         $editLink.on('click',function(){
-            name  = window.getEnv('rubric');
-            var title  = 'title',
+            name  = window.getEnv('articleInfo').name;
+            var title  = window.getEnv('articleInfo').title,
             url = window.getEnv('articleEditUrl');
-            getFormHtml(url, name, title);
+            getFormHtml(url, name, title, 'edit');
             formType = 'edit';
         });
 
     },
 
-    getFormHtml = function(url,name,title){
+    getFormHtml = function(url,name,title, type){
         $wrapper.html(''); 
         $wrapper.attr('class','').addClass('b-form__wrapper_'+name);
         $.get(url, function(html){
             $wrapper.html(html); 
             $wrapper.find('#id_title').attr('placeholder', 'Заголовок');
             $wrapper.find('.b-form__type span').text(title);
+
+            if(type=='edit' && $('.b-form__prev-picture').text().length){
+                $previewTools = $popup.find('.b-form__preview-tools');
+                $previewTools.addClass('b-form__preview-tools_active');
+                $('.b-form__preview').css("background-image", "url(/media/"+$('.b-form__prev-picture').text()+")");
+            }
         });
         $popup.addClass(shownClass);
         $overlay.height($('body').outerHeight());
@@ -140,10 +148,11 @@
 
     },
     formAnswerProcessing = function(json){
-        var $elem,
-            okText = $('<div />').addClass('b-form__ok').text('Ваше сообщение будет добавлено после модерации');
+        var $elem;
+            //okText = $('<div />').addClass('b-form__ok').text('Ваше сообщение будет добавлено после модерации');
         if(json.success){
-            $wrapper.html(okText).append('<i class="b-form__close"></i>');   
+            //$wrapper.html(okText).append('<i class="b-form__close"></i>');  
+            location.href=json.article_url;
         }else{
             /*--------------------ERRORS-------------------------*/
             $.each(json.errors,function(index, errorElem){

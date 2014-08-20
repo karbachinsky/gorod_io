@@ -112,7 +112,8 @@ class ArticleAddView(View):
             except (DatabaseError, IntegrityError) as e:
                 raise e
 
-            user.make_action('add-article')
+            if not hasattr(self, 'article'):
+                user.make_action('add-article')
             response = dict(success=True, article_url=user_article.get_absolute_url())
         else:
             response = dict(success=False, errors=form.errors.items())

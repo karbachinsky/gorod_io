@@ -45,7 +45,7 @@
             $('.b-form__picture input').click();
         });
         $window.on('click', '.b-form__preview, .b-form__del-preview', function(){
-            $('.b-form__del-picture input').attr('checked', 'checked');
+            $('#picture-clear_id').attr('checked', 'checked');
             $('#id_picture').val('');
             $('.b-form__preview').css("background-image", "");
         });
@@ -62,7 +62,7 @@
 
                     $previewTools = $popup.find('.b-form__preview-tools');
                     $previewTools.addClass('b-form__preview-tools_active');
-                    $('.b-form__del-picture input').removeAttr('checked');
+                    $('#picture-clear_id').removeAttr('checked');
                 }
             }
         });

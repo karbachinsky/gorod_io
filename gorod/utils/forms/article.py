@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.forms import ModelForm, Textarea, TextInput, FileInput
+from django.forms import ModelForm, Textarea, TextInput, ClearableFileInput
 #from captcha.fields import CaptchaField
 
 from django.forms import ModelForm, Textarea, TextInput, HiddenInput, BooleanField
@@ -13,7 +13,6 @@ class ArticleAddForm(ModelForm):
     """
     #captcha = CaptchaField(label=u'Проверочный код:')
     # If checked then image must be cleared
-    clear_picture = BooleanField(required=False)
 
     class Meta:
         model = Article
@@ -22,7 +21,7 @@ class ArticleAddForm(ModelForm):
         widgets = {
             'text': Textarea(attrs={'placeholder': 'Текст'}),
             'title': TextInput(attrs={'placeholder': 'Заголовок','autocomplete':'off'}),
-            'picture': FileInput(attrs={'placeholder': 'Изображение'}),
+            'picture': ClearableFileInput(attrs={'placeholder': 'Изображение'}),
             'rubric': HiddenInput(),
         }
 
@@ -35,8 +34,3 @@ class ArticleAddForm(ModelForm):
             return False
 
         return True
-
-    def save(self, commit=True):
-        if self.cleaned_data['clear_picture']:
-            self.cleaned_data['picture'] = None
-        return super(ArticleAddForm, self).save(commit=commit)

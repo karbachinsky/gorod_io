@@ -3,7 +3,7 @@
 from django.forms import ModelForm, Textarea, TextInput, FileInput
 #from captcha.fields import CaptchaField
 
-from django.forms import ModelForm, Textarea, TextInput, HiddenInput, BooleanField
+from django.forms import ModelForm, Textarea, TextInput, HiddenInput, NullBooleanField
 from gorod.models import Article
 
 
@@ -13,7 +13,7 @@ class ArticleAddForm(ModelForm):
     """
     #captcha = CaptchaField(label=u'Проверочный код:')
     # If checked then image must be cleared
-    clear_picture = BooleanField()
+    clear_picture = NullBooleanField()
 
     class Meta:
         model = Article

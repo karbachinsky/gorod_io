@@ -1,5 +1,5 @@
 {% load staticfiles %}
-<link href="{% static 'gorod/css/style.css' %}?v=12" rel="stylesheet" type="text/css" />
+<link href="{% static 'gorod/css/style.css' %}?v=14" rel="stylesheet" type="text/css" />
 <link rel="SHORTCUT ICON" href="{% static 'gorod/img/favicon.ico' %}?v=8" />
 <script>
 	var globals = {
@@ -16,8 +16,25 @@
             {% if rubric %}
                 rubric: '{{ rubric.name }}',
             {% endif %}
+
+            {% if article %}
+                articleInfo :{
+                    {% if article.rubric and article.rubric.name %}
+                        rubricName: '{{ article.rubric.name }}',
+                    {% endif %}
+                    {% if article.rubric and article.rubric.title %}
+                        rubricTitle: '{{ article.rubric.name }}',
+                    {% endif %}
+                },
+            {% endif %}    
+            
             {% if user_info %}
                 profileUserId: {{ user_info.id }},
+            {% endif %}
+
+            {% if article and user == article.user %}
+                articleDeleteUrl : '{% url 'gorod:article-delete' city.name article.id %}',
+                articleEditUrl : '{% url 'gorod:article-edit' city.name article.rubric.name article.id %}',
             {% endif %}
 		{% endif %}
 	};
@@ -27,6 +44,6 @@
 <script src="{% static 'gorod/js/imagesloaded.js' %}"></script>
 <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script src="{% static 'gorod/js/handlebars.js' %}"></script>
-<script src="{% static 'gorod/js/addpopup.js' %}?v=10" ></script>
+<script src="{% static 'gorod/js/addpopup.js' %}?v=12" ></script>
 <script src="{% static 'gorod/js/ajaxfeed.js' %}?v=8" ></script>
-<script src="{% static 'gorod/js/main.js' %}?v=8" ></script>
+<script src="{% static 'gorod/js/main.js' %}?v=9" ></script>

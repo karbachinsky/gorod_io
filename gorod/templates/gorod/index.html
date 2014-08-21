@@ -26,7 +26,7 @@
         <ul class="b-index-cities__list">
             {% for city in cities %}
                 <li class="b-index-cities__item">
-                    <a href="{% url 'gorod:city_main_page' city.name %}">
+                    <a href="{% url 'gorod:city-main-page' city.name %}">
                         <span class="b-index-cities__title">{{ city.title }}</span>
                         <span class="b-index-cities__region">{{ city.region }}</span>     
                     </a>      
@@ -36,19 +36,10 @@
         </ul>
     </div>   
     <div class="b-index-info">
-        <div class="b-index-info__logo"></div>
-        <div class="b-index-info__descr">Сервис для жителей городов, где вы можете<br />публиковать местные новости, фотографии, информацию<br />об организациях и полезные советы</div>
+        <div class="b-index-info__descr">Городской конструктор предоставляет жителям больших и малых городов готовую площадку для развития местного сообщества и совместных инициатив.</div>
         <div class="b-index-info__devider"></div>
 
         <div class="b-index-info__text">
-                <div>
-                    <h3>Платформа – это:</h3>
-                    <ul>
-                        <li>быстрая публикация местных новостей, событий</li>
-                        <li>объединение информации о местных организациях и услугах</li>
-                        <li>площадка для общения и совместных действия для жителей города или поселка</li>
-                    </ul>
-                </div>
                 <div>
                     <h3>Лента города</h3>
                     <p>События, афиша, фотографии города, опубликованные местными жителями</p>
@@ -68,7 +59,6 @@
                 </div>
         </div>
 
-        <div class="b-index-info__descr">Цель нашей платформы – предоставить жителям <br/> городов удобную площадку для общения <br/>и обмена информацией</div>
         <div class="b-index-info__devider"></div>
 
         <div class="b-index-info__how">

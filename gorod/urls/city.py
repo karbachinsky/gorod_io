@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     #url(r'^$', RedirectView.as_view(url='/town/kashin'), name='index'),
 
     # City main page
-    url(r'^$', articles.FeedView.as_view(), name='city_main_page'),
+    url(r'^$', articles.FeedView.as_view(), name='city-main-page'),
 
     url(r'^welcome/?$', city_welcome.CityWelcomeView.as_view(), name='welcome'),
 
@@ -41,9 +41,14 @@ urlpatterns = patterns('',
     url(r'^(?P<rubric_name>\w+)/(?P<article_id>\d+)/?$', articles.ArticleView.as_view(), name='article'),
     # Rubric feed list page
     url(r'^(?P<rubric_name>\w+)/?$', articles.FeedView.as_view(), name='feed-rubric'),
+
+    ## Ajax urls
+
     # Add article by user
-    url(r'^(?P<rubric_name>\w+)/add/?$', articles.AddView.as_view(), name='article-add'),
-
-
+    url(r'^(?P<rubric_name>\w+)/add/?$', articles.ArticleAddView.as_view(), name='article-add'),
+    # Edit article by user
+    url(r'^(?P<rubric_name>\w+)/edit/(?P<article_id>\d+)/?$', articles.ArticleEditView.as_view(), name='article-edit'),
+    # Delete article by user
+    url(r'^article/delete/(?P<article_id>\d+)/?$', articles.ArticleDeleteView.as_view(), name='article-delete'),
 )
 

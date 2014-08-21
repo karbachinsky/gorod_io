@@ -34,9 +34,18 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<div class="b-form__picture">{{ form.picture }}</div>
+	<div class="b-form__picture">
+        {{ form.picture }}
+        <div class="b-form__del-picture">{{ form.clear_picture }}</div>
+        
+        <div class="b-form__prev-picture">{{ current_image }}</div>
+        
+    </div>
 
 	<div class="b-form__submit">
     	<input type="submit" value="Опубликовать" />
+    	{% if user == article.user %}
+    		<span class="b-form__del">Удалить</span>
+    	{% endif %}
     </div>
 </form>

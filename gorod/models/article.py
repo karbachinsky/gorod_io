@@ -174,6 +174,7 @@ class Article(models.Model):
         from django.contrib.humanize.templatetags.humanize import naturalday
         return naturalday(self.add_date)
 
+
     #@property
     #def rubric_url(self):
     #    return self.rubric.get_absolute_url(self.city)

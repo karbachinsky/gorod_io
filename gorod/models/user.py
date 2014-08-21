@@ -4,6 +4,11 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 
 from gorod.models.base import City
 
+from django.conf import settings
+
+from datetime import datetime, timedelta
+from django.utils import timezone
+
 
 class User(AbstractUser):
     """
@@ -28,7 +33,71 @@ class User(AbstractUser):
 
     profile_url = property(get_absolute_url)
 
+    def get_stat(self):
+        """
+            Get internal user stat (UserStat object)
+        """
+        userstat, is_created = UserStat.objects.get_or_create(user=self)
+        return userstat
+
     def __unicode__(self):
         if self.first_name and self.last_name:
             return "%s %s" % (self.first_name, self.last_name)
         return self.username
+
+    def can_action(self, action):
+        """
+            Check if user can add article.
+        """
+        userstat = self.get_stat()
+
+        if action == 'add-article':
+            return userstat.can_action_add_article()
+
+    def make_action(self, action):
+        """
+            Update statistics after some user actions
+        """
+        userstat = self.get_stat()
+
+        if action == 'add-article':
+            userstat.make_action_add_article()
+
+
+class UserStat(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    article_last_add_time = models.DateTimeField(null=True)
+    article_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
+
+    class Meta:
+        app_label = 'gorod'
+        db_table = 'gorod_userstat'
+
+    def _article_last_add_was_more_then_hour_ago(self):
+        if not self.article_last_add_time or\
+                self.article_last_add_time < timezone.now() - timedelta(hours=1):
+            return True
+        return False
+
+    def make_action_add_article(self):
+        """
+            Called when user adds article
+        """
+        if self._article_last_add_was_more_then_hour_ago():
+            self.article_add_in_last_hour_cnt = 1
+            self.article_last_add_time = timezone.now()
+        else:
+            self.article_add_in_last_hour_cnt += 1
+
+        self.save()
+
+    def can_action_add_article(self):
+        """
+            Checks if user can add article now
+        """
+        if self._article_last_add_was_more_then_hour_ago():
+            return True
+        if self.article_add_in_last_hour_cnt < settings.GOROD_ARTICLE_MAX_ADD_IN_HOUR_CNT:
+            return True
+
+        return False

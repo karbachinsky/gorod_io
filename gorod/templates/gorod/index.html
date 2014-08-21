@@ -26,7 +26,7 @@
         <ul class="b-index-cities__list">
             {% for city in cities %}
                 <li class="b-index-cities__item">
-                    <a href="{% url 'gorod:city_main_page' city.name %}">
+                    <a href="{% url 'gorod:city-main-page' city.name %}">
                         <span class="b-index-cities__title">{{ city.title }}</span>
                         <span class="b-index-cities__region">{{ city.region }}</span>     
                     </a>      

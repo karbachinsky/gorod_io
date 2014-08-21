@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     #url(r'^$', RedirectView.as_view(url='/town/kashin'), name='index'),
 
     # City main page
-    url(r'^$', articles.FeedView.as_view(), name='city_main_page'),
+    url(r'^$', articles.FeedView.as_view(), name='city-main-page'),
 
     url(r'^welcome/?$', city_welcome.CityWelcomeView.as_view(), name='welcome'),
 

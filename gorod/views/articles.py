@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render, get_object_or_404, Http404, HttpResponse, HttpResponsePermanentRedirect
+from django.shortcuts import render, get_object_or_404, Http404, HttpResponse, HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.db import IntegrityError, DatabaseError
 from django.views.generic import View
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.core.urlresolvers import reverse
 
 from gorod.models import City, Article, ArticleRubric
 from gorod.utils.forms.article import ArticleAddForm
@@ -159,11 +160,9 @@ class ArticleDeleteView(View):
         try:
             article.delete()
             article.save()
-            json_response = {'success': True}
+            return HttpResponseRedirect(reverse('gorod:city_main_page', kwargs={'city_name': city_name}))
         except IntegrityError:
-            json_response = {'success': False}
-
-        return HttpResponse(json.dumps(json_response), content_type='application/json')
+            raise Http404
 
 
 class FeedAPIView(View):

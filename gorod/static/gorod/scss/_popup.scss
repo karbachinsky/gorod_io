@@ -160,11 +160,22 @@
 	.b-form__submit{
 		padding: 0px 10px 20px;
 		margin-bottom: 0px !important;
+		line-height: 30px;
 		input{
 			@extend .btn;
 			border: 0;
 			outline: none;
 		}
+	}
+	.b-form__del{
+		font-size: 13px;
+		letter-spacing: 1.2px;
+		text-transform: uppercase;
+		font-weight: 600;
+		margin-left: 15px;
+		cursor: pointer;
+		color: $green-color;
+		display: none;
 	}
 	.b-form__error{
 		position: absolute;

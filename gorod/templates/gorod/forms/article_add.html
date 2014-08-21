@@ -44,5 +44,8 @@
 
 	<div class="b-form__submit">
     	<input type="submit" value="Опубликовать" />
+    	{% if user == article.user %}
+    		<span class="b-form__del">Удалить</span>
+    	{% endif %}
     </div>
 </form>

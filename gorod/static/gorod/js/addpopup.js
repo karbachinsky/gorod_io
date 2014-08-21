@@ -114,8 +114,11 @@
                 $previewTools = $popup.find('.b-form__preview-tools');
                 $previewTools.addClass('b-form__preview-tools_active');
                 $('.b-form__preview').css("background-image", "url(/media/"+$('.b-form__prev-picture').text()+")");
-                $popup.find('.b-form__del').show();
 
+
+            }
+            if(type=='edit'){
+                $popup.find('.b-form__del').show();
             }
         });
         $popup.addClass(shownClass);

@@ -113,7 +113,7 @@ class ArticleAddView(View):
             except (DatabaseError, IntegrityError) as e:
                 raise e
 
-            if not hasattr(self, 'article'):
+            if not hasattr(self, 'article') and not user.is_superuser:
                 user.make_action('add-article')
             response = dict(success=True, article_url=user_article.get_absolute_url())
         else:
@@ -141,7 +141,8 @@ class ArticleEditView(ArticleAddView):
         form = ArticleAddForm(instance=self.article)
         return render(self.request, 'gorod/forms/article_add.html', {
             'form': form,
-            'current_image': self.article.picture
+            'current_image': self.article.picture,
+            'article': self.article
         })
 
 
@@ -160,7 +161,7 @@ class ArticleDeleteView(View):
         try:
             article.delete()
             article.save()
-            return HttpResponseRedirect(reverse('gorod:city_main_page', kwargs={'city_name': city_name}))
+            return HttpResponseRedirect(reverse('gorod:city-main-page', kwargs={'city_name': city_name}))
         except IntegrityError:
             raise Http404
 

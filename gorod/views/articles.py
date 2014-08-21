@@ -160,7 +160,6 @@ class ArticleDeleteView(View):
 
         try:
             article.delete()
-            article.save()
             return HttpResponseRedirect(reverse('gorod:city-main-page', kwargs={'city_name': city_name}))
         except IntegrityError:
             raise Http404

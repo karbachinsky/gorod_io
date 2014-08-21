@@ -149,27 +149,31 @@
     },
     formAnswerProcessing = function(json){
         var $elem;
-            //okText = $('<div />').addClass('b-form__ok').text('Ваше сообщение будет добавлено после модерации');
+            
         if(json.success){
-            //$wrapper.html(okText).append('<i class="b-form__close"></i>');  
             location.href=json.article_url;
         }else{
             /*--------------------ERRORS-------------------------*/
             $.each(json.errors,function(index, errorElem){
-                if(errorElem[0]=='picture'){
-                    $elem = $window.find('.b-form__preview-wrapper');
-                }else if(errorElem[0]=='internal'){
-                    $elem = $window.find('.b-form__preview-wrapper');
-                    //$elem = $elem.add($window.find('.b-form__text'));
-                }
-                else{
-                    $elem = $window.find('[name="'+errorElem[0]+'"]').closest('div');
-                }
 
-                $elem.addClass('error');
-                $.each(errorElem[1],function(index, errorText){
-                    $('<span/>').addClass('b-form__error').text(errorText).appendTo($elem);
-                });
+                if(errorElem[0]=='time'){
+                    var timeText = $('<div />').addClass('b-form__time').text(errorElem[1]);
+                    $wrapper.html(timeText).append('<i class="b-form__close"></i>');  
+                }else{   
+                    if(errorElem[0]=='picture'){
+                        $elem = $window.find('.b-form__preview-wrapper');
+                    }else if(errorElem[0]=='internal'){
+                        $elem = $window.find('.b-form__preview-wrapper');
+                        //$elem = $elem.add($window.find('.b-form__text'));
+                    }else{
+                        $elem = $window.find('[name="'+errorElem[0]+'"]').closest('div');
+                    }
+
+                    $elem.addClass('error');
+                    $.each(errorElem[1],function(index, errorText){
+                        $('<span/>').addClass('b-form__error').text(errorText).appendTo($elem);
+                    });
+                }
             });
         }
     }; 

@@ -247,16 +247,16 @@
 			@include cke-icons(-25px);
 		}
 		.cke_button__numberedlist{
-			@include cke-icons(-50px);
+			@include cke-icons(-75px);
 		}
 		.cke_button__bulletedlist{
-			@include cke-icons(-75px);
+			@include cke-icons(-50px);
 		}
 
 	}
 
 }
-.b-form__ok{
+.b-form__time{
 	padding: 120px 115px;
 	margin: auto;
 }

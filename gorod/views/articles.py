@@ -83,7 +83,7 @@ class ArticleAddView(View):
                 form = ArticleAddForm(request.POST, request.FILES, instance=instance)
                 json_response = self._save_form(form)
             else:
-                json_response = dict(success=False, errors=[['internal', [
+                json_response = dict(success=False, errors=[['time', [
                     u'Вы не можете добавлять новые материалы так часто! Попробуйте позже.']]])
 
             return HttpResponse(json.dumps(json_response), content_type='application/json')

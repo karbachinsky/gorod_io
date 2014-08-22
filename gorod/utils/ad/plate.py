@@ -3,13 +3,13 @@
     Author: I. Karbachinsky
 """
 
-from gorod.models import Organization, HubQuestion, CityWelcome
+from gorod.models import Organization, HubQuestion
 
 
 class AdStartPlate(object):
     def __init__(self):
-        self.organizations = Organization.objects.all()
-        self.questions = HubQuestion.objects.all()
+        self.organizations = Organization.objects.order_by('?')[0:9]
+        self.questions = HubQuestion.objects.order_by('?')[0:9]
 
     def get_context(self):
         """

@@ -17,6 +17,33 @@
             {% endif %}
         </h1>
     {% endif %}
+        
+    <div class="b-adplate">
+        <ul class="b-adplate__organizations">
+            {% for organization in adplate.organizations %}
+                <li>
+                    <a href="{% url 'gorod:organization' city.name organization.id %}">{{ organization.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <ul class="b-adplate__questions">
+            {% for question in adplate.questions %}
+                <li class="b-city-info__question">
+                    <a href="{% url 'gorod:hub-question' city.name question.id %}">
+                        {{ question.question }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="b-adplate_welcome">
+            <a href="{% url 'gorod:welcome' city.name %}">
+                Welcome banner
+            </a>
+        </div>
+    </div>
+
     <div class="b-feed__wrapper">
         {% include "gorod/feed/_feed_item.html" %}
         <script>
@@ -24,7 +51,7 @@
                 window.ajaxFeed();
             });
         </script>
-        
+
         <div class="b-feed">
             <ul class="b-feed__list">
                 <div class="grid-sizer"></div>

@@ -174,6 +174,11 @@ class Article(models.Model):
         from django.contrib.humanize.templatetags.humanize import naturalday
         return naturalday(self.add_date)
 
+    def can_user_modify(self, user):
+        """
+            Check if user can edit/delete current article object
+        """
+        return user.is_superuser or self.user == user
 
     #@property
     #def rubric_url(self):

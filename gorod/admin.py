@@ -144,12 +144,17 @@ class OrganizationAdmin(GorodAdminBase):
             kwargs["queryset"] = OrganizationCategory.objects.get_first_level_categories()
         return super(OrganizationAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
-    list_display = ('id', 'name', 'city', 'user', 'add_date')
+    def view_link(self, obj):
+        obj_url = obj.get_absolute_url()
+        return u"<a href='%s' target='blank'>%s</a>" % (obj_url, obj_url)
+
+    view_link.allow_tags = True
+    list_display = ('id', 'name', 'city', 'user', 'view_link', 'add_date')
     #inlines = [OrganizationAddressInline, OrganizationPhoneInline, OrganizationScheduleInline]
     inlines = [OrganizationAddressInline, OrganizationPhoneInline]
     mptt_indent_field = "category"
     save_on_top = True
-
+    view_on_site = True
 
 class OrganizationCategoryAdmin(DjangoMpttAdmin):
     list_display = ('id', 'name', 'title')

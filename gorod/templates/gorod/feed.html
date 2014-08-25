@@ -2,9 +2,9 @@
 
 {% load staticfiles %}
 
-{% block meta_title %}{{ city.title }} — события города{% endblock %}
+{% block meta_title %}Городской сайт {{ city.title_gent }}{% endblock %}
 
-{% block meta_description %}Новости {{ city.title }}, каталог организаций, полезная информация{% endblock %}
+{% block meta_description %}{{ city.title }} — новости, события, организации, вопросы и ответы{% endblock %}
 
 
 {% block content %}
@@ -44,9 +44,9 @@
 
         <div class="b-adplate__welcome">
             <a href="{% url 'gorod:welcome' city.name %}">
-                <h2 class="b-adplate__welcome-title">О проекте</h2>
+                <h2 class="b-adplate__welcome-title">Городской сайт {{ city.title_gent }}</h2>
                 <p class="b-adplate__welcome-text">
-                    Как начать публиковать новости, фотографии и полезную информацию для жителей города.
+                    Как начать публиковать новости, фотографии и полезную информацию.
                 </p>
             </a>
         </div>

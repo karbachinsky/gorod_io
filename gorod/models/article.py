@@ -10,6 +10,7 @@ from ckeditor.fields import RichTextField
 
 from gorod.models import City
 from gorod.utils.exceptions import FeedError
+
 from smart_selects.db_fields import ChainedForeignKey
 
 
@@ -180,6 +181,3 @@ class Article(models.Model):
         """
         return user.is_superuser or self.user == user
 
-    #@property
-    #def rubric_url(self):
-    #    return self.rubric.get_absolute_url(self.city)

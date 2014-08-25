@@ -47,7 +47,7 @@ INSTALLED_APPS = (
     'mptt',
     'social.apps.django_app.default',
     'easy_thumbnails',
-    'captcha',
+    #'captcha',
     'smart_selects',
     'django_mptt_admin'
 )

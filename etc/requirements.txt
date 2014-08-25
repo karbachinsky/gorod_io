@@ -11,3 +11,4 @@ django-simple-captcha
 wadofstuff-django-serializers
 django-smart-selects
 django_mptt_admin
+pymorphy2

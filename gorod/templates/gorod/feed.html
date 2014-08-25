@@ -2,9 +2,9 @@
 
 {% load staticfiles %}
 
-{% block meta_title %}{{ city.title }} — события города{% endblock %}
+{% block meta_title %}Городской сайт {{ city.title_gent }}{% endblock %}
 
-{% block meta_description %}Новости {{ city.title }}, каталог организаций, полезная информация{% endblock %}
+{% block meta_description %}{{ city.title }} — новости, события, организации, вопросы и ответы{% endblock %}
 
 
 {% block content %}
@@ -17,6 +17,33 @@
             {% endif %}
         </h1>
     {% endif %}
+
+    <div class="b-adplate">
+        <ul class="b-adplate__organizations">
+            {% for organization in adplate.organizations %}
+                <li>
+                    <a href="{% url 'gorod:organization' city.name organization.id %}">{{ organization.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <ul class="b-adplate__questions">
+            {% for question in adplate.questions %}
+                <li class="b-city-info__question">
+                    <a href="{% url 'gorod:hub-question' city.name question.id %}">
+                        {{ question.question }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="b-adplate_welcome">
+            <a href="{% url 'gorod:welcome' city.name %}">
+                Welcome banner
+            </a>
+        </div>
+    </div>
+
     <div class="b-feed__wrapper">
         {% include "gorod/feed/_feed_item.html" %}
         <script>
@@ -24,16 +51,16 @@
                 window.ajaxFeed();
             });
         </script>
-        
+
         <div class="b-feed">
             <ul class="b-feed__list">
                 <div class="grid-sizer"></div>
                 <div class="gutter-sizer"></div>
                 <li class="b-feed-item b-feed-item_info">
                     <a href="{% url 'gorod:welcome' city.name %}">
-                        <h2 class="b-feed-item__title">О проекте</h2>
+                        <h2 class="b-feed-item__title">Городской сайт {{ city.title_gent }}</h2>
                         <p class="b-feed-item__text">
-                            Как начать публиковать новости, фотографии и полезную информацию для жителей города.
+                            Как начать публиковать новости, фотографии и полезную информацию.
                         </p>
                     </a>
                 </li>

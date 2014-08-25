@@ -11,6 +11,7 @@ from django.core.urlresolvers import reverse
 from gorod.models import City, Article, ArticleRubric
 from gorod.utils.forms.article import ArticleAddForm
 from gorod.utils.exceptions import FeedError
+from gorod.utils.ad.plate import AdStartPlate
 
 import json
 
@@ -25,7 +26,9 @@ class FeedView(View):
             rubric = get_object_or_404(ArticleRubric, name=rubric_name)
 
         context = {
-            'rubric': rubric
+            'rubric': rubric,
+            # Start plate
+            'adplate': AdStartPlate().get_context()
         }
 
         return render(request, 'gorod/feed.html', context)
@@ -133,7 +136,7 @@ class ArticleEditView(ArticleAddView):
     @method_decorator(login_required)
     def dispatch(self, request, city_name, rubric_name, article_id):
         self.article = get_object_or_404(Article, id=article_id, city__name=city_name, rubric__name=rubric_name)
-        if not request.user.is_superuser and self.article.user != request.user:
+        if not self.article.can_user_modify(request.user):
             raise Http404
         return super(ArticleEditView, self).dispatch(request, city_name, rubric_name)
 
@@ -155,7 +158,7 @@ class ArticleDeleteView(View):
     def dispatch(self, request, city_name, article_id):
         article = get_object_or_404(Article, id=article_id, city__name=city_name)
 
-        if request.user != article.user:
+        if not article.can_user_modify(request.user):
             raise Http404
 
         try:

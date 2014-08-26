@@ -19,27 +19,35 @@
     {% endif %}
 
     <div class="b-adplate" style="display: none">
-        <ul class="b-adplate__organizations">
-            {% for organization in adplate.organizations %}
-                <li>
-                    <a href="{% url 'gorod:organization' city.name organization.id %}">{{ organization.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="b-adplate__organizations">
+            <span class="b-adplate__title">Организации</span>
+            <ul>
+                {% for organization in adplate.organizations %}
+                    <li>
+                        <a href="{% url 'gorod:organization' city.name organization.id %}">{{ organization.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="b-adplate__questions">
+            <span class="b-adplate__title">Вопросы</span>
+            <ul>
+                {% for question in adplate.questions %}
+                    <li class="b-city-info__question">
+                        <a href="{% url 'gorod:hub-question' city.name question.id %}">
+                            {{ question.question }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
 
-        <ul class="b-adplate__questions">
-            {% for question in adplate.questions %}
-                <li class="b-city-info__question">
-                    <a href="{% url 'gorod:hub-question' city.name question.id %}">
-                        {{ question.question }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-
-        <div class="b-adplate_welcome">
+        <div class="b-adplate__welcome">
             <a href="{% url 'gorod:welcome' city.name %}">
-                Welcome banner
+                <h2 class="b-adplate__welcome-title">Городской сайт {{ city.title_gent }}</h2>
+                <p class="b-adplate__welcome-text">
+                    Как начать публиковать новости, фотографии и полезную информацию.
+                </p>
             </a>
         </div>
     </div>
@@ -51,19 +59,10 @@
                 window.ajaxFeed();
             });
         </script>
-
         <div class="b-feed">
             <ul class="b-feed__list">
                 <div class="grid-sizer"></div>
                 <div class="gutter-sizer"></div>
-                <li class="b-feed-item b-feed-item_info">
-                    <a href="{% url 'gorod:welcome' city.name %}">
-                        <h2 class="b-feed-item__title">Городской сайт {{ city.title_gent }}</h2>
-                        <p class="b-feed-item__text">
-                            Как начать публиковать новости, фотографии и полезную информацию.
-                        </p>
-                    </a>
-                </li>
             </ul>
             <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
            

@@ -110,6 +110,7 @@ class ArticleAdmin(GorodAdminBase):
         return u"<a href='%s' target='blank'>%s</a>" % (obj_url, obj_url)
 
     view_link.allow_tags = True
+    readonly_fields = ('short_text',)
     list_display = ('id', 'add_date', 'title', 'city', 'rubric', 'user', 'view_link', 'is_checked')
     save_on_top = True
     view_on_site = True
@@ -155,6 +156,7 @@ class OrganizationAdmin(GorodAdminBase):
     mptt_indent_field = "category"
     save_on_top = True
     view_on_site = True
+
 
 class OrganizationCategoryAdmin(DjangoMpttAdmin):
     list_display = ('id', 'name', 'title')

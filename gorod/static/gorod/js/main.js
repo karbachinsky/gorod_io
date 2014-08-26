@@ -56,6 +56,7 @@
 			transitionDuration: 0
 		});
 	});*/
+
 	$('.b-orgs__list').masonry({
 		columnWidth: '.grid-sizer',
 		itemSelector: '.b-orgs__item',
@@ -94,7 +95,7 @@
 
 
 $(function(){
-	
+
 	
 	window.grid();
 	window.loginPopup();

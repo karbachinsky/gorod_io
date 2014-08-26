@@ -28,11 +28,10 @@ class City(models.Model):
     def __unicode__(self):
         return self.name
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.title_gent:
             self._set_title_gent()
-
-        super(City, self).save()
+        super(City, self).save(*args, **kwargs)
 
     def _set_title_gent(self):
         wordproc = WordProcessor()

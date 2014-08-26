@@ -100,7 +100,6 @@ class Article(models.Model):
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     rubric = models.ForeignKey(ArticleRubric, default=1, help_text=u'Рубрика')
-    #user = models.ForeignKey(settings.AUTH_USER_MODEL)
     user = ChainedForeignKey(
         settings.AUTH_USER_MODEL,
         chained_field="city",
@@ -110,6 +109,7 @@ class Article(models.Model):
     )
     picture = models.ImageField(max_length=255, upload_to='pictures/%Y/%m/', null=True, blank=True, help_text=u'Изображение')
     text = RichTextField(blank=True, help_text=u'Текст')
+    short_text = RichTextField(blank=True, null=True, help_text="Short text")
     is_published = models.BooleanField(default=True)
     is_checked = models.BooleanField(default=True)
 
@@ -147,25 +147,32 @@ class Article(models.Model):
         else:
             return None
 
-    @property
-    def short_text(self):
+    def save(self, *args, **kwargs):
+        self._set_short_text()
+        super(Article, self).save(*args, **kwargs)
+
+    def _set_short_text(self):
         """
-            Returns short text for article preview
+            Sets short text (brief) for article preview
         """
 
         # FIXME. HTML entities!
-        from django.utils.html import strip_tags
+        from django.utils.html import strip_tags, strip_entities
 
-        text = strip_tags(self.text)
+        text = strip_tags(strip_entities(self.text))
+        #assert False, "%d %d" % (len(text), self._SHORT_TEXT_LENGTH)
         if len(text) <= self._SHORT_TEXT_LENGTH:
-            return text
+            self.short_text = text
+            return
 
         if text[self._SHORT_TEXT_LENGTH-1] == u'.':
-            return text[0:self._SHORT_TEXT_LENGTH]
+            short_text = text[0:self._SHORT_TEXT_LENGTH]
         elif text[self._SHORT_TEXT_LENGTH-1] == u' ':
-            return text[0:self._SHORT_TEXT_LENGTH-1] + u'...'
+            short_text = text[0:self._SHORT_TEXT_LENGTH-1] + u'...'
         else:
-            return text[0:self._SHORT_TEXT_LENGTH] + u'...'
+            short_text = text[0:self._SHORT_TEXT_LENGTH] + u'...'
+
+        self.short_text = short_text
 
     @property
     def human_add_date(self):

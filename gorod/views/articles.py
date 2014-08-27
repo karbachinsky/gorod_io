@@ -28,7 +28,7 @@ class FeedView(View):
         context = {
             'rubric': rubric,
             # Start plate
-            'adplate': AdStartPlate().get_context()
+            'adplate': AdStartPlate(city_name).get_context()
         }
 
         return render(request, 'gorod/feed.html', context)

@@ -27,6 +27,108 @@
 		background: $violet-color;
 	}
 }
+/*--------adplate-----------*/
+
+.b-adplate{
+	padding:20px 0 10px;
+	width: 1180px;
+	margin:auto;
+}
+.b-adplate__title{
+	font-size: 15px;
+	text-transform: uppercase;
+}
+.b-adplate__organizations{
+	
+	width:610px;
+	float: left;
+
+	.b-adplate__title{
+		color:$yellow-color;
+	}
+	ul{
+		margin-top: 12px;
+	}
+	li{
+		@include inline-block(top);
+		width:265px;
+		margin-right: 37px;
+		margin-bottom: 15px;
+		span{
+			display: block;
+			font-size: 11px;
+			text-transform: uppercase;
+			color:#969696;
+			font-weight: 600;
+		}
+		a{
+			color:#444444;
+			text-decoration: none;
+			font-size: 15px;
+		}
+	}
+}
+.b-adplate__questions{
+	.b-adplate__title{
+		color:$green-color-dark;
+	}
+	width:305px;
+	float: left;
+	ul{
+		width: 265px;
+		margin-top: 10px;
+		li{
+			margin-bottom: 12px;
+		}
+		a{
+			color:#444444;
+			text-decoration: none;
+			font-size: 15px;
+		}
+	}
+}
+
+.b-adplate__welcome{
+	height:290px;
+	width:265px;
+	margin-bottom: 12px;
+	float: right;
+	background: url(../img/thumb.png) no-repeat bottom center;
+	
+	a{
+		display: block;
+		text-decoration: none;
+		height:290px;
+	}
+	.b-adplate__welcome-title{
+		margin: 0;
+		line-height: 25px;
+		vertical-align: top;
+		color: #000;
+		text-decoration: none;
+		font-size: 20px;
+		font-weight: 600;
+		margin-bottom: 12px;
+		padding: 25px 20px 0;
+	}
+	.b-adplate__welcome-text{
+		margin: 0;
+		font-size: 13px;
+		text-decoration: none;
+		color: #000;
+		line-height: 20px;
+		word-break: break-word;
+		padding: 0 20px 3px;
+	}
+	&:hover{
+		.b-adplate__welcome-text,.b-adplate__welcome-title{
+			color:$gray-color;
+		}
+	}
+	
+}
+
+/*--------feed-----------*/
 .b-feed{
 	padding:30px 0 50px;
 	width: 1180px;
@@ -52,20 +154,7 @@
 		@include box-shadow(0px 2px 0px #bbb);
 	}
 }
-.b-feed-item_info{
-	height:280px;
-	background: url(../img/feed-info.png) no-repeat bottom center;
-	
-	a{
-		display: block;
-		text-decoration: none;
-		height:280px;
-	}
-	.b-feed-item__title{
-		padding-top: 25px;
-		padding-bottom: 3px;
-	}
-}
+
 .b-feed-item__top{
 	background: $violet-color;
 	height:3px;
@@ -178,6 +267,10 @@
 }
 @media screen and (max-width: 630px) { 
 	
+	.b-adplate__welcome{
+		background-size: cover;
+		background-position: bottom center;
+	}
 	.b-feed{
 		width: auto;
 		padding-left: 10px;
@@ -186,10 +279,7 @@
 	.b-feed-item{
 		width: 100%;
 	}
-	.b-feed-item_info{
-		background-size: cover;
-		background-position: bottom center;
-	}
+	
 	.b-feed-item__rubric{
 		font-size: 13px;
 	}

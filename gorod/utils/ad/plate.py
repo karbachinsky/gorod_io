@@ -8,8 +8,8 @@ from gorod.models import Organization, HubQuestion
 
 class AdStartPlate(object):
     def __init__(self):
-        self.organizations = Organization.objects.order_by('?')[0:9]
-        self.questions = HubQuestion.objects.order_by('?')[0:9]
+        self.organizations = Organization.objects.order_by('?')[0:8]
+        self.questions = HubQuestion.objects.order_by('?')[0:4]
 
     def get_context(self):
         """

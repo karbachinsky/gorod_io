@@ -18,42 +18,9 @@
         </h1>
     {% endif %}
 
-    <div class="b-adplate">
-        <div class="b-adplate__organizations">
-            <span class="b-adplate__title">Организации</span>
-            <ul>
-                {% for organization in adplate.organizations %}
-                    <li>
-                        <span>{{ organization.category }}</span>
-                        <a href="{% url 'gorod:organization' city.name organization.id %}">{{ organization.name }}</a>
-                    </li>
-                {% endfor %}
-                <div class="clear"></div>
-            </ul>
-        </div>
-        <div class="b-adplate__questions">
-            <span class="b-adplate__title">Вопросы</span>
-            <ul>
-                {% for question in adplate.questions %}
-                    <li>
-                        <a href="{% url 'gorod:hub-question' city.name question.id %}">
-                            {{ question.question }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="b-adplate__welcome">
-            <a href="{% url 'gorod:welcome' city.name %}">
-                <h2 class="b-adplate__welcome-title">Городской сайт {{ city.title_gent }}</h2>
-                <p class="b-adplate__welcome-text">
-                    На городском сайте {{ city.title_gent }} любой житель может поделиться новостью, фото или анонсом важного события.
-                </p>
-            </a>
-        </div>
-        <div class="clear"></div>
-    </div>
+    {% if not rubric %}
+        {% include "gorod/feed/_adplate.html" %}
+    {% endif %}
 
     <div class="b-feed__wrapper">
         {% include "gorod/feed/_feed_item.html" %}
@@ -63,6 +30,7 @@
             });
         </script>
         <div class="b-feed">
+            <span class="b-feed__title">Новости</span>
             <ul class="b-feed__list">
                 <div class="grid-sizer"></div>
                 <div class="gutter-sizer"></div>

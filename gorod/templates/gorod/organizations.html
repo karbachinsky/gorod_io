@@ -9,14 +9,15 @@
 {% block body-class %}body_organizations{% endblock %}
 
 {% block content %}
-    <h1 class="b-orgs__title">Организации</h1>
     <div class="b-orgs">
+        <h4 class="b-orgs__title">Организации</h4>
         <ul class="b-orgs__list">
             <div class="grid-sizer"></div>
             <div class="gutter-sizer"></div>
 
             {% for organization in organizations %}
                 <li class="b-orgs__item">
+                    <span>{{ organization.category }}</span>
                     <a href="{% url 'gorod:organization' city.name organization.id %}">{{ organization.name }}</a>                 
                 </li>
             {% endfor %}

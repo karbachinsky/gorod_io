@@ -30,7 +30,9 @@
             });
         </script>
         <div class="b-feed">
-            <span class="b-feed__title">Новости</span>
+            {% if not rubric %}
+                <span class="b-feed__title">Новости</span>
+            {% endif %}
             <ul class="b-feed__list">
                 <div class="grid-sizer"></div>
                 <div class="gutter-sizer"></div>

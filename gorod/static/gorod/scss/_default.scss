@@ -23,12 +23,22 @@ $gray-color-dark: #444444;
 }
 
 .edit-link{
-	font-size: 12px;
+	font-size: 11px;
 	font-weight: 600;
-	color: $green-color;
+	color: $gray-color;
 	text-transform: uppercase;
 	text-decoration: none;
+	line-height: 22px;
 	cursor: pointer;
+	&:before{
+		@include inline-block;
+		width:20px;
+		height:22px;
+		margin-right: 5px;
+		background: url(../img/sprite.png?4) no-repeat 0 -150px;
+		content: "";
+	}
+	
 }
 .btn{
 	font-size: 13px;

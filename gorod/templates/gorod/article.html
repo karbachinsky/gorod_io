@@ -18,14 +18,17 @@
                 <div class="b-article__info">
                     <div class="b-article__descr">
                         <a href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}" class="b-article__rubric">{{ article.rubric.title }}</a>
+
                         <span class="b-article__date">{{ article.add_date|naturalday }}</span>
                     </div>
-                    <div class="b-article__author">
-                        {% user article.user %}
-                        {% if user == article.user or user.is_superuser %}
-                            <span class="edit-link edit-link_article">Редактировать</span>
-                        {% endif %}
-                    </div>  
+                    
+                    {% if user == article.user or user.is_superuser %}
+                        <span class="edit-link edit-link_article">Редактировать</span>
+                    {% else %}
+                        <div class="b-article__author">
+                            {% user article.user %}
+                        </div> 
+                    {% endif %} 
                     <div class="clear"></div>
                 </div>
                 
@@ -44,9 +47,16 @@
                 {% endif %}
 
                 <div class="clear"></div>
-                <div class="b-article__share">
-                    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-                    <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir" data-yashareTheme="counter"></div> 
+                <div class="b-article__service">
+                    <div class="b-article__share">
+                        <span class="b-article__share-text">Поделиться:</span>
+                        <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+                        <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir" data-yashareTheme="counter"></div> 
+                    </div>
+                    <div class="b-article__complaint">
+                        <a href="mailto:hola@gorod.io"><i></i>Пожаловаться</a>
+                    </div>
+                    <div class="clear"></div>
                 </div>
             </div>
         </div>

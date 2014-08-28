@@ -10,7 +10,15 @@
 .b-article__content{
 	max-width: 650px;
 	margin: auto;	
-	padding: 40px 30px 100px;
+	padding: 40px 30px 50px;
+}
+.b-article__info{
+	
+	.edit-link{
+		float: right;
+		text-align: right;
+		padding-top: 6px;
+	}
 }
 .b-article__author{
 	float: right;
@@ -26,8 +34,7 @@
 
 .b-article__descr{
 	float: left;
-	text-align: right;
-	padding-top: 4px;
+	line-height: 14px;
 
 }
 .b-article__rubric{
@@ -35,7 +42,6 @@
 	font-size: 11px;	
 	text-transform: uppercase;
 	font-weight: 600;
-	margin-right: 10px;
 	text-decoration: none;
 
 	.b-article_event &{
@@ -50,7 +56,9 @@
 }
 .b-article__date{
 	color:$gray-color-light;
-	font-size: 12px;
+	font-size: 11px;
+	display: block;
+	padding-top: 6px;
 
 }
 .b-article__picture{
@@ -79,8 +87,39 @@
 		padding: 0 0 0 20px;
 	}
 }
-.b-article__share{
+.b-article__service{
 	margin: 40px 0 0;
+}
+.b-article__share{
+	float: left;
+	&>div{
+		margin-top: 5px;
+		margin-left: -4px;
+	}
+}
+.b-article__share-text{
+	font-size: 14px;
+	font-weight: 300;
+}
+.b-article__complaint{
+	float: right;
+	padding-top: 28px;
+	a{
+		color:$gray-color;
+		font-size: 11px;	
+		line-height: 18px;
+		text-transform: uppercase;
+		font-weight: 600;
+		text-decoration: none;
+		i{
+			@include inline-block;
+			width:13px;
+			height:18px;
+			margin-right: 5px;
+			background: url(../img/sprite.png) no-repeat 0 -175px;
+			content: "";
+		}
+	}
 }
 @media screen and (max-width: 630px) { 
 	

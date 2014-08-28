@@ -21,7 +21,7 @@
 		background: $yellow-color;
 	}
 	&.b-feed__rubric-title_message{
-		background: $mareen-color;
+		background: $green-color;
 	}
 	&.b-feed__rubric-title_photo{
 		background: $violet-color;
@@ -59,11 +59,11 @@
 			display: block;
 			font-size: 11px;
 			text-transform: uppercase;
-			color:#969696;
+			color:$gray-color;
 			font-weight: 600;
 		}
 		a{
-			color:#444444;
+			color:$gray-color-dark;
 			text-decoration: none;
 			font-size: 15px;
 			&:hover{
@@ -74,7 +74,7 @@
 }
 .b-adplate__questions{
 	.b-adplate__title{
-		color:$green-color-dark;
+		color:$mareen-color;
 	}
 	width:305px;
 	float: left;
@@ -85,7 +85,7 @@
 			margin-bottom: 12px;
 		}
 		a{
-			color:#444444;
+			color:$gray-color-dark;
 			text-decoration: none;
 			font-size: 15px;
 			&:hover{
@@ -111,7 +111,7 @@
 		margin: 0;
 		line-height: 25px;
 		vertical-align: top;
-		color: #000;
+		color:$gray-color-dark;
 		text-decoration: none;
 		font-size: 20px;
 		font-weight: 600;
@@ -122,7 +122,7 @@
 		margin: 0;
 		font-size: 13px;
 		text-decoration: none;
-		color: #000;
+		color:$gray-color-dark;
 		line-height: 20px;
 		word-break: break-word;
 		padding: 0 20px 3px;
@@ -177,7 +177,7 @@
 		background:$yellow-color;
 	}
 	.b-feed-item_message &{
-		background: $mareen-color;
+		background: $green-color;
 	}
 	.b-feed-item_photo &{
 		background:$violet-color;
@@ -200,7 +200,7 @@
 		color:$yellow-color;
 	}
 	.b-feed-item_message &{
-		color: $mareen-color;
+		color: $green-color;
 	}
 	.b-feed-item_photo &{
 		color:$violet-color;
@@ -210,13 +210,14 @@
 .b-feed-item__date{
 	font-size: 10px;
 	margin-left: 8px;
-	color:#888888;
+	color:$gray-color-light;
 	vertical-align: bottom;
 }
 .b-feed-item__link{
 	display: block;
 	text-decoration: none;
 	padding: 6px 0 13px;
+
 	&:hover {
 		.b-feed-item__title, .b-feed-item__text{
 			color:$gray-color;
@@ -228,7 +229,7 @@
 	margin:0;
 	line-height: 25px;
 	vertical-align: top;
-	color:#000 ;
+	color:$gray-color-dark;
 	text-decoration: none;
 	font-size: 18px;
 	font-weight: 600;
@@ -248,7 +249,7 @@
 	margin:0 ;
 	font-size: 13px;
 	text-decoration: none;
-	color:#000;
+	color:$gray-color-dark;
 	line-height: 20px;
 	word-break: break-word;
 	padding: 0 20px 3px;

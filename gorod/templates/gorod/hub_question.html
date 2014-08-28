@@ -8,50 +8,60 @@
 {% block meta_description %}{{city.title}} - {{ question.question }}{% endblock %}
 
 {% block content %}
-    <h1 class="b-city-info__title">Полезная информация</h1>
-    <div class="b-city-info b-city-info-question">
-        {% if request.user.is_superuser %}
-            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_hubquestion_change' question.id %}">Редактировать</a>
-        {% endif %}
-
-        <div claass="b-city-info__question_author">
-            {% user question.user %}
+<div class="b-hub-item__wrapper">
+    <div class="b-hub-item">
+        <div class="b-hub-question">
+            <div class="b-hub-item__content">
+                <div class="b-hub-item__info">
+                    <span>Вопрос</span>
+                </div>
+                <div class="b-hub-item__author">
+                    {% user question.user %}
+                </div>
+                <div class="clear"></div>
+                <h2 class="b-hub-question__title">
+                    {{ question.question }}
+                </h2>
+            </div>
         </div>
-        <h2 class="b-city-info__question-title">
-            {{ question.question }}
-        </h2>
-
-        {% for answer in answers %}
-            <div class="b-city-info__answer">
-                <div claass="b-city-info__answer_author">
-                    {%  user answer.user %}
-                </div>
-                <div claass="b-city-info__answer_text">
-                    {% autoescape off %}
-                        {{ answer.text }}
-                    {% endautoescape %}
-                </div>
-            </div>
-        {% endfor %}
+            <ul class="b-hub-item__answers">
+                {% for answer in answers %}
+                    <li class="b-hub-answer">
+                        <div class="b-hub-item__content">
+                            <div class="b-hub-item__info">
+                                <span>Ответ</span>
+                            </div>
+                            <div class="b-hub-item__author">
+                                {%  user answer.user %}
+                            </div>
+                            <div class="clear"></div>
+                            <div class="b-hub-answer__text">
+                                {% autoescape off %}
+                                    {{ answer.text }}
+                                {% endautoescape %}
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>  
         
+            {% if other_questions %}
+                <noindex>
+                    <div class="b-hub-item__other b-hub">
+                        <h1 class="b-hub__title">Другие вопросы</h1>
+                        <ul class="b-hub__questions">
+                            {% for question in other_questions %}
+                                <li class="b-hub__questions-item">
+                                    <a href="{% url 'gorod:hub-question' city.name question.id %}">
+                                        {{ question.question }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </noindex>
+            {% endif %} 
     </div>
-    {% if other_questions %}
-        <noindex>
-            <div class="b-city-info__questions-other-wrapper">
-                <div class="b-city-info__questions-other">
-                    <h3>Другие вопросы:</h3>
-                    <ul class="b-city-info__questions">
-                        {% for other_question in other_questions %}
-                            <li class="b-city-info__question">
-                                <a href="{% url 'gorod:hub-question' city.name other_question.id %}">
-                                    {{ other_question.question }}
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </noindex>
-    {% endif %}
+</div>
 {% endblock %}
 

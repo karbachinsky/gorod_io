@@ -6,18 +6,14 @@
 
 {% block meta_description %}{{city.title}} - Полезная информация{% endblock %}
 
-{% block content %}
-    <h1 class="b-city-info__title">Вопросы и ответы</h1>
-    <div class="b-city-info">
-        
-        {% if request.user.is_superuser %}
-            <a class="edit-link" target="_blank" href="{% url 'admin:gorod_hubquestion_changelist' %}">Редактировать</a>
-        {% endif %}
+{% block body-class %}body_hub{% endblock %}
 
-        <h3>Список вопросов:</h3>
-        <ul class="b-city-info__questions">
+{% block content %}
+    <div class="b-hub">
+        <h1 class="b-hub__title">Вопросы и ответы</h1>
+        <ul class="b-hub__questions">
             {% for question in questions %}
-                <li class="b-city-info__question">
+                <li class="b-hub__questions-item">
                     <a href="{% url 'gorod:hub-question' city.name question.id %}">
                         {{ question.question }}
                     </a>

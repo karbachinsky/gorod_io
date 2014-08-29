@@ -67,32 +67,7 @@
 	display: block;
 }
 .b-article__text{
-	font-size: 16px;
-	line-height: 25px;
-	color:#000;
-
-	p{
-		margin:25px 0;
-	}
-	img{
-		width:100% !important;
-		height:auto !important;
-	}
-	ul{
-		list-style-type: disc;
-		padding: 0 0 0 20px;
-	}
-	ol{
-		list-style-type: decimal;
-		padding: 0 0 0 20px;
-	}
-	a{
-		color:#1188c0;
-		text-decoration: none;
-		&:hover{
-			color:#0b587c;
-		}
-	}
+	@include default-text();
 }
 .b-article__service{
 	margin: 40px 0 0;

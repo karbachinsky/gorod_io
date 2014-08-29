@@ -1,39 +1,26 @@
-.b-city-welcome{
-	padding:60px 30px;
-	max-width:650px;
-	margin: auto;
-	color:#444;
-	font-size: 14px;
-	position: relative;
-	min-height: 450px;
-
-	img{
-		width: 100% !important;
-		height: auto !important;
-	}
-
-	.edit-link{
-		@include inline-block;
-		position: absolute;
-		top:30px;
-		left:30px;
-	}
+.b-welcome__wrapper{
+	padding:30px 30px 30px;
+	background: #f3f3f3;
 }
-.b-city-welcome__text{
-	ul{
-		list-style-type: disc;
-		padding: 0 0 0 20px;
-	}
-	ol{
-		list-style-type: decimal;
-		padding: 0 0 0 20px;
-	}
-	a{
-		color:#005fc5;
-	}
+
+.b-welcome__content{
+	max-width: 650px;
+	margin: auto;	
+	padding: 40px 30px 50px;
+}
+.b-welcome{
+	background: #fff;
+	min-height: 650px;
+
+}
+.b-welcome__title{
+	color:$gray-color-dark;
+}
+.b-welcome__text{
+	@include default-text();
 }
 @media screen and (max-width: 630px) { 
-	.b-city-welcome{
+	.b-welcome__wrapper{
 		padding-left: 10px;
 		padding-right: 10px;
 	}

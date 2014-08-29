@@ -11,16 +11,45 @@ $gray-color: #969696;
 $gray-color-light: #cccccc;
 $gray-color-dark: #444444;
 
+@mixin default-text() {
+	font-size: 16px;
+	line-height: 25px;
+	color:$gray-color-dark;
+
+	p{
+		margin:10px 0;
+	}
+	img{
+		width:100% !important;
+		height:auto !important;
+	}
+	ul{
+		list-style-type: disc;
+		padding: 0 0 0 20px;
+		margin:10px 0;
+	}
+	ol{
+		list-style-type: decimal;
+		margin:10px 0;
+		padding: 0 0 0 20px;
+	}
+	li{
+		margin: 8px 0;
+	}
+	a{
+		color:#1188c0;
+		text-decoration: none;
+		&:hover{
+			color:#0b587c;
+		}
+	}
+}
+
 
 .b-hidden{
 	display: none;
 }
-.logo-bw{
-	width:80px;
-	height:19px;
-	display: block;
-	margin:20px auto;
-}
+
 
 .edit-link{
 	font-size: 11px;

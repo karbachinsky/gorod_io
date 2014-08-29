@@ -15,6 +15,7 @@
 }
 .b-welcome__title{
 	color:$gray-color-dark;
+	margin-bottom: 35px;
 }
 .b-welcome__text{
 	@include default-text();

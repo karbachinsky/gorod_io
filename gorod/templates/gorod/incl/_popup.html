@@ -9,5 +9,6 @@
 	<div class="b-popup__window">
 		<span class="">ВХОД</span>
 		<a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" >Войти через вконтакте</a>
+        <!--<a href="{% url 'social:begin' "odnoklassniki-oauth2" %}?next={{ request.get_full_path }}" >Войти через Одноклассники</a> -->
 	</div>
 </div>

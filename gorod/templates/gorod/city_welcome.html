@@ -2,9 +2,13 @@
 
 {% load staticfiles %}
 
-{% block meta_title %}Добро пожаловать в {{city.title}}{% endblock %}
+{% block meta_title %}
+    {{ city.title }}. Как публиковать новости и полезную информацию.
+{% endblock %}
 
-{% block meta_description %}Добро пожаловать в {{city.title}}{% endblock %}
+{% block meta_description %}
+    Как начать публиковать новости, фотографии и полезную информацию на городском сайте {{ city.title_gent }}.
+{% endblock %}
 
 {% block content %}
 <div class="b-welcome__wrapper">

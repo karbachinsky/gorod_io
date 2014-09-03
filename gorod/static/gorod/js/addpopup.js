@@ -3,7 +3,6 @@
 	var $popup = $('.b-popup-add'),
 	$window = $popup.find('.b-popup__window'),
 	$addBtn = $('.b-header__add'),
-	$overlay = $popup.find('.b-popup__overlay'),
     $addList = $('.b-header__add-list'),
     $wrapper = $window.find('#b-form__wrapper'),
     $editLink  = $('.edit-link_article'),
@@ -12,6 +11,14 @@
     name,
     formType,
     $previewTools,
+    openPopup = function(){
+        $popup.addClass(shownClass);
+        $('body').addClass('body-block');
+    },
+    closePopup = function(){
+        $popup.removeClass(shownClass);
+        $('body').removeClass('body-block');
+    },
 
 
     bindHandlers=function(){
@@ -24,18 +31,20 @@
 
 
     closeHandlers = function(){
-        $overlay.on('click',function(){
-            $popup.removeClass(shownClass);
+        $popup.on('click',function(e){
+            if($(e.target).hasClass('b-popup-add')){
+                closePopup();
+            }
         });
 
         $(document).keydown(function(e) {
             if( e.keyCode === 27 ) {
-                $popup.removeClass(shownClass);
+                closePopup();
                 return false;
             }
         });
         $window.on('click', '.b-form__close', function(){
-            $popup.removeClass(shownClass);
+            closePopup();
         });
     },
 
@@ -121,8 +130,7 @@
                 $popup.find('.b-form__del').show();
             }
         });
-        $popup.addClass(shownClass);
-        $overlay.height($('body').outerHeight());
+        openPopup();
     },
     
     

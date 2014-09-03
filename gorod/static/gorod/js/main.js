@@ -71,22 +71,30 @@
 	var $popup = $('.b-popup-login'),
 	$window = $popup.find('.b-popup__window'),
 	$loginBtn = $('.b-header__content .b-header__login'),
-	$overlay = $popup.find('.b-popup__overlay'),
-	shownClass = 'b-popup_shown';
+	shownClass = 'b-popup_shown',
+	openPopup = function(e){
+		$popup.addClass(shownClass);
+		e.preventDefault();
+		$('body').addClass('body-block');
+	},
+	closePopup = function(){
+		$popup.removeClass(shownClass);
+		$('body').removeClass('body-block');
+	};
 
 	$loginBtn.on('click',function(e){
-		$popup.addClass(shownClass);
-		$overlay.height($('body').outerHeight());
-		e.preventDefault();
+		openPopup(e);
 	});
 
-	$overlay.on('click',function(){
-		$popup.removeClass(shownClass);
+	$popup.on('click',function(e){
+		if($(e.target).hasClass('b-popup-login')){
+            closePopup();
+        }
 	});
 
 	$(document).keydown(function(e) {
 	    if( e.keyCode === 27 ) {
-	        $popup.removeClass(shownClass);
+	        closePopup();
 	        return false;
 	    }
 	});

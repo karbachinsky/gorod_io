@@ -1,15 +1,13 @@
 <div class="b-popup b-popup-add">
-	<div class="b-popup__overlay"></div>
 	<div class="b-popup__window">
 		<div id="b-form__wrapper"></div>
 	</div>
 </div>
 <div class="b-popup b-popup-login">
-	<div class="b-popup__overlay"></div>
 	<div class="b-popup__window">
 		<span class="">ВХОД</span>
-		<a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" >Войти через вконтакте</a>
-        <a href="{% url 'social:begin' "facebook" %}?next={{ request.get_full_path }}" >Войти через Facebook</a>
+		<a class="login-vk" href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" >Войти через вконтакте</a>
+        <a class="login-fb" href="{% url 'social:begin' "facebook" %}?next={{ request.get_full_path }}" >Войти через Facebook</a>
         <!--<a href="{% url 'social:begin' "odnoklassniki-oauth2" %}?next={{ request.get_full_path }}" >Войти через Одноклассники</a> -->
 	</div>
 </div>

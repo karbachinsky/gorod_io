@@ -116,7 +116,7 @@
         $wrapper.attr('class','').addClass('b-form__wrapper_'+name);
         $.get(url, function(html){
             $wrapper.html(html); 
-            $wrapper.find('#id_title').attr('placeholder', 'Заголовок');
+            $wrapper.find('#id_title').attr('placeholder', 'Введите заголовок');
             $wrapper.find('.b-form__type span').text(title);
 
             if(type=='edit' && $('.b-form__prev-picture').text().length){

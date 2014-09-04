@@ -59,7 +59,13 @@
 		color:$gray-color-light;
 	}
 }
+.b-hub-item__date{
+	color:$gray-color-light;
+	font-size: 11px;
+	display: block;
+	padding-top: 6px;
 
+}
 .b-hub-item__author{
 	float: right;
 }
@@ -68,7 +74,10 @@
 	margin: 20px 0;
 	font-size: 26px;
 }
-
+.b-hub-question__text{
+	margin-top: 15px;
+	@include default-text();
+}
 
 
 .b-hub-answer{

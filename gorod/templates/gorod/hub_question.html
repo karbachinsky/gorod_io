@@ -1,6 +1,7 @@
 {% extends 'gorod/layout.html' %}
 
 {% load staticfiles %}
+{% load humanize %}
 {% load user %}
 
 {% block meta_title %}{{city.title}} - {{ question.question }}{% endblock %}
@@ -14,6 +15,7 @@
             <div class="b-hub-item__content">
                 <div class="b-hub-item__info">
                     <span>Вопрос</span>
+                    <div class="b-hub-item__date">{{ question.add_date|naturalday }}</div>
                 </div>
                 <div class="b-hub-item__author">
                     {% user question.user %}
@@ -22,6 +24,11 @@
                 <h2 class="b-hub-question__title">
                     {{ question.question }}
                 </h2>
+                <div class="b-hub-question__text">
+                    {% autoescape off %}
+                        {{ question.description }}
+                    {% endautoescape %}
+                </div>
             </div>
         </div>
             <ul class="b-hub-item__answers">
@@ -30,6 +37,7 @@
                         <div class="b-hub-item__content">
                             <div class="b-hub-item__info">
                                 <span>Ответ</span>
+                                <div class="b-hub-item__date">{{ answer.add_date|naturalday }}</div>
                             </div>
                             <div class="b-hub-item__author">
                                 {%  user answer.user %}

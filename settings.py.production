@@ -169,7 +169,7 @@ CKEDITOR_CONFIGS = {
         'width' : '100%',
         'height': '200',
         'resize_enabled' : False,
-        'placeholder': u'Текст'
+        'placeholder': u'Введите текст'
     }
 }
 

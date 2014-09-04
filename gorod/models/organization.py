@@ -129,7 +129,9 @@ class Organization(models.Model):
     email = models.EmailField(blank=True)
     logo = models.ImageField(max_length=255, upload_to='organizations/', default='', blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    #map_link = models.CharField(blank=True, max_length=255)
+    # Link on yandex map constructor
+    map_link = models.CharField(blank=True, max_length=450, null=True,
+                                help_text="Yandex map constructor link from: http://api.yandex.ru/maps/tools/constructor/")
     #twitter_link = models.URLField(blank=True)
     #vk_link = models.URLField(blank=True)
     #ok_link = models.URLField(blank=True)

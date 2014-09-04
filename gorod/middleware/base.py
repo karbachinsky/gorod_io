@@ -41,7 +41,7 @@ class RedirectOldCityUrlsMiddleware(object):
     """
     def process_request(self, request):
 
-        redirects = ('_redirect_towns', '_redirect_pk')
+        redirects = ('_redirect_towns', '_redirect_pk', '_redirect_hub')
 
         for func in redirects:
             redirect = getattr(self, func)(request)
@@ -60,6 +60,18 @@ class RedirectOldCityUrlsMiddleware(object):
         redirect_url = request.path.replace('/PK', '/pk', 1)
 
         return self._resolve_redirect_url(redirect_url)
+
+    def _redirect_hub(self, request):
+        """
+            hub -> question
+        """
+        if not '/hub' in request.path:
+            return None
+
+        redirect_url = request.path.replace('/hub', '/question', 1)
+
+        return self._resolve_redirect_url(redirect_url)
+
 
     def _redirect_towns(self, request):
         """

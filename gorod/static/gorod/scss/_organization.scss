@@ -41,7 +41,7 @@
 		text-decoration: none;
 	}
 	
-	li{
+	>li{
 		position: relative;
 		padding-left: 40px;
 		margin:0 0 20px;
@@ -95,9 +95,7 @@
 li.b-organization__description{
 	margin:40px 0 20px;
 
-	p{
-		margin:10px 0;
-	}
+	@include default-text();
 }
 
 @media screen and (max-width: 630px) { 

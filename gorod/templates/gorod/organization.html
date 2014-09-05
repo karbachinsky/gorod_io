@@ -26,6 +26,12 @@
                 <span>{{ breadcrumb }}</span>
             {% endfor %}
         </div>
+
+        {% if organization.map_link %}
+            <div class="b-organization__map">
+                <script type="text/javascript" charset="utf-8" src="{{ organization.map_link }}"></script>
+            </div>
+        {% endif %}
         
         <ul class="b-organization__info">
 

@@ -51,7 +51,7 @@ class GorodUserAdmin(UserAdmin):
     form = GorodUserChangeForm
     add_form = GorodUserCreationForm
 
-    list_display = ('id', 'username', 'email', 'first_name', 'last_name', 'date_joined', 'city', 'is_staff')
+    list_display = ('id', 'is_staff', 'username', 'email', 'first_name', 'last_name', 'date_joined', 'city')
 
     # Redefining fields adding profile fields like city
     # May we should just append these fields to default?
@@ -68,7 +68,7 @@ class GorodUserAdmin(UserAdmin):
             'fields': ('username', 'password1', 'password2', 'city')
         }),
     )
-
+    ordering = ['-date_joined']
 
 class CityAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'title', 'add_date')
@@ -207,3 +207,30 @@ admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(OrganizationCategory, OrganizationCategoryAdmin)
 admin.site.register(Complaint, ComplaintAdmin)
 
+## Ckeditor to flatpages
+
+from django.contrib import admin
+from django.contrib.flatpages.models import FlatPage
+
+# Note: we are renaming the original Admin and Form as we import them!
+from django.contrib.flatpages.admin import FlatPageAdmin as FlatPageAdminOld
+from django.contrib.flatpages.admin import FlatpageForm as FlatpageFormOld
+
+from django import forms
+from ckeditor.widgets import CKEditorWidget
+
+
+class FlatpageForm(FlatpageFormOld):
+    content = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = FlatPage # this is not automatically inherited from FlatpageFormOld
+
+
+class FlatPageAdmin(FlatPageAdminOld):
+    form = FlatpageForm
+
+
+# We have to unregister the normal admin, and then reregister ours
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, FlatPageAdmin)

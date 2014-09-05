@@ -8,6 +8,8 @@ from django.views.generic import TemplateView
 from gorod.views import base, user, complaint
 from gorod.utils.sitemap import sitemaps
 
+from django.contrib.flatpages import views
+
 urlpatterns = patterns('',
     # Project main page
     url(r'^$', base.IndexView.as_view(), name='index'),
@@ -25,7 +27,10 @@ urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name='sitemap'),
 
     ## Static pages
-    url(r'^rules/?', TemplateView.as_view(template_name="gorod/rules.html"), name='rules'),
+    url(r'^license/?', TemplateView.as_view(template_name="gorod/rules.html"), name='rules'),
+    #url(r'^help/?', TemplateView.as_view(template_name="gorod/help.html"), name='help'),
+    #url(r'^help/?', TemplateView.as_view(template_name="gorod/help.html"), name='help'),
+    url(r'(?P<url>help)/?$', views.flatpage, {'url': '/help/'}, name='help'),
 
     # Complaint add
     url(r'^complaint/?', complaint.ComplaintAddView.as_view(), name='complaint'),

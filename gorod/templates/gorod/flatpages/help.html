@@ -1,0 +1,30 @@
+{% extends 'gorod/layout.html' %}
+
+{% load staticfiles %}
+
+{% block meta_title %}
+    {{ flatpage.title }}
+{% endblock %}
+
+{% block meta_description %}
+    Что такое городской конструктор. Как добавить свой город и начать публиковать новости и добавлять организации.
+{% endblock %}
+
+{% block header %}
+    <div class="b-header">
+	    <div class="b-header__content">
+            Руководство пользователя
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="b-help__wrapper">
+    <div class="b-help">
+        <div class="b-help__content">
+            {{ flatpage.content }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

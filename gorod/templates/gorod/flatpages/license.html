@@ -1,0 +1,30 @@
+{% extends 'gorod/layout.html' %}
+
+{% load staticfiles %}
+
+{% block meta_title %}
+    {{ flatpage.title }}
+{% endblock %}
+
+{% block meta_description %}
+    Правила пользования сервисом gorod.io
+{% endblock %}
+
+{% block header %}
+    <div class="b-header">
+	    <div class="b-header__content">
+            Пользовательское соглашение
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="b-liceinse__wrapper">
+    <div class="b-license">
+        <div class="b-license__content">
+            {{ flatpage.content }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

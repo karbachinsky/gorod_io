@@ -28,7 +28,7 @@ urlpatterns = patterns('',
 
     ## Static pages
     #url(r'^license/?', TemplateView.as_view(template_name="gorod/rules.html"), name='rules'),
-    url(r'(?P<url>license)/?$', views.flatpage, {'url': '/license/'}, name='rules'),
+    url(r'(?P<url>license)/?$', views.flatpage, {'url': '/license/'}, name='license'),
     url(r'(?P<url>help)/?$', views.flatpage, {'url': '/help/'}, name='help'),
 
     # Complaint add

@@ -27,9 +27,8 @@ urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name='sitemap'),
 
     ## Static pages
-    url(r'^license/?', TemplateView.as_view(template_name="gorod/rules.html"), name='rules'),
-    #url(r'^help/?', TemplateView.as_view(template_name="gorod/help.html"), name='help'),
-    #url(r'^help/?', TemplateView.as_view(template_name="gorod/help.html"), name='help'),
+    #url(r'^license/?', TemplateView.as_view(template_name="gorod/rules.html"), name='rules'),
+    url(r'(?P<url>license)/?$', views.flatpage, {'url': '/license/'}, name='rules'),
     url(r'(?P<url>help)/?$', views.flatpage, {'url': '/help/'}, name='help'),
 
     # Complaint add

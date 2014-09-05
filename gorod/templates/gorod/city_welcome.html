@@ -34,5 +34,22 @@
         </div>
     </div>
 </div>
+<div class="b-feed__wrapper">
+        {% include "gorod/feed/_feed_item.html" %}
+        <script>
+            $(function(){
+                window.ajaxFeed();
+            });
+        </script>
+        <div class="b-feed">
+            <span class="b-feed__title">Читать также</span>
+            <ul class="b-feed__list">
+                <div class="grid-sizer"></div>
+                <div class="gutter-sizer"></div>
+            </ul>
+            <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
+           
+        </div>
+    </div>
 {% endblock %}
 

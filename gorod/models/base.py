@@ -95,3 +95,4 @@ class CityWelcome(models.Model):
             'city_name': self.city.name,
         })
 
+

@@ -86,6 +86,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social.apps.django_app.context_processors.login_redirect',
     # Gorod
     'gorod.context_processors.base.base_params',
+    'django.contrib.flatpages'
 )
 
 ROOT_URLCONF = 'urls'

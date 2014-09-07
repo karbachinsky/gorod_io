@@ -15,10 +15,14 @@
             <div class="grid-sizer"></div>
             <div class="gutter-sizer"></div>
 
-            {% for organization in organizations %}
+            {% for category, category_orgs in organizations.items %}
                 <li class="b-orgs__item">
-                    <span>{{ organization.category }}</span>
-                    <a href="{% url 'gorod:organization' city.name organization.id %}">{{ organization.name }}</a>                 
+                    <span class="b-orgs__category">{{ category }}</span>
+                    {% for org in category_orgs %}
+                        <div class="b-orgs__organization">
+                            <a href="{{ org.url }}">{{ org.name }}</a>
+                        </div>
+                    {% endfor %}
                 </li>
             {% endfor %}
 

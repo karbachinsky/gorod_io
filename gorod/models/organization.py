@@ -184,6 +184,8 @@ class Organization(models.Model):
             'organization_id': self.id
         })
 
+    url = property(get_absolute_url)
+
     def __unicode__(self):
         return self.name
 

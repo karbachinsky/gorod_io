@@ -10,11 +10,17 @@ class OrganizationsView(View):
     """
     def dispatch(self, request, city_name):
         organizations = Organization.objects.filter(city__name=city_name)\
-                                            .order_by('name')\
                                             .select_related()
 
+        organizations_grouped = dict()
+
+        for organization in organizations:
+            if not organization.category in organizations_grouped:
+                organizations_grouped[organization.category] = list()
+            organizations_grouped[organization.category].append(organization)
+
         context = {
-            'organizations': organizations,
+            'organizations': organizations_grouped,
         }
 
         return render(request, 'gorod/organizations.html', context)

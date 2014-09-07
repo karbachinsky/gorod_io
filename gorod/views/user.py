@@ -3,6 +3,7 @@ from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user_model
 from django.views.generic import View
+from django.core.urlresolvers import reverse
 
 from gorod.models import Article
 
@@ -38,9 +39,15 @@ class LogoutView(View):
         Logout action.
     """
     def dispatch(self, request):
-        logout(request)
-        # FIXME please
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        try:
+            city = request.user.city
+            logout(request)
+            return HttpResponseRedirect(
+                reverse('gorod:city-main-page', kwargs=dict(city_name=city.name))
+            )
+        except AttributeError:
+            # Case when someone tries to logout if he is not authed
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 class OldUserRedirectView(View):

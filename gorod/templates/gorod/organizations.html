@@ -19,9 +19,9 @@
                 <li class="b-orgs__item">
                     <span class="b-orgs__category">{{ category }}</span>
                     {% for org in category_orgs %}
-                        <div class="b-orgs__organization">
+                        <p class="b-orgs__organization">
                             <a href="{{ org.url }}">{{ org.name }}</a>
-                        </div>
+                        </p>
                     {% endfor %}
                 </li>
             {% endfor %}

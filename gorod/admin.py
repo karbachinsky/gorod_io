@@ -70,6 +70,7 @@ class GorodUserAdmin(UserAdmin):
     )
     ordering = ['-date_joined']
 
+
 class CityAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'title', 'add_date')
 

@@ -27,6 +27,9 @@ class OrganizationCategory(MPTTModel):
     title = models.CharField(max_length=255)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
 
+    class MPTTMeta:
+        order_insertion_by = ['title']
+
     class Meta:
         app_label = 'gorod'
         db_table = 'gorod_organizationcategory'

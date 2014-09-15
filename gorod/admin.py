@@ -38,6 +38,11 @@ class GorodAdminBase(admin.ModelAdmin):
         """ get url name for object by it's class name"""
         return obj.__class__.__name__.lower()
 
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "city":
+            kwargs["queryset"] = City.objects.order_by('title')
+        return super(GorodAdminBase, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 class GorodUserCreationForm(UserCreationForm):
     pass

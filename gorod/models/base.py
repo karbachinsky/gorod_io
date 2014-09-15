@@ -26,7 +26,7 @@ class City(models.Model):
         verbose_name_plural = 'cities'
 
     def __unicode__(self):
-        return self.name
+        return self.title
 
     def save(self, *args, **kwargs):
         if not self.title_gent:

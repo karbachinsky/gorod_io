@@ -10,8 +10,6 @@
     Городской конструктор. Сайт gorod.io и мобильное приложение для вашего города.
 {% endblock %}
 
-{#{% block meta_additional %}<meta name="viewport" content="width=1200" />{% endblock %}#}
-
 {% block body-class %}body_main{% endblock %}
 
 {% block header %}{% endblock %}
@@ -19,60 +17,101 @@
 {% block content %}
 <div class="b-index">
     <div class="b-index-header">
-        <span class="b-index-header__city">ГОРОДСКОЙ КОНСТРУКТОР</span>
-        <span class="b-index-header__paltform">сайт и мобильное приложение для вашего города</span>
+        <div class="b-index-header__content">
+            <span class="b-index-header__city">ГОРОДСКОЙ КОНСТРУКТОР</span>
+            <div class="b-index-header__paltform">Сайт и мобильное приложение для вашего города</div>
+            <p class="b-index-header__text">Городской конструктор предоставляет жителям больших и малых городов готовую площадку для развития местного сообщества и совместных инициатив</p>
+        </div>
     </div>    
     <div class="b-index-cities">
-        <ul class="b-index-cities__list">
-            {% for city in cities %}
-                <li class="b-index-cities__item">
-                    <a href="{% url 'gorod:city-main-page' city.name %}">
-                        <span class="b-index-cities__title">{{ city.title }}</span>
-                        <span class="b-index-cities__region">{{ city.region }}</span>     
-                    </a>      
-                </li>
-            {% endfor %}
+        <div class="b-index-cities__content">
+            <h4>Примеры городов</h4>
+            <ul class="b-index-cities__list">
+                {% for city in cities %}
+                    <li class="b-index-cities__item">
+                        <a href="{% url 'gorod:city-main-page' city.name %}">
+                            <span class="b-index-cities__title">{{ city.title }}</span>
+                            <span class="b-index-cities__region">{{ city.region }}</span>     
+                        </a>      
+                    </li>
+                {% endfor %}
+                <div class="clear"></div>
+            </ul>
+            <div class="b-index-cities__add">
+                <a href="#">Добавить город</a>
+                <p>Городской конструктор используется жителями бесплатно</p>
+            </div>
             <div class="clear"></div>
-        </ul>
-    </div>   
-    <div class="b-index-info">
-        <div class="b-index-info__descr">Городской конструктор предоставляет жителям больших и малых городов готовую площадку для развития местного сообщества и совместных инициатив.</div>
-        <div class="b-index-info__devider"></div>
-
-        <div class="b-index-info__text">
-                <div>
-                    <h3>Лента города</h3>
-                    <p>События, афиша, фотографии города, опубликованные местными жителями</p>
-                </div>
-                <div>
-                    <h3>Каталог организаций города</h3>
-                    <p>Информация об организациях, услугах, контактная информация</p>
-                </div>
-                <div>
-                    <h3>У нашего города уже есть сайт. Зачем ещё один?</h3>
-                    <p>Городские сайты создаются энтузиастами, которым приходится решать много технических вопросов: оплата хостинга, настройка и модерация форума. Благодаря нашей платформе такие вопросы даже не возникнут.</p> 
-                    <p>Довольно часто найти что-то полезное и свежее на таких сайтах не представляется возможным.</p>
-                </div>
-                <div>
-                    <h3>Как это всё работает?</h3>
-                    <p>Местные жители, используя сайт или мобильное приложение, могут легко и быстро публиковать местные новости, информацию о мероприятиях, важных городских событиях. Это полноценный сайт города с набором всех необходимых инструментов для общения местных жителей.</p>
-                </div>
         </div>
+    </div>   
 
-        <div class="b-index-info__devider"></div>
 
-        <div class="b-index-info__how">
-            <i></i>
-            <p><a href="mailto:hola@gorod.io">Напишите нам</a> для активации платформы в своем городе</p>
+    <div class="b-index-info">
+        <div class="b-index-info__content">
+            <div class="b-index-info__row">
+                <h4>Возможности</h4>
+                <div class="b-index-info__item b-index-info__item_1">
+                    <div class="b-index-info__img"></div>
+                    <div class="b-index-info__heading">Организация местного СМИ</div>
+                    <div class="b-index-info__text">Используйте онлайн-редактор <br />для публикации местных новостей <br/>и событий.</div>
+                </div>
+                <div class="b-index-info__item b-index-info__item_2">
+                    <div class="b-index-info__img"></div>
+                    <div class="b-index-info__heading">Площадка для городского <br />сообщества</div>
+                    <div class="b-index-info__text">Используя сервис, объединяйтесь <br />для решения городских задач</div>
+                </div>
+                <div class="b-index-info__item b-index-info__item_3">
+                    <div class="b-index-info__img"></div>
+                    <div class="b-index-info__heading">Гиперлокальное <br />мобильное приложение</div>
+                    <div class="b-index-info__text">В разработке</div>
+                </div>
+            </div>
+            <div class="b-index-info__row">
+                <h4>ДЕТАЛИ КОНСТРУКТОРА</h4>
+                <div class="b-index-info__item b-index-info__item_1">
+                    <div class="b-index-info__img"></div>
+                    <div class="b-index-info__heading">ЛЕНТА ГОРОДА</div>
+                    <div class="b-index-info__text">Публикация новостей, фото, <br />анонсов мероприятий</div>
+                </div>
+                <div class="b-index-info__item b-index-info__item_2">
+                    <div class="b-index-info__img"></div>
+                    <div class="b-index-info__heading">ОРГАНИЗАЦИИ</div>
+                    <div class="b-index-info__text">Бизнес становится участником <br />городского сообщества и может <br />продвигаь свои услуги</div>
+                </div>
+                <div class="b-index-info__item b-index-info__item_3">
+                    <div class="b-index-info__img"></div>
+                    <div class="b-index-info__heading">Вопросы и ответы</div>
+                    <div class="b-index-info__text">Жители могут задавать вопросы <br />и оставлять ответы, создавая <br />городскую базу данных полезной <br />информации</div>
+                </div>
+            </div>
+            <div class="b-index-info__row">
+                <h4>ФИЧИ</h4>
+                <div class="b-index-info__item b-index-info__item_1">
+                    <div class="b-index-info__img"></div>
+                    <div class="b-index-info__heading">Быстрая авторизация</div>
+                    <div class="b-index-info__text">Авторизация с помощью <br />социальных сетей за несколько <br />секунд</div>
+                </div>
+                <div class="b-index-info__item b-index-info__item_2">
+                    <div class="b-index-info__img"></div>
+                    <div class="b-index-info__heading">Удобный онлайн-редактор</div>
+                    <div class="b-index-info__text">Редактор для быстрой публикации <br />новостей и афиши</div>
+                </div>
+                <div class="b-index-info__item b-index-info__item_3">
+                    <div class="b-index-info__img"></div>
+                    <div class="b-index-info__heading">Всё настроено</div>
+                    <div class="b-index-info__text">Не требуется домен, хостинг <br />и работа программистов</div>
+                </div>
+            </div>
+
+            <div class="b-index-info__house"></div>
         </div>
 
 
     </div>
     <div class="b-index-footer">
-        <a target="_blank" href="http://localhub.tumblr.com/">НАШ БЛОГ</a>
-        <a href="{% url 'license' 'license' %}" rel="nofollow">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</a>
+        <a target="_blank" href="http://localhub.tumblr.com/">БЛОГ</a>
         <a href="{% url 'help' 'help' %}" rel="nofollow">ПОМОЩЬ</a>
-        <!--<a class="b-index-footer__error" href="#">СООБЩИТЬ ОБ ОШИБКЕ</a>-->
+        <a href="{% url 'license' 'license' %}" rel="nofollow">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</a>
     </div>
 </div>
 {% endblock %}

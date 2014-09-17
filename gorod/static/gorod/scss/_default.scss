@@ -77,6 +77,7 @@ $gray-color-dark: #444444;
 	color:#fff;
 	cursor: pointer;
 	text-transform: uppercase;
+	text-decoration: none;
 	padding: 9px 25px 8px;
 	background: $green-color;
 	@include box-shadow(0px 2px 0px #ddd);

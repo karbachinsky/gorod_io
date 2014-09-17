@@ -3,6 +3,7 @@ from django.views.generic import View
 
 from gorod.models import City, Organization
 
+from collections import OrderedDict
 
 class OrganizationsView(View):
     """
@@ -20,7 +21,7 @@ class OrganizationsView(View):
             organizations_grouped[organization.category].append(organization)
 
         context = {
-            'organizations': organizations_grouped,
+            'organizations': OrderedDict(sorted(organizations_grouped.items(), key=lambda c: c[0].title)),
         }
 
         return render(request, 'gorod/organizations.html', context)

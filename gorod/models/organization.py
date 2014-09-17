@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 
 from ckeditor.fields import RichTextField
 from mptt.models import MPTTModel, TreeForeignKey
+from mptt.managers import TreeManager
 
 from gorod.models import City
 
@@ -19,6 +20,9 @@ class OrganizationCategoryManager(models.Manager):
         return self.model.objects.filter(level=0)
 
 
+class OrganizationCategoryTreeManager(TreeManager):
+    pass
+
 class OrganizationCategory(MPTTModel):
     """
         Organization category tree
@@ -26,6 +30,8 @@ class OrganizationCategory(MPTTModel):
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
+
+    tree = OrganizationCategoryTreeManager()
 
     class MPTTMeta:
         order_insertion_by = ['title']

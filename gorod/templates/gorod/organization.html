@@ -1,79 +1,53 @@
 {% extends 'gorod/layout.html' %}
 
 {% load staticfiles %}
+{% load humanize %}
 
 {% block meta_title %}{{ organization.name }} - {{city.title}}{% endblock %}
 
 {% block meta_description %}{{ organization.name }} - {{city.title}}{% endblock %}
 
 {% block content %}
+<div class="b-organization__wrapper">
     <div class="b-organization">
+        <div class="b-organization__content">
+            <span class="b-organization__breadcrumbs">{{ organization.category_breadcrumbs.0 }}</span>
+            <span class="b-organization__date">{{ organization.add_date|naturalday }}</span>
 
-        {% if request.user.is_superuser %}
-            <a class="edit-link" href="{% url 'admin:gorod_organization_change' organization.id %}?source=main">Редактировать</a>
-        {% endif %}
-        
-        {% if organization.logo %}
-            <div class="b-organization__logo">
-                <img  src="{{ organization.logo.url}}" title="{{ organization.name}}" />
+           
+            <h2 class="b-organization__name">{{ organization.name }}</h2>
+            
+            <div class="b-organization__info">
+                {% if organization.phones %}
+                    <span class="b-organization__phone">{{ organization.phones.0 }}</span>
+                {% endif %}
+                {% if organization.addresses %}
+                    <span class="b-organization__address">{{ organization.addresses.0 }}</span>
+                {% endif %}
+                {% if organization.web_site %}
+                    <a href="{{ organization.web_site }}" class="b-organization__web-site">{{ organization.web_site }}</a>
+                {% endif %}
             </div>
-        {% endif %}
-
-        <h2 class="b-organization__name">{{ organization.name }}</h2>
-        <div class="b-organization__breadcrumbs">
-            {% for breadcrumb in organization.category_breadcrumbs %}
-                {% if not forloop.first %}/{% endif %}
-                <span>{{ breadcrumb }}</span>
-            {% endfor %}
-        </div>
-
-        {% if organization.map_link %}
-            <div class="b-organization__map">
-                <script type="text/javascript" charset="utf-8" src="{{ organization.map_link }}"></script>
-            </div>
-        {% endif %}
-        
-        <ul class="b-organization__info">
-
-            {% if organization.addresses %}
-                <li class="b-organization__address">
-                    <i class="b-organization__icon"></i>
-                    {% for address in organization.addresses %}
-                        <span>{{ address }}</span>
-                    {% endfor %}
-                </li>
+            {% if organization.map_link %}
+                <div class="b-organization__map">
+                    <script type="text/javascript" charset="utf-8" src="{{ organization.map_link }}"></script>
+                </div>
             {% endif %}
 
-            {% if organization.phones %}
-                <li class="b-organization__phone">
-                    <i class="b-organization__icon"></i>
-                    {% for phone in organization.phones %}
-                        <span>{{ phone }}</span>
-                    {% endfor %}
-                </li>
-            {% endif %}
-
-            {% if organization.web_site %}
-                <li class="b-organization__web-site">
-                    <i class="b-organization__icon"></i>
-                    <a href="{{ organization.web_site }}"  target="blank">{{ organization.web_site }}</a>
-                </li>
-            {% endif %}
-
-            {% if organization.email %}
-                <li class="b-organization__email">
-                    <i class="b-organization__icon"></i>
-                    <a href="mailto:{{ organization.email }}"  target="blank">{{ organization.email }}</a>
-                </li>
+            {% if organization.description %}
+                <div class="b-organization__description">
+                    {% autoescape off %}
+                        {{ organization.description }} 
+                    {% endautoescape %} 
+                </div>
             {% endif %}
             
             {% if organization.schedules %}
-                <li class="b-organization__schedules">
-                    <i class="b-organization__icon"></i>
+                <div class="b-organization__schedules">
                     {% for schedule in organization.schedules %}
                         <div class="b-organization__schedule">
                             <span class="b-organization__schedule-day">
-                                {{ schedule.day_name_rus }}:
+                                {{ schedule.day_name_rus }} &mdash;
                             </span>
                             <span class="b-organization__schedule-time_from">
                                 {{ schedule.time_from }}
@@ -84,36 +58,21 @@
                             </span>
                         </div>
                     {% endfor %}
-                </li>
-            {% endif %}
-
-            {% if organization.twitter_link or organization.vk_link or organization.ok_link or organization.my_mail_link %}
-                <li class="b-organization__social-links">
-                    {% if organization.twitter_link %}
-                        <a href="{{ organization.twitter_link }}"  target="blank">Twitter</a>
-                    {% endif %}
-                    {% if organization.vk_link %}
-                        <a href="{{ organization.vk_link }}"  target="blank">Вконтакте</a>
-                    {% endif %}
-                    {% if organization.ok_link %}
-                        <a href="{{ organization.ok_link }}"  target="blank">Одноклассники</a>
-                    {% endif %}
-                    {% if organization.my_mail_link %}
-                        <a href="{{ organization.my_mail_link }}"  target="blank">Мой мир</a>
-                    {% endif %}
-                </li>
-            {% endif %}
-
-            
-
-            {% if organization.description %}
-                <li class="b-organization__description">
-                    {% autoescape off %}
-                        {{ organization.description }} 
-                    {% endautoescape %} 
-                </li>
-            {% endif %}
-        </ul>
+                </div>
+            {% endif %} 
+            <div class="b-article__service">
+                <div class="b-article__share">
+                    <span class="b-article__share-text">Поделиться:</span>
+                    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+                    <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir" data-yashareTheme="counter"></div> 
+                </div>
+                <div class="b-article__complaint">
+                    <a href="mailto:hola@gorod.io"><i></i>Пожаловаться</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}
 

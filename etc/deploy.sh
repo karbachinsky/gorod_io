@@ -81,8 +81,8 @@ execute_remote $host  "cd $app_dir; git pull origin"
 execute_remote $host "cd $app_dir; cp settings.py.production settings.py"
 
 # Updating db
-execute_remote $host "cd $app_dir; ./manage.py schemamigration gorod --auto"
-execute_remote $host "cd $app_dir; ./manage.py migrate gorod"
+#execute_remote $host "cd $app_dir; ./manage.py schemamigration gorod --auto"
+#execute_remote $host "cd $app_dir; ./manage.py migrate gorod"
 
 # Updating static
 execute_remote $host "cd $app_dir; ./manage.py collectstatic"

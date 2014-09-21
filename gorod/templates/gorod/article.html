@@ -19,9 +19,9 @@
                 });
             }
             else {
-                // Scroll to comment previous to last
+                // Scroll to last
                 $(".b-article__comments").show();
-                $(location).attr('hash', "#" + $(".b-comment:last").prev().find("a").attr("name"));
+                $(location).attr('hash', "#" + $(".b-comment:last a").attr("name"));
             }
 
             var comments = new Comments();

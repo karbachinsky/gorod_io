@@ -73,10 +73,15 @@
     Comments.prototype._formFailAnswerProcessing = function(jqXHR, textStatus, errorThrown) {
         var self = this;
 
-        var error = jQuery.parseJSON(jqXHR.responseText);
+        var errorText;
+        try {
+            var error = jQuery.parseJSON(jqXHR.responseText);
 
-        var errorText = error ? error['error'][0][1][0] : defaultErrorMsg;
-
+            errorText = error['error'][0][1][0];
+        }
+        catch (e) {
+            errorText = self.defaultErrorMsg;
+        }
         self.$commentFormError.text(errorText);
         self.$commentFormError.show();
         self.$commentFormSubmitButton.removeAttr("disabled");

@@ -50,8 +50,13 @@ INSTALLED_APPS = (
     #'captcha',
     'smart_selects',
     'django_mptt_admin',
-    'django.contrib.flatpages'
+    'django.contrib.flatpages',
+    'django.contrib.comments',
+    'comments'
 )
+
+COMMENTS_APP = 'comments'
+COMMENT_MAX_LENGTH = 300
 
 SITE_ID = 1
 
@@ -139,6 +144,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     '/home/g/gorodin/gorod.in/gorod/static',
+    '/home/g/gorodin/gorod.in/comments/static',
     '/home/g/gorodin/.venv/lib/python2.7/site-packages/django/contrib/admin/static',
     '/home/g/gorodin/.venv/lib/python2.7/site-packages/ckeditor/static',
     '/home/g/gorodin/.venv/lib/python2.7/site-packages/django_mptt_admin/static'
@@ -212,6 +218,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 GOROD_ARTICLE_MAX_ADD_IN_HOUR_CNT = 3
+GOROD_COMMENT_MAX_ADD_IN_HOUR_CNT = 20
 
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',

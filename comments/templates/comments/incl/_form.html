@@ -1,0 +1,30 @@
+{% load comments i18n %}
+
+<div class="b-comments__add">
+    <a name="comments-add"></a>
+    {% if user.is_authenticated %}
+        <form class="b-comments__add-form" action="{% comment_form_target %}" method="POST">
+            {% csrf_token %}
+            {{ form.honeypot }}
+            {{ form.content_type }}
+            {{ form.object_pk }}
+            {{ form.timestamp }}
+            {{ form.security_hash }}
+
+            <p class="error"></p>
+
+            {{ form.comment }}
+
+            {% if node.id %}
+                <input type="hidden" name="parent" id="parent_id" value="{{ node.id }}" />
+            {% endif %}
+
+            <input type="hidden" name="next" value="{{ object.url }}" />
+            <p>
+                <input type="submit" value="Добавить комментарий" id="id_submit" />
+            </p>
+        </form>
+    {% else %}
+        <p><a href="" class="b-comments__add__login">Авторизуйтесь</a>, чтобы добавлять комментарии!</p>
+    {% endif %}
+</div>

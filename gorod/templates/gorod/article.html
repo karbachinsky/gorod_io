@@ -8,6 +8,61 @@
 
 {% block meta_description %}{{ article.title }} - {{city.title}}{% endblock %}
 
+{% block static_additional %}
+    <script src="{% static 'comments/js/comments.js' %}"></script>
+    <script>
+        // open comments
+        $(function(){
+            if ($(location).attr('hash') != "#comments-cnt") {
+                $(".b-comments-cnt__link").on("click", function() {
+                    $(".b-article__comments").show();
+                });
+            }
+            else {
+                // Scroll to comment previous to last
+                $(".b-article__comments").show();
+                $(location).attr('hash', "#" + $(".b-comment:last").prev().find("a").attr("name"));
+            }
+
+            var comments = new Comments();
+        });
+    </script>
+    <style>
+        .b-article__comments {
+            margin-top: 50px;
+            display: none;
+        }
+
+        .b-comments-cnt {
+            float: right;
+            padding: 28px 10px 0 0;
+        }
+
+        .b-comment {
+            margin-bottom: 30px;
+        }
+
+        .b-comment__user {
+            float: left;
+        }
+
+        .b-comment__date {
+            float: right;
+        }
+
+        .b-comment__text {
+            margin-top: 10px;
+        }
+
+        #id_honeypot {
+            display: none;
+        }
+
+        .b-comments__add .error{
+            color: red;
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
     <div class="b-article__wrapper">
@@ -33,8 +88,6 @@
                 </div>
                 
                 <h2 class="b-article__title">{{ article.title }}</h2>
-                            
-                
 
                 <div class="b-article__text">
                     {% autoescape off %}
@@ -56,6 +109,16 @@
                     <div class="b-article__complaint">
                         <a href="mailto:hola@gorod.io"><i></i>Пожаловаться</a>
                     </div>
+
+                    {% with article as object %}
+                    {% include "comments/incl/_comments_cnt.html" %}
+
+                    <div class="clear"></div>
+                    <div class="b-article__comments">
+                        {% include "comments/incl/_comments.html" %}
+                    </div>
+                    {% endwith %}
+
                     <div class="clear"></div>
                 </div>
             </div>

@@ -33,8 +33,8 @@ class AddView(JSONResponseMixin, TemplateView):
         user = request.user
 
         # FIXME: spike!
-        data["name"] = user.username
-        data["email"] = user.email
+        data["name"] = user.username or "Unknown"
+        data["email"] = user.email or "Unknown@mail"
 
         if ctype is None or object_pk is None:
             return self.json_form_error_context(_(u'Кажется, что-то пошло не так :('))

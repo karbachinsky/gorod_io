@@ -1,0 +1,16 @@
+{% load user %}
+{% load humanize %}
+
+<div class="b-comment">
+    <a name="c{{ comment.id }}"></a>
+    <div class="b-comment__user">
+        {% user comment.user %}
+    </div>
+    <div class="b-comment__date">
+        {{ comment.submit_date|naturalday }}
+    </div>
+    <div class="clear"></div>
+    <div class="b-comment__text">
+        {{ comment.comment }}
+    </div>
+</div>

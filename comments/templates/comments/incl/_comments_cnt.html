@@ -1,0 +1,13 @@
+{% load comments %}
+
+<div class="b-comments-cnt">
+    {% get_comment_count for article as comments_cnt  %}
+
+    <a name="comments-cnt" class="b-comments-cnt__link" href="#comments-cnt">
+        {% if comments_cnt > 0 %}
+            {{ comments_cnt }} комментари{{comments_cnt|pluralize:"й,ев"}}
+        {% else %}
+            Добавить комментарий
+        {% endif %}
+    </a>
+</div>

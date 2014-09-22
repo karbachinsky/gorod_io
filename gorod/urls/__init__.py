@@ -8,7 +8,8 @@ from django.views.generic import TemplateView
 from gorod.views import base, user, complaint
 from gorod.utils.sitemap import sitemaps
 
-from django.contrib.flatpages import views
+from django.contrib.flatpages import views as flatpages_views
+
 
 urlpatterns = patterns('',
     # Project main page
@@ -20,16 +21,21 @@ urlpatterns = patterns('',
     # Captcha
     url(r'^captcha/', include('captcha.urls')),
 
+    # Comments
+    #url(r'^comments/add/?', CommentsAddView.as_view(), name='comments-add'),
+    url(r'^comments/', include('comments.urls')),
+
     ## API urls
     url(r'^api/', include('gorod.urls.api', namespace='gorodapi')),
 
     # Sitemap.xml
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name='sitemap'),
 
+
     ## Static pages
     #url(r'^license/?', TemplateView.as_view(template_name="gorod/rules.html"), name='rules'),
-    url(r'(?P<url>license)/?$', views.flatpage, {'url': '/license/'}, name='license'),
-    url(r'(?P<url>help)/?$', views.flatpage, {'url': '/help/'}, name='help'),
+    url(r'(?P<url>license)/?$', flatpages_views.flatpage, {'url': '/license/'}, name='license'),
+    url(r'(?P<url>help)/?$', flatpages_views.flatpage, {'url': '/help/'}, name='help'),
 
     # Complaint add
     url(r'^complaint/?', complaint.ComplaintAddView.as_view(), name='complaint'),

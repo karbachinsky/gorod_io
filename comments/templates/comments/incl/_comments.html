@@ -1,0 +1,29 @@
+{% load comments %}
+
+{% load mptt_tags %}
+
+{% get_comment_list for object as comments %}
+
+<div class="b-comments">
+    <a name="comments"></a>
+    {% if comments %}
+        {% recursetree comments %}
+            {# Display single comment #}
+            {% with node as comment %}
+                {% include "comments/incl/_comment.html" %}
+            {% endwith %}
+
+            <!--
+            {% render_comment_form for object %}
+            -->
+
+            {# recursion! children of a given comment #}
+            {% if not node.is_leaf_node %}
+                {{ children }}
+            {% endif %}
+        {% endrecursetree %}
+    {% endif %}
+</div>
+
+{% get_comment_form for object as form %}
+{% include "comments/incl/_form.html" %}

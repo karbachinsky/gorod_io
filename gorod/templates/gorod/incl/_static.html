@@ -26,6 +26,7 @@
                         rubricTitle: '{{ article.rubric.name }}',
                     {% endif %}
                 },
+                commentAddUrl: '{% url 'comments-add' %}',
             {% endif %}    
             
             {% if user_info %}

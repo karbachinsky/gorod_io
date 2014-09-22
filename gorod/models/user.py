@@ -51,8 +51,11 @@ class User(AbstractUser):
         """
         userstat = self.get_stat()
 
+        # FIXME
         if action == 'add-article':
             return userstat.can_action_add_article()
+        elif action == 'add-comment':
+            return userstat.can_action_add_comment()
 
     def make_action(self, action):
         """
@@ -60,14 +63,19 @@ class User(AbstractUser):
         """
         userstat = self.get_stat()
 
+        # FIXME
         if action == 'add-article':
             userstat.make_action_add_article()
+        if action == 'add-comment':
+            userstat.make_action_add_comment()
 
 
 class UserStat(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     article_last_add_time = models.DateTimeField(null=True)
     article_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
+    comment_last_add_time = models.DateTimeField(null=True)
+    comment_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
 
     class Meta:
         app_label = 'gorod'
@@ -98,6 +106,35 @@ class UserStat(models.Model):
         if self._article_last_add_was_more_then_hour_ago():
             return True
         if self.article_add_in_last_hour_cnt < settings.GOROD_ARTICLE_MAX_ADD_IN_HOUR_CNT:
+            return True
+
+        return False
+
+    def _comment_last_add_was_more_then_hour_ago(self):
+        if not self.comment_last_add_time or\
+                self.comment_last_add_time < timezone.now() - timedelta(hours=1):
+            return True
+        return False
+
+    def make_action_add_comment(self):
+        """
+            Called when user adds comment
+        """
+        if self._comment_last_add_was_more_then_hour_ago():
+            self.comment_add_in_last_hour_cnt = 1
+            self.comment_last_add_time = timezone.now()
+        else:
+            self.comment_add_in_last_hour_cnt += 1
+
+        self.save()
+
+    def can_action_add_comment(self):
+        """
+            Checks if user can add comment now
+        """
+        if self._comment_last_add_was_more_then_hour_ago():
+            return True
+        if self.comment_add_in_last_hour_cnt < settings.GOROD_COMMENT_MAX_ADD_IN_HOUR_CNT:
             return True
 
         return False

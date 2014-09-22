@@ -8,6 +8,8 @@ from gorod.models import City
 
 from ckeditor.fields import RichTextField
 
+from smart_selects.db_fields import ChainedForeignKey
+
 
 class HubQuestionManager(models.Manager):
     def get_questions_by_city_name(self, city_name):
@@ -30,7 +32,14 @@ class HubQuestion(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     question = models.CharField(max_length=500)
     description = RichTextField(max_length=25000)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = ChainedForeignKey(
+        settings.AUTH_USER_MODEL,
+        chained_field="city",
+        chained_model_field="city",
+        show_all=False,
+        auto_choose=True,
+        on_delete=models.CASCADE
+    )
     add_date = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=True)
 

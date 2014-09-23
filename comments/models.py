@@ -13,3 +13,5 @@ class MPTTComment(MPTTModel, Comment):
 
     class Meta:
         ordering=['tree_id','lft']
+        verbose_name = 'comment'
+        verbose_name_plural = 'comments'

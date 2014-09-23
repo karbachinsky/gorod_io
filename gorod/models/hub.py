@@ -31,7 +31,7 @@ class HubQuestion(models.Model):
     """
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     question = models.CharField(max_length=500)
-    description = RichTextField(max_length=25000)
+    description = RichTextField(max_length=25000, blank=True, null=True)
     user = ChainedForeignKey(
         settings.AUTH_USER_MODEL,
         chained_field="city",

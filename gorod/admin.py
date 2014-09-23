@@ -11,6 +11,7 @@ from django_mptt_admin.admin import DjangoMpttAdmin
 from gorod.models import *
 
 
+
 class GorodAdminBase(admin.ModelAdmin):
     def response_add(self, request, obj):
         """ Redirect to object's page after add if exists param source  = main """

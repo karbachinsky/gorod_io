@@ -21,13 +21,17 @@
                         <span class="b-article__date">{{ article.add_date|naturalday }}</span>
                     </div>
                     
-                    {% if user == article.user or user.is_superuser %}
+                    {% if user == article.user %}
                         <span class="edit-link edit-link_article">Редактировать</span>
                     {% else %}
                         <div class="b-article__author">
                             {% user article.user %}
-                        </div> 
-                    {% endif %} 
+                        </div>
+                        {% if user.is_superuser %}
+                            <!-- Kirill FIXME :) -->
+                            <span style="padding-right:20px;" class="edit-link edit-link_article">Редактировать</span>
+                        {% endif %}
+                    {% endif %}
                     <div class="clear"></div>
                 </div>
                 

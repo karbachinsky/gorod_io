@@ -40,7 +40,7 @@ class RedirectOldCityUrlsMiddleware(object):
         Redirect old urls with /town/$city/*  to /$city/*
     """
     def process_request(self, request):
-        if 'admin' in request.path:
+        if any(map(lambda x: x in request.path, ('/admin', '/media'))):
             return
 
         redirects = ('_redirect_towns', '_redirect_pk', '_redirect_hub')

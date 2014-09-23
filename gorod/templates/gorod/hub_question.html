@@ -24,6 +24,11 @@
                 <h2 class="b-hub-question__title">
                     {{ question.question }}
                 </h2>
+
+                {% if question.picture and question.picture.url %}
+                    <img class="b-hub-question__picture" src="{{question.picture.url}}" />
+                {% endif %}
+
                 <div class="b-hub-question__text">
                     {% autoescape off %}
                         {{ question.description }}
@@ -43,6 +48,9 @@
                                 {%  user answer.user %}
                             </div>
                             <div class="clear"></div>
+                            {% if answer.picture and answer.picture.url %}
+                                <img class="b-hub-answer__picture" src="{{answer.picture.url}}" />
+                            {% endif %}
                             <div class="b-hub-answer__text">
                                 {% autoescape off %}
                                     {{ answer.text }}

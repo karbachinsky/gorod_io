@@ -3,9 +3,9 @@
 <div class="b-comments-cnt">
     {% get_comment_count for article as comments_cnt  %}
 
-    <a name="comments-cnt" class="b-comments-cnt__link" href="#comments-cnt">
+    <a name="comments-cnt" class="b-comments-cnt__link" href="#comments-cnt"><i></i>
         {% if comments_cnt > 0 %}
-            {{ comments_cnt }} комментари{{comments_cnt|pluralize:"й,ев"}}
+            {{ comments_cnt }}
         {% else %}
             Добавить комментарий
         {% endif %}

@@ -1,0 +1,85 @@
+.b-comments-cnt {
+    float: left;
+
+    padding: 25px 10px 0 25px;
+}
+.b-comments-cnt__link{
+	@include inline-block;
+	font-size: 11px;	
+	text-transform: uppercase;
+	font-weight: 600;
+	text-decoration: none;
+	vertical-align: top;
+	color:#b6b6b6;
+	cursor: pointer;
+	padding: 8px 15px 7px;
+	background: #eeeeee;
+	line-height: 13px;
+	@include border-radius(3px);
+	
+	&:hover{
+		background:#dddddd;
+		color:#6e6e6e;
+	}
+	&:focus{
+		outline: none;
+	}
+}
+.b-comment {
+	padding-top: 15px;
+    padding-bottom: 20px;
+    border-top: 1px solid #f4f4f4;
+}
+
+.b-comment__user {
+    float: left;
+}
+
+.b-comment__date {
+	@include inline-block;
+	padding-top: 10px;
+    font-size: 11px;	
+	text-transform: uppercase;
+	font-weight: 600;
+	color:$gray-color-light;
+	margin-left: 12px;
+
+}
+
+.b-comment__text {
+    padding-left: 42px;
+    margin-top: -5px;
+    float: left;
+    font-size: 14px;
+	line-height: 22px;
+	color:$gray-color-dark;
+}
+
+#id_honeypot {
+    display: none;
+}
+.b-comments__add {
+	padding-top: 15px;
+    padding-bottom: 20px;
+    border-top: 1px solid #f4f4f4;
+
+    textarea{
+    	margin-left: 40px;
+    	border: none;
+    	height:80px;
+    	resize:none;
+    	width: 90%;
+    	font-size: 14px;
+    	color:$gray-color;
+    	font-weight: 300;
+    }
+    input[type="submit"]{
+		@extend .btn;
+		border: none;
+		margin-left: 42px;
+	}
+}
+
+.b-comments__add .error{
+    color: red;
+}

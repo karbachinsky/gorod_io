@@ -9,6 +9,35 @@ from gorod.models import City
 from ckeditor.fields import RichTextField
 
 from smart_selects.db_fields import ChainedForeignKey
+from mptt.models import MPTTModel, TreeForeignKey
+from mptt.managers import TreeManager
+
+
+class HubQuestionCategoryTreeManager(TreeManager):
+    pass
+
+
+class HubQuestionCategory(MPTTModel):
+    """
+        Hub question category tree
+    """
+    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
+
+    class MPTTMeta:
+        order_insertion_by = ['title']
+
+    class Meta:
+        app_label = 'gorod'
+        db_table = 'gorod_hubquestioncategory'
+        verbose_name = 'city question category'
+        verbose_name_plural = 'city question categories'
+
+    tree = HubQuestionCategoryTreeManager()
+
+    def __unicode__(self):
+        return self.title
 
 
 class HubQuestionManager(models.Manager):
@@ -30,6 +59,7 @@ class HubQuestion(models.Model):
         city hub question
     """
     city = models.ForeignKey(City, on_delete=models.CASCADE)
+    category = TreeForeignKey(HubQuestionCategory, on_delete=models.PROTECT)
     question = models.CharField(max_length=500)
     description = RichTextField(max_length=25000, blank=True, null=True)
     picture = models.ImageField(max_length=255, upload_to='pictures/hub/%Y/%m/', null=True, blank=True, help_text=u'Изображение')

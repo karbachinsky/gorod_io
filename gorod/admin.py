@@ -179,6 +179,10 @@ class ComplaintAdmin(GorodAdminBase):
     readonly_fields = ('comment', 'city', 'add_date', 'url', 'type', 'email')
 
 
+class HubQuestionCategoryAdmin(DjangoMpttAdmin):
+    list_display = ('id', 'name', 'title')
+    mptt_level_indent = 20
+
 # Change list display for social auths.
 from social.apps.django_app.default.admin import UserSocialAuthOption
 
@@ -213,6 +217,7 @@ admin.site.register(ArticleRubric, ArticleRubrucAdmin)
 admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(OrganizationCategory, OrganizationCategoryAdmin)
 admin.site.register(Complaint, ComplaintAdmin)
+admin.site.register(HubQuestionCategory, HubQuestionCategoryAdmin)
 
 ## Ckeditor to flatpages
 

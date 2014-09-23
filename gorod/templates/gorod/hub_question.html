@@ -16,6 +16,7 @@
                 <div class="b-hub-item__info">
                     <span>Вопрос</span>
                     <div class="b-hub-item__date">{{ question.add_date|naturalday }}</div>
+                    <div class="b-hub-item__category">{{ question.category }}</div>
                 </div>
                 <div class="b-hub-item__author">
                     {% user question.user %}

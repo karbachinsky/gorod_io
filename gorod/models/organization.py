@@ -23,6 +23,7 @@ class OrganizationCategoryManager(models.Manager):
 class OrganizationCategoryTreeManager(TreeManager):
     pass
 
+
 class OrganizationCategory(MPTTModel):
     """
         Organization category tree

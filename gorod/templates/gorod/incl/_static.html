@@ -27,15 +27,14 @@
                     {% endif %}
                 },
                 commentAddUrl: '{% url 'comments-add' %}',
+                {% if user == article.user or user.is_superuser %}
+                    articleDeleteUrl : '{% url 'gorod:article-delete' city.name article.id %}',
+                    articleEditUrl : '{% url 'gorod:article-edit' city.name article.rubric.name article.id %}',
+                {% endif %}
             {% endif %}    
             
             {% if user_info %}
                 profileUserId: {{ user_info.id }},
-            {% endif %}
-
-            {% if article and user == article.user %}
-                articleDeleteUrl : '{% url 'gorod:article-delete' city.name article.id %}',
-                articleEditUrl : '{% url 'gorod:article-edit' city.name article.rubric.name article.id %}',
             {% endif %}
 		{% endif %}
 	};

@@ -1,4 +1,5 @@
 {% load comments i18n %}
+{% load user %}
 
 <div class="b-comments__add">
     <a name="comments-add"></a>
@@ -12,6 +13,10 @@
             {{ form.security_hash }}
 
             <p class="error"></p>
+            <div class="b-comment__user">
+                {% user user %}
+            </div>
+            <div class="clear"></div>
 
             {{ form.comment }}
 
@@ -21,7 +26,7 @@
 
             <input type="hidden" name="next" value="{{ object.url }}" />
             <p>
-                <input type="submit" value="Добавить комментарий" id="id_submit" />
+                <input type="submit" value="Ответить" id="id_submit" />
             </p>
         </form>
     {% else %}

@@ -8,62 +8,6 @@
 
 {% block meta_description %}{{ article.title }} - {{city.title}}{% endblock %}
 
-{% block static_additional %}
-    <script src="{% static 'comments/js/comments.js' %}"></script>
-    <script>
-        // open comments
-        $(function(){
-            if ($(location).attr('hash') != "#comments-cnt") {
-                $(".b-comments-cnt__link").on("click", function() {
-                    $(".b-article__comments").show();
-                });
-            }
-            else {
-                // Scroll to last
-                $(".b-article__comments").show();
-                $(location).attr('hash', "#" + $(".b-comment:last a").attr("name"));
-            }
-
-            var comments = new Comments();
-        });
-    </script>
-    <style>
-        .b-article__comments {
-            margin-top: 50px;
-            display: none;
-        }
-
-        .b-comments-cnt {
-            float: right;
-            padding: 28px 10px 0 0;
-        }
-
-        .b-comment {
-            margin-bottom: 30px;
-        }
-
-        .b-comment__user {
-            float: left;
-        }
-
-        .b-comment__date {
-            float: right;
-        }
-
-        .b-comment__text {
-            margin-top: 10px;
-        }
-
-        #id_honeypot {
-            display: none;
-        }
-
-        .b-comments__add .error{
-            color: red;
-        }
-    </style>
-{% endblock %}
-
 {% block content %}
     <div class="b-article__wrapper">
         <div class="b-article b-article_{{article.rubric.name}}">
@@ -119,6 +63,13 @@
 
                     <div class="clear"></div>
                     <div class="b-article__comments">
+                        <script src="{% static 'comments/js/comments.js' %}"></script>
+                        <script src="{% static 'gorod/js/comments.js' %}" ></script>
+                        <script>
+                            $(function(){
+                                window.articleComments();
+                            });
+                        </script>
                         {% include "comments/incl/_comments.html" %}
                     </div>
                     {% endwith %}

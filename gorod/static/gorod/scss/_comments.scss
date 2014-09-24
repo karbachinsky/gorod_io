@@ -79,7 +79,21 @@
 		margin-left: 42px;
 	}
 }
-
+.b-comments__add{
+	font-size: 14px;
+	color:$gray-color-dark;
+	margin: 20px 0 0;
+}
+.b-comments__add__login{
+	font-size: 11px;	
+	text-transform: uppercase;
+	font-weight: 600;
+	color:$green-color;
+	text-decoration: none;
+	&:hover{
+		color:$green-color-dark;
+	}
+}
 .b-comments__add .error{
     color: red;
 }

@@ -8,7 +8,9 @@
 }
 .b-organization{
 	background: #fff;
-
+	.edit-link{
+		float: right;
+	}
 }
 
 .b-organization__content{
@@ -33,6 +35,15 @@
 	text-decoration: none;
 	color:$gray-color-light;
 }
+.b-organization__logo{
+	text-align: center;
+	margin-bottom: 25px;
+	margin-top: 20px;
+
+	img{
+		max-width: 200px;
+	}
+}
 .b-organization__name{
 	margin:25px 0 0px; 
 	font-weight: 600;
@@ -55,6 +66,11 @@
 		&:hover{
 			color:$gray-color-dark;
 		}
+	}
+}
+.b-organization__map{
+	>ymaps{
+		width: 100% !important;
 	}
 }
 

@@ -13,10 +13,19 @@
 <div class="b-organization__wrapper">
     <div class="b-organization">
         <div class="b-organization__content">
+            {% if request.user.is_superuser %}
+                <a class="edit-link" href="{% url 'admin:gorod_organization_change' organization.id %}?source=main">Редактировать</a>
+            {% endif %}
+
             <span class="b-organization__breadcrumbs">{{ organization.category_breadcrumbs.0 }}</span>
             <span class="b-organization__date">{{ organization.add_date|naturalday }}</span>
 
-           
+           {% if organization.logo %}
+                <div class="b-organization__logo">
+                    <img  src="{{ organization.logo.url}}" title="{{ organization.name}}" />
+                </div>
+            {% endif %}
+
             <h2 class="b-organization__name">{{ organization.name }}</h2>
             
             <div class="b-organization__info">

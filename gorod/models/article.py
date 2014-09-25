@@ -74,10 +74,16 @@ class ArticleManager(models.Manager):
         json_feed = serializers.serialize('json', articles,
             indent=4,
             extras=('url', 'thumbnail', 'short_text', 'human_add_date'),
-            relations={'rubric': {
-                'extras': ('url',)
-            }},
-            excludes=('user', 'text', 'is_checked', 'is_published', 'add_date', 'city')
+            relations={
+                'rubric': {
+                    'extras': ('url',)
+                },
+                'user': {
+                    'extras': ('profile_url', 'human_name', 'avatar'),
+                    'fields': ('id',)
+                }
+            },
+            excludes=('text', 'is_checked', 'is_published', 'add_date', 'city')
         )
 
         # FIXME! GOVNOKOD! Use django rest framework

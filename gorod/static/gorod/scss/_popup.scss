@@ -272,7 +272,7 @@
 .b-popup-login {
 	.b-popup__window{
 		width:530px;
-		padding-bottom:20px;
+		padding-bottom: 40px;
 		text-align: center;
 	}
 	span{
@@ -305,13 +305,18 @@
 		font-weight: 600;
 	}
 	.login-vk{
-		background: #54769a;
-		border-bottom: 2px solid #416588;
+		color: #54769a;
+		border: 2px solid #54769a;
 	}
 	.login-fb{
-		background: #3b5998;
-		border-bottom: 2px solid #416588;
+        color: #3b5998;
+		border: 2px solid #3b5998;
 	}
+	.login-ok{
+		color: #ff6600;
+		border: 2px solid #ff6600;
+	}
+
 }
 
 

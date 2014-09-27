@@ -11,9 +11,12 @@ def save_avatar(strategy, user, response, details, is_new=False, *args, **kwargs
     # VK
     if strategy.backend.name == 'vk-oauth2':
         image_url = response.get('photo')
-    if strategy.backend.name == 'facebook':
+    elif strategy.backend.name == 'facebook':
         #assert False, response
         image_url = 'http://graph.facebook.com/%d/picture' % int(response.get(u'id'))
+    elif strategy.backend.name == 'odnoklassniki-oauth2':
+        image_url = response.get('pic_2')
+
     # Add your backend here
 
     if not image_url:

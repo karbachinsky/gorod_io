@@ -20,7 +20,7 @@ class UserCityMiddleware(object):
         current_url_params = request.resolver_match.kwargs
 
         if current_url_params.get('city_name'):
-            city = City.objects.get(name=current_url_params.get('city_name'));
+            city = City.objects.get(name=current_url_params.get('city_name'))
 
         if not city:
             return None

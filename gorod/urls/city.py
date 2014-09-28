@@ -1,20 +1,13 @@
 from django.conf.urls import patterns, url
 
-from gorod.views import base, organizations, hub, user, articles, redirects, city_welcome
+from gorod.views import base, organizations, hub, user, articles, redirects, city_welcome, payment
 
 urlpatterns = patterns('',
-    # Main page    
-    #url(r'^$', views.index, name='index'),
-    #url(r'^town/(?P<city>\w+)/?$', RedirectView.as_view(url='/town/kashin'), name='index'),
-    #url(r'^$', RedirectView.as_view(url='/town/kashin'), name='index'),
-
     # City main page
     url(r'^$', articles.FeedView.as_view(), name='city-main-page'),
 
+    # City welcome
     url(r'^welcome/?$', city_welcome.CityWelcomeView.as_view(), name='welcome'),
-
-    # City feed page. The same as main page
-    #url(r'^feed/?$', articles.FeedView.as_view(), name='feed'),
 
     ## Organzations
 
@@ -23,10 +16,12 @@ urlpatterns = patterns('',
     # One organization page
     url(r'^org/(?P<organization_id>\d+)/?$', organizations.OrganizationView.as_view(), name='organization'),
 
-
-    ## City info/about
+    ## City hub
     url(r'^question/?$', hub.HubView.as_view(), name='hub'),
     url(r'^question/(?P<question_id>\d+)/?$', hub.HubQuestionView.as_view(), name='hub-question'),
+
+    ## Payment
+    url(r'^payment/?$', payment.PaymentsView.as_view(), name='payments'),
 
     ## City user
     url(r'^user/(?P<user_id>\d+)/?$', user.ProfileView.as_view(), name='user'),

@@ -11,6 +11,9 @@
 	text-transform: uppercase;
 	text-decoration: none;
 }
+#owl-carousel{
+	display: none !important;
+}
 .b-adplate__organizations{
 	
 	width:610px;
@@ -147,12 +150,31 @@
 		display: none;
 	}
 	.b-adplate__questions{
-		width: auto;
+		display: none;
+	}
 
-		ul{
-			width: auto;
+	#owl-carousel{
+		width: 300px;
+		margin: auto;
+		display: block !important;
+		.owl-item{
+			>div{
+				display: block;
+			}
+		}
+		.b-adplate__welcome{
+			float: none;
+			margin: auto;
+			background-size: cover;
+			background-position: bottom center;
+			width: 100%;
 		}
 	}
+
+
+
+
+	
 	
 }
 

@@ -1,16 +1,4 @@
 <div class="b-adplate">
-    <div class="b-adplate__organizations">
-        <a href="{% url 'gorod:organizations' city.name %}" class="b-adplate__title">Организации</a>
-        <ul>
-            {% for organization in adplate.organizations %}
-                <li>
-                    <span>{{ organization.category }}</span>
-                    <a href="{% url 'gorod:organization' city.name organization.id %}">{{ organization.name }}</a>
-                </li>
-            {% endfor %}
-            <div class="clear"></div>
-        </ul>
-    </div>
     <div class="b-adplate__questions">
         <a href="{% url 'gorod:hub' city.name %}" class="b-adplate__title">Вопросы</a>
         <ul>
@@ -23,7 +11,18 @@
             {% endfor %}
         </ul>
     </div>
-
+    <div class="b-adplate__organizations">
+        <a href="{% url 'gorod:organizations' city.name %}" class="b-adplate__title">Организации</a>
+        <ul>
+            {% for organization in adplate.organizations %}
+                <li>
+                    <span>{{ organization.category }}</span>
+                    <a href="{% url 'gorod:organization' city.name organization.id %}">{{ organization.name }}</a>
+                </li>
+            {% endfor %}
+            <div class="clear"></div>
+        </ul>
+    </div>
     <div class="b-adplate__welcome">
         <a href="{% url 'gorod:welcome' city.name %}">
             <h2 class="b-adplate__welcome-title">Городской сайт {{ city.title_gent }}</h2>

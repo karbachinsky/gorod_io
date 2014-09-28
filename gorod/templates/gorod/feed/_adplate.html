@@ -32,4 +32,46 @@
         </a>
     </div>
     <div class="clear"></div>
+    <div  id="owl-carousel" class="owl-carousel">
+        <div class="b-adplate__questions">
+            <a href="{% url 'gorod:hub' city.name %}" class="b-adplate__title">Вопросы</a>
+            <ul>
+                {% for question in adplate.questions %}
+                    <li>
+                        <a href="{% url 'gorod:hub-question' city.name question.id %}">
+                            {{ question.question }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="b-adplate__organizations">
+            <a href="{% url 'gorod:organizations' city.name %}" class="b-adplate__title">Организации</a>
+            <ul>
+                {% for organization in adplate.organizations %}
+                    <li>
+                        <span>{{ organization.category }}</span>
+                        <a href="{% url 'gorod:organization' city.name organization.id %}">{{ organization.name }}</a>
+                    </li>
+                {% endfor %}
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="b-adplate__welcome">
+            <a href="{% url 'gorod:welcome' city.name %}">
+                <h2 class="b-adplate__welcome-title">Городской сайт {{ city.title_gent }}</h2>
+                <p class="b-adplate__welcome-text">
+                    Как начать публиковать новости, фотографии и полезную информацию
+                </p>
+            </a>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $('#owl-carousel').owlCarousel({
+                items : 1,
+                singleItem: true
+            });
+        });
+    </script>
 </div>

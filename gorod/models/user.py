@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.templatetags.static import static
 
 from gorod.models.base import City
 
@@ -49,6 +50,12 @@ class User(AbstractUser):
             return "%s %s" % (self.first_name, self.last_name)
         return self.username
 
+    def full_avatar(self):
+        """
+            If avatar is set then returning it. Else getting default avatar
+        """
+        return self.avatar or self._default_avatar
+
     def can_action(self, action):
         """
             Check if user can add article.
@@ -72,6 +79,10 @@ class User(AbstractUser):
             userstat.make_action_add_article()
         if action == 'add-comment':
             userstat.make_action_add_comment()
+
+    @property
+    def _default_avatar(self):
+        return static('gorod/img/userava.png')
 
 
 class UserStat(models.Model):

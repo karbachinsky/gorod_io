@@ -79,7 +79,7 @@ class ArticleManager(models.Manager):
                     'extras': ('url',)
                 },
                 'user': {
-                    'extras': ('profile_url', 'human_name', 'avatar'),
+                    'extras': ('profile_url', 'human_name', 'full_avatar'),
                     'fields': ('id',)
                 }
             },

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View
 
-from gorod.models import City, Payment
+from gorod.models import Payment
 
 
 class PaymentsView(View):

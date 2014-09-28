@@ -21,114 +21,6 @@
 		color: $green-color;
 	}
 }
-/*--------adplate-----------*/
-
-.b-adplate{
-	padding:20px 0 10px;
-	width: 1180px;
-	margin:auto;
-}
-.b-adplate__title{
-	font-size: 16px;
-	text-transform: uppercase;
-	text-decoration: none;
-}
-.b-adplate__organizations{
-	
-	width:610px;
-	float: left;
-
-	.b-adplate__title{
-		color:$yellow-color;
-	}
-	ul{
-		margin-top: 12px;
-	}
-	li{
-		@include inline-block(top);
-		width:265px;
-		margin-right: 37px;
-		margin-bottom: 15px;
-		span{
-			display: block;
-			font-size: 11px;
-			text-transform: uppercase;
-			color:$gray-color;
-			font-weight: 600;
-		}
-		a{
-			color:$gray-color-dark;
-			text-decoration: none;
-			font-size: 15px;
-			&:hover{
-				color:$gray-color;
-			}
-		}
-	}
-}
-.b-adplate__questions{
-	.b-adplate__title{
-		color:$mareen-color;
-	}
-	margin-right: 40px;
-	width: 265px;
-	float: left;
-	ul{
-		width: 265px;
-		margin-top: 10px;
-		li{
-			margin-bottom: 12px;
-		}
-		a{
-			color:$gray-color-dark;
-			text-decoration: none;
-			font-size: 15px;
-			&:hover{
-				color:$gray-color;
-			}
-		}
-	}
-}
-
-.b-adplate__welcome{
-	height:290px;
-	width:265px;
-	float: right;
-	background: url(../img/thumb.png) no-repeat bottom center;
-	
-	a{
-		display: block;
-		text-decoration: none;
-		height:290px;
-	}
-	.b-adplate__welcome-title{
-		margin: 0;
-		line-height: 25px;
-		vertical-align: top;
-		color:$gray-color-dark;
-		text-decoration: none;
-		font-size: 20px;
-		font-weight: 600;
-		margin-bottom: 12px;
-		padding: 25px 20px 0;
-	}
-	.b-adplate__welcome-text{
-		margin: 0;
-		font-size: 13px;
-		text-decoration: none;
-		color:$gray-color-dark;
-		line-height: 20px;
-		word-break: break-word;
-		padding: 0 20px 3px;
-	}
-	&:hover{
-		.b-adplate__welcome-text,.b-adplate__welcome-title{
-			color:$gray-color;
-		}
-	}
-	
-}
-
 /*--------feed-----------*/
 .b-feed{
 	padding:25px 0 50px;
@@ -274,13 +166,6 @@
 	.b-feed{
 		width: 875px;
 	}
-	.b-adplate{
-		width: 915px;
-		padding-left: 40px;
-	}
-	.b-adplate__welcome{
-		display: none;
-	}
 	
 }
 @media screen and (max-width: 935px) { 
@@ -288,38 +173,10 @@
 		width: 570px;
 	}
 
-	.b-adplate{
-		width: 570px;
-		overflow: hidden;
-		padding-left: 0;
-	}
-	.b-adplate__organizations{
-		width: 265px;
-		max-height: 233px;
-	}
 }
 @media screen and (max-width: 630px) { 
 	
-	.b-adplate__welcome{
-		background-size: cover;
-		background-position: bottom center;
-	}
-
-	.b-adplate{
-		width: auto;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-	.b-adplate__organizations{
-		display: none;
-	}
-	.b-adplate__questions{
-		width: auto;
-
-		ul{
-			width: auto;
-		}
-	}
+	
 	.b-feed{
 		width: auto;
 		padding-left: 10px;

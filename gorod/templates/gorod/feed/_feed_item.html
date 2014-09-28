@@ -22,6 +22,20 @@
                 <img class="b-feed-item__picture" src="{{ extras.thumbnail }}" />
             {{/if}} 
         </a>
+
+
+        <div class='b-user {{#if extras.thumbnail }} b-user__with-thumb {{/if}}'>
+            <a href="{{ fields.user.extras.profile_url }}" class="b-user__avatar">
+                {{# if fields.user.extras.avatar }}
+                    <img src="{{ fields.user.extras.avatar }}" />
+                {{ else }}
+                    <!--<img src="{% static 'gorod/img/userava.png' %}" /> FIX ME-->
+                {{/if}} 
+            </a>
+            <a href="{{ fields.user.extras.profile_url }}" class="b-user__name">{{ fields.user.extras.human_name }}</a>
+        </div>
+         
     </li>
 </script>
 {% endverbatim %}
+

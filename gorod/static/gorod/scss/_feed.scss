@@ -155,10 +155,22 @@
 	width:265px;
 	background: #fff;
 	margin-bottom: 35px;
+	position: relative;
 	@include box-shadow(0px 1px 0px #bbb);
 
 	&:hover{
 		@include box-shadow(0px 2px 0px #bbb);
+	}
+
+	.b-user{
+		padding-left: 20px;
+		padding-bottom: 11px;
+		&.b-user__with-thumb{
+			padding-bottom: 0;
+			position: absolute;
+			left: 0;
+			bottom: 20px;
+		}
 	}
 }
 
@@ -201,16 +213,11 @@
 	}
 
 }
-.b-feed-item__date{
-	font-size: 10px;
-	margin-left: 8px;
-	color:$gray-color-light;
-	vertical-align: bottom;
-}
+
 .b-feed-item__link{
 	display: block;
 	text-decoration: none;
-	padding: 6px 0 13px;
+	padding: 6px 0 5px;
 
 	&:hover {
 		.b-feed-item__title, .b-feed-item__text{

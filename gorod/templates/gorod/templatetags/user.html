@@ -8,5 +8,5 @@
             <img src="{% static 'gorod/img/userava.png' %}" />
         {% endif %}
     </a>
-    <a href="{{ user.profile_url }}" class="b-user__name">{{ user }}</a>
+    <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
 </div>

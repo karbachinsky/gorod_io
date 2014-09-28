@@ -183,6 +183,12 @@ class HubQuestionCategoryAdmin(DjangoMpttAdmin):
     list_display = ('id', 'name', 'title')
     mptt_level_indent = 20
 
+
+class PaymentAdmin(GorodAdminBase):
+    list_display = ('id', 'city', 'title', 'url')
+    list_filter = ('city',)
+
+
 # Change list display for social auths.
 from social.apps.django_app.default.admin import UserSocialAuthOption
 
@@ -218,6 +224,7 @@ admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(OrganizationCategory, OrganizationCategoryAdmin)
 admin.site.register(Complaint, ComplaintAdmin)
 admin.site.register(HubQuestionCategory, HubQuestionCategoryAdmin)
+admin.site.register(Payment, PaymentAdmin)
 
 ## Ckeditor to flatpages
 

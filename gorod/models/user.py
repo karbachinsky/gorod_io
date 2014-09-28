@@ -41,6 +41,10 @@ class User(AbstractUser):
         return userstat
 
     def __unicode__(self):
+        return self.human_name
+
+    @property
+    def human_name(self):
         if self.first_name and self.last_name:
             return "%s %s" % (self.first_name, self.last_name)
         return self.username

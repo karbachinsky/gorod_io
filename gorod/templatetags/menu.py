@@ -43,6 +43,14 @@ def menu(context, city):
         'is_active': 0
     })
 
+    if city.name == 'pk':
+        menu.append({
+            'title': 'Оплата услуг',
+            'url_name': 'payments',
+            'link': reverse('gorod:payments', kwargs={'city_name': city.name}),
+            'is_active': 0
+        })
+
     # Setting active
     for menuitem in menu:
         if menuitem['url_name'] == current_url_name:

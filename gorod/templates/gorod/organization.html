@@ -11,6 +11,7 @@
 
 {% block content %}
 <div class="b-organization__wrapper">
+    <h4 class="b-orgs__title"><a href="{% url 'gorod:organizations' city.name %}">Организации</a></h4>
     <div class="b-organization">
         <div class="b-organization__content">
             {% if request.user.is_superuser %}

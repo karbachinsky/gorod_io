@@ -17,6 +17,10 @@
 	font-weight: 400;
 	color: $mareen-color;
 	text-transform: uppercase;
+	a{
+		color: $mareen-color;
+		text-decoration: none;
+	}
 }
 
 .b-hub__questions{

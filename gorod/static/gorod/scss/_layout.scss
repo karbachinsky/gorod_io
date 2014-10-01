@@ -67,6 +67,11 @@ body{
 	&.b-header__city_mobile{
 		display: none;
 	}
+	&.b-header__city_not-hover{
+		&:hover{
+			color:#000;
+		}
+	}
 }
 
 

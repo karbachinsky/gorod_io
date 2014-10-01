@@ -1,8 +1,16 @@
-/*   HELP page  */
-.b-help__content ul {
-  list-style: disc ;
+.b-license__wrapper, .b-help__wrapper{
+	padding:30px;
+	background: #f3f3f3;
 }
 
-.b-help__content ol {
-  list-style: decimal ;
+.b-license, .b-help{
+	background: #fff;
 }
+
+.b-license__content, .b-help__content{
+	max-width: 650px;
+	margin: auto;	
+	padding: 30px 30px 50px;
+	@include default-text();
+}
+

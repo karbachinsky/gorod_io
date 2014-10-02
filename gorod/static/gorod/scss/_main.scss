@@ -28,6 +28,7 @@
 	word-spacing: 8px;
 	text-align: left;
 	margin-bottom: 7px;
+	text-align: center;
 }
 .b-index-header__paltform{
 	color: #000;
@@ -47,7 +48,7 @@
 
 .b-index-cities{
 	background: #f3c500;
-	padding: 50px;
+	padding: 50px 25px;
 	h4{
 		text-transform: uppercase;
 		margin: 0 0 50px;
@@ -57,7 +58,7 @@
 	}
 }
 .b-index-cities__content{
-	width: 1100px;
+	width: 1150px;
 	margin: auto;
 }
 .b-index-cities__list{
@@ -92,14 +93,20 @@
 }
 .b-index-cities__add{
 	float: right;
-	padding-top: 10px;
-	width:190px;
+	padding: 30px;
+	width: 180px;
+	border: 2px solid #fff;
+	h5{
+		font-weight: 500;
+		font-size: 15px;
+		margin: 0;
+	}
 	a{
 		@extend .btn;
 	}
 	p{
-		margin: 25px 0 0;
-		font-size: 15px;
+		margin: 15px 0 26px;
+		font-size: 13px;
 	}
 }
 
@@ -110,7 +117,7 @@
 
 .b-index-info{
 	background: #f3f3f3;
-	padding: 50px 50px 0px;
+	padding: 50px 25px 0px;
 	h4{
 		text-transform: uppercase;
 		margin: 0 0 34px;
@@ -120,7 +127,7 @@
 	}
 }
 .b-index-info__content{
-	width: 1100px;
+	width: 1150px;
 	padding-bottom: 120px;
 	margin: auto;
 	position: relative;

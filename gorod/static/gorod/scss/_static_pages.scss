@@ -12,5 +12,9 @@
 	margin: auto;	
 	padding: 30px 30px 50px;
 	@include default-text();
+
+	h2{
+		font-size: 20px;
+	}
 }
 

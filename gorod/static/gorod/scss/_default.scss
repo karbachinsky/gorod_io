@@ -80,7 +80,7 @@ $gray-color-dark: #444444;
 	text-decoration: none;
 	padding: 9px 25px 8px;
 	background: $green-color;
-	@include border-radius(3px);
+	@include border-radius(4px);
 	&:hover{
 		background:$green-color-dark;
 	}

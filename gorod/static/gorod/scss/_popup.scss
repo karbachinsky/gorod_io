@@ -316,7 +316,43 @@
 		color: #ff6600;
 		border: 2px solid #ff6600;
 	}
+    .login-gorod{
+        color: gray;
+        text-transform: uppercase;
+        letter-spacing: +0.1em;
+    }
 
+    .b-auth {
+        display: none;
+        margin-top: 40px;
+
+        p {
+          margin: 10px 0;
+          padding: 0;
+        }
+
+        .b-auth__error {
+            color: #e1968c;
+            margin-top: 20px;
+        }
+
+        input {
+		    width: 57%;
+            padding: 13px 0;
+        }
+
+        input[type=text], input[type=password] {
+            border: 1px solid #dbdbdb;
+            color: gray;
+            font-size: 13px;
+            letter-spacing: 1.2px;
+            text-align: center;
+        }
+
+        input[type=text]:focus, input[type=password]:focus {
+            border-color: $green-color;
+        }
+    }
 }
 
 

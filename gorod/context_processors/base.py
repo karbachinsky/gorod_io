@@ -2,6 +2,7 @@
 
 from django.core.context_processors import request
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.forms import AuthenticationForm
 
 from gorod.models import City, ArticleRubric
 

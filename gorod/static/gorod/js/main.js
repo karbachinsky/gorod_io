@@ -100,12 +100,52 @@
 	    }
 	});
 
+    // Click on login using simple login
+    $popup.find('.login-gorod').on('click', function() {
+        $(this).hide();
+        $popup.find('.b-auth').show();
+    });
+
+    // Login-password auth. FIXME!
+    $authForm = $popup.find('.b-auth__form');
+    $authFormError = $popup.find('.b-auth__error');
+
+    $authForm.on('submit', function(e) {
+        e.preventDefault();
+        var data = new FormData($(this).get(0));
+        var Deferred = $.ajax({
+            url: $(this).attr('action'),
+            data: data,
+            type: 'POST',
+            dataType: "json",
+            processData: false,
+            cache: false,
+            contentType: false
+        });
+
+        Deferred.done(function(json) {
+            location.reload();
+        });
+        Deferred.fail(function(jqXHR, textStatus, errorThrown) {
+            var errorText;
+            try {
+                var error = jQuery.parseJSON(jqXHR.responseText);
+
+                errorText = error['error'][0][1][0];
+            }
+            catch (e) {
+                errorText = self.defaultErrorMsg;
+            }
+            $authFormError.text(errorText);
+        });
+
+    });
+
 });
 
 
 $(function(){
 
-	
 	window.grid();
 	window.loginPopup();
 	window.addPopup();

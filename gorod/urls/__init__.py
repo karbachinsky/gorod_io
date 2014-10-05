@@ -17,6 +17,7 @@ urlpatterns = patterns('',
 
     # User profile
     url(r'^logout/?$', user.LogoutView.as_view(), name='logout'),
+    url(r'^login/?$', user.LoginView.as_view(), name='login'),
 
     # Captcha
     url(r'^captcha/', include('captcha.urls')),

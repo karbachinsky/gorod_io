@@ -80,6 +80,7 @@ $gray-color-dark: #444444;
 	text-decoration: none;
 	padding: 9px 25px 8px;
 	background: $green-color;
+    border: 0;
 	@include box-shadow(0px 2px 0px #ddd);
 	&:hover{
 		background:$green-color-dark;

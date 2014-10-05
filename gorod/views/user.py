@@ -1,11 +1,15 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render,  get_object_or_404, HttpResponsePermanentRedirect
-from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user_model
-from django.views.generic import View
+from django.views.generic import View, TemplateView
 from django.core.urlresolvers import reverse
+from django.utils.translation import gettext as _
+from django.contrib.auth import authenticate, login, logout
 
 from gorod.models import Article
+from gorod.utils.views.mixins import JSONResponseMixin
 
 USER_LAST_FEEDS_CNT = 10
 
@@ -48,6 +52,28 @@ class LogoutView(View):
         except AttributeError:
             # Case when someone tries to logout if he is not authed
             return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+class LoginView(JSONResponseMixin, TemplateView):
+    def _post(self, request):
+        """
+            Process post from login form
+        """
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return self.json_success_context()
+            else:
+                return self.json_form_error_context(_('Ваш аккаунт заблокирован!'))
+
+        return self.json_form_error_context(_('Неверный логин и пароль!'))
+
+    def _get(self, request):
+        return self.json_form_error_context(_('Неверный логин и пароль!'))
 
 
 class OldUserRedirectView(View):

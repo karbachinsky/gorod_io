@@ -27,14 +27,6 @@ def menu(context, city):
     if url_named_params.get('rubric_name'):
         current_url_name += '_' + url_named_params['rubric_name']
 
-    # Adding organizations
-    menu.append({
-        'title': 'Организации',
-        'url_name': 'organizations',
-        'link': reverse('gorod:organizations', kwargs={'city_name': city.name}),
-        'is_active': 0
-    })
-
     # Adding about (city info module)
     menu.append({
         'title': 'Вопросы и ответы',
@@ -43,13 +35,20 @@ def menu(context, city):
         'is_active': 0
     })
 
-    if city.name == 'pk':
-        menu.append({
-            'title': 'Оплата услуг',
-            'url_name': 'payments',
-            'link': reverse('gorod:payments', kwargs={'city_name': city.name}),
-            'is_active': 0
-        })
+    # Adding organizations
+    menu.append({
+        'title': 'Организации',
+        'url_name': 'organizations',
+        'link': reverse('gorod:organizations', kwargs={'city_name': city.name}),
+        'is_active': 0
+    })
+
+    menu.append({
+        'title': 'Оплата услуг',
+        'url_name': 'payments',
+        'link': reverse('gorod:payments', kwargs={'city_name': city.name}),
+        'is_active': 0
+    })
 
     # Setting active
     for menuitem in menu:

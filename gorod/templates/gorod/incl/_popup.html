@@ -5,9 +5,24 @@
 </div>
 <div class="b-popup b-popup-login">
 	<div class="b-popup__window">
-		<span class="">ВХОД</span>
-		<a class="login-vk" href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" >вконтакте</a>
-        <a class="login-fb" href="{% url 'social:begin' "facebook" %}?next={{ request.get_full_path }}" >Facebook</a>
-        <a class="login-ok" href="{% url 'social:begin' "odnoklassniki-oauth2" %}?next={{ request.get_full_path }}" >Одноклассники</a>
+        <div class="b-auth-social">
+		    <span class="">ВХОД</span>
+		    <a class="login-vk" href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" >вконтакте</a>
+            <a class="login-fb" href="{% url 'social:begin' "facebook" %}?next={{ request.get_full_path }}" >Facebook</a>
+            <a class="login-ok" href="{% url 'social:begin' "odnoklassniki-oauth2" %}?next={{ request.get_full_path }}" >Одноклассники</a>
+            <a class="login-gorod" href="#">Войти, используя логин</a>
+        </div>
+        <div class="b-auth">
+            <form method="post" class="b-auth__form" action="{% url 'login' %}">
+                {% csrf_token %}
+                <p><input id="id_username" maxlength="254" name="username" placeholder="Логин" type="text" /></p>
+                <p><input id="id_password" name="password" type="password" placeholder="Пароль" /></p>
+                <p>
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+                    <input type="submit" value="Войти" class="btn" />
+                </p>
+                <p class="b-auth__error"></p>
+            </form>
+        </div>
 	</div>
 </div>

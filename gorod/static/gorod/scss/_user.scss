@@ -19,3 +19,16 @@
 		display: block; 
 	}
 }
+.b-user_small{
+	.b-user__name{
+		font-size: 10px;
+	}
+	.b-user__avatar{
+		border-radius: 14px;
+		img{
+			width:28px;
+			height:28px;
+			display: block; 
+		}
+	}
+}

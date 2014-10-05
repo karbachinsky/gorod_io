@@ -1,6 +1,11 @@
 body{
 	min-width: 400px;
-	padding-top: 78px;
+	padding-top: 78px;	
+}
+@media screen and (max-width: 935px) and (min-width: 630px) { 
+	body.not-adaptive-935{
+		min-width: 945px;
+	}
 }
 .b-header{
 	background: #fff;
@@ -66,6 +71,11 @@ body{
 	}
 	&.b-header__city_mobile{
 		display: none;
+	}
+	&.b-header__city_not-hover{
+		&:hover{
+			color:#000;
+		}
 	}
 }
 

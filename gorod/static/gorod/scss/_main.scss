@@ -13,26 +13,27 @@
 	text-align: center;
 }
 .b-index-header__content{
-	max-width: 480px;
+	max-width: 520px;
 	margin: auto;
 }
 .b-index-header__city{
 	display: block;
 	color: #000;
-	font-size: 30px;
+	font-size: 32px;
 	font-weight: 800;
 	text-transform: uppercase;
 	padding: 20px 0 0;
 	line-height: 37px;
-	letter-spacing: 1.5px;
+	letter-spacing: 0.5px;
 	word-spacing: 8px;
 	text-align: left;
-	margin-bottom: 7px;
+	margin-bottom: 11px;
+	text-align: center;
 }
 .b-index-header__paltform{
 	color: #000;
 	font-weight: 400;
-	font-size: 16px;
+	font-size: 21px;
 }
 .b-index-header__text{
 	color:$gray-color;
@@ -47,17 +48,18 @@
 
 .b-index-cities{
 	background: #f3c500;
-	padding: 50px;
+	padding: 50px 25px;
 	h4{
 		text-transform: uppercase;
 		margin: 0 0 50px;
 		color:#000;
-		font-size: 23px;
+		font-size: 21px;
+		letter-spacing: 0.5px;
 
 	}
 }
 .b-index-cities__content{
-	width: 1100px;
+	width: 1150px;
 	margin: auto;
 }
 .b-index-cities__list{
@@ -81,25 +83,33 @@
 	}
 }
 .b-index-cities__title{
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 20px;
 	margin-bottom: 10px;
 	
 }
 .b-index-cities__region{
-	font-size: 14px;
+	font-size: 12px;
 	display: block;
 }
 .b-index-cities__add{
 	float: right;
-	padding-top: 10px;
-	width:190px;
+	padding: 30px;
+	width: 200px;
+	margin-right: -20px;
+	border: 1px solid #fff;
+	@include box-shadow(1px 1px 0px rgba(255,255,255,0.6),-1px -1px 0px rgba(255,255,255,0.6));
+	h5{
+		font-weight: 600;
+		font-size: 15px;
+		margin: 0;
+	}
 	a{
 		@extend .btn;
 	}
 	p{
-		margin: 25px 0 0;
-		font-size: 15px;
+		margin: 15px 0 26px;
+		font-size: 13px;
 	}
 }
 
@@ -110,17 +120,18 @@
 
 .b-index-info{
 	background: #f3f3f3;
-	padding: 50px 50px 0px;
+	padding: 50px 25px 0px;
 	h4{
 		text-transform: uppercase;
 		margin: 0 0 34px;
 		color:#000;
-		font-size: 23px;
+		font-size: 21px;
+		letter-spacing: 0.5px;
 
 	}
 }
 .b-index-info__content{
-	width: 1100px;
+	width: 1150px;
 	padding-bottom: 120px;
 	margin: auto;
 	position: relative;
@@ -153,8 +164,9 @@
 	text-transform: uppercase;
 	font-size: 11px;
 	color:#000;
-	font-weight: 600;
+	font-weight: 700;
 	padding-bottom: 3px;
+	letter-spacing: 0.4px;
 }
 .b-index-info__text{
 	font-size: 13px;
@@ -175,9 +187,10 @@
 	text-align: center;
 	padding: 15px 0;
 	a{
-		color:#777777;
+		color:$gray-color;
 		font-weight: 700;
-		font-size: 13px;
+		font-size: 12px;
+		letter-spacing: 0.4px;
 		margin: 0 20px;
 		text-decoration: none;
 		&.b-index-footer__error{
@@ -195,14 +208,16 @@
 	}
 	.b-index-header{
 		background: url(../img/index-left.png) no-repeat bottom left;
+		padding: 90px 20px 180px;
 	}
 	.b-index-header__city{
 		text-align: center;
+		font-size: 30px;
 	}
 	.b-index-header__paltform{
-		width: 270px;
+		width: 260px;
 		margin: auto;
-		font-size: 17px;
+		font-size: 19px;
 		padding-bottom: 10px;
 	}
 	.b-index-header__text{
@@ -226,6 +241,7 @@
 	.b-index-cities__add{
 		float: none;
 		width: auto;
+		margin-right: 0;
 		a{
 			display: block;
 			text-align: center;
@@ -253,10 +269,11 @@
 	}
 
 	.b-index-footer{
+		padding: 30px 0 35px;
 		a{
 			display: block;
 			text-align: left;
-			padding: 3px 0;
+			margin:24px 20px;
 		}
 	}
 }

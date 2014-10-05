@@ -3,13 +3,14 @@
     Author: I. Karbachinsky
 """
 
-from gorod.models import Organization, HubQuestion
+from gorod.models import Organization, HubQuestion, Payment
 
 
 class AdStartPlate(object):
     def __init__(self, city_name):
         self.organizations = Organization.objects.filter(city__name=city_name).order_by('?')[0:8]
         self.questions = HubQuestion.objects.filter(city__name=city_name).order_by('?')[0:4]
+        self.payments = Payment.objects.filter(city__name=city_name).order_by('?')[0:8]
 
     def get_context(self):
         """
@@ -17,5 +18,6 @@ class AdStartPlate(object):
         """
         return {
             'organizations': self.organizations,
-            'questions': self.questions
+            'questions': self.questions,
+            'payments': self.payments
         }

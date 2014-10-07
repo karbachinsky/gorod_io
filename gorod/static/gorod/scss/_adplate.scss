@@ -16,7 +16,8 @@
 }
 .b-adplate__organizations{
 	
-	width:610px;
+	width:265px;
+	margin-right: 40px;
 	float: left;
 
 	.b-adplate__title{
@@ -26,9 +27,6 @@
 		margin-top: 12px;
 	}
 	li{
-		@include inline-block(top);
-		width:265px;
-		margin-right: 37px;
 		margin-bottom: 15px;
 		span{
 			display: block;
@@ -50,6 +48,29 @@
 .b-adplate__questions{
 	.b-adplate__title{
 		color:$mareen-color;
+	}
+	margin-right: 40px;
+	width: 265px;
+	float: left;
+	ul{
+		width: 265px;
+		margin-top: 10px;
+		li{
+			margin-bottom: 12px;
+		}
+		a{
+			color:$gray-color-dark;
+			text-decoration: none;
+			font-size: 15px;
+			&:hover{
+				color:$gray-color;
+			}
+		}
+	}
+}
+.b-adplate__payments{
+	.b-adplate__title{
+		color:#000;
 	}
 	margin-right: 40px;
 	width: 265px;
@@ -113,8 +134,8 @@
 @media screen and (max-width: 1240px) { 
 
 	.b-adplate{
-		width: 915px;
-		padding-left: 30px;
+		//width: 915px;
+		//padding-left: 30px;
 	}
 	.b-adplate__welcome{
 		display: none;
@@ -150,6 +171,9 @@
 		display: none;
 	}
 	.b-adplate__questions{
+		display: none;
+	}
+	.b-adplate__payments{
 		display: none;
 	}
 

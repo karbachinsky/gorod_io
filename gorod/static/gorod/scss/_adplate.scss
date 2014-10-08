@@ -44,6 +44,19 @@
 			}
 		}
 	}
+	&.b-adplate__organizations_wide{
+		width:610px;
+		margin-right: 0px;
+
+
+		li{
+			@include inline-block(top);
+			width:265px;
+			margin-right: 37px;
+		}
+
+	}
+
 }
 .b-adplate__questions{
 	.b-adplate__title{
@@ -134,8 +147,8 @@
 @media screen and (max-width: 1240px) { 
 
 	.b-adplate{
-		//width: 915px;
-		//padding-left: 30px;
+		width: 915px;
+		padding-left: 30px;
 	}
 	.b-adplate__welcome{
 		display: none;

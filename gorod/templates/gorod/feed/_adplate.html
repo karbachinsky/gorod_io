@@ -11,7 +11,7 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="b-adplate__organizations">
+    <div class="b-adplate__organizations{% if adplate.payments|length <= 3 %} b-adplate__organizations_wide{% endif %}">
         <a href="{% url 'gorod:organizations' city.name %}" class="b-adplate__title">Организации</a>
         <ul>
             {% for organization in adplate.organizations %}
@@ -23,17 +23,19 @@
             <div class="clear"></div>
         </ul>
     </div>
-    <div class="b-adplate__payments">
-        <a href="{% url 'gorod:payments' city.name %}" class="b-adplate__title">Оплата услуг</a>
-        <ul>
-            {% for payment in adplate.payments %}
-                <li>
-                    <a target="_blank" href="{{payment.url}}">{{ payment.title }}</a>
-                </li>
-            {% endfor %}
-            <div class="clear"></div>
-        </ul>
-    </div>
+    {% if adplate.payments|length > 3 %}
+        <div class="b-adplate__payments">
+            <a href="{% url 'gorod:payments' city.name %}" class="b-adplate__title">Оплата услуг</a>
+            <ul>
+                {% for payment in adplate.payments %}
+                    <li>
+                        <a target="_blank" href="{{payment.url}}">{{ payment.title }}</a>
+                    </li>
+                {% endfor %}
+                <div class="clear"></div>
+            </ul>
+        </div>
+    {% endif %}
     <div class="b-adplate__welcome">
         <a href="{% url 'gorod:welcome' city.name %}">
             <h2 class="b-adplate__welcome-title">Городской сайт {{ city.title_gent }}</h2>
@@ -43,6 +45,10 @@
         </a>
     </div>
     <div class="clear"></div>
+
+
+
+
     <div  id="owl-carousel" class="owl-carousel">
         <div class="b-adplate__questions">
             <a href="{% url 'gorod:hub' city.name %}" class="b-adplate__title">Вопросы</a>

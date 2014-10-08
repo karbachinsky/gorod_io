@@ -9,9 +9,18 @@
 
         self.$commentForm = $(".b-comments__add-form");
         self.$commentFormError = self.$commentForm.find(".error");
-        self.$commentFormSubmitButton = $(this).find("[type=submit]");
+        self.$commentFormSubmitButton = self.$commentForm.find("[type=submit]");
+        self.$commentFormInput = self.$commentForm.find("[name=comment]");
 
         self.bindHandlers();
+    };
+
+    /*
+     * Returns input selector for current comments objects
+     */
+    Comments.prototype.getInput = function() {
+        var self = this;
+        return self.$commentFormInput;
     };
 
     Comments.prototype.bindHandlers = function() {

@@ -7,7 +7,7 @@
             {% for question in adplate.questions %}
                 <li>
                     <a href="{% url 'gorod:hub-question' city.name question.id %}">
-                        {{ question.question|smart_truncate:50 }}
+                        {{ question.question|smart_truncate:60 }}
                     </a>
                 </li>
             {% endfor %}
@@ -58,7 +58,7 @@
                 {% for question in adplate.questions %}
                     <li>
                         <a href="{% url 'gorod:hub-question' city.name question.id %}">
-                            {{ question.question|smart_truncate:50 }}
+                            {{ question.question|smart_truncate:60 }}
                         </a>
                     </li>
                 {% endfor %}

@@ -10,6 +10,7 @@ from ckeditor.fields import RichTextField
 
 from gorod.models import City
 from gorod.utils.exceptions import FeedError
+from gorod.templatetags.stringutils import smart_truncate
 
 from smart_selects.db_fields import ChainedForeignKey
 
@@ -161,24 +162,7 @@ class Article(models.Model):
         """
             Sets short text (brief) for article preview
         """
-
-        # FIXME. HTML entities!
-        from django.utils.html import strip_tags, strip_entities
-
-        text = strip_tags(strip_entities(self.text))
-        #assert False, "%d %d" % (len(text), self._SHORT_TEXT_LENGTH)
-        if len(text) <= self._SHORT_TEXT_LENGTH:
-            self.short_text = text
-            return
-
-        if text[self._SHORT_TEXT_LENGTH-1] == u'.':
-            short_text = text[0:self._SHORT_TEXT_LENGTH]
-        elif text[self._SHORT_TEXT_LENGTH-1] == u' ':
-            short_text = text[0:self._SHORT_TEXT_LENGTH-1] + u'...'
-        else:
-            short_text = text[0:self._SHORT_TEXT_LENGTH] + u'...'
-
-        self.short_text = short_text
+        self.short_text = smart_truncate(self.text, self._SHORT_TEXT_LENGTH)
 
     @property
     def human_add_date(self):

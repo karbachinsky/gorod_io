@@ -16,7 +16,6 @@ class UserTestCase(TestCase):
     """
 
     def setUp(self):
-        pass
         self.user = get_user_model()()
         self.user.save()
 

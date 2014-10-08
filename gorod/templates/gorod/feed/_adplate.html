@@ -1,3 +1,5 @@
+{% load stringutils %}
+
 <div class="b-adplate">
     <div class="b-adplate__questions">
         <a href="{% url 'gorod:hub' city.name %}" class="b-adplate__title">Вопросы</a>
@@ -23,13 +25,13 @@
             <div class="clear"></div>
         </ul>
     </div>
-    {% if adplate.payments|length > 3 %}
+    {% if adplate.payments %}
         <div class="b-adplate__payments">
             <a href="{% url 'gorod:payments' city.name %}" class="b-adplate__title">Оплата услуг</a>
             <ul>
                 {% for payment in adplate.payments %}
                     <li>
-                        <a target="_blank" href="{{payment.url}}">{{ payment.title }}</a>
+                        <a target="_blank" href="{{payment.url}}">{{ payment.title|smart_truncate:50 }}</a>
                     </li>
                 {% endfor %}
                 <div class="clear"></div>
@@ -79,7 +81,7 @@
             <ul>
                 {% for payment in adplate.payments %}
                     <li>
-                        <a target="_blank" href="{{payment.url}}">{{ payment.title }}</a>
+                        <a target="_blank" href="{{payment.url}}">{{ payment.title|smart_truncate:50 }}</a>
                     </li>
                 {% endfor %}
                 <div class="clear"></div>

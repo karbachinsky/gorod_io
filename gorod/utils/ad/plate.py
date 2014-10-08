@@ -19,6 +19,9 @@ class AdStartPlate(object):
 
         if len(self.payments) > 3: 
             self.organizations = self.organizations[0:4]
+        else:
+            self.payments = []
+
         return {
             'organizations': self.organizations,
             'questions': self.questions,

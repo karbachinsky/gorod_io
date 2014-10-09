@@ -133,9 +133,9 @@ MANAGERS = (('Manager', 'hola@gorod.io'))
 
 EMAIL_HOST = 'smtp.fullspace.ru'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'admin@gorod.io'
-EMAIL_HOST_PASSWORD = 'z6LOuB'
-DEFAULT_FROM_EMAIL = 'admin@gorod.io'
+EMAIL_HOST_USER = 'system@gorod.io'
+EMAIL_HOST_PASSWORD = 'f999ece7'
+DEFAULT_FROM_EMAIL = 'system@gorod.io'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/

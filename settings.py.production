@@ -69,6 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'gorod.middleware.base.UserCityMiddleware',
     'gorod.middleware.base.RedirectOldCityUrlsMiddleware',
+    'gorod.middleware.exceptions.RequestExceptionMiddleware'
 )
 
 
@@ -248,3 +249,48 @@ SERIALIZATION_MODULES = {
 }
 
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(asctime)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/g/gorodin/logs/django.log',
+            'formatter': 'simple',
+        },
+        'exceptions-file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/g/gorodin/logs/exceptions.log',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'views': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'exceptions': {
+            'handlers': ['exceptions-file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}

@@ -3,6 +3,8 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.core.validators import MinLengthValidator
+
 
 from gorod.models import City
 
@@ -60,7 +62,7 @@ class HubQuestion(models.Model):
     """
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     category = TreeForeignKey(HubQuestionCategory, on_delete=models.PROTECT)
-    question = models.CharField(max_length=500)
+    question = models.CharField(max_length=500, validators=[MinLengthValidator(3)])
     description = RichTextField(max_length=3000, blank=True, null=True)
     picture = models.ImageField(max_length=255, upload_to='pictures/hub/%Y/%m/', null=True, blank=True, help_text=u'Изображение')
     user = ChainedForeignKey(
@@ -95,7 +97,7 @@ class HubAnswer(models.Model):
     """
     question = models.ForeignKey(HubQuestion, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    text = RichTextField(max_length=3000)
+    text = RichTextField(max_length=3000, validators=[MinLengthValidator(3)])
     picture = models.ImageField(max_length=255, upload_to='pictures/hub/%Y/%m/', null=True, blank=True, help_text=u'Изображение')
     add_date = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=True)

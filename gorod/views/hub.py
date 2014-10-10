@@ -1,9 +1,15 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.views.generic import View, TemplateView
+from django.utils.translation import ugettext as _
+from django.db import IntegrityError, DatabaseError
 
-from django.views.generic import View
-
-from gorod.models import HubQuestion, HubAnswer
+from gorod.models import HubQuestion, HubAnswer, City
 from gorod.utils.forms.hub_answer import HubAnswerAddForm
+from gorod.utils.views.mixins import JSONResponseMixin
 
 
 class HubView(View):
@@ -40,3 +46,45 @@ class HubQuestionView(View):
         }
 
         return render(request, 'gorod/hub_question.html', context)
+
+
+class HubAnswerAddView(JSONResponseMixin, TemplateView):
+    """
+        Post answer
+    """
+    def _get(self, *args, **kwargs):
+        return self.json_forbidden_context(_(u'Ошибка!'))
+
+    @method_decorator(login_required)
+    def _post(self, request, city_name, question_id):
+        city = get_object_or_404(City, name=city_name)
+        data = request.POST.copy()
+
+        if not 'question' in data or not question_id or question_id != data['question']:
+            return self.json_form_error_context(
+                _(u'Hacker?')
+            )
+
+        if request.user.can_action('add-hubanswer'):
+            form = HubAnswerAddForm(request.POST, instance=HubAnswer())
+            user = self.request.user
+            if form.is_valid():
+                answer = form.save(commit=False)
+                answer.city = city
+                answer.user = user
+                try:
+                    answer.save()
+                except (DatabaseError, IntegrityError) as e:
+                    raise e
+
+                if not user.is_superuser:
+                    user.make_action('add-hubanswer')
+                    return self.json_success_context()
+            else:
+                return self.json_error_context(form.errors.items())
+        else:
+            return self.json_form_error_context(
+                _(u'Вы не можете добавлять новые ответы так часто. Попробуйте позже!')
+            )
+
+        return self.json_success_context()

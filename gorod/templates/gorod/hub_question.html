@@ -64,8 +64,18 @@
 
         <div class="b-hubanswer-add">
             {% if user.is_authenticated %}
-                <form class="b-hubanswer-add__form" action="" method="POST">
+                <script src="{% static 'gorod/js/hub.js' %}" ></script>
+                <script>
+                    $(function(){
+                        var answer = new window.HubAnswer();
+                    });
+                </script>
+                <form class="b-hubanswer-add__form" action="{% url 'gorod:hub-question-add-answer' city_name question.id %}" method="POST">
                     {% csrf_token %}
+                    <p class="error"></p>
+                    <div class="b-comment__user">
+                        {% user user %}
+                    </div>
                     {{ answer_form.question }}
                     <textarea cols="40" id="id_text" name="text" placeholder="Введите ответ на вопрос" rows="10"></textarea>
                     <input type="submit" value="Ответить" />

@@ -62,11 +62,12 @@ class User(AbstractUser):
         """
         userstat = self.get_stat()
 
-        # FIXME
-        if action == 'add-article':
-            return userstat.can_action_add_article()
-        elif action == 'add-comment':
-            return userstat.can_action_add_comment()
+        if action.startswith('add-'):
+            model_type = action.replace('add-', '')
+            return userstat.can_timenumber_action(
+                model_type=model_type,
+                threshold=getattr(settings, "GOROD_%s_MAX_ADD_IN_HOUR_CNT" % model_type.upper())
+            )
 
     def make_action(self, action):
         """
@@ -74,11 +75,8 @@ class User(AbstractUser):
         """
         userstat = self.get_stat()
 
-        # FIXME
-        if action == 'add-article':
-            userstat.make_action_add_article()
-        if action == 'add-comment':
-            userstat.make_action_add_comment()
+        if action.startswith('add-'):
+            userstat.make_timenumber_action(action.replace('add-', ''))
 
     @property
     def _default_avatar(self):
@@ -87,69 +85,50 @@ class User(AbstractUser):
 
 class UserStat(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # FIXME
     article_last_add_time = models.DateTimeField(null=True)
     article_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
     comment_last_add_time = models.DateTimeField(null=True)
     comment_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
+    hubanswer_last_add_time = models.DateTimeField(null=True)
+    hubanswer_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
+    hubquestion_last_add_time = models.DateTimeField(null=True)
+    hubquestion_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
 
     class Meta:
         app_label = 'gorod'
         db_table = 'gorod_userstat'
 
-    def _article_last_add_was_more_then_hour_ago(self):
-        if not self.article_last_add_time or\
-                self.article_last_add_time < timezone.now() - timedelta(hours=1):
+    def _last_add_was_more_then_hour_ago(self, model_type):
+        last_add_time = getattr(self, "%s_last_add_time" % model_type)
+        if not last_add_time or last_add_time < timezone.now() - timedelta(hours=1):
             return True
         return False
 
-    def make_action_add_article(self):
+    def make_timenumber_action(self, model_type):
         """
-            Called when user adds article
+            When adding some material
         """
-        if self._article_last_add_was_more_then_hour_ago():
-            self.article_add_in_last_hour_cnt = 1
-            self.article_last_add_time = timezone.now()
+        last_add_time_attr_name = "%s_last_add_time" % model_type
+        add_in_last_hour_cnt_attr_name = "%s_add_in_last_hour_cnt" % model_type
+
+        last_add_time = getattr(self, last_add_time_attr_name)
+        add_in_last_hour_cnt = getattr(self, add_in_last_hour_cnt_attr_name)
+
+        if self._last_add_was_more_then_hour_ago(model_type):
+            setattr(self, add_in_last_hour_cnt_attr_name, 1)
+            setattr(self, last_add_time_attr_name, timezone.now())
         else:
-            self.article_add_in_last_hour_cnt += 1
+            setattr(self, add_in_last_hour_cnt_attr_name, add_in_last_hour_cnt + 1)
 
         self.save()
 
-    def can_action_add_article(self):
+    def can_timenumber_action(self, model_type, threshold):
         """
-            Checks if user can add article now
+            Checks if user can add som material
         """
-        if self._article_last_add_was_more_then_hour_ago():
-            return True
-        if self.article_add_in_last_hour_cnt < settings.GOROD_ARTICLE_MAX_ADD_IN_HOUR_CNT:
-            return True
-
-        return False
-
-    def _comment_last_add_was_more_then_hour_ago(self):
-        if not self.comment_last_add_time or\
-                self.comment_last_add_time < timezone.now() - timedelta(hours=1):
-            return True
-        return False
-
-    def make_action_add_comment(self):
-        """
-            Called when user adds comment
-        """
-        if self._comment_last_add_was_more_then_hour_ago():
-            self.comment_add_in_last_hour_cnt = 1
-            self.comment_last_add_time = timezone.now()
-        else:
-            self.comment_add_in_last_hour_cnt += 1
-
-        self.save()
-
-    def can_action_add_comment(self):
-        """
-            Checks if user can add comment now
-        """
-        if self._comment_last_add_was_more_then_hour_ago():
-            return True
-        if self.comment_add_in_last_hour_cnt < settings.GOROD_COMMENT_MAX_ADD_IN_HOUR_CNT:
+        add_in_last_hour_cnt = getattr(self, "%s_add_in_last_hour_cnt" % model_type)
+        if self._last_add_was_more_then_hour_ago(model_type) or add_in_last_hour_cnt < threshold:
             return True
 
         return False

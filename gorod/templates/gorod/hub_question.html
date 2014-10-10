@@ -37,47 +37,61 @@
                 </div>
             </div>
         </div>
-            <ul class="b-hub-item__answers">
-                {% for answer in answers %}
-                    <li class="b-hub-answer">
-                        <div class="b-hub-item__content">
-                            <div class="b-hub-item__info">
-                                <span>Ответ</span>
-                                <div class="b-hub-item__date">{{ answer.add_date|naturalday }}</div>
-                            </div>
-                            <div class="b-hub-item__author">
-                                {%  user answer.user %}
-                            </div>
-                            <div class="clear"></div>
-                            {% if answer.picture and answer.picture.url %}
-                                <img class="b-hub-answer__picture" src="{{answer.picture.url}}" />
-                            {% endif %}
-                            <div class="b-hub-answer__text">
-                                {% autoescape off %}
-                                    {{ answer.text }}
-                                {% endautoescape %}
-                            </div>
+        <ul class="b-hub-item__answers">
+            {% for answer in answers %}
+                <li class="b-hub-answer">
+                    <div class="b-hub-item__content">
+                        <div class="b-hub-item__info">
+                            <span>Ответ</span>
+                            <div class="b-hub-item__date">{{ answer.add_date|naturalday }}</div>
                         </div>
-                    </li>
-                {% endfor %}
-            </ul>  
-        
-            {% if other_questions %}
-                <noindex>
-                    <div class="b-hub-item__other b-hub">
-                        <h1 class="b-hub__title">Другие вопросы</h1>
-                        <ul class="b-hub__questions">
-                            {% for question in other_questions %}
-                                <li class="b-hub__questions-item">
-                                    <a href="{% url 'gorod:hub-question' city.name question.id %}">
-                                        {{ question.question }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                        <div class="b-hub-item__author">
+                            {%  user answer.user %}
+                        </div>
+                        <div class="clear"></div>
+                        {% if answer.picture and answer.picture.url %}
+                            <img class="b-hub-answer__picture" src="{{answer.picture.url}}" />
+                        {% endif %}
+                        <div class="b-hub-answer__text">
+                            {% autoescape off %}
+                                {{ answer.text }}
+                            {% endautoescape %}
+                        </div>
                     </div>
-                </noindex>
-            {% endif %} 
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="b-hubanswer-add">
+            {% if user.is_authenticated %}
+                <form class="b-hubanswer-add__form" action="" method="POST">
+                    {% csrf_token %}
+                    {{ answer_form.question }}
+                    <textarea cols="40" id="id_text" name="text" placeholder="Введите ответ на вопрос" rows="10"></textarea>
+                    <input type="submit" value="Ответить" />
+                </form>
+            {% else %}
+                <p><a href="" class="b-hubanswer-add__login-link">Авторизуйтесь</a>, чтобы ответить на вопрос!</p>
+            {% endif %}
+
+        </div>
+        
+        {% if other_questions %}
+            <noindex>
+                <div class="b-hub-item__other b-hub">
+                    <h1 class="b-hub__title">Другие вопросы</h1>
+                    <ul class="b-hub__questions">
+                        {% for question in other_questions %}
+                            <li class="b-hub__questions-item">
+                                <a href="{% url 'gorod:hub-question' city.name question.id %}">
+                                    {{ question.question }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </noindex>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

@@ -61,7 +61,7 @@ class HubQuestion(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     category = TreeForeignKey(HubQuestionCategory, on_delete=models.PROTECT)
     question = models.CharField(max_length=500)
-    description = RichTextField(max_length=25000, blank=True, null=True)
+    description = RichTextField(max_length=3000, blank=True, null=True)
     picture = models.ImageField(max_length=255, upload_to='pictures/hub/%Y/%m/', null=True, blank=True, help_text=u'Изображение')
     user = ChainedForeignKey(
         settings.AUTH_USER_MODEL,
@@ -95,7 +95,7 @@ class HubAnswer(models.Model):
     """
     question = models.ForeignKey(HubQuestion, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    text = RichTextField(max_length=25000)
+    text = RichTextField(max_length=3000)
     picture = models.ImageField(max_length=255, upload_to='pictures/hub/%Y/%m/', null=True, blank=True, help_text=u'Изображение')
     add_date = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=True)

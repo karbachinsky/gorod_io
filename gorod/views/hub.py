@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
 
 from gorod.models import HubQuestion, HubAnswer
+from gorod.utils.forms.hub_answer import HubAnswerAddForm
 
 
 class HubView(View):
@@ -34,7 +35,8 @@ class HubQuestionView(View):
         context = {
             'question': question,
             'answers': answers,
-            'other_questions': questions
+            'other_questions': questions,
+            'answer_form': HubAnswerAddForm(instance=HubAnswer(question=question))
         }
 
         return render(request, 'gorod/hub_question.html', context)

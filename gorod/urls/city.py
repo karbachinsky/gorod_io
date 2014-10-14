@@ -18,6 +18,7 @@ urlpatterns = patterns('',
 
     ## City hub
     url(r'^question/?$', hub.HubView.as_view(), name='hub'),
+    url(r'^question/add/?$', hub.HubQuestionAddView.as_view(), name='hub-question-add'),
     url(r'^question/(?P<question_id>\d+)/?$', hub.HubQuestionView.as_view(), name='hub-question'),
     url(r'^question/(?P<question_id>\d+)/answer/?$', hub.HubAnswerAddView.as_view(), name='hub-question-add-answer'),
 

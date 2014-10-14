@@ -4,7 +4,7 @@ from django.forms import ModelForm, Textarea, HiddenInput
 from django.utils.translation import ugettext as _
 from django.utils.html import escape
 
-from gorod.models import HubAnswer
+from gorod.models import HubAnswer, HubQuestion
 
 
 class HubAnswerAddForm(ModelForm):
@@ -29,4 +29,23 @@ class HubAnswerAddForm(ModelForm):
     def clean_text(self):
         text = escape(self.cleaned_data.get('text', ''))
         return text
+
+
+class HubQuestionAddForm(ModelForm):
+    """
+        Hub question add form
+    """
+
+    class Meta:
+        model = HubQuestion
+        fields = ['category', 'question', 'description']
+        error_messages = {
+            'question': {
+                'required': _(u"Введите вопрос"),
+                'min_length': _(u"Длина вопроса должна быть не менее 3 символов")
+            },
+            'category': {
+                'required': _(u"Выберите категорию")
+            }
+        }
 

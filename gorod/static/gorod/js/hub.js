@@ -95,6 +95,44 @@
         self.$formSubmitButton.removeAttr("disabled");
     };
 
+
+    /* HubQuestion */
+
+    // FIXME: Create HubQuestion object and derive it from HubAnswer
+    function extend(Child, Parent) {
+        var F = function() { };
+        F.prototype = Parent.prototype;
+        Child.prototype = new F();
+        Child.prototype.constructor = Child;
+        Child.superclass = Parent.prototype;
+    }
+
+    var HubQuestion = function(){
+        var self = this;
+        console.log('called');
+
+        self.defaultErrorMsg = "Произошла неизвестная ошибка. Попробуйте позже!";
+
+        self.$form = $(".b-hubquestion-add__form");
+        self.$formError = self.$form.find(".error");
+        self.$formSubmitButton = self.$form.find("[type=submit]");
+        self.$formInput = self.$form.find("[name=answer]");
+
+        //console.log(HubAnswer.prototype.bindHandlers);
+        //HubAnswer.prototype.bindHandlers.apply(self);
+        HubAnswer.prototype.bindHandlers.call(self);
+    };
+
+    extend(HubQuestion, HubAnswer)
+
+    HubQuestion.prototype._formSuccessAnswerProcessing = function(json) {
+        var self = this;
+
+        location.href = json['redirect_url'];
+    };
+
+
     window.HubAnswer = HubAnswer;
+    window.HubQuestion = HubQuestion;
 
 })(jQuery);

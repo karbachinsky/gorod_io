@@ -7,8 +7,8 @@ from django.views.generic import View, TemplateView
 from django.utils.translation import ugettext as _
 from django.db import IntegrityError, DatabaseError
 
-from gorod.models import HubQuestion, HubAnswer, City
-from gorod.utils.forms.hub_answer import HubAnswerAddForm
+from gorod.models import HubQuestion, HubAnswer, City, HubQuestionCategory
+from gorod.utils.forms.hub import HubAnswerAddForm, HubQuestionAddForm
 from gorod.utils.views.mixins import JSONResponseMixin
 
 
@@ -20,7 +20,10 @@ class HubView(View):
         questions = HubQuestion.objects.get_questions_by_city_name(city_name)
 
         context = {
-            'questions': questions
+            'questions': questions,
+            'question_form': HubQuestionAddForm(),
+            # FIXME: Remove it if categories are redundant on frontend
+            'categories': HubQuestionCategory.objects.all()
         }
 
         return render(request, 'gorod/hub.html', context)
@@ -88,3 +91,42 @@ class HubAnswerAddView(JSONResponseMixin, TemplateView):
             )
 
         return self.json_success_context()
+
+
+class HubQuestionAddView(JSONResponseMixin, TemplateView):
+    """
+        Post question
+    """
+    def _get(self, *args, **kwargs):
+        return self.json_forbidden_context(_(u'Ошибка!'))
+
+    @method_decorator(login_required)
+    def _post(self, request, city_name):
+        city = get_object_or_404(City, name=city_name)
+        data = request.POST.copy()
+
+        if request.user.can_action('add-hubquestion'):
+            form = HubQuestionAddForm(data)
+            user = self.request.user
+            if form.is_valid():
+                question = form.save(commit=False)
+                question.city = city
+                question.user = user
+                try:
+                    question.save()
+                except (DatabaseError, IntegrityError) as e:
+                    raise e
+
+                if not user.is_superuser:
+                    user.make_action('add-hubquestion')
+
+                return self.json_success_context({
+                    'redirect_url': question.get_absolute_url()
+                })
+            else:
+                return self.json_error_context(form.errors.items())
+        else:
+            return self.json_form_error_context(
+                _(u'Вы не можете добавлять новые вопросы так часто. Попробуйте позже!')
+            )
+

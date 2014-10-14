@@ -2,14 +2,41 @@
 
 {% load staticfiles %}
 
-{% block meta_title %}{{city.title}} - Полезная информация{% endblock %}
+{% block meta_title %}{{city.title}} - Вопросы и ответы{% endblock %}
 
-{% block meta_description %}{{city.title}} - Полезная информация{% endblock %}
+{% block meta_description %}{{city.title}} - Вопросы и ответы{% endblock %}
 
 {% block body-class %}body_hub{% endblock %}
 
 {% block content %}
     <div class="b-hub">
+
+        <div class="b-hubquestion-add">
+            {% if user.is_authenticated %}
+                <script src="{% static 'gorod/js/hub.js' %}" ></script>
+                <script>
+                    $(function(){
+                        var question = new window.HubQuestion();
+                    });
+                </script>
+                <form class="b-hubquestion-add__form" action="{% url 'gorod:hub-question-add' city_name %}" method="POST">
+                    {% csrf_token %}
+                    <p class="error"></p>
+                    <div class="b-hubquestion-add__user">
+
+                    </div>
+                    {{ question_form.category }}
+                    {{ question_form.question }}
+                    {{ question_form.description }}
+                    <input type="submit" value="Спросить" />
+                </form>
+            {% else %}
+                <p><a href="" class="b-hubquestion-add__login-link login-link">Авторизуйтесь</a>, если вы хотите задать вопрос!</p>
+            {% endif %}
+
+        </div>
+
+
         <h4 class="b-hub__title">Вопросы и ответы</h4>
         <ul class="b-hub__questions">
             {% for question in questions %}

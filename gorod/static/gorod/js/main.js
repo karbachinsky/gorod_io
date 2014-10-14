@@ -70,7 +70,7 @@
 
 	var $popup = $('.b-popup-login'),
 	$window = $popup.find('.b-popup__window'),
-	$loginBtn = $('.b-header__content .b-header__login, .b-comments__add__login'),
+	$loginBtn = $('.b-header__content .b-header__login, .b-comments__add__login .login-link'),
 	shownClass = 'b-popup_shown',
 	openPopup = function(e){
 		$popup.addClass(shownClass);

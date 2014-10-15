@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.forms import ModelForm, Textarea, HiddenInput
+from django.forms import ModelForm, Textarea, HiddenInput, TextInput
 from django.utils.translation import ugettext as _
 from django.utils.html import escape
 
@@ -39,6 +39,9 @@ class HubQuestionAddForm(ModelForm):
     class Meta:
         model = HubQuestion
         fields = ['category', 'question', 'description']
+        widgets = {
+            'question': TextInput(attrs={'placeholder': 'Введите ваш вопрос','autocomplete':'off'})
+        }
         error_messages = {
             'question': {
                 'required': _(u"Введите вопрос"),

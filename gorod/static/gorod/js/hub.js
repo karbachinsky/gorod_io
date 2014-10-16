@@ -34,12 +34,12 @@
     HubAnswer.prototype.formHandler = function() {
         var self = this;
 
-        self.$form.on("submit", function(e){
+        self.$form.parent().on("submit", self.$form, function(e){
             e.preventDefault();
             self.$formSubmitButton.attr("disabled", "disabled");
 
             var addUrl = self.$form.attr('action');
-            var data = new FormData($(this).get(0));
+            var data = new FormData(self.$form.get(0));
 
             var Deferred = $.ajax({
                 url: addUrl,
@@ -109,7 +109,6 @@
 
     var HubQuestion = function(){
         var self = this;
-        console.log('called');
 
         self.defaultErrorMsg = "Произошла неизвестная ошибка. Попробуйте позже!";
 

@@ -73,18 +73,15 @@
 .b-article__service{
 	margin: 40px 0 0;
 }
-.b-article__share{
+.b-hub-question__share{
 	float: left;
 	&>div{
 		margin-top: 5px;
 		margin-left: -4px;
 	}
 }
-.b-article__share-text{
-	font-size: 14px;
-	font-weight: 300;
-}
-.b-article__complaint{
+
+.b-hub-question__complaint{
 	float: right;
 	padding-top: 28px;
 	a{

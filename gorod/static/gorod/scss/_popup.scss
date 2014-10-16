@@ -82,6 +82,11 @@
 		margin-top: -14px;
 
 	}
+	.b-form__title{
+		input{
+			width: 554px;	
+		}
+	}
 
 	.b-form__preview-wrapper{
 		padding-bottom: 25px;
@@ -136,32 +141,15 @@
 		display: none;
 	}
 
-	.b-form__title{
-		position: relative;
-		input{
-			display: block;
-			padding: 0px 8px;
-			width: 554px;	
-			border:none;
-			font-size: 20px;
-			outline: none !important;
-		}
+	.b-form__submit{
+		padding: 0px 10px 20px;
 	}
 	.b-form__rubric{
 		display: none;
 	}
 
 	
-	.b-form__submit{
-		padding: 0px 10px 20px;
-		margin-bottom: 0px !important;
-		line-height: 30px;
-		input{
-			@extend .btn;
-			border: 0;
-			outline: none;
-		}
-	}
+	
 	.b-form__del{
 		font-size: 13px;
 		letter-spacing: 1.2px;
@@ -191,74 +179,6 @@
 				border-color: red;
 			}
 		}
-	}
-
-	/*---------------CKEDITOR----------------*/
-	.b-form__text{
-		width: 100% !important;
-		.cke{
-			margin: auto;
-			border:none;
-			border-top: 2px solid #f1f1f1;
-			border-bottom: 2px solid #f1f1f1;
-			@include box-shadow(none);
-		}
-		.cke_top{
-			background: none;
-			border: none;
-			padding: 12px 10px 5px;
-		}
-
-		.cke_wysiwyg_frame{
-			margin: -10px;
-		}
-
-		.cke_toolgroup{
-			background: none;
-			border:none;
-			@include box-shadow(none);
-		}
-		.cke_button{
-			background: none;
-			border:none;
-			margin-right: 5px;
-			@include box-shadow(none);
-			cursor: pointer;
-			padding: 0;
-			width:22px;
-			height:25px;
-		}
-		.cke_button_icon{
-			width:22px;
-			height:25px;
-			margin: 0;
-			background: url(../img/form-sprite.png) no-repeat 0 0 !important;
-		}
-
-		@mixin cke-icons($y-pos) {
-			.cke_button_icon{
-				background-position: 0 $y-pos !important;
-			}
-
-			&.cke_button_on{
-				.cke_button_icon{
-					background-position: -23px $y-pos !important;
-				}
-			}
-		}
-		.cke_button__bold{
-			@include cke-icons(0px);
-		}
-		.cke_button__link{
-			@include cke-icons(-25px);
-		}
-		.cke_button__numberedlist{
-			@include cke-icons(-75px);
-		}
-		.cke_button__bulletedlist{
-			@include cke-icons(-50px);
-		}
-
 	}
 
 }

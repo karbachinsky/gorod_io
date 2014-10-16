@@ -16,7 +16,7 @@ class HubAnswerAddForm(ModelForm):
         model = HubAnswer
         fields = ['question', 'text']
         widgets = {
-            'text': Textarea(attrs={'placeholder': 'Введите ответ на вопрос'}),
+            'text': Textarea(attrs={'placeholder': 'Введите ответ на вопрос', 'id':'id_answer_text'}),
             'question': HiddenInput(),
         }
         error_messages = {

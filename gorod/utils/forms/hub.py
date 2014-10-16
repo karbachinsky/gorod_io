@@ -16,7 +16,7 @@ class HubAnswerAddForm(ModelForm):
         model = HubAnswer
         fields = ['question', 'text']
         widgets = {
-            'text': Textarea(attrs={'placeholder': 'Введите ответ на вопрос'}),
+            'text': Textarea(attrs={'placeholder': 'Введите ответ на вопрос', 'id':'id_answer_text'}),
             'question': HiddenInput(),
         }
         error_messages = {
@@ -39,8 +39,10 @@ class HubQuestionAddForm(ModelForm):
     class Meta:
         model = HubQuestion
         fields = ['category', 'question', 'description']
+        localized_fields = ['category', 'question', 'description']
         widgets = {
-            'question': TextInput(attrs={'placeholder': 'Введите ваш вопрос','autocomplete':'off'})
+            'question': TextInput(attrs={'placeholder': 'Введите ваш вопрос', 'autocomplete':'off'}),
+            'description': Textarea(attrs={'placeholder': 'Описание вопроса'}),
         }
         error_messages = {
             'question': {

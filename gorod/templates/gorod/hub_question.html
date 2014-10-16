@@ -12,13 +12,14 @@
 <div class="b-hub-item__wrapper">
     <h4 class="b-hub__title"><a href="{% url 'gorod:hub' city.name %}">Вопросы и ответы</a></h4>
     <div class="b-hub-item">
-        <div class="b-hub-question">
-            <div class="b-hub-item__content">
-                <div class="b-hub-item__info">
+        <div class="b-hub-item__content">
+            <div class="b-hub-question">
+            
+                <div class="b-hub-question__info">
                     <span>{{ question.category }}</span>
-                    <div class="b-hub-item__date">{{ question.add_date|naturalday }}</div>
+                    <div class="b-hub-question__date">{{ question.add_date|naturalday }}</div>
                 </div>
-                <div class="b-hub-item__author">
+                <div class="b-hub-question__author">
                     {% user question.user %}
                 </div>
                 <div class="clear"></div>
@@ -36,26 +37,36 @@
                     {% endautoescape %}
                 </div>
 
+                <div class="b-hub-question__share">
+                    {% include "gorod/incl/_share.html" %}
+                </div>
+                <div class="b-hub-question__complaint">
+                    <a href="mailto:hola@gorod.io"><i></i>Пожаловаться</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            
+            {% if answers %}
+                <ul class="b-hub-item__answers">
+                    {% for answer in answers %}
+                        <li class="b-hubanswer">
+                            <div class="b-hubanswer__user">
+                                {%  user answer.user %}
+                            </div>
+                            <div class="b-hubanswer__date">{{ answer.add_date|naturalday }}</div>
+                            <div class="clear"></div>
+                            <div class="b-hubanswer__text">
+                                {% autoescape off %}
+                                    {{ answer.text }}
+                                {% endautoescape %}
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-                {% if answers %}
-                    <ul class="b-hub-item__answers">
-                        {% for answer in answers %}
-                            <li class="b-comment">
-                                <div class="b-comment__user">
-                                    {%  user answer.user %}
-                                </div>
-                                <div class="b-comment__date">{{ answer.add_date|naturalday }}</div>
-                                <div class="clear"></div>
-                                <div class="b-comment__text">
-                                    {% autoescape off %}
-                                        {{ answer.text }}
-                                    {% endautoescape %}
-                                </div>
-                                <div class="clear"></div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+            <div class="b-hubanswer__add">
 
                 <div class="b-hubanswer-add b-comments__add ">
                     {% if user.is_authenticated %}
@@ -72,9 +83,9 @@
                                 {% user user %}
                             </div>
                             {{ answer_form.question }}
-                            <textarea cols="40" id="id_text" name="text" placeholder="Введите ответ на вопрос" rows="10"></textarea>
+                            <textarea cols="40" id="id_answer_text" name="text" placeholder="Введите ответ на вопрос" rows="10"></textarea>
                             <p>
-                                <input type="submit" value="Ответить" />
+                                <input type="submit" value="Введите ответ на вопрос" />
                             </p>
                         </form>
                     {% else %}
@@ -84,6 +95,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 {% endblock %}

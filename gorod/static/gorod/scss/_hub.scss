@@ -46,7 +46,6 @@
 	}
 }
 .b-hubquestion-add__auth{
-	padding: 20px 0 40px;
 	
 	.b-hubquestion-add__login-link{
 		font-size: 14px;	
@@ -90,7 +89,7 @@
 	}
 }
 .b-hub-questions-item__info{
-	padding-top: 3px;
+	padding-top: 7px;
 	.b-user{
 		float: right;
 		@extend .b-user_small;
@@ -239,6 +238,8 @@
 	padding-top: 15px;
     padding-bottom: 20px;
     border-top: 1px solid #f4f4f4;
+	font-size: 14px;
+	color:$gray-color-dark;
 
     textarea{
     	margin-left: 40px;
@@ -255,11 +256,6 @@
 		border: none;
 		margin-left: 42px;
 	}
-}
-.b-hubanswer__add{
-	font-size: 14px;
-	color:$gray-color-dark;
-	margin: 20px 0 0;
 }
 .b-hubanswer-add__login-link{
 	font-size: 11px;	

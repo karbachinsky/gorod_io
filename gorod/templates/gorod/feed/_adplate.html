@@ -76,17 +76,19 @@
                 <div class="clear"></div>
             </ul>
         </div>
-        <div class="b-adplate__payments">
-            <a href="{% url 'gorod:payments' city.name %}" class="b-adplate__title">Оплата услуг</a>
-            <ul>
-                {% for payment in adplate.payments %}
-                    <li>
-                        <a target="_blank" href="{{payment.url}}">{{ payment.title|smart_truncate:50 }}</a>
-                    </li>
-                {% endfor %}
-                <div class="clear"></div>
-            </ul>
-        </div>
+        {% if adplate.payments %}
+            <div class="b-adplate__payments">
+                <a href="{% url 'gorod:payments' city.name %}" class="b-adplate__title">Оплата услуг</a>
+                <ul>
+                    {% for payment in adplate.payments %}
+                        <li>
+                            <a target="_blank" href="{{payment.url}}">{{ payment.title|smart_truncate:50 }}</a>
+                        </li>
+                    {% endfor %}
+                    <div class="clear"></div>
+                </ul>
+            </div>
+        {% endif %}
         <div class="b-adplate__welcome">
             <a href="{% url 'gorod:welcome' city.name %}">
                 <h2 class="b-adplate__welcome-title">Городской сайт {{ city.title_gent }}</h2>

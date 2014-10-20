@@ -1,4 +1,5 @@
 {% load stringutils %}
+{% load humanize %}
 
 <div class="b-adplate">
     <div class="b-adplate__questions">
@@ -9,6 +10,10 @@
                     <a href="{% url 'gorod:hub-question' city.name question.id %}">
                         {{ question.question|smart_truncate:60 }}
                     </a>
+                    <div class="b-adplate-questions__info">
+                        <span class="b-adplate-questions__date">{{ question.add_date|naturalday }}</span>
+                        <span class="b-adplate-questions__comments"><i></i>100</span>
+                    </div>
                 </li>
             {% endfor %}
         </ul>

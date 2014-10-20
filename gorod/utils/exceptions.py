@@ -29,3 +29,10 @@ class ComplaintError(Error):
         Errors associated with complaints
     """
     pass
+
+
+class DONCError(Error):
+    """
+        Errors associated with Depending Object Numbers Counter
+    """
+    pass

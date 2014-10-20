@@ -4,11 +4,13 @@ from django.db import models
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
 from django.core import serializers
+from django.contrib.contenttypes.generic import GenericRelation
 
 from easy_thumbnails.templatetags.thumbnail import thumbnail_url
 from ckeditor.fields import RichTextField
 
 from gorod.models import City
+from gorod.models.donc import DONC
 from gorod.utils.exceptions import FeedError
 from gorod.templatetags.stringutils import smart_truncate
 
@@ -74,7 +76,7 @@ class ArticleManager(models.Manager):
         # FIXME: add try-catch
         json_feed = serializers.serialize('json', articles,
             indent=4,
-            extras=('url', 'thumbnail', 'short_text', 'human_add_date'),
+            extras=('url', 'thumbnail', 'short_text', 'human_add_date', 'comment_cnt'),
             relations={
                 'rubric': {
                     'extras': ('url',)
@@ -82,7 +84,7 @@ class ArticleManager(models.Manager):
                 'user': {
                     'extras': ('profile_url', 'human_name', 'full_avatar'),
                     'fields': ('id',)
-                }
+                },
             },
             excludes=('text', 'is_checked', 'is_published', 'add_date', 'city')
         )
@@ -120,6 +122,8 @@ class Article(models.Model):
     is_published = models.BooleanField(default=True)
     is_checked = models.BooleanField(default=True)
 
+    donc_data = GenericRelation(DONC, object_id_field='object_pk')
+
     objects = ArticleManager()
 
     class Meta:
@@ -143,6 +147,16 @@ class Article(models.Model):
         })
 
     url = property(get_absolute_url)
+
+    @property
+    def comment_cnt(self):
+        """
+            Number of comments
+        """
+        try:
+            return self.donc_data.filter(field_name='comment_cnt')[0].count
+        except IndexError:
+            return 0
 
     @property
     def thumbnail(self):

@@ -5,3 +5,4 @@ from gorod.models.organization import *
 from gorod.models.complaint import *
 from gorod.models.hub import *
 from gorod.models.payment import *
+from gorod.models.donc import *

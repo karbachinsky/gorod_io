@@ -30,8 +30,10 @@
             </a>
             <a href="{{ fields.user.extras.profile_url }}" class="b-user__name">{{ fields.user.extras.human_name }}</a>
         </div>
-        <div class="b-feed-item__comments"><i></i>100</div>
-         
+
+        {{#if extras.comment_cnt}}
+            <div class="b-feed-item__comments"><i></i>{{ extras.comment_cnt }}</div>
+        {{/if}}
     </li>
 </script>
 {% endverbatim %}

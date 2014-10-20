@@ -11,7 +11,7 @@ from ckeditor.fields import RichTextField
 
 from gorod.models import City
 from gorod.models.donc import DONC
-from gorod.utils.exceptions import FeedError
+from gorod.utils.exceptions import FeedError, DONCError
 from gorod.templatetags.stringutils import smart_truncate
 
 from smart_selects.db_fields import ChainedForeignKey
@@ -147,6 +147,19 @@ class Article(models.Model):
         })
 
     url = property(get_absolute_url)
+
+    def add_comment_hook(self):
+        """
+            Called when someone adds comment to this article
+        """
+        from gorod.utils.donc import ArticleCommentsCounter
+
+        article_comment_counter = ArticleCommentsCounter()
+
+        try:
+            article_comment_counter.set_object_cnt(self.id, self.comment_cnt + 1)
+        except DONCError:
+            pass
 
     @property
     def comment_cnt(self):

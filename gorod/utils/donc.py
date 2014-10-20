@@ -11,15 +11,15 @@
 
     Author: I. Karbachinsky <igorkarbachinsky@mail.ru>
 """
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
 from django.db import IntegrityError
 
 from gorod.utils.exceptions import DONCError
-from gorod.models import Article, DONC
+import gorod.models.article
+from gorod.models.donc import DONC
 import comments
 
-from abc import ABCMeta, abstractproperty, abstractmethod
+from abc import ABCMeta, abstractproperty
 from collections import Counter
 
 
@@ -58,10 +58,14 @@ class DONCCounterBase(object):
     def __init__(self):
         pass
 
-    def recount(self):
+    def recount(self, object_id):
         depending_model_qs = self.depending_model.objects.all()
         if self.required_depending_model_filter:
             depending_model_qs.filter(**self.required_depending_model_filter)
+            if object_id:
+                depending_model_qs.filter(
+                    object_pk=object_id
+                )
 
         data = Counter()
 
@@ -74,34 +78,19 @@ class DONCCounterBase(object):
                 data[object_pk] += 1
 
         for object_pk, cnt in data.iteritems():
-            try:
-                object = self.model.objects.select_related().get(pk=object_pk)
+            self.set_object_cnt(object_pk, cnt)
 
-                object_donc, _ = DONC.objects.get_or_create(
-                    object_pk=object_pk,
-                    **self.donc_filter
-                )
+    def set_object_cnt(self, object_pk, cnt):
+        try:
+            object_donc, _ = DONC.objects.get_or_create(
+                object_pk=object_pk,
+                **self.donc_filter
+            )
 
-                """
-                try:
-                    object_donc = DONC.objects.get_for_model(self.model).filter(
-                        object_pk=object_pk,
-                        **self.donc_filter
-                    )[0]
-                except IndexError:
-                    object_donc = DONC(
-                        self.content_type,
-
-                        object_pk=object_pk,
-                    )
-                """
-
-                object_donc.count = cnt
-                object_donc.save()
-            except ObjectDoesNotExist:
-                continue
-            except IntegrityError as e:
-                raise DONCError(e)
+            object_donc.count = cnt
+            object_donc.save()
+        except IntegrityError as e:
+            raise DONCError(e)
 
 
 class ArticleCommentsCounter(DONCCounterBase):
@@ -109,7 +98,7 @@ class ArticleCommentsCounter(DONCCounterBase):
         Count number of comments for articles
     """
     depending_model = comments.get_model()
-    model = Article
+    model = gorod.models.article.Article
 
     content_type = ContentType.objects.get_for_model(model)
 

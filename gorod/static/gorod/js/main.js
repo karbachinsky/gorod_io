@@ -70,7 +70,7 @@
 
 	var $popup = $('.b-popup-login'),
 	$window = $popup.find('.b-popup__window'),
-	$loginBtn = $('.b-header__content .b-header__login, .login-link'),
+	$loginBtn = $('.b-header__login, .login-link'),
 	shownClass = 'b-popup_shown',
 	openPopup = function(e){
 		$popup.addClass(shownClass);
@@ -84,6 +84,7 @@
 
 	$loginBtn.on('click',function(e){
         e.preventDefault();
+        $('.b-header').removeClass('active');
 		openPopup(e);
 	});
 

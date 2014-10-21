@@ -53,10 +53,8 @@
             </a>
         {% endif %}
 		<div class="b-header__btns">
-			{% if user.is_authenticated %}
-	        	{#<a href="#" class="b-header__add" >+ Добавить</a>#}
-	        {% else %}
-	        	<a href="{% url 'social:begin' "vk-oauth2" %}?next={{ request.get_full_path }}" class="b-header__login sn-logo">Войти</a>
+			{% if not user.is_authenticated %}
+	        	<span class="b-header__login">Войти</span>
 	        {% endif %}
 	    </div>
 	</div>

@@ -80,6 +80,9 @@ class HubAnswerAddView(JSONResponseMixin, TemplateView):
                 except (DatabaseError, IntegrityError) as e:
                     raise e
 
+                if hasattr(answer.question, 'add_answer_hook'):
+                    answer.question.add_answer_hook()
+
                 if not user.is_superuser:
                     user.make_action('add-hubanswer')
                     return self.json_success_context()

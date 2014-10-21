@@ -4,9 +4,11 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.core.validators import MinLengthValidator
-
+from django.contrib.contenttypes.generic import GenericRelation
 
 from gorod.models import City
+from gorod.utils.exceptions import DONCError
+from gorod.models.donc import DONC
 
 from ckeditor.fields import RichTextField
 
@@ -76,6 +78,8 @@ class HubQuestion(models.Model):
     add_date = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=True)
 
+    donc_data = GenericRelation(DONC, object_id_field='object_pk')
+
     class Meta:
         app_label = 'gorod'
         db_table = 'gorod_hubquestion'
@@ -83,6 +87,30 @@ class HubQuestion(models.Model):
         verbose_name_plural = 'city questions'
 
     objects = HubQuestionManager()
+
+    def add_answer_hook(self):
+        """
+            Called when someone adds answer to this question
+        """
+        from gorod.utils.donc import HubQuestionAnswersCounter
+
+        answer_counter = HubQuestionAnswersCounter()
+
+        try:
+            answer_counter.set_object_cnt(self.id, self.answer_cnt + 1)
+        except DONCError:
+            pass
+
+    @property
+    def answer_cnt(self):
+        """
+            Number of answers
+        """
+        try:
+            return self.donc_data.filter(field_name='answer_cnt')[0].count
+        except IndexError:
+            return 0
+
 
     def get_absolute_url(self):
         return reverse('gorod:hub-question', kwargs={

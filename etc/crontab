@@ -1,1 +1,2 @@
-* */1 * * * /home/g/gorodin/gorod.in/manage.py count_article_comments_number >/dev/null
+* */1 * * * /home/g/gorodin/gorod.in/manage.py donc_recount --type='questions' >/dev/null
+* */1 * * * /home/g/gorodin/gorod.in/manage.py donc_recount --type='articles' >/dev/null

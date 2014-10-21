@@ -6,26 +6,38 @@
 from django.core.management.base import BaseCommand, CommandError
 
 from gorod.utils.exceptions import DONCError
-from gorod.utils.donc import ArticleCommentsCounter
+from gorod.utils.donc import *
 
 from optparse import make_option
 
 
 class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
-        make_option('--article-id',
+        make_option('--type',
+            help='articles, questions'
+        ),
+        make_option('--object-id',
             default=None,
-            help='Article id'),
+            help='certain object id'
+        )
     )
 
     def handle(self, *args, **options):
         """
             Command execution
         """
-        article_id = options.get('article_id', None)
+        type = options.get('type')
+        object_id = options.get('object_id', None)
+
+        if not type:
+            raise CommandError("Specify type!")
+
+        if 'articles' == type:
+            donc = ArticleCommentsCounter()
+        elif 'questions' == type:
+            donc = HubQuestionAnswersCounter()
 
         try:
-            donc = ArticleCommentsCounter()
-            donc.recount(article_id)
+            donc.recount(object_id)
         except DONCError as e:
             raise CommandError(e)

@@ -16,10 +16,11 @@ from django.db import IntegrityError
 
 from gorod.utils.exceptions import DONCError
 import gorod.models.article
+import gorod.models.hub
 from gorod.models.donc import DONC
 import comments
 
-from abc import ABCMeta, abstractproperty
+from abc import ABCMeta, abstractproperty, abstractmethod
 from collections import Counter
 
 
@@ -47,6 +48,13 @@ class DONCCounterBase(object):
         """
         pass
 
+    @abstractproperty
+    def content_type(self):
+        """
+            model content_type
+        """
+        pass
+
     @property
     def required_depending_model_filter(self):
         """
@@ -54,6 +62,10 @@ class DONCCounterBase(object):
             For example skip removed comments or you can specify period here
         """
         return None
+
+    @abstractmethod
+    def depending_model_related_pk(self, depending_object):
+        pass
 
     def __init__(self):
         pass
@@ -69,8 +81,8 @@ class DONCCounterBase(object):
 
         data = Counter()
 
-        for comment in depending_model_qs:
-            object_pk = comment.object_pk
+        for depending_object in depending_model_qs:
+            object_pk = self.depending_model_related_pk(depending_object)
 
             if not object_pk in data:
                 data[object_pk] = 1
@@ -102,6 +114,9 @@ class ArticleCommentsCounter(DONCCounterBase):
 
     content_type = ContentType.objects.get_for_model(model)
 
+    def depending_model_related_pk(self, depending_object):
+        return depending_object.object_pk
+
     required_depending_model_filter = dict(
         is_removed=False,
         content_type__name='article',
@@ -113,4 +128,25 @@ class ArticleCommentsCounter(DONCCounterBase):
         content_type=content_type
     )
 
+
+class HubQuestionAnswersCounter(DONCCounterBase):
+    """
+        Count number of answers for questions
+    """
+    depending_model = gorod.models.hub.HubAnswer
+    model = gorod.models.hub.HubQuestion
+
+    def depending_model_related_pk(self, depending_object):
+        return depending_object.question.id
+
+    content_type = ContentType.objects.get_for_model(model)
+
+    required_depending_model_filter = dict(
+        is_published=False,
+    )
+
+    donc_filter = dict(
+        field_name='answer_cnt',
+        content_type=content_type
+    )
 

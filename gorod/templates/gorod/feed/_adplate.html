@@ -12,7 +12,11 @@
                     </a>
                     <div class="b-adplate-questions__info">
                         <span class="b-adplate-questions__date">{{ question.add_date|naturalday }}</span>
-                        <span class="b-adplate-questions__comments"><i></i>100</span>
+                        {% if question.answer_cnt %}
+                            <span class="b-adplate-questions__comments"><i></i>
+                                {{ question.answer_cnt }}
+                            </span>
+                        {% endif %}
                     </div>
                 </li>
             {% endfor %}

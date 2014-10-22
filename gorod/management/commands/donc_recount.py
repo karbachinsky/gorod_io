@@ -36,6 +36,8 @@ class Command(BaseCommand):
             donc = ArticleCommentsCounter()
         elif 'questions' == type:
             donc = HubQuestionAnswersCounter()
+        else:
+            raise CommandError("Specify correct type!")
 
         try:
             donc.recount(object_id)

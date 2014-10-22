@@ -1,13 +1,10 @@
 {% load comments %}
+{% get_comment_count for article as comments_cnt  %}
 
-<div class="b-comments-cnt">
-    {% get_comment_count for article as comments_cnt  %}
+{% if comments_cnt > 0 %}
+	<div class="b-comments-cnt">
+	    {% get_comment_count for article as comments_cnt  %}
 
-    <a name="comments-cnt" class="b-comments-cnt__link" href="#comments-cnt"><i></i>
-        {% if comments_cnt > 0 %}
-            {{ comments_cnt }}
-        {% else %}
-            Добавить комментарий
-        {% endif %}
-    </a>
-</div>
+	    <span name="comments-cnt" class="b-comments-cnt__link" >Комментарии</span>
+	</div>
+{% endif %}

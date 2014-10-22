@@ -1,3 +1,10 @@
+.b-comments{
+	
+	display: none;
+    &.active{
+    	display: block;
+    }
+}
 .b-comments-cnt {
     float: left;
 
@@ -9,21 +16,19 @@
 	text-transform: uppercase;
 	font-weight: 600;
 	text-decoration: none;
-	vertical-align: top;
-	color:#b6b6b6;
+	color:$green-color;
 	cursor: pointer;
-	padding: 8px 15px 7px;
-	background: #eeeeee;
-	line-height: 13px;
-	@include border-radius(3px);
 	
 	&:hover{
-		background:#dddddd;
-		color:#6e6e6e;
+		color:$green-color-dark;
 	}
 	&:focus{
 		outline: none;
 	}
+}
+.b-comments__list {
+	max-height: 300px;
+	overflow: scroll;
 }
 .b-comment {
 	padding-top: 15px;
@@ -59,10 +64,12 @@
     display: none;
 }
 .b-comments__add {
+	font-size: 14px;
+	color:$gray-color-dark;
+	margin: 0;
 	padding-top: 15px;
-    padding-bottom: 20px;
     border-top: 1px solid #f4f4f4;
-
+    
     textarea{
     	margin-left: 40px;
     	border: none;
@@ -78,11 +85,6 @@
 		border: none;
 		margin-left: 42px;
 	}
-}
-.b-comments__add{
-	font-size: 14px;
-	color:$gray-color-dark;
-	margin: 20px 0 0;
 }
 .b-comments-add__login-link{
 	font-size: 11px;	

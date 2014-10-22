@@ -12,7 +12,7 @@ from models import MPTTComment
 class MPTTCommentForm(CommentForm):
     def __init__(self, *args, **kwargs):
         super(MPTTCommentForm, self).__init__(*args, **kwargs)
-        self.fields['comment'].widget.attrs['placeholder'] = _(u"Комментарий")
+        self.fields['comment'].widget.attrs['placeholder'] = _(u"Введите комментарий")
 
     parent = forms.ModelChoiceField(
         queryset=MPTTComment.objects.all(),

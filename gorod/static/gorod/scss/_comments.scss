@@ -1,9 +1,6 @@
 .b-comments{
 	
-	display: none;
-    &.active{
-    	display: block;
-    }
+	
 }
 .b-comments-cnt {
     float: left;
@@ -27,8 +24,6 @@
 	}
 }
 .b-comments__list {
-	max-height: 300px;
-	overflow: scroll;
 }
 .b-comment {
 	padding-top: 15px;

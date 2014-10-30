@@ -88,12 +88,18 @@ class UserStat(models.Model):
     # FIXME
     article_last_add_time = models.DateTimeField(null=True)
     article_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
+
     comment_last_add_time = models.DateTimeField(null=True)
     comment_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
+
     hubanswer_last_add_time = models.DateTimeField(null=True)
     hubanswer_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
+
     hubquestion_last_add_time = models.DateTimeField(null=True)
     hubquestion_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
+
+    like_last_add_time = models.DateTimeField(null=True)
+    like_add_in_last_hour_cnt = models.SmallIntegerField(default=0)
 
     class Meta:
         app_label = 'gorod'

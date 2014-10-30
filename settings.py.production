@@ -52,7 +52,8 @@ INSTALLED_APPS = (
     'django_mptt_admin',
     'django.contrib.flatpages',
     'django.contrib.comments',
-    'comments'
+    'comments',
+    'likes'
 )
 
 COMMENTS_APP = 'comments'
@@ -146,6 +147,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     '/home/g/gorodin/gorod.in/gorod/static',
     '/home/g/gorodin/gorod.in/comments/static',
+    '/home/g/gorodin/gorod.in/likes/static',
     '/home/g/gorodin/.venv/lib/python2.7/site-packages/django/contrib/admin/static',
     '/home/g/gorodin/.venv/lib/python2.7/site-packages/ckeditor/static',
     '/home/g/gorodin/.venv/lib/python2.7/site-packages/django_mptt_admin/static'
@@ -222,6 +224,7 @@ GOROD_ARTICLE_MAX_ADD_IN_HOUR_CNT = 3
 GOROD_COMMENT_MAX_ADD_IN_HOUR_CNT = 20
 GOROD_HUBQUESTION_MAX_ADD_IN_HOUR_CNT = 10
 GOROD_HUBANSWER_MAX_ADD_IN_HOUR_CNT = 20
+GOROD_LIKE_MAX_ADD_IN_HOUR_CNT = 200
 
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',

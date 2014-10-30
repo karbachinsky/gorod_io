@@ -26,6 +26,9 @@ urlpatterns = patterns('',
     #url(r'^comments/add/?', CommentsAddView.as_view(), name='comments-add'),
     url(r'^comments/', include('comments.urls')),
 
+    # Likes
+    url(r'^likes/', include('likes.urls', namespace='likes')),
+
     ## API urls
     url(r'^api/', include('gorod.urls.api', namespace='gorodapi')),
 

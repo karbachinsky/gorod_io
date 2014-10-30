@@ -77,9 +77,21 @@ class GorodUserAdmin(UserAdmin):
     ordering = ['-date_joined']
 
 
+## Groups
+
+class ArticleRubricInline(admin.StackedInline):
+    model = ArticleRubric
+    extra = 1
+
+
+class ArticleRubricAdmin(GorodAdminBase):
+    list_display = ('id', 'name', 'city')
+    list_filter = ('city',)
+
+
 class CityAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'title', 'add_date')
-
+    inlines = [ArticleRubricInline]
 
 ## CITYINFO
 
@@ -122,9 +134,6 @@ class ArticleAdmin(GorodAdminBase):
     save_on_top = True
     view_on_site = True
 
-
-class ArticleRubrucAdmin(GorodAdminBase):
-    list_display = ('id', 'name')
 
 
 ## ORGANIZATIONS
@@ -219,7 +228,7 @@ admin.site.register(HubQuestion, HubQuestionAdmin)
 #admin.site.register(CityInfo, CityInfoAdmin)
 admin.site.register(CityWelcome, CityWelcomeAdmin)
 admin.site.register(Article, ArticleAdmin)
-admin.site.register(ArticleRubric, ArticleRubrucAdmin)
+admin.site.register(ArticleRubric, ArticleRubricAdmin)
 admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(OrganizationCategory, OrganizationCategoryAdmin)
 admin.site.register(Complaint, ComplaintAdmin)

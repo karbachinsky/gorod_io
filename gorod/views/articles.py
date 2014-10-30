@@ -23,7 +23,7 @@ class FeedView(View):
     def dispatch(self, request, city_name, rubric_name=None):
         rubric = None
         if rubric_name:
-            rubric = get_object_or_404(ArticleRubric, name=rubric_name)
+            rubric = get_object_or_404(ArticleRubric, name=rubric_name, city__name=city_name)
 
         context = {
             'rubric': rubric,
@@ -77,7 +77,7 @@ class ArticleAddView(View):
     @method_decorator(login_required)
     def dispatch(self, request, city_name, rubric_name):
         self.city = get_object_or_404(City, name=city_name)
-        self.rubric = get_object_or_404(ArticleRubric, name=rubric_name)
+        self.rubric = get_object_or_404(ArticleRubric, name=rubric_name, city__name=city_name)
         self.request = request
 
         # TODO: check is user trying to add article to his city
@@ -189,7 +189,7 @@ class FeedAPIView(View):
         }
 
         if rubric_name:
-            rubric = get_object_or_404(ArticleRubric, name=rubric_name)
+            rubric = get_object_or_404(ArticleRubric, name=rubric_name, city__name=city_name)
             filters['rubric'] = rubric.id
 
         if user_id:

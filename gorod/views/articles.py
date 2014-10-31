@@ -96,8 +96,12 @@ class ArticleAddView(View):
             return self._display_form()
 
     def _display_form(self):
-        defaults = {'rubric': self.rubric}
-        form = ArticleAddForm(initial=defaults)
+        #defaults = {'rubric': self.rubric}
+        defaults = {}
+
+
+
+        form = ArticleAddForm()
         return render(self.request, 'gorod/forms/article_add.html', {
             'form': form,
         })

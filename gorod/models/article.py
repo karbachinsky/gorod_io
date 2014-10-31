@@ -114,14 +114,6 @@ class Article(models.Model):
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     rubric = models.ForeignKey(ArticleRubric, default=1, help_text=u'Рубрика')
-    rubric = ChainedForeignKey(
-        ArticleRubric,
-        chained_field="city",
-        chained_model_field="city",
-        show_all=False,
-        auto_choose=True,
-        help_text=u'Группа'
-    )
     user = ChainedForeignKey(
         settings.AUTH_USER_MODEL,
         chained_field="city",

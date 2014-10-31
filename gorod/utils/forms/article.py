@@ -22,7 +22,6 @@ class ArticleAddForm(ModelForm):
             'text': Textarea(attrs={'placeholder': 'Введите текст'}),
             'title': TextInput(attrs={'placeholder': 'Введите заголовок','autocomplete':'off'}),
             'picture': ClearableFileInput(attrs={'placeholder': 'Изображение'}),
-            'rubric': HiddenInput(),
         }
 
     def is_valid(self):

@@ -25,6 +25,8 @@ class ArticleRubric(models.Model):
     title = models.CharField(max_length=255)
     title_plural = models.CharField(max_length=255, null=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
+    # #123245
+    color = models.CharField(null=True, max_length=7)
 
     class Meta:
         app_label = 'gorod'

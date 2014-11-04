@@ -95,13 +95,15 @@ class ArticleAddView(View):
             return self._display_form()
 
     def _display_form(self):
-        #defaults = {'rubric': self.rubric}
-        defaults = {'city': self.city}
-
         form = ArticleAddForm()
+        self._patch_rubrics_qs(form)
+
         return render(self.request, 'gorod/forms/article_add.html', {
             'form': form,
         })
+
+    def _patch_rubrics_qs(self, form):
+        form.fields["rubric"].queryset = ArticleRubric.objects.filter(city=self.city)
 
     def _save_form(self, form):
         user = self.request.user
@@ -143,6 +145,8 @@ class ArticleEditView(ArticleAddView):
 
     def _display_form(self):
         form = ArticleAddForm(instance=self.article)
+        self._patch_rubrics_qs(form)
+
         return render(self.request, 'gorod/forms/article_add.html', {
             'form': form,
             'current_image': self.article.picture,

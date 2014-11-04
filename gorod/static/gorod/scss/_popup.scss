@@ -141,7 +141,14 @@
 		padding: 0px 10px 20px;
 	}
 	.b-form__rubric{
-		display: none;
+		padding-left: 10px;	
+		span{
+			font-size: 11px;
+			color:$gray-color-dark;
+			text-transform: uppercase;
+			font-weight: 600;
+			margin-right: 10px;
+		}
 	}
 
 	

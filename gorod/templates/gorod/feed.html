@@ -9,10 +9,6 @@
 
 {% block content %}
 
-    {% if not rubric %}
-        {% include "gorod/feed/_adplate.html" %}
-    {% endif %}
-
     <div class="b-feed__wrapper">
         {% if rubric %}
             <h1 class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}">
@@ -39,6 +35,17 @@
             </ul>
             <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
            
+        </div>
+        <div class="b-groups">
+            <span class="b-groups__title">Группы</span>
+            <div class="grid-sizer"></div>
+            <div class="gutter-sizer"></div>
+            {% for rubric in rubrics %}
+                <a href="#" class="b-groups-item" style="background:{{rubric.color}}">
+                    <div class="b-groups-item__name">{{rubric.title_plural}}</div>
+                    
+                </a>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

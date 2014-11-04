@@ -61,5 +61,11 @@
 		gutter : '.gutter-sizer',
 		transitionDuration: 0
 	});
-});
 
+	$('.b-groups').masonry({
+		columnWidth: '.grid-sizer',
+		itemSelector: '.b-groups-item',
+		gutter : '.gutter-sizer',
+		transitionDuration: 0
+	});
+});

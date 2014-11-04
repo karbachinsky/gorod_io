@@ -36,11 +36,11 @@ class Command(BaseCommand):
 
             message_rubric.save()
 
-            for article in Article.objects.filter(rubric__name='event'):
+            for article in Article.objects.filter(rubric__name='event', city=city):
                 article.rubric = event_rubric
                 article.save()
 
-            for article in Article.objects.filter(rubric__name='message'):
+            for article in Article.objects.filter(rubric__name='message', city=city):
                 article.rubric = message_rubric
                 article.save()
 

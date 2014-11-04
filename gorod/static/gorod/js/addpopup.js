@@ -3,7 +3,6 @@
 	var $popup = $('.b-popup-add'),
 	$window = $popup.find('.b-popup__window'),
 	$addBtn = $('.b-header__add'),
-    $addList = $('.b-header__add-list'),
     $wrapper = $window.find('#b-form__wrapper'),
     $editLink  = $('.edit-link_article'),
 	shownClass = 'b-popup_shown',
@@ -81,28 +80,15 @@
 
     headerListHandlers = function(){
         $addBtn.on('click',function(e){
-            $addList.addClass('active');
-        });
-        $(document).on('click',function(e){
-            if( ! $(e.target).hasClass('b-header__add') ){
-                $addList.removeClass('active');
-            }
-        });
-
-        $addList.find('li').on('click',function(e){
-            name  = $(this).attr('data-name');
-            var title = $(this).attr('data-title'),
-            url = formAjaxUrls[name];
-            getFormHtml(url, name, title);
+            url = window.getEnv('articleAddUrl');
+            getFormHtml(url, 'add');
             formType = 'add';
         });
     },
     editFormHandlers = function(){
         $editLink.on('click',function(){
-            name  = window.getEnv('articleInfo').name;
-            var title  = window.getEnv('articleInfo').title,
             url = window.getEnv('articleEditUrl');
-            getFormHtml(url, name, title, 'edit');
+            getFormHtml(url, 'edit');
             formType = 'edit';
         });
         $window.on('click', '.b-form__del',function(){
@@ -111,20 +97,16 @@
 
     },
 
-    getFormHtml = function(url,name,title, type){
+    getFormHtml = function(url, type){
         $wrapper.html(''); 
-        $wrapper.attr('class','').addClass('b-form__wrapper_'+name);
         $.get(url, function(html){
             $wrapper.html(html); 
             $wrapper.find('#id_title').attr('placeholder', 'Введите заголовок');
-            $wrapper.find('.b-form__type span').text(title);
 
             if(type=='edit' && $('.b-form__prev-picture').text().length){
                 $previewTools = $popup.find('.b-form__preview-tools');
                 $previewTools.addClass('b-form__preview-tools_active');
                 $('.b-form__preview').css("background-image", "url(/media/"+$('.b-form__prev-picture').text()+")");
-
-
             }
             if(type=='edit'){
                 $popup.find('.b-form__del').show();
@@ -141,7 +123,7 @@
             e.preventDefault();
             var url;
             if(formType=='add'){
-                url = formAjaxUrls[name];
+                url = window.getEnv('articleAddUrl');
             }else  if(formType=='edit'){
                 url = window.getEnv('articleEditUrl');
             }

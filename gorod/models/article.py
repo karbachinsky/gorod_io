@@ -32,6 +32,7 @@ class ArticleRubric(models.Model):
         app_label = 'gorod'
         verbose_name = 'group'
         verbose_name_plural = 'groups'
+        unique_together = ('city', 'name')
 
     def __unicode__(self):
         return self.name

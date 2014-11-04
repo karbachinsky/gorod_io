@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.forms import ModelForm, Textarea, TextInput, ClearableFileInput
+from django.forms import ModelForm, Textarea, TextInput, ClearableFileInput, Select
 #from captcha.fields import CaptchaField
 
 from django.forms import ModelForm, Textarea, TextInput, HiddenInput, BooleanField
@@ -24,6 +24,7 @@ class ArticleAddForm(ModelForm):
             'text': Textarea(attrs={'placeholder': 'Введите текст'}),
             'title': TextInput(attrs={'placeholder': 'Введите заголовок','autocomplete':'off'}),
             'picture': ClearableFileInput(attrs={'placeholder': 'Изображение'}),
+            'rubric': Select()
         }
 
     def is_valid(self):

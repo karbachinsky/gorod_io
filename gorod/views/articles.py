@@ -75,9 +75,8 @@ class ArticleAddView(View):
         self.request = None
 
     @method_decorator(login_required)
-    def dispatch(self, request, city_name, rubric_name):
+    def dispatch(self, request, city_name):
         self.city = get_object_or_404(City, name=city_name)
-        self.rubric = get_object_or_404(ArticleRubric, name=rubric_name, city__name=city_name)
         self.request = request
 
         # TODO: check is user trying to add article to his city
@@ -97,9 +96,7 @@ class ArticleAddView(View):
 
     def _display_form(self):
         #defaults = {'rubric': self.rubric}
-        defaults = {}
-
-
+        defaults = {'city': self.city}
 
         form = ArticleAddForm()
         return render(self.request, 'gorod/forms/article_add.html', {
@@ -142,7 +139,7 @@ class ArticleEditView(ArticleAddView):
         self.article = get_object_or_404(Article, id=article_id, city__name=city_name, rubric__name=rubric_name)
         if not self.article.can_user_modify(request.user):
             raise Http404
-        return super(ArticleEditView, self).dispatch(request, city_name, rubric_name)
+        return super(ArticleEditView, self).dispatch(request, city_name)
 
     def _display_form(self):
         form = ArticleAddForm(instance=self.article)

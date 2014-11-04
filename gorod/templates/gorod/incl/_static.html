@@ -8,11 +8,7 @@
             currentUrlPath: '{{ request.path }}',
 	    	cityName : '{{ city.name }}',
 	    	url : '{{ request.path }}',
-            formAjaxUrls : {
-                {% for rubric in rubrics %}
-                    '{{ rubric.name }}': '{% url 'gorod:article-add' city.name rubric.name %}',
-                {% endfor %}
-            },
+            articleAddUrl: '{% url 'gorod:article-add' city.name %}',
             {% if rubric %}
                 rubric: '{{ rubric.name }}',
             {% endif %}

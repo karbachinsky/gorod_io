@@ -18,13 +18,12 @@ class ArticleAddForm(ModelForm):
 
     class Meta:
         model = Article
-        fields = ['picture', 'title', 'rubric', 'text', 'city']
-        localized_fields = ['picture', 'title', 'rubric', 'text', 'city']
+        fields = ['picture', 'title', 'rubric', 'text']
+        localized_fields = ['picture', 'title', 'rubric', 'text']
         widgets = {
             'text': Textarea(attrs={'placeholder': 'Введите текст'}),
             'title': TextInput(attrs={'placeholder': 'Введите заголовок','autocomplete':'off'}),
             'picture': ClearableFileInput(attrs={'placeholder': 'Изображение'}),
-            'city': HiddenInput(),
         }
 
     def is_valid(self):

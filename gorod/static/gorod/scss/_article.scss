@@ -39,21 +39,12 @@
 
 }
 .b-article__rubric{
-	color:#666666;
 	font-size: 11px;	
 	text-transform: uppercase;
 	font-weight: 600;
 	text-decoration: none;
+	color:$violet-color;
 
-	.b-article_event &{
-		color:$yellow-color;
-	}
-	.b-article_message &{
-		color: $green-color;
-	}
-	.b-article_photo &{
-		color:$violet-color;
-	}
 }
 .b-article__date{
 	color:$gray-color-light;

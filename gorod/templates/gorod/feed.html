@@ -8,17 +8,26 @@
 {% block body-class %}not-adaptive-935{% endblock %}
 
 {% block content %}
-
+    
+    {% if rubric %}
+        <div class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}" style="background:{{rubric.color}}">
+            <div class="b-feed__rubric-title-inner">
+                <h1>
+                    {% if rubric.title_plural %}
+                        {{rubric.title_plural}}
+                    {% else %}
+                        {{ rubric.title }}
+                    {% endif %}
+                </h1>
+                <div class="b-feed__filter">
+                    <a href="#" class="b-feed__filter-item_active">Последние</a>
+                    <a href="#">Популярные</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <div class="b-feed__wrapper">
-        {% if rubric %}
-            <h1 class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}">
-                {% if rubric.title_plural %}
-                    {{rubric.title_plural}}
-                {% else %}
-                    {{ rubric.title }}
-                {% endif %}
-            </h1>
-        {% endif %}
+        
         {% include "gorod/feed/_feed_item.html" %}
         <script>
             $(function(){

@@ -1,5 +1,5 @@
 {% load staticfiles %}
-<link href="{% static 'gorod/css/style.css' %}?v=48" rel="stylesheet" type="text/css" />
+<link href="{% static 'gorod/css/style.css' %}?v=52" rel="stylesheet" type="text/css" />
 <link rel="SHORTCUT ICON" href="{% static 'gorod/img/favicon.ico' %}?v=9" />
 <script>
 	var globals = {
@@ -8,11 +8,7 @@
             currentUrlPath: '{{ request.path }}',
 	    	cityName : '{{ city.name }}',
 	    	url : '{{ request.path }}',
-            formAjaxUrls : {
-                {% for rubric in rubrics %}
-                    '{{ rubric.name }}': '{% url 'gorod:article-add' city.name rubric.name %}',
-                {% endfor %}
-            },
+            articleAddUrl: '{% url 'gorod:article-add' city.name %}',
             {% if rubric %}
                 rubric: '{{ rubric.name }}',
             {% endif %}

@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 
-from django.forms import ModelForm, Textarea, TextInput, ClearableFileInput
+from django.forms import ModelForm, Textarea, TextInput, ClearableFileInput, Select
 #from captcha.fields import CaptchaField
 
 from django.forms import ModelForm, Textarea, TextInput, HiddenInput, BooleanField
-from gorod.models import Article
+from gorod.models import Article, ArticleRubric
 
 
 class ArticleAddForm(ModelForm):
     """
         Article add form
     """
-    #captcha = CaptchaField(label=u'Проверочный код:')
-    # If checked then image must be cleared
+    def __init__(self, *args,**kwargs):
+        super(ArticleAddForm, self).__init__(*args, **kwargs)
+        #assert False, repr(self.fields['city'])
+        #self.fields['rubric'].queryset = ArticleRubric.objects.filter(city__id=2)
 
     class Meta:
         model = Article
@@ -22,7 +24,7 @@ class ArticleAddForm(ModelForm):
             'text': Textarea(attrs={'placeholder': 'Введите текст'}),
             'title': TextInput(attrs={'placeholder': 'Введите заголовок','autocomplete':'off'}),
             'picture': ClearableFileInput(attrs={'placeholder': 'Изображение'}),
-            'rubric': HiddenInput(),
+            'rubric': Select()
         }
 
     def is_valid(self):

@@ -23,7 +23,7 @@ class FeedView(View):
     def dispatch(self, request, city_name, rubric_name=None):
         rubric = None
         if rubric_name:
-            rubric = get_object_or_404(ArticleRubric, name=rubric_name)
+            rubric = get_object_or_404(ArticleRubric, name=rubric_name, city__name=city_name)
 
         context = {
             'rubric': rubric,
@@ -75,9 +75,8 @@ class ArticleAddView(View):
         self.request = None
 
     @method_decorator(login_required)
-    def dispatch(self, request, city_name, rubric_name):
+    def dispatch(self, request, city_name):
         self.city = get_object_or_404(City, name=city_name)
-        self.rubric = get_object_or_404(ArticleRubric, name=rubric_name)
         self.request = request
 
         # TODO: check is user trying to add article to his city
@@ -96,11 +95,15 @@ class ArticleAddView(View):
             return self._display_form()
 
     def _display_form(self):
-        defaults = {'rubric': self.rubric}
-        form = ArticleAddForm(initial=defaults)
+        form = ArticleAddForm()
+        self._patch_rubrics_qs(form)
+
         return render(self.request, 'gorod/forms/article_add.html', {
             'form': form,
         })
+
+    def _patch_rubrics_qs(self, form):
+        form.fields["rubric"].queryset = ArticleRubric.objects.filter(city=self.city)
 
     def _save_form(self, form):
         user = self.request.user
@@ -138,10 +141,12 @@ class ArticleEditView(ArticleAddView):
         self.article = get_object_or_404(Article, id=article_id, city__name=city_name, rubric__name=rubric_name)
         if not self.article.can_user_modify(request.user):
             raise Http404
-        return super(ArticleEditView, self).dispatch(request, city_name, rubric_name)
+        return super(ArticleEditView, self).dispatch(request, city_name)
 
     def _display_form(self):
         form = ArticleAddForm(instance=self.article)
+        self._patch_rubrics_qs(form)
+
         return render(self.request, 'gorod/forms/article_add.html', {
             'form': form,
             'current_image': self.article.picture,
@@ -189,7 +194,7 @@ class FeedAPIView(View):
         }
 
         if rubric_name:
-            rubric = get_object_or_404(ArticleRubric, name=rubric_name)
+            rubric = get_object_or_404(ArticleRubric, name=rubric_name, city__name=city_name)
             filters['rubric'] = rubric.id
 
         if user_id:

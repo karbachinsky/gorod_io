@@ -24,9 +24,15 @@ class ArticleRubric(models.Model):
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     title_plural = models.CharField(max_length=255, null=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
+    # #123245
+    color = models.CharField(null=True, max_length=7)
 
     class Meta:
         app_label = 'gorod'
+        verbose_name = 'group'
+        verbose_name_plural = 'groups'
+        unique_together = ('city', 'name')
 
     def __unicode__(self):
         return self.name
@@ -108,7 +114,14 @@ class Article(models.Model):
     title = models.CharField(max_length=255, help_text=u'Заголовок')
     add_date = models.DateTimeField(editable=False, auto_now_add=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    rubric = models.ForeignKey(ArticleRubric, default=1, help_text=u'Рубрика')
+    #rubric = models.ForeignKey(ArticleRubric, default=1, help_text=u'Рубрика')
+    rubric = ChainedForeignKey(
+        ArticleRubric,
+        chained_field="city",
+        chained_model_field="city",
+        show_all=False,
+        auto_choose=True
+    )
     user = ChainedForeignKey(
         settings.AUTH_USER_MODEL,
         chained_field="city",

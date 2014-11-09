@@ -1,8 +1,8 @@
 {% load comments i18n %}
 {% load user %}
 
+
 <div class="b-comments__add">
-    <a name="comments-add"></a>
     {% if user.is_authenticated %}
         <form class="b-comments__add-form" action="{% comment_form_target %}" method="POST">
             {% csrf_token %}

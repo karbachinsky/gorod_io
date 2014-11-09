@@ -18,11 +18,7 @@
 	}
 }
 
-@media screen and (max-width: 630px) { 
-	.b-popup_shown{
-		display: none !important;
-	}
-}
+
 
 .b-popup__window{
 	z-index: 2;
@@ -145,7 +141,14 @@
 		padding: 0px 10px 20px;
 	}
 	.b-form__rubric{
-		display: none;
+		padding-left: 10px;	
+		span{
+			font-size: 11px;
+			color:$gray-color-dark;
+			text-transform: uppercase;
+			font-weight: 600;
+			margin-right: 10px;
+		}
 	}
 
 	
@@ -180,6 +183,11 @@
 			}
 		}
 	}
+	@media screen and (max-width: 630px) { 
+		&.b-popup_shown{
+			display: none !important;
+		}
+	}
 
 }
 .b-form__time{
@@ -193,7 +201,8 @@
     $width: 210px;
 
 	.b-popup__window{
-		width:530px;
+		max-width:530px;
+		width: 80%;
 		padding-bottom: 40px;
 		text-align: center;
 	}

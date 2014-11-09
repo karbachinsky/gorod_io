@@ -42,7 +42,7 @@ urlpatterns = patterns('',
     ## Ajax urls
 
     # Add article by user
-    url(r'^(?P<rubric_name>\w+)/add/?$', articles.ArticleAddView.as_view(), name='article-add'),
+    url(r'^article/add/?$', articles.ArticleAddView.as_view(), name='article-add'),
     # Edit article by user
     url(r'^(?P<rubric_name>\w+)/edit/(?P<article_id>\d+)/?$', articles.ArticleEditView.as_view(), name='article-edit'),
     # Delete article by user

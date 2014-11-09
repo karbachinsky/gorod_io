@@ -22,12 +22,10 @@ def base_params(request):
     if current_url_params.get('city_name'):
         context['city_name'] = current_url_params['city_name']           
         context['city'] = get_object_or_404(City, name=current_url_params['city_name'])
+        context['rubrics'] = ArticleRubric.objects.filter(city=context['city']).all()
 
     if current_url_params.get('rubric'):
         context['article_rubric'] = current_url_params['article_rubric']           
-
-    # Always sending article rubrics to templates
-    context['rubrics'] = ArticleRubric.objects.all()
 
     return context
 

@@ -12,6 +12,9 @@
             {% if rubric %}
                 rubric: '{{ rubric.name }}',
             {% endif %}
+            {% if group_filter %}
+                group_filter: '{{ group_filter }}',
+            {% endif %}
 
             {% if article %}
                 articleInfo :{

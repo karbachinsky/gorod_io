@@ -20,13 +20,14 @@ class FeedView(View):
     """
         Show list of articles for the certain city and rubric.
     """
-    def dispatch(self, request, city_name, rubric_name=None):
+    def dispatch(self, request, city_name, rubric_name=None, filter_name='last'):
         rubric = None
         if rubric_name:
             rubric = get_object_or_404(ArticleRubric, name=rubric_name, city__name=city_name)
 
         context = {
             'rubric': rubric,
+            'group_filter': filter_name,
             # Start plate
             'adplate': AdStartPlate(city_name).get_context()
         }
@@ -180,6 +181,7 @@ class FeedAPIView(View):
     def dispatch(self, request):
         city_name = request.GET.get('city')
         rubric_name = request.GET.get('rubric')
+        filter_name = request.GET.get('filter')
         user_id = request.GET.get('user')
 
         page = int(request.GET.get('page', 0))
@@ -200,8 +202,20 @@ class FeedAPIView(View):
         if user_id:
             filters['user'] = user_id
 
+        # Applying group filter
+        if filter_name:
+            if ArticleRubric.is_valid_filter(filter_name):
+                articles = Article.objects.get_by_group_filter(filter_name)
+        else:
+            articles = Article.objects.order_by('-add_date')
+
+        # Apply default filters
+        articles = articles.filter(**filters)\
+                           .select_related('rubric, user')\
+
         try:
-            json_response = Article.objects.get_json_feed(filters, page, limit)
+            # TODO: rewrite on queryset input when will be necessary
+            json_response = Article.objects.construct_json_feed(articles, page, limit)
         except FeedError:
             return HttpResponse("{}", mimetype='application/json', status=404)
 

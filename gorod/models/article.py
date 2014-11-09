@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
 from django.core import serializers
 from django.contrib.contenttypes.generic import GenericRelation
+from django.utils.translation import ugettext as _
 
 from easy_thumbnails.templatetags.thumbnail import thumbnail_url
 from ckeditor.fields import RichTextField
@@ -21,9 +22,14 @@ class ArticleRubric(models.Model):
     """
         ArticleRubric class
     """
+    FILTERS = (
+        ('last',    _(u'Последние')),
+        ('popular', _(u'Популярные'))
+    )
+
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
-    title_plural = models.CharField(max_length=255, null=True)
+    #title_plural = models.CharField(max_length=255, null=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     # #123245
     color = models.CharField(null=True, max_length=7)
@@ -35,7 +41,18 @@ class ArticleRubric(models.Model):
         unique_together = ('city', 'name')
 
     def __unicode__(self):
-        return self.name
+        return self.title
+
+    @staticmethod
+    def is_valid_filter(name):
+        """
+            Checks whether filter name is ok
+        """
+        for filter_name, filter_value in ArticleRubric.FILTERS:
+            if filter_name == name:
+                return True
+
+        return False
 
     def get_absolute_url(self, city=None):
         try:
@@ -55,19 +72,16 @@ class ArticleRubric(models.Model):
 
 class ArticleManager(models.Manager):
     """
-        Queryset manager for Article model
+        Queryset manager for Article model.
+        articles is querySet
     """
-    def get_json_feed(self, filters, page=0, limit=15):
+    def construct_json_feed(self, articles, page=0, limit=15):
         """
             Article list in json format
         """
 
         if page < 0 or limit <= 0:
             raise FeedError('Bad page and limit parameters!')
-
-        articles = self.model.objects.filter(**filters)\
-                             .order_by('-add_date')\
-                             .select_related()
 
         lim_start = page*limit
         lim_end = lim_start + limit
@@ -99,6 +113,19 @@ class ArticleManager(models.Manager):
         json_response = '{"total": %d, "feed": %s}' % (total_cnt, json_feed)
 
         return json_response
+
+    def get_by_group_filter(self, filter_name):
+        """
+            Select with respect to group filter
+        """
+        if 'last' == filter_name:
+            return Article.objects.order_by('-add_date')
+        elif 'popular' == filter_name:
+            # FIXME someday
+            return Article.objects.order_by('add_date')
+
+        return Article.objects
+
 
     def get_all_published(self):
         return self.model.objects.filter(is_published=True).all()

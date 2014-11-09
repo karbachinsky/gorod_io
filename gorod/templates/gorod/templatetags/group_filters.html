@@ -1,0 +1,7 @@
+<div class="b-feed__filter">
+    {% for filter in filters %}
+        <a href="{{ filter.link }}" {% if filter.is_active %}class="b-feed__filter-item_active"{% endif %}>
+            {{ filter.title }}
+        </a>
+    {% endfor %}
+</div>

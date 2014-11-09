@@ -20,7 +20,7 @@ def menu(context, city):
     request = context['request']
 
     current_url_name = request.resolver_match.url_name 
-    url_named_params = request.resolver_match.kwargs;
+    url_named_params = request.resolver_match.kwargs
 
     menu = []
 
@@ -43,12 +43,12 @@ def menu(context, city):
         'is_active': 0
     })
 
-    menu.append({
-        'title': 'Оплата услуг',
-        'url_name': 'payments',
-        'link': reverse('gorod:payments', kwargs={'city_name': city.name}),
-        'is_active': 0
-    })
+    #menu.append({
+    #    'title': 'Оплата услуг',
+    #    'url_name': 'payments',
+    #    'link': reverse('gorod:payments', kwargs={'city_name': city.name}),
+    #    'is_active': 0
+    #})
 
     # Setting active
     for menuitem in menu:

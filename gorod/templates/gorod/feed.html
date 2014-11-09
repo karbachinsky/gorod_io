@@ -1,6 +1,7 @@
 {% extends 'gorod/layout.html' %}
 
 {% load staticfiles %}
+{% load group_filters %}
 
 {% block meta_title %}Городской сайт {{ city.title_gent }}{% endblock %}
 
@@ -8,21 +9,26 @@
 {% block body-class %}not-adaptive-935{% endblock %}
 
 {% block content %}
-    
+
+    <div class="b-groups">
+        <span class="b-groups__title">Группы</span>
+        <div class="grid-sizer"></div>
+        <div class="gutter-sizer"></div>
+        {% for rubric in rubrics %}
+            <a href="{% url 'gorod:feed-rubric' city.name rubric.name %}" class="b-groups-item" style="background:{{rubric.color}}">
+                <div class="b-groups-item__name">{{rubric.title}}</div>
+            </a>
+        {% endfor %}
+    </div>
+
     {% if rubric %}
         <div class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}" style="background:{{rubric.color}}">
             <div class="b-feed__rubric-title-inner">
                 <h1>
-                    {% if rubric.title_plural %}
-                        {{rubric.title_plural}}
-                    {% else %}
-                        {{ rubric.title }}
-                    {% endif %}
+                    {{ rubric.title }}
                 </h1>
-                <div class="b-feed__filter">
-                    <a href="#" class="b-feed__filter-item_active">Последние</a>
-                    <a href="#">Популярные</a>
-                </div>
+
+                {% group_filters rubric %}
             </div>
         </div>
     {% endif %}
@@ -44,16 +50,6 @@
             </ul>
             <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
            
-        </div>
-        <div class="b-groups">
-            <span class="b-groups__title">Группы</span>
-            <div class="grid-sizer"></div>
-            <div class="gutter-sizer"></div>
-            {% for rubric in rubrics %}
-                <a href="{% url 'gorod:feed-rubric' city.name rubric.name %}" class="b-groups-item" style="background:{{rubric.color}}">
-                    <div class="b-groups-item__name">{{rubric.title_plural}}</div>
-                </a>
-            {% endfor %}
         </div>
     </div>
 {% endblock %}

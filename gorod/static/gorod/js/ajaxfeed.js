@@ -7,6 +7,7 @@
 				page : page,
 				city : globals.cityName,
 				rubric : globals.rubric,
+                filter : globals.group_filter,
 				user : globals.profileUserId
 			}
 		});

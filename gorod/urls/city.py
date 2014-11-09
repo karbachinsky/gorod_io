@@ -32,13 +32,6 @@ urlpatterns = patterns('',
     url(r'^organization/(?P<organization_id>\d+)/?$', redirects.OrganizationRedirectView.as_view()),
     url(r'^article/(?P<article_id>\d+)/?$', redirects.ArticleRedirectView.as_view()),
 
-    ## Articles
-
-    # One article page
-    url(r'^(?P<rubric_name>\w+)/(?P<article_id>\d+)/?$', articles.ArticleView.as_view(), name='article'),
-    # Rubric feed list page
-    url(r'^(?P<rubric_name>\w+)/?$', articles.FeedView.as_view(), name='feed-rubric'),
-
     ## Ajax urls
 
     # Add article by user
@@ -47,5 +40,15 @@ urlpatterns = patterns('',
     url(r'^(?P<rubric_name>\w+)/edit/(?P<article_id>\d+)/?$', articles.ArticleEditView.as_view(), name='article-edit'),
     # Delete article by user
     url(r'^article/delete/(?P<article_id>\d+)/?$', articles.ArticleDeleteView.as_view(), name='article-delete'),
+
+    ## Articles
+
+    # One article page
+    url(r'^(?P<rubric_name>\w+)/(?P<article_id>\d+)/?$', articles.ArticleView.as_view(), name='article'),
+    # Rubric feed list page
+    url(r'^(?P<rubric_name>\w+)/?$', articles.FeedView.as_view(), kwargs={'filter_name': 'last'}, name='feed-rubric'),
+    # Rubric feed list page with filter
+    url(r'^(?P<rubric_name>\w+)/(?P<filter_name>\w+)/?$', articles.FeedView.as_view(), name='feed-rubric-filter'),
+
 )
 

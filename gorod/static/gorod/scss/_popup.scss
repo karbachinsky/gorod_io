@@ -149,6 +149,9 @@
 			font-weight: 600;
 			margin-right: 10px;
 		}
+		select{
+			font-size: 14px;
+		}
 	}
 
 	
@@ -184,8 +187,9 @@
 		}
 	}
 	@media screen and (max-width: 630px) { 
-		&.b-popup_shown{
-			display: none !important;
+		.b-form__user{
+			float: none;
+
 		}
 	}
 

@@ -55,7 +55,10 @@
 		<div class="b-header__btns">
 			{% if not user.is_authenticated %}
 	        	<span class="b-header__login">Войти</span>
-	        {% endif %}
+	        {% else %}
+                <span class="b-header__add">Добавить</span>
+        {% endif %}
+
 	    </div>
 	</div>
 </div>

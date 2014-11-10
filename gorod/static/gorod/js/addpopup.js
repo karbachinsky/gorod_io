@@ -3,6 +3,7 @@
 	var $popup = $('.b-popup-add'),
 	$window = $popup.find('.b-popup__window'),
 	$addBtn = $('.b-header__add'),
+    $header = $('.b-header'),
     $wrapper = $window.find('#b-form__wrapper'),
     $editLink  = $('.edit-link_article'),
 	shownClass = 'b-popup_shown',
@@ -83,6 +84,8 @@
             url = window.getEnv('articleAddUrl');
             getFormHtml(url, 'add');
             formType = 'add';
+            $header.removeClass('active');
+
         });
     },
     editFormHandlers = function(){

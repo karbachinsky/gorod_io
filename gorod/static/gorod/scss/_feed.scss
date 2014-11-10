@@ -176,7 +176,7 @@
 
 /*---------------------------GROUPS-----------------*/
 .b-groups{
-	padding:45px 0 50px;
+	padding:45px 0 15px;
 	width: 1180px;
 	margin:auto;
 	.grid-sizer{
@@ -231,10 +231,17 @@
 @media screen and (max-width: 630px) { 
 	
 	
-	.b-feed, .b-groups, .b-feed__rubric-title-inner{
+	.b-feed, .b-feed__rubric-title-inner{
 		width: auto;
 		padding-left: 10px;
 		padding-right: 10px;
+	}
+	.b-groups{
+		width: auto;
+		margin-right: 10px;
+		margin-left: 10px;
+		padding-left: 0;
+		padding-right: 0;
 	}
 	.b-feed-item, .b-groups-item{
 		width: 100%;

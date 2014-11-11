@@ -23,7 +23,7 @@ def like(data_object, user=None):
 
     # FIXME
     return {
-        #'was_already_liked': int(was_already_liked),
+        'was_already_liked': int(was_already_liked),
         'object': data_object,
         # FIXME: make dynamic app getting
         'content_type': "gorod.%s" % content_type,

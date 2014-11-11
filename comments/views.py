@@ -22,9 +22,6 @@ class AddView(JSONResponseMixin, TemplateView):
     """
         Post comment
     """
-    def _get(self, *args, **kwargs):
-        return self.json_forbidden_context(_(u'Ошибка!'))
-
     @method_decorator(login_required)
     def _post(self, request):
         data = request.POST.copy()
@@ -46,7 +43,6 @@ class AddView(JSONResponseMixin, TemplateView):
                 target.add_comment_hook()
 
         except (TypeError, AttributeError, ObjectDoesNotExist, ValueError, ValidationError):
-            print e
             return self.json_form_error_context(_(u'Кажется, для этого материала нельзя добавлять комментарии :('))
 
         # Construct the comment form

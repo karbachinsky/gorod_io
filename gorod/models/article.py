@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.db import models
+from django.db import models, DatabaseError, IntegrityError
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
 from django.core import serializers
@@ -24,7 +24,8 @@ class ArticleRubric(models.Model):
     """
     FILTERS = (
         ('last',    _(u'Последние')),
-        ('popular', _(u'Популярные'))
+        ('popular', _(u'Популярные')),
+        ('hot', _(u'Горячие'))
     )
 
     name = models.CharField(max_length=255)
@@ -96,7 +97,7 @@ class ArticleManager(models.Manager):
         # FIXME: add try-catch
         json_feed = serializers.serialize('json', articles,
             indent=4,
-            extras=('url', 'thumbnail', 'short_text', 'human_add_date', 'comment_cnt'),
+            extras=('url', 'thumbnail', 'short_text', 'human_add_date', 'comment_cnt', 'raiting'),
             relations={
                 'rubric': {
                     'extras': ('url',)
@@ -121,11 +122,11 @@ class ArticleManager(models.Manager):
         if 'last' == filter_name:
             return Article.objects.order_by('-add_date')
         elif 'popular' == filter_name:
-            # FIXME someday
-            return Article.objects.order_by('add_date')
+            return Article.objects.order_by('-raiting')
+        elif 'hot' == filter_name:
+            return Article.objects.order_by('raiting')
 
         return Article.objects
-
 
     def get_all_published(self):
         return self.model.objects.filter(is_published=True).all()
@@ -164,6 +165,9 @@ class Article(models.Model):
 
     donc_data = GenericRelation(DONC, object_id_field='object_pk')
 
+    # Denormalaized value, special for fast selects
+    raiting = models.IntegerField(default=0)
+
     objects = ArticleManager()
 
     class Meta:
@@ -201,6 +205,25 @@ class Article(models.Model):
         except DONCError:
             pass
 
+    def add_like_hook(self, like):
+        """
+            Called when someone likes this article
+        """
+        from gorod.utils.donc import ArticlePositiveLikesCounter, ArticleNegativeLikesCounter
+
+        if like.is_positive:
+            article_likes_counter = ArticlePositiveLikesCounter()
+        else:
+            article_likes_counter = ArticleNegativeLikesCounter()
+
+        try:
+            article_likes_counter.set_object_cnt(self.id, self.likes_cnt(is_positive=like.is_positive) + 1)
+            self.raiting = self.likes_cnt(is_positive=True) - self.likes_cnt(is_positive=False)
+            self.save()
+        except (DONCError, DatabaseError, IntegrityError):
+            # Ok, we can miss it
+            pass
+
     @property
     def comment_cnt(self):
         """
@@ -208,6 +231,23 @@ class Article(models.Model):
         """
         try:
             return self.donc_data.filter(field_name='comment_cnt')[0].count
+        except IndexError:
+            return 0
+
+    #@property
+    #def raiting(self):
+    #    """
+    #        Raiting depending on likes
+    #    """
+    #    return self.likes_cnt(is_positive=True) - self.likes_cnt(is_positive=False)
+
+    def likes_cnt(self, is_positive=True):
+        """
+            Number of positive and negative likes
+        """
+        field_name = 'positive_likes_cnt' if is_positive else 'negative_likes_cnt'
+        try:
+            return self.donc_data.filter(field_name=field_name)[0].count
         except IndexError:
             return 0
 

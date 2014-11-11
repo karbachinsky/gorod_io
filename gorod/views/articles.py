@@ -211,7 +211,7 @@ class FeedAPIView(View):
 
         # Apply default filters
         articles = articles.filter(**filters)\
-                           .select_related('rubric, user')\
+                           .select_related('rubric, user, donc_data')\
 
         try:
             # TODO: rewrite on queryset input when will be necessary

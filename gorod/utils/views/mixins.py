@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+
 """
     Mixins for Django class-based views.
 """
 
 from django import http
+from django.utils.translation import ugettext as _
 
 import json as json
 
@@ -17,6 +20,18 @@ class JSONResponseMixin(object):
     def post(self, *args, **kwargs):
         context_dict = self._post(*args, **kwargs)
         return self._get_json_response(self._convert_context_to_json(context_dict))
+
+    def _get(self, *args, **kwargs):
+        """
+            Must be redefined in derived class
+        """
+        return self.json_forbidden_context(_(u'Ошибка!'))
+
+    def _post(self, *args, **kwargs):
+        """
+            Must be redefined in derived class
+        """
+        return self.json_forbidden_context(_(u'Ошибка!'))
 
     def _get_json_response(self, content, **httpresponse_kwargs):
         """

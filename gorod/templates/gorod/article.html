@@ -3,6 +3,7 @@
 {% load staticfiles %}
 {% load humanize %}
 {% load user %}
+{% load like %}
 
 {% block meta_title %}{{ article.title }} - {{city.title}}{% endblock %}
 
@@ -53,6 +54,25 @@
                     <div class="b-article__share">
                         {% include "gorod/incl/_share.html" %}
                     </div>
+
+                    {% like article %}
+
+                    <script>
+                        $(function() {
+                            options = {};
+
+                            {% if not user.is_authenticated %}
+                               options = {
+                                   like: false,
+                                   dislike: false
+                               };
+                            {% else %}
+                                options = {};
+                            {% endif %}
+
+                            $('.b-like').Like(options);
+                        });
+                    </script>
                     <div class="b-article__complaint">
                         <a href="mailto:hola@gorod.io"><i></i>Пожаловаться</a>
                     </div>

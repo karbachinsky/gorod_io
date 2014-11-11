@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*- 
 
-from django.core.context_processors import request
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.forms import AuthenticationForm
+#from django.core.context_processors import csrf
 
 from gorod.models import City, ArticleRubric
 
@@ -13,8 +12,10 @@ def base_params(request):
     current_url_params = request.resolver_match.kwargs
 
     context = {
-        'current_url_name': current_url_name    
+        'current_url_name': current_url_name,
+        #'csrf': csrf(request),
     }
+    #assert False, csrf(request)
 
     if not current_url_params:
         return context

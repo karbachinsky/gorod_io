@@ -10,17 +10,6 @@
 
 {% block content %}
 
-    <div class="b-groups">
-        <span class="b-groups__title">Группы</span>
-        <div class="grid-sizer"></div>
-        <div class="gutter-sizer"></div>
-        {% for rubric in rubrics %}
-            <a href="{% url 'gorod:feed-rubric' city.name rubric.name %}" class="b-groups-item" style="background:{{rubric.color}}">
-                <div class="b-groups-item__name">{{rubric.title}}</div>
-            </a>
-        {% endfor %}
-    </div>
-
     {% if rubric %}
         <div class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}" style="background:{{rubric.color}}">
             <div class="b-feed__rubric-title-inner">
@@ -30,6 +19,17 @@
 
                 {% group_filters rubric %}
             </div>
+        </div>
+    {% else %}
+        <div class="b-groups">
+            <span class="b-groups__title">Группы</span>
+            <div class="grid-sizer"></div>
+            <div class="gutter-sizer"></div>
+            {% for rubric in rubrics %}
+                <a href="{% url 'gorod:feed-rubric' city.name rubric.name %}" class="b-groups-item" style="background:{{rubric.color}}">
+                    <div class="b-groups-item__name">{{rubric.title}}</div>
+                </a>
+            {% endfor %}
         </div>
     {% endif %}
     <div class="b-feed__wrapper">

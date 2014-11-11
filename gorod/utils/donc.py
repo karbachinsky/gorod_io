@@ -18,7 +18,10 @@ from gorod.utils.exceptions import DONCError
 import gorod.models.article
 import gorod.models.hub
 from gorod.models.donc import DONC
+
 import comments
+
+from likes.models import Like
 
 from abc import ABCMeta, abstractproperty, abstractmethod
 from collections import Counter
@@ -127,6 +130,38 @@ class ArticleCommentsCounter(DONCCounterBase):
         field_name='comment_cnt',
         content_type=content_type
     )
+
+
+class ArticlePositiveLikesCounter(DONCCounterBase):
+    """
+        Positive likes counter for articles
+    """
+    depending_model = Like
+    model = gorod.models.article.Article
+
+    content_type = ContentType.objects.get_for_model(model)
+
+    def depending_model_related_pk(self, depending_object):
+        return depending_object.object_pk
+
+    required_depending_model_filter = dict(
+        content_type__name='article',
+        content_type__app_label='gorod'
+    )
+
+    donc_filter = dict(
+        field_name='positive_likes_cnt',
+        content_type=content_type
+    )
+
+
+class ArticleNegativeLikesCounter(ArticlePositiveLikesCounter):
+    """
+        Negative likes counter for articles
+    """
+    from copy import deepcopy
+    donc_filter = deepcopy(ArticlePositiveLikesCounter.donc_filter)
+    donc_filter['field_name'] = 'negative_likes_cnt'
 
 
 class HubQuestionAnswersCounter(DONCCounterBase):

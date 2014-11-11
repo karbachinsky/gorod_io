@@ -1,0 +1,40 @@
+
+
+.b-like {
+  padding: 28px 5px 0 30px;
+  float: left;
+
+  .like {
+    margin: 0 5px;
+    border: 1px solid green;
+    color: green;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 7px;
+  }
+
+  .dislike {
+    border: 1px solid indianred;
+    color: indianred;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 8px;
+  }
+
+  .raiting {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+}
+
+.positive-like {
+  color: green;
+}
+
+.negative-like {
+    color: indianred;
+}
+
+.neitral-like {
+    color: gray;
+}

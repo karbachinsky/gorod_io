@@ -34,6 +34,10 @@
         {{#if extras.comment_cnt}}
             <div class="b-feed-item__comments"><i></i>{{ extras.comment_cnt }}</div>
         {{/if}}
+
+        {{#if fields.raiting}}
+            <div class="b-feed-item__raiting"><i></i>{{ fields.raiting }}</div>
+        {{/if}}
     </li>
 </script>
 {% endverbatim %}

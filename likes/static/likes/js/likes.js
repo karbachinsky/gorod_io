@@ -180,9 +180,9 @@
             colorClass = 'negative-like';
         }
 
-        self.$raitingBlock.removeClass('neitral')
-                          .removeClass('negative')
-                          .removeClass('positive');
+        self.$raitingBlock.removeClass('neitral-like')
+                          .removeClass('negative-like')
+                          .removeClass('positive-like');
 
         self.$raitingBlock.addClass(colorClass);
     };

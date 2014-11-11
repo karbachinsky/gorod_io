@@ -4,6 +4,23 @@
  */
 
 (function($){
+    // FIXME, use jquery cookie :)
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
     /*
      * Like handler
      * @param {Jquery Object} selector for likes
@@ -15,8 +32,8 @@
         self.options = {
             like: true,
             dislike: true,
-            requestSuccessCallback: self._defaultRequestSuccessCallback,
-            requestFailCallback: self._defaultRequestFailCallback
+            requestSuccessCallback: function () { self._defaultRequestSuccessCallback.apply(self, arguments); },
+            requestFailCallback: function () { self._defaultRequestFailCallback.apply(self, arguments); },
         };
 
         $.extend(self.options, options);
@@ -34,6 +51,8 @@
 
         self.appendHTMLSceleton();
         self.bindHandlers();
+
+        self._colorRaitingBlock();
     };
 
     /*
@@ -53,7 +72,7 @@
         // Adding like button
         if (self.options.like) {
             $("<span>").addClass(self.likeClass)
-                       .text(self.positive_likes_cnt || 0)
+                       .text('+')
                        .appendTo(self.$likeBlock);
             self.$likeButton = self.$likeBlock.find('.' + self.likeClass);
         }
@@ -61,7 +80,7 @@
         // Adding dislike button
         if (self.options.dislike) {
             $("<span>").addClass(self.dislikeClass)
-                       .text(self.negative_likes_cnt || 0)
+                       .text('-')
                        .appendTo(self.$likeBlock);
             self.$dislikeButton = self.$likeBlock.find('.' + self.dislikeClass);
         }
@@ -93,23 +112,23 @@
             e.preventDefault();
 
             if (self.isLocked) {
-                return;
+                //return;
             }
 
             self.isLocked = true;
 
             var data = {
                 is_positive: is_positive_like,
-                csrf_token: "CSRF_TOKEN", // window.getEnv('csrfToken')
+                csrfmiddlewaretoken: getCookie('csrftoken'), // window.getEnv('csrfToken')
                 object_pk: self.$likeBlock.data('object-pk'),
-                ctype: self.$likeBlock.data('ctype')
+                content_type: self.$likeBlock.data('content_type')
             };
 
             var Deferred = $.ajax({
                 url: window.getEnv('likeAddUrl'),
                 data: data,
                 type: 'POST',
-                dataType: "json",
+                dataType: "json"
                 //processData: false,
 			    //cache: false,
 			    //contentType: false
@@ -139,8 +158,11 @@
             self.raiting--;
         }
 
-        // FIXME
+        //if (self.$likeButton) self.$likeButton.hide();
+        //if (self.$dislikeButton) self.$dislikeButton.hide();
+
         self.$raitingBlock.text(self.raiting);
+        self._colorRaitingBlock();
     };
 
     /*
@@ -149,15 +171,18 @@
     Like.prototype._colorRaitingBlock = function() {
         var self = this;
 
-        var colorClass = 'neitral';
+        var colorClass = 'neitral-like';
 
-        if (raitin)
-
-
+        if (self.raiting > 0) {
+            colorClass = 'positive-like';
+        }
+        else if (self.raiting < 0) {
+            colorClass = 'negative-like';
+        }
 
         self.$raitingBlock.removeClass('neitral')
-                          .removeClass('neitral')
-                          .removeClass('neitral');
+                          .removeClass('negative')
+                          .removeClass('positive');
 
         self.$raitingBlock.addClass(colorClass);
     };

@@ -8,8 +8,9 @@
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.db import models, IntegrityError, DatabaseError
+from django.db import models, IntegrityError, DatabaseError, transaction
 from django.utils.translation import ugettext as _
+from django.contrib.contenttypes.models import ContentType
 
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
@@ -22,6 +23,7 @@ class AddView(JSONResponseMixin, TemplateView):
     """
         Add like
     """
+    @transaction.atomic()
     @method_decorator(login_required)
     def _post(self, request):
         data = request.POST.copy()
@@ -34,31 +36,26 @@ class AddView(JSONResponseMixin, TemplateView):
         try:
             model = models.get_model(*ctype.split(".", 1))
             target = model._default_manager.get(pk=object_pk)
-
-            if hasattr(target, 'add_like_hook'):
-                target.add_like_hook()
-
-        except (TypeError, AttributeError, ObjectDoesNotExist, ValueError, ValidationError):
-            return self.json_form_error_context(_(u'Кажется, этот материла нельзя полайкать :('))
+        except (TypeError, AttributeError, ObjectDoesNotExist, ValueError, ValidationError) as e:
+            return self.json_form_error_context(_(u'Кажется, этот материал нельзя полайкать!'))
 
         # Construct like form
-        form = LikeForm(target, data=data)
-
-        # Check security information
-        if form.security_errors():
-            # hacker ?
-            return self.json_form_error_context(_(u'Кажется, что-то пошло не так. Ты хакер? :('))
+        data['user'] = user.id
+        data['content_type'] = ContentType.objects.get_for_model(target).id
+        form = LikeForm(data)
 
         if not request.user.can_action('add-like'):
             return self.json_form_error_context(_(u'Вы не можете лайкать так часто. Попробуйте позже!'))
 
         if form.is_valid():
-            like = form.get_comment_object()
-            like.user = user
+            like = form.save(commit=False)
             try:
                 like.save()
             except (DatabaseError, IntegrityError) as e:
                 return self.json_form_error_context(_(u'Кажется, что-то пошло не так :('))
+
+            if hasattr(target, 'add_like_hook'):
+                target.add_like_hook(like)
 
             if not user.is_superuser:
                 user.make_action('add-like')

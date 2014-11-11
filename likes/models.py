@@ -23,4 +23,5 @@ class Like(models.Model):
     is_positive = models.BooleanField(default=True)
 
     class Meta:
-        app_label = 'gorod'
+        app_label = 'likes'
+

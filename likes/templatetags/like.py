@@ -14,8 +14,10 @@ register = template.Library()
 def like(data_object):
     content_type = ContentType.objects.get_for_model(type(data_object))
 
+    # FIXME
     return {
         'object': data_object,
-        'content_type': content_type,
+        # FIXME: make dynamic app getting
+        'content_type': "gorod.%s" % content_type,
     }
 

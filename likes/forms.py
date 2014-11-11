@@ -9,7 +9,9 @@ from models import Like
 
 
 class LikeForm(forms.ModelForm):
-    model = Like
+    class Meta:
+        #fields = ['picture', 'title', 'rubric', 'text']
+        model = Like
 
-    def __init__(self, *args, **kwargs):
-        super(LikeForm, self).__init__(*args, **kwargs)
+    #def __init__(self, *args, **kwargs):
+    #    super(LikeForm, self).__init__(*args, **kwargs)

@@ -59,7 +59,18 @@
 
                     <script>
                         $(function() {
-                            $('.b-likes').Like({});
+                            options = {};
+
+                            {% if not user.is_authenticated %}
+                               options = {
+                                   like: false,
+                                   dislike: false
+                               };
+                            {% else %}
+                                options = {};
+                            {% endif %}
+
+                            $('.b-like').Like(options);
                         });
                     </script>
                     <div class="b-article__complaint">

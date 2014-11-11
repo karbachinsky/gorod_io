@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAEE,cAAM,CACJ,gBAAgB,CAAE,WAAW,CAC7B,MAAM,CAAE,OAAO,CAGjB,iBAAS,CACP,gBAAgB,CAAE,SAAS,CAC3B,MAAM,CAAE,OAAO",
-"sources": ["../scss/likes.scss"],
-"names": [],
-"file": "likes.css"
-}

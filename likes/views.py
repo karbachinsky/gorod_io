@@ -36,6 +36,11 @@ class AddView(JSONResponseMixin, TemplateView):
         try:
             model = models.get_model(*ctype.split(".", 1))
             target = model._default_manager.get(pk=object_pk)
+
+            # Check if user has already liked it
+            if Like.objects.has_user_liked_material(user, target):
+                return self.json_form_error_context(_(u'Вы уже лайкали это!'))
+
         except (TypeError, AttributeError, ObjectDoesNotExist, ValueError, ValidationError) as e:
             return self.json_form_error_context(_(u'Кажется, этот материал нельзя полайкать!'))
 

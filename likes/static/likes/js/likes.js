@@ -45,6 +45,12 @@
         self.$likeBlock = $likeBlock;
 
         self.raiting = parseInt($likeBlock.data('raiting')) || 0;
+        self.was_already_liked = Boolean($likeBlock.data('was-already-liked'));
+
+        // force hide like buttons if was already liked
+        if (self.was_already_liked) {
+            self.options['like'] = self.options['dislike'] = false;
+        }
 
         // Prevent multiple clicking
         self.isLocked = false;
@@ -67,7 +73,6 @@
                        .appendTo(self.$likeBlock);
 
         self.$raitingBlock = self.$likeBlock.find('.' + self.raitingClass);
-
 
         // Adding like button
         if (self.options.like) {
@@ -158,8 +163,8 @@
             self.raiting--;
         }
 
-        //if (self.$likeButton) self.$likeButton.hide();
-        //if (self.$dislikeButton) self.$dislikeButton.hide();
+        if (self.$likeButton) self.$likeButton.hide();
+        if (self.$dislikeButton) self.$dislikeButton.hide();
 
         self.$raitingBlock.text(self.raiting);
         self._colorRaitingBlock();

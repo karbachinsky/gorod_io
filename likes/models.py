@@ -5,11 +5,27 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 
+class LikeManager(models.Manager):
+    """
+        Likes manager
+    """
+    def has_user_liked_material(self, user, data_object):
+        """
+            Check whether user likes certain material
+        """
+        return bool(
+            self.filter(
+                user=user,
+                object_pk=data_object.id,
+                content_type=ContentType.objects.get_for_model(type(data_object))
+            ).count()
+        )
+
+
 class Like(models.Model):
     """
         One like representation
     """
-
     # Content-object field
     content_type = models.ForeignKey(ContentType,
         verbose_name=_('content type'),
@@ -21,6 +37,8 @@ class Like(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     # Positive and negative likes
     is_positive = models.BooleanField(default=True)
+
+    objects = LikeManager()
 
     class Meta:
         app_label = 'likes'

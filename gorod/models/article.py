@@ -17,6 +17,8 @@ from gorod.templatetags.stringutils import smart_truncate
 
 from smart_selects.db_fields import ChainedForeignKey
 
+from likes.models import Like
+
 
 class ArticleRubric(models.Model):
     """
@@ -124,7 +126,7 @@ class ArticleManager(models.Manager):
         elif 'popular' == filter_name:
             return Article.objects.order_by('-raiting')
         elif 'hot' == filter_name:
-            return Article.objects.order_by('raiting')
+            return Article.objects.exclude(raiting=0).order_by('raiting')
 
         return Article.objects
 
@@ -250,6 +252,12 @@ class Article(models.Model):
             return self.donc_data.filter(field_name=field_name)[0].count
         except IndexError:
             return 0
+
+    def is_already_liked_by_user(self, user):
+        """
+            Check whether user has already liked this
+        """
+        return Like.objects.has_user_liked_material(user, self)
 
     @property
     def thumbnail(self):

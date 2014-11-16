@@ -39,9 +39,6 @@ class AddView(JSONResponseMixin, TemplateView):
             model = models.get_model(*ctype.split(".", 1))
             target = model._default_manager.get(pk=object_pk)
 
-            if hasattr(target, 'add_comment_hook'):
-                target.add_comment_hook()
-
         except (TypeError, AttributeError, ObjectDoesNotExist, ValueError, ValidationError):
             return self.json_form_error_context(_(u'Кажется, для этого материала нельзя добавлять комментарии :('))
 
@@ -66,6 +63,9 @@ class AddView(JSONResponseMixin, TemplateView):
 
             if not user.is_superuser:
                 user.make_action('add-comment')
+
+            if hasattr(target, 'add_comment_hook'):
+                target.add_comment_hook(comment)
 
             return self.json_success_context()
         else:

@@ -2,13 +2,38 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.templatetags.static import static
+from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import ugettext_lazy as _
 
 from gorod.models.base import City
 
 from django.conf import settings
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.utils import timezone
+
+
+class Notification(models.Model):
+    """
+        User Notification
+    """
+    #user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notifications')
+    ctime = models.DateTimeField(auto_now_add=True)
+    # User who has made action to be notified
+    target_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # Content-object field on which was action
+    content_type = models.ForeignKey(ContentType,
+        verbose_name=_('content type'),
+        related_name="content_type_set_for_%(class)s"
+    )
+    object_pk = models.PositiveIntegerField(_('object ID'))
+    content_object = generic.GenericForeignKey(ct_field="content_type", fk_field="object_pk")
+    action = models.CharField(max_length=100)
+
+    class Meta:
+        app_label = 'gorod'
+        db_table = 'gorod_notification'
 
 
 class User(AbstractUser):
@@ -18,6 +43,7 @@ class User(AbstractUser):
     """
     city = models.ForeignKey(City, blank=True, null=True, on_delete=models.SET_NULL)
     avatar = models.CharField(max_length=255, blank=True, null=True)
+    notifications = models.ManyToManyField('Notification')
 
     class Meta:
         app_label = 'gorod'
@@ -82,6 +108,20 @@ class User(AbstractUser):
     def _default_avatar(self):
         return static('gorod/img/userava.png')
 
+    def add_notification(self, target, target_user, action):
+        """
+            Add notification to user
+        """
+        notification = Notification(
+            target_user=target_user,
+            action=action,
+            object_pk=target.id,
+            content_type=ContentType.objects.get_for_model(type(target))
+        )
+        notification.save()
+
+        self.notifications.add(notification)
+
 
 class UserStat(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -138,3 +178,5 @@ class UserStat(models.Model):
             return True
 
         return False
+
+

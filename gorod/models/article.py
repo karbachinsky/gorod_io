@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.db import models, DatabaseError, IntegrityError
+from django.db import models, DatabaseError, IntegrityError, transaction
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
 from django.core import serializers
@@ -194,7 +194,8 @@ class Article(models.Model):
 
     url = property(get_absolute_url)
 
-    def add_comment_hook(self):
+    @transaction.atomic
+    def add_comment_hook(self, comment):
         """
             Called when someone adds comment to this article
         """
@@ -207,6 +208,14 @@ class Article(models.Model):
         except DONCError:
             pass
 
+        # Adding notification
+        self.user.add_notification(
+            target=self,
+            action='add-comment',
+            target_user=comment.user
+        )
+
+    @transaction.atomic
     def add_like_hook(self, like):
         """
             Called when someone likes this article
@@ -225,6 +234,13 @@ class Article(models.Model):
         except (DONCError, DatabaseError, IntegrityError):
             # Ok, we can miss it
             pass
+
+        # Adding notification
+        self.user.add_notification(
+            target=self,
+            action='add-like',
+            target_user=like.user
+        )
 
     @property
     def comment_cnt(self):

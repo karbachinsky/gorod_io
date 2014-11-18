@@ -23,7 +23,7 @@ def base_params(request):
     if current_url_params.get('city_name'):
         context['city_name'] = current_url_params['city_name']           
         context['city'] = get_object_or_404(City, name=current_url_params['city_name'])
-        context['rubrics'] = ArticleRubric.objects.filter(city=context['city']).all()
+        context['rubrics'] = ArticleRubric.objects.select_related('donc_data').filter(city=context['city']).all()
 
     if current_url_params.get('rubric'):
         context['article_rubric'] = current_url_params['article_rubric']           

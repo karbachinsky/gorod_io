@@ -23,7 +23,9 @@ class FeedView(View):
     def dispatch(self, request, city_name, rubric_name=None, filter_name='last'):
         rubric = None
         if rubric_name:
-            rubric = get_object_or_404(ArticleRubric, name=rubric_name, city__name=city_name)
+            rubric = get_object_or_404(ArticleRubric.objects.select_related('donc_data'),
+                                       name=rubric_name,
+                                       city__name=city_name)
 
         context = {
             'rubric': rubric,

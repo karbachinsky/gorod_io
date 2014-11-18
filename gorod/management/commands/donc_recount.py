@@ -36,6 +36,8 @@ class Command(BaseCommand):
             donc = ArticleCommentsCounter()
         elif 'questions' == type:
             donc = HubQuestionAnswersCounter()
+        elif 'groups' == type:
+            donc = GroupArticlesCounter()
         else:
             raise CommandError("Specify correct type!")
 

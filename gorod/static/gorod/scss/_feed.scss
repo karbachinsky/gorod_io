@@ -229,15 +229,40 @@
 	&:hover{
 		@include box-shadow(0px 2px 0px #bbb);
 	}
+
+    div {
+      margin: 10px;
+      margin-bottom: 0;
+    }
+
+    .b-groups-item__picture {
+        margin-right: 0;
+        float: left;
+        overflow: hidden;
+    }
+
+    .b-groups-item__name {
+        float: left;
+        color:#fff;
+        font-size: 13px;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .b-groups-item__feeds-cnt {
+        float: right;
+
+        i {
+        }
+    }
+
+    .b-groups-item__description {
+        float: left;
+        font-size: 0.8em;
+    }
 }
-.b-groups-item__name{
-	margin: 10px 20px;
-	color:#fff;
-	font-size: 13px;
-	text-transform: uppercase;
-	font-weight: 600;
-	text-decoration: none;
-}
+
 
 
 @media screen and (max-width: 1240px) { 

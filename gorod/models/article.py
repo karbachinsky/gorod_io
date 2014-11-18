@@ -27,15 +27,23 @@ class ArticleRubric(models.Model):
     FILTERS = (
         ('last',    _(u'Последние')),
         ('popular', _(u'Популярные')),
-        ('hot', _(u'Горячие'))
+        #('hot', _(u'Горячие'))
     )
 
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     #title_plural = models.CharField(max_length=255, null=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
+    picture = models.ImageField(max_length=255,
+                                upload_to='group_pictures/%Y/%m/',
+                                null=True,
+                                blank=True,
+                                help_text=u'Изображение')
+    description = RichTextField(null=True, blank=True, help_text=u'Описание')
     # #123245
     color = models.CharField(null=True, max_length=7)
+
+    donc_data = GenericRelation(DONC, object_id_field='object_pk')
 
     class Meta:
         app_label = 'gorod'
@@ -45,6 +53,16 @@ class ArticleRubric(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    @property
+    def articles_cnt(self):
+        """
+            Number of articles
+        """
+        try:
+            return self.donc_data.filter(field_name='articles_cnt')[0].count
+        except IndexError:
+            return 0
 
     @staticmethod
     def is_valid_filter(name):

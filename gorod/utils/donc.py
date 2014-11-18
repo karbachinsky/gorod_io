@@ -185,3 +185,19 @@ class HubQuestionAnswersCounter(DONCCounterBase):
         content_type=content_type
     )
 
+
+class GroupArticlesCounter(DONCCounterBase):
+    """
+        Number of articles in group
+    """
+    depending_model = gorod.models.article.Article
+    model = gorod.models.article.ArticleRubric
+
+    content_type = ContentType.objects.get_for_model(model)
+
+    def depending_model_related_pk(self, depending_object):
+        return depending_object.rubric.id
+
+    donc_filter = dict(
+        field_name='articles_cnt',
+    )

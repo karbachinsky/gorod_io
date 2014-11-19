@@ -39,7 +39,7 @@ class ArticleRubric(models.Model):
                                 null=True,
                                 blank=True,
                                 help_text=u'Изображение')
-    description = RichTextField(null=True, blank=True, help_text=u'Описание')
+    description = models.TextField(null=True, blank=True, help_text=u'Описание')
     # #123245
     color = models.CharField(null=True, max_length=7)
 

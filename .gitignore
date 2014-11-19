@@ -8,6 +8,7 @@
 *.scssc
 /settings.py
 /gorod/migrations/
+/likes/migrations/
 .idea
 robots.txt
 logs/

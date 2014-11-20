@@ -1,9 +1,9 @@
 {% verbatim %}
 <script id="feed-item-template" type="text/x-handlebars-template">
     <li class="b-feed-item  b-feed-item_{{fields.rubric.fields.name}}" >           
-        <div class="b-feed-item__top"></div>
+        <div class="b-feed-item__top" style="background: {{fields.rubric.fields.color}}"></div>
         <div class="b-feed-item__info">
-            <a class="b-feed-item__rubric" href="{{ fields.rubric.extras.url }}">
+            <a class="b-feed-item__rubric" href="{{ fields.rubric.extras.url }}" style="color:{{fields.rubric.fields.color}}">
                 {{ fields.rubric.fields.title }}
             </a>
         </div>

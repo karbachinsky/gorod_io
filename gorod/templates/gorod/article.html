@@ -19,7 +19,7 @@
 
                 <div class="b-article__info">
                     <div class="b-article__descr">
-                        <a href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}" class="b-article__rubric" style="color:{{article.rubric.color}}">{{ article.rubric.title }}</a>
+                        <a href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}" class="b-article__rubric">{{ article.rubric.title }}</a>
 
                         <span class="b-article__date">{{ article.add_date|naturalday }}</span>
                     </div>

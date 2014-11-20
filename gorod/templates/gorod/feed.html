@@ -11,7 +11,7 @@
 {% block content %}
 
     {% if rubric %}
-        <div class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}" style="background:{{rubric.color}}">
+        <div class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}">
             <div class="b-feed__rubric-title-inner">
                 <h1>
                     {{ rubric.title }}
@@ -26,7 +26,7 @@
             <div class="grid-sizer"></div>
             <div class="gutter-sizer"></div>
             {% for rubric in rubrics %}
-                <a href="{% url 'gorod:feed-rubric' city.name rubric.name %}" class="b-groups-item" style="background:{{rubric.color}}">
+                <a href="{% url 'gorod:feed-rubric' city.name rubric.name %}" class="b-groups-item">
                     <div class="b-groups-item__content">
                         {% if rubric.picture %}
                             <div class="b-groups-item__picture" style="float:left">

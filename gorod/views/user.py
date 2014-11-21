@@ -35,6 +35,10 @@ class ProfileView(View):
             'user_last_feeds': user_last_feeds
         }
 
+        # If user watches his profile
+        if request.user == user:
+            context['notifications'] = user.get_last_notifications()
+
         return render(request, 'gorod/user/profile.html', context)
 
 

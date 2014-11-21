@@ -122,6 +122,10 @@ class User(AbstractUser):
 
         self.notifications.add(notification)
 
+    # TODO: set default cnt in django settings
+    def get_last_notifications(self, cnt=5):
+        return self.notifications.all().order_by('-ctime')[0:cnt]
+
 
 class UserStat(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

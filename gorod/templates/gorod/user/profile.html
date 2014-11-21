@@ -14,11 +14,7 @@
             </div>
 			<div class="b-profile__text">
 			    <span class="b-profile__name">
-                    {% if user_info.first_name %}
-                        {{ user_info.first_name }} {{ user_info.last_name }}
-                    {% else %}
-                        {{ user_info }}
-                    {% endif %}
+                    {{ user_info.human_name }}
                 </span>
                 {% if user_info == user %}
 			        <a class="b-profile__logout" href="{% url 'logout' %}">Выйти</a>
@@ -27,6 +23,29 @@
 		    <div class="clear"></div>
 		</div>
 	</div>
+    <div class="notifications">
+        {% if notifications %}
+            {% for notification in notifications %}
+                <p>
+                    <b>{{ notification.ctime }}</b>
+                        Пользователь
+                        <a href="{{ notification.target_user.profile_url }}">
+                            {{ notification.target_user }}
+                        </a>
+                        оставил
+                        {% if notification.action == 'add-comment'  %}
+                        комменатрий
+                        {% elif notification.action == 'add-like' %}
+                        лайк
+                        {% endif %}
+                        на ваш материал
+                        <a href="{{ notification.content_object.url }}">
+                            {{ notification.content_object }}
+                        </a>
+                </p>
+            {% endfor %}
+        {% endif %}
+    </div>
 	<div class="b-feed__wrapper">
         {% include "gorod/feed/_feed_item.html" %}
         <script>

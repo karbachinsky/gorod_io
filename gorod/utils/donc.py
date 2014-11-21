@@ -200,4 +200,5 @@ class GroupArticlesCounter(DONCCounterBase):
 
     donc_filter = dict(
         field_name='articles_cnt',
+        content_type=content_type
     )

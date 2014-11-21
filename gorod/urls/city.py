@@ -37,18 +37,18 @@ urlpatterns = patterns('',
     # Add article by user
     url(r'^article/add/?$', articles.ArticleAddView.as_view(), name='article-add'),
     # Edit article by user
-    url(r'^(?P<rubric_name>\w+)/edit/(?P<article_id>\d+)/?$', articles.ArticleEditView.as_view(), name='article-edit'),
+    url(r'^(?P<rubric_name>[\w_-]+)/edit/(?P<article_id>\d+)/?$', articles.ArticleEditView.as_view(), name='article-edit'),
     # Delete article by user
     url(r'^article/delete/(?P<article_id>\d+)/?$', articles.ArticleDeleteView.as_view(), name='article-delete'),
 
     ## Articles
 
     # One article page
-    url(r'^(?P<rubric_name>\w+)/(?P<article_id>\d+)/?$', articles.ArticleView.as_view(), name='article'),
+    url(r'^(?P<rubric_name>[\w_-]+)/(?P<article_id>\d+)/?$', articles.ArticleView.as_view(), name='article'),
     # Rubric feed list page
-    url(r'^(?P<rubric_name>\w+)/?$', articles.FeedView.as_view(), kwargs={'filter_name': 'last'}, name='feed-rubric'),
+    url(r'^(?P<rubric_name>[\w_-]+)/?$', articles.FeedView.as_view(), kwargs={'filter_name': 'last'}, name='feed-rubric'),
     # Rubric feed list page with filter
-    url(r'^(?P<rubric_name>\w+)/(?P<filter_name>\w+)/?$', articles.FeedView.as_view(), name='feed-rubric-filter'),
+    url(r'^(?P<rubric_name>[\w_-]+)/(?P<filter_name>\w+)/?$', articles.FeedView.as_view(), name='feed-rubric-filter'),
 
 )
 

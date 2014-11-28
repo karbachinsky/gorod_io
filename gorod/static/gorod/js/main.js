@@ -35,16 +35,6 @@
 });
 
 
-(window.grid = function(){
-
-	$('.b-orgs__list').masonry({
-		columnWidth: '.grid-sizer',
-		itemSelector: '.b-orgs__item',
-		gutter : '.gutter-sizer',
-		transitionDuration: 0
-	});
-});
-
 
 (window.LoginPopup = function(e){
 
@@ -131,7 +121,6 @@
 
 $(function(){
 
-	window.grid();
 	window.loginPopup = window.LoginPopup();
 	window.menu();
 });

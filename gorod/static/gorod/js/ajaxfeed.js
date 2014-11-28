@@ -22,11 +22,7 @@
 		});
 		
 		$container.append(appendedHtml);
-		$container.masonry( 'appended', appendedHtml );
-		$container.imagesLoaded( function() {
-			$container.masonry();
 
-		});	
 		//$('.b-feed__more').show();
 	},
 	uploadNew = function(){
@@ -56,17 +52,5 @@
 	$('.b-feed__more').on('click',function(){
 		uploadNew();
 	});
-	$('.b-feed__list').masonry({
-		columnWidth: '.grid-sizer',
-		itemSelector: '.b-feed-item',
-		gutter : '.gutter-sizer',
-		transitionDuration: 0
-	});
 
-	$('.b-groups').masonry({
-		columnWidth: '.grid-sizer',
-		itemSelector: '.b-groups-item',
-		gutter : '.gutter-sizer',
-		transitionDuration: 0
-	});
 });

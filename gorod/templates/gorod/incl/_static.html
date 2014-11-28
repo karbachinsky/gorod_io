@@ -32,7 +32,9 @@
                     articleEditUrl : '{% url 'gorod:article-edit' city.name article.rubric.name article.id %}',
                 {% endif %}
             {% endif %}    
-            
+            {% if user.is_authenticated %}
+                isAuthenticated: true,
+            {% endif %}
             {% if user_info %}
                 profileUserId: {{ user_info.id }},
             {% endif %}

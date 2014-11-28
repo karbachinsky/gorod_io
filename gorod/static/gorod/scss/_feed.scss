@@ -1,15 +1,7 @@
-.body_feed{
-	background: #f3f3f3;
-}
-
 .b-feed__wrapper{
-	background: #f3f3f3;
 }
-
 .b-feed__rubric-title{
-	background: $violet-color;
 	color:#fff;
-
 	h1{
 		font-weight: 400;
 		font-size: 20px;
@@ -17,7 +9,6 @@
 		margin: 0;
 	}
 }
-
 .b-feed__rubric-title-inner{
 	width: 1180px;
 	padding: 20px 0;
@@ -193,126 +184,3 @@
 .b-feed__more{
 	@extend .btn;
 }
-
-/*---------------------------GROUPS-----------------*/
-.b-groups{
-	padding:45px 0 15px;
-	width: 1180px;
-	margin:auto;
-	.grid-sizer{
-		width:265px;
-	}
-	.gutter-sizer{
-		width:40px;
-	}
-}
-.b-groups__title{
-	@include inline-block;
-	margin-top: -60px;
-	text-transform: uppercase;
-	color:#000;
-	font-size: 16px;
-}
-.b-groups-item{
-	display: block;
-	background: $violet-color;
-	position: relative;
-	width:265px;
-	height: 85px; 
-	margin-bottom: 35px;
-	position: relative;
-	@include box-shadow(0px 1px 0px #bbb);
-	text-decoration: none;
-	cursor: pointer;
-
-	&:hover{
-		@include box-shadow(0px 2px 0px #bbb);
-	}
-
-    .b-groups-item__content{
-    	padding: 10px;
-    	max-height: 64px;
-    	overflow: hidden;
-    }
-
-    .b-groups-item__picture {
-        margin-right: 0;
-        float: left;
-        overflow: hidden;
-    }
-
-    .b-groups-item__name {
-        float: left;
-        color:#fff;
-        font-size: 13px;
-        text-transform: uppercase;
-        font-weight: 600;
-        text-decoration: none;
-        max-width: 80%;
-    }
-
-    .b-groups-item__feeds-cnt {
-        float: right;
-        color:#fff;
-        i {
-
-        }
-    }
-
-    .b-groups-item__description {
-        float: left;
-        font-size: 0.8em;
-        color:#fff;
-    }
-}
-
-
-
-@media screen and (max-width: 1240px) { 
-	.b-feed, .b-groups, .b-feed__rubric-title-inner{
-		width: 875px;
-	}
-}
-@media screen and (max-width: 935px) { 
-
-}
-@media screen and (max-width: 630px) { 
-	
-	
-	.b-feed, .b-feed__rubric-title-inner{
-		width: auto;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-	.b-groups{
-		width: auto;
-		margin-right: 10px;
-		margin-left: 10px;
-		padding-left: 0;
-		padding-right: 0;
-	}
-	.b-feed-item, .b-groups-item{
-		width: 100%;
-	}
-	
-	.b-feed-item__rubric{
-		font-size: 13px;
-	}
-
-	.b-feed-item__title{
-		line-height: 32px;
-		font-size: 22px;
-		margin-bottom: 5px;
-	}
-	.b-feed-item__text{
-		font-size: 15px;
-		line-height: 22px;
-	}
-}
-
-
-
-
-
-
-

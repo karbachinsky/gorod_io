@@ -12,22 +12,24 @@
 
 (window.menu = function(){
 	var $btn = $('.b-header__menu-btn'),
-		$header = $('.b-header'),
-		$menu = $('.b-header__menu'),
-		$topLine = $('.b-header__content'),
-		$content = $('.b-js-content');
+		$menu = $('.b-menu'),
+		$overlay= $('.b-overlay'),
+		$body = $('body'),
+		toggleClasses = function(){
+			$menu.toggleClass('b-menu_active');
+			$overlay.toggleClass('b-overlay_active');
+			$body.toggleClass('body_blocked');
+		};
 
 	$btn.on('click', function(e){
-		$header.toggleClass('active');
-		return false;
+		if(globals.isAuthenticated){
+			toggleClasses();
+		}else{
+			window.loginPopup.openPopup(e);
+		}
 	});
-
-	$topLine.on('click',function(e){
-		var time = setTimeout(function(){
-			if($header.hasClass('active') && !$(e.target).hasClass('b-header__city') ){
-				$header.removeClass('active');
-			}
-		},50)
+	$overlay.on('click', function(){
+		toggleClasses();
 	});
 	
 });
@@ -44,7 +46,7 @@
 });
 
 
-(window.loginPopup = function(e){
+(window.LoginPopup = function(e){
 
 	var $popup = $('.b-popup-login'),
 	$window = $popup.find('.b-popup__window'),
@@ -120,13 +122,16 @@
 
     });
 
+    return {
+    	openPopup : openPopup
+    }
+
 });
 
 
 $(function(){
 
 	window.grid();
-	window.loginPopup();
-	window.addPopup();
+	window.loginPopup = window.LoginPopup();
 	window.menu();
 });

@@ -6,63 +6,30 @@
 {% block meta_title %}Городской сайт {{ city.title_gent }}{% endblock %}
 
 {% block meta_description %}{{ city.title }} — новости, события, организации, вопросы и ответы{% endblock %}
-{% block body-class %}not-adaptive-935{% endblock %}
+{% block body-class %}{% endblock %}
 
 {% block content %}
-    d
-    {% if rubric %}
-        <div class="b-feed__rubric-title b-feed__rubric-title_{{rubric.name}}" style="background:{{rubric.color}}">
-            <div class="b-feed__rubric-title-inner">
-                <h1>
-                    {{ rubric.title }}
-                </h1>
-
-                {% group_filters rubric %}
-            </div>
-        </div>
-    {% else %}
-        <div class="b-groups">
-            <span class="b-groups__title">Группы</span>
-            <div class="grid-sizer"></div>
-            <div class="gutter-sizer"></div>
-            {% for rubric in rubrics %}
-                <a href="{% url 'gorod:feed-rubric' city.name rubric.name %}" class="b-groups-item" style="background:{{rubric.color}}">
-                    <div class="b-groups-item__content">
-                        {% if rubric.picture %}
-                            <div class="b-groups-item__picture" style="float:left">
-                                <img src="{{rubric.picture.url}}" title="{{ rubric.title }}"/>
-                            </div>
-                        {% endif %}
-                        <div class="b-groups-item__name">{{rubric.title}}</div>
-                        <div class="b-groups-item__feeds-cnt"><i></i>{{ rubric.articles_cnt }}</div>
-                        <div class="clear"></div>
-                        {% if rubric.description %}
-                            <div class="b-groups-item__description">{{rubric.description}}</div>
-                        {% endif %}
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-    {% endif %}
-    <div class="b-feed__wrapper">
-        
-        {% include "gorod/feed/_feed_item.html" %}
-        <script>
-            $(function(){
-                window.ajaxFeed();
-            });
-        </script>
-        <div class="b-feed">
-            {% if not rubric %}
-                <span class="b-feed__title">Сообщения от жителей</span>
-            {% endif %}
-            <ul class="b-feed__list">
-                <div class="grid-sizer"></div>
-                <div class="gutter-sizer"></div>
-            </ul>
-            <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
-           
-        </div>
+    <div class="b-groups">
+        <span class="b-groups__title">Группы</span>
+        <div class="grid-sizer"></div>
+        <div class="gutter-sizer"></div>
+        {% for rubric in rubrics %}
+            <a href="{% url 'gorod:feed-rubric' city.name rubric.name %}" class="b-groups-item" style="background:{{rubric.color}}">
+                <div class="b-groups-item__content">
+                    {% if rubric.picture %}
+                        <div class="b-groups-item__picture" style="float:left">
+                            <img src="{{rubric.picture.url}}" title="{{ rubric.title }}"/>
+                        </div>
+                    {% endif %}
+                    <div class="b-groups-item__name">{{rubric.title}}</div>
+                    <div class="b-groups-item__feeds-cnt"><i></i>{{ rubric.articles_cnt }}</div>
+                    <div class="clear"></div>
+                    {% if rubric.description %}
+                        <div class="b-groups-item__description">{{rubric.description}}</div>
+                    {% endif %}
+                </div>
+            </a>
+        {% endfor %}
     </div>
 {% endblock %}
 

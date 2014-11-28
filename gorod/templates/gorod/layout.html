@@ -17,20 +17,23 @@
 </head>
 
 <body class="{% block body-class %}{% endblock %}">
-    {% block header %}
-        {% include "gorod/incl/_header.html" %}
-    {% endblock %}
+    {% include "gorod/incl/_menu.html" %}
+    <div class="b-content">
+        <div class="b-header">
+            {% include "gorod/incl/_header.html" %}
+            <div class="b-header__content">
+                {% block header-content %}{% endblock %}
+            </div>
+        </div>
 
-    <div class="b-js-content">
+    
         {% block content %}{% endblock %}
     </div>
 
-    {% block footer %}
-        {% include "gorod/incl/_footer.html" %}
-    {% endblock %}
     
     {% include "gorod/incl/_popup.html" %}
     {% include "gorod/incl/_counters.html" %}
+    <div class="b-overlay"></div>
 
 </body>
 

@@ -9,9 +9,9 @@ class MPTTComment(MPTTModel, Comment):
 
     class MPTTMeta:
         # comments on one level will be ordered by date of creation
-        order_insertion_by=['submit_date']
+        order_insertion_by = ['submit_date']
 
     class Meta:
-        ordering=['tree_id','lft']
+        ordering = ['tree_id', 'lft']
         verbose_name = 'comment'
         verbose_name_plural = 'comments'

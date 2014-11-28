@@ -11,7 +11,6 @@ from django.core.urlresolvers import reverse
 from gorod.models import City, Article, ArticleRubric
 from gorod.utils.forms.article import ArticleAddForm
 from gorod.utils.exceptions import FeedError
-from gorod.utils.ad.plate import AdStartPlate
 
 import json
 
@@ -30,11 +29,28 @@ class FeedView(View):
         context = {
             'rubric': rubric,
             'group_filter': filter_name,
-            # Start plate
-            'adplate': AdStartPlate(city_name).get_context()
         }
 
         return render(request, 'gorod/feed.html', context)
+
+
+class GroupsView(View):
+    """
+        Show list of articles for the certain city and rubric.
+    """
+    def dispatch(self, request, city_name, rubric_name=None, filter_name='last'):
+        rubric = None
+        if rubric_name:
+            rubric = get_object_or_404(ArticleRubric.objects.select_related('donc_data'),
+                                       name=rubric_name,
+                                       city__name=city_name)
+
+        context = {
+            'rubric': rubric,
+            'group_filter': filter_name,
+        }
+
+        return render(request, 'gorod/groups.html', context)
 
 
 class ArticleView(View):

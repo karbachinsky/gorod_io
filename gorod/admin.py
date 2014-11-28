@@ -93,34 +93,6 @@ class CityAdmin(GorodAdminBase):
     list_display = ('id', 'name', 'title', 'add_date')
     inlines = [ArticleRubricInline]
 
-## CITYINFO
-
-
-#class CityInfoQuestionInline(admin.StackedInline):
-#    model = CityInfoQuestion
-#    extra = 2
-
-
-#class CityInfoAdmin(GorodAdminBase):
-#    list_display = ('id', 'city')
-#    inlines = [CityInfoQuestionInline]
-
-
-## HUB
-
-class HubAnswerInline(admin.StackedInline):
-    model = HubAnswer
-    extra = 2
-
-
-class HubQuestionAdmin(GorodAdminBase):
-    list_display = ('id', 'city', 'question')
-    inlines = [HubAnswerInline]
-
-
-class CityWelcomeAdmin(GorodAdminBase):
-    list_display = ('id', 'city')
-
 
 ## ARTICLES
 class ArticleAdmin(GorodAdminBase):
@@ -135,67 +107,9 @@ class ArticleAdmin(GorodAdminBase):
     view_on_site = True
 
 
-
-## ORGANIZATIONS
-
-class OrganizationAddressInline(admin.StackedInline):
-    model = OrganizationAddress
-    extra = 1
-    max_num = 1
-
-
-class OrganizationPhoneInline(admin.StackedInline):
-    model = OrganizationPhone
-    extra = 1
-    max_num = 1
-
-
-class OrganizationScheduleInline(admin.StackedInline):
-    model = OrganizationSchedule
-    extra = 2
-
-
-class OrganizationAdmin(GorodAdminBase):
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "category":
-            kwargs["queryset"] = OrganizationCategory.objects.get_first_level_categories()
-        return super(OrganizationAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
-
-    def view_link(self, obj):
-        obj_url = obj.get_absolute_url()
-        return u"<a href='%s' target='blank'>%s</a>" % (obj_url, obj_url)
-
-    view_link.allow_tags = True
-    list_display = ('id', 'name', 'city', 'user', 'view_link', 'add_date')
-    #inlines = [OrganizationAddressInline, OrganizationPhoneInline, OrganizationScheduleInline]
-    inlines = [OrganizationAddressInline, OrganizationPhoneInline]
-    mptt_indent_field = "category"
-    save_on_top = True
-    view_on_site = True
-
-
-class OrganizationCategoryAdmin(DjangoMpttAdmin):
-    list_display = ('id', 'name', 'title')
-    mptt_level_indent = 20
-
-
-class OrganizationScheduleAdmin(GorodAdminBase):
-    list_display = ('id', 'time_from')
-
-
 class ComplaintAdmin(GorodAdminBase):
     list_display = ('id', 'city', 'email', 'add_date')
     readonly_fields = ('comment', 'city', 'add_date', 'url', 'type', 'email')
-
-
-class HubQuestionCategoryAdmin(DjangoMpttAdmin):
-    list_display = ('id', 'name', 'title')
-    mptt_level_indent = 20
-
-
-class PaymentAdmin(GorodAdminBase):
-    list_display = ('id', 'city', 'title', 'url')
-    list_filter = ('city',)
 
 
 # Change list display for social auths.
@@ -221,19 +135,11 @@ UserSocialAuthOption.list_select_related = ('user',)
 
 
 
-admin.site.register(OrganizationSchedule, OrganizationScheduleAdmin)
 admin.site.register(User, GorodUserAdmin)
 admin.site.register(City, CityAdmin)
-admin.site.register(HubQuestion, HubQuestionAdmin)
-#admin.site.register(CityInfo, CityInfoAdmin)
-admin.site.register(CityWelcome, CityWelcomeAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleRubric, ArticleRubricAdmin)
-admin.site.register(Organization, OrganizationAdmin)
-admin.site.register(OrganizationCategory, OrganizationCategoryAdmin)
 admin.site.register(Complaint, ComplaintAdmin)
-admin.site.register(HubQuestionCategory, HubQuestionCategoryAdmin)
-admin.site.register(Payment, PaymentAdmin)
 
 ## Ckeditor to flatpages
 

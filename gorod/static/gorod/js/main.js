@@ -32,30 +32,8 @@
 	
 });
 
-(window.topScrolling = function(){
-	var $topLine = $('.b-header__content'),
-	$header = $('.b-header'),
-	$menu = $('.b-header__menu');
-
-	$('.b-header__avatar').on('click',function(e){
-		e.stopPropagation();
-	})
-	$topLine.on('click',function(e){
-		if(!$header.hasClass('active') && !$(e.target).hasClass('b-header__city')){
-			$('body').animate({scrollTop:0},300);
-		}
-	});
-});
 
 (window.grid = function(){
-	/*$('.b-feed__list').imagesLoaded( function() {
-		$('.b-feed__list').masonry({
-			columnWidth: '.grid-sizer',
-			itemSelector: '.b-feed-item',
-			gutter : '.gutter-sizer',
-			transitionDuration: 0
-		});
-	});*/
 
 	$('.b-orgs__list').masonry({
 		columnWidth: '.grid-sizer',
@@ -151,5 +129,4 @@ $(function(){
 	window.loginPopup();
 	window.addPopup();
 	window.menu();
-	window.topScrolling();
 });

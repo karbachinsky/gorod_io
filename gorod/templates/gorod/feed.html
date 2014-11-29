@@ -9,12 +9,8 @@
 
 {% block header-content %}
     <div class="b-feed__rubric-title">
-        <div class="b-feed__rubric-title-inner">
-            <h1>
-                {{ rubric.title }}
-            </h1>
-            {% group_filters rubric %}
-        </div>
+        <h1>{{ rubric.title }}</h1>
+        {% group_filters rubric %}
     </div>
 {% endblock %}
 
@@ -27,9 +23,6 @@
             });
         </script>
         <div class="b-feed">
-            {% if not rubric %}
-                <span class="b-feed__title">Сообщения от жителей</span>
-            {% endif %}
             <ul class="b-feed__list">
             </ul>
             <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>

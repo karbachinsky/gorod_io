@@ -1,1 +1,27 @@
-<div class="b-menu"></div>
+<div class="b-menu">
+	{% if notifications %}
+	    <div class="notifications">
+	    
+	        {% for notification in notifications %}
+	            <p>
+	                <b>{{ notification.ctime }}</b>
+	                    Пользователь
+	                    <a href="{{ notification.target_user.profile_url }}">
+	                        {{ notification.target_user }}
+	                    </a>
+	                    оставил
+	                    {% if notification.action == 'add-comment'  %}
+	                    комменатрий
+	                    {% elif notification.action == 'add-like' %}
+	                    лайк
+	                    {% endif %}
+	                    на ваш материал
+	                    <a href="{{ notification.content_object.url }}">
+	                        {{ notification.content_object }}
+	                    </a>
+	            </p>
+	        {% endfor %}
+	    
+	    </div>
+    {% endif %}
+</div>

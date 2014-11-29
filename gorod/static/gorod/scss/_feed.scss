@@ -1,18 +1,11 @@
-.b-feed__wrapper{
-}
 .b-feed__rubric-title{
-	color:#fff;
 	h1{
+		color:#fff;
 		font-weight: 400;
 		font-size: 20px;
 		text-transform: uppercase;
 		margin: 0;
 	}
-}
-.b-feed__rubric-title-inner{
-	max-width: 1180px;
-	padding: 20px 20px;
-	margin: auto; 
 }
 .b-feed__filter{
 	margin: 2px 0 0; 
@@ -31,25 +24,12 @@
 
 /*--------feed-----------*/
 .b-feed{
-	padding:25px 20px 50px;
-	max-width: 700px;
+	padding:30px 20px 40px;
+	max-width: 650px;
 	height: 1000500px;
 	margin:auto;
-	
-	.grid-sizer{
-		width:265px;
-	}
-	.gutter-sizer{
-		width:40px;
-	}
 }
-.b-feed__title{
-	@include inline-block;
-	margin-bottom: 10px;
-	text-transform: uppercase;
-	color:#000;
-	font-size: 16px;
-}
+
 .b-feed-item{
 	display: block;
 	background: #fff;

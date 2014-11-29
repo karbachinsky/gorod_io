@@ -23,29 +23,6 @@
 		    <div class="clear"></div>
 		</div>
 	</div>
-    <div class="notifications">
-        {% if notifications %}
-            {% for notification in notifications %}
-                <p>
-                    <b>{{ notification.ctime }}</b>
-                        Пользователь
-                        <a href="{{ notification.target_user.profile_url }}">
-                            {{ notification.target_user }}
-                        </a>
-                        оставил
-                        {% if notification.action == 'add-comment'  %}
-                        комменатрий
-                        {% elif notification.action == 'add-like' %}
-                        лайк
-                        {% endif %}
-                        на ваш материал
-                        <a href="{{ notification.content_object.url }}">
-                            {{ notification.content_object }}
-                        </a>
-                </p>
-            {% endfor %}
-        {% endif %}
-    </div>
 	<div class="b-feed__wrapper">
         {% include "gorod/feed/_feed_item.html" %}
         <script>
@@ -55,8 +32,6 @@
         </script>
         <div class="b-feed">
             <ul class="b-feed__list">
-                <div class="grid-sizer"></div>
-                <div class="gutter-sizer"></div>
             </ul>
             <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
            

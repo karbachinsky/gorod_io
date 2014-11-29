@@ -52,9 +52,9 @@
 		cursor: pointer;
 		width: 20px;
 		height: 20px;
-		background: url(../img/sprite.png?2) no-repeat 0 -125px;
+		@include gorod-sprite($icons-sprite, close); 
 		&:hover{
-			background: url(../img/sprite.png?2) no-repeat -25px -125px;
+			@include gorod-sprite($icons-sprite, close-hover); 
 		}
 	}
 	.b-form{

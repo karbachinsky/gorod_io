@@ -10,6 +10,9 @@
 {% block header-content %}
     <div class="b-feed__rubric-title">
         <h1>{{ rubric.title }}</h1>
+        {% if rubric.description %}
+            <div class="b-feed__rubric-description">{{rubric.description}}</div>
+        {% endif %}
         {% group_filters rubric %}
     </div>
 {% endblock %}

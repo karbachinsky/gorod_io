@@ -3,9 +3,9 @@
 from django.db import models, DatabaseError, IntegrityError, transaction
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
-from django.core import serializers
 from django.contrib.contenttypes.generic import GenericRelation
 from django.utils.translation import ugettext as _
+#from django.contrib.contenttypes.models import ContentType
 
 from easy_thumbnails.templatetags.thumbnail import thumbnail_url
 from ckeditor.fields import RichTextField
@@ -14,6 +14,11 @@ from gorod.models import City
 from gorod.models.donc import DONC
 from gorod.utils.exceptions import FeedError, DONCError
 from gorod.templatetags.stringutils import smart_truncate
+from gorod.utils.serializers.article import ArticleFeedSerializer
+
+from comments import get_model as get_comments_model
+
+from rest_framework.renderers import JSONRenderer
 
 from smart_selects.db_fields import ChainedForeignKey
 
@@ -75,14 +80,18 @@ class ArticleRubric(models.Model):
 
         return False
 
-    def get_absolute_url(self, city=None):
+    def get_absolute_url(self):
         try:
             return reverse('gorod:feed-rubric', kwargs={
-                'city_name': city.name,
+                'city_name': self.city.name,
                 'rubric_name': self.name
             })
         except NoReverseMatch:
             return '/'
+
+    @property
+    def url(self):
+        return self.get_absolute_url()
 
     def natural_key(self):
         return {
@@ -111,27 +120,9 @@ class ArticleManager(models.Manager):
 
         articles = articles.all()[lim_start:lim_end]
 
-        for article in articles:
-            article.rubric.url = article.rubric.get_absolute_url(article.city)
+        serializer = ArticleFeedSerializer(articles, many=True)
 
-        # FIXME: add try-catch
-        json_feed = serializers.serialize('json', articles,
-            indent=4,
-            extras=('url', 'thumbnail', 'short_text', 'human_add_date', 'comment_cnt', 'raiting'),
-            relations={
-                'rubric': {
-                    'extras': ('url',)
-                },
-                'user': {
-                    'extras': ('profile_url', 'human_name', 'full_avatar'),
-                    'fields': ('id',)
-                },
-            },
-            excludes=('text', 'is_checked', 'is_published', 'add_date', 'city')
-        )
-
-        # FIXME! GOVNOKOD! Use django rest framework
-        json_response = '{"total": %d, "feed": %s}' % (total_cnt, json_feed)
+        json_response = '{"total": %d, "feed": %s}' % (total_cnt, JSONRenderer().render(serializer.data))
 
         return json_response
 
@@ -184,6 +175,8 @@ class Article(models.Model):
     is_checked = models.BooleanField(default=True)
 
     donc_data = GenericRelation(DONC, object_id_field='object_pk')
+
+    comments = GenericRelation(get_comments_model(), object_id_field='object_pk')
 
     # Denormalaized value, special for fast selects
     raiting = models.IntegerField(default=0)
@@ -270,13 +263,6 @@ class Article(models.Model):
         except IndexError:
             return 0
 
-    #@property
-    #def raiting(self):
-    #    """
-    #        Raiting depending on likes
-    #    """
-    #    return self.likes_cnt(is_positive=True) - self.likes_cnt(is_positive=False)
-
     def likes_cnt(self, is_positive=True):
         """
             Number of positive and negative likes
@@ -326,4 +312,5 @@ class Article(models.Model):
             Check if user can edit/delete current article object
         """
         return user.is_superuser or self.user == user
+
 

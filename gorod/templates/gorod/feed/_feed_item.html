@@ -1,43 +1,59 @@
 {% verbatim %}
 <script id="feed-item-template" type="text/x-handlebars-template">
-    <li class="b-feed-item  b-feed-item_{{fields.rubric.fields.name}}" >           
-        <div class="b-feed-item__top" style="background: {{fields.rubric.fields.color}}"></div>
+    <li class="b-feed-item  b-feed-item_{{rubric.name}}" >
+        <div class="b-feed-item__top" style="background: {{rubric.color}}"></div>
         <div class="b-feed-item__info">
-            <a class="b-feed-item__rubric" href="{{ fields.rubric.extras.url }}" style="color:{{fields.rubric.fields.color}}">
-                {{ fields.rubric.fields.title }}
+            <a class="b-feed-item__rubric" href="{{ rubric.url }}" style="color:{{rubric.color}}">
+                {{ rubric.title }}
             </a>
         </div>
-        
-        
-        
-        <a class="b-feed-item__link" href="{{ extras.url }}">
-            <h2 class="b-feed-item__title">{{ fields.title }}</h2>   
-            {{#if extras.short_text}}
+
+        <a class="b-feed-item__link" href="{{ url }}">
+            <h2 class="b-feed-item__title">{{ title }}</h2>
+            {{#if text}}
                 <p class="b-feed-item__text">
-                    {{{ extras.short_text }}}
+                    {{{ text }}}
                 </p>
             {{/if}} 
 
-            {{#if extras.thumbnail }}
-                <img class="b-feed-item__picture" src="{{ extras.thumbnail }}" />
+            {{#if thumbnail }}
+                <img class="b-feed-item__picture" src="{{ thumbnail }}" />
             {{/if}} 
         </a>
 
-
         <div class='b-user'>
-            <a href="{{ fields.user.extras.profile_url }}" class="b-user__avatar">
-                <img src="{{ fields.user.extras.full_avatar }}" />
+            <a href="{{ user.profile_url }}" class="b-user__avatar">
+                <img src="{{ user.full_avatar }}" />
             </a>
-            <a href="{{ fields.user.extras.profile_url }}" class="b-user__name">{{ fields.user.extras.human_name }}</a>
+            <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
         </div>
 
-        {{#if extras.comment_cnt}}
-            <div class="b-feed-item__comments"><i></i>{{ extras.comment_cnt }}</div>
+
+        {{#if raiting}}
+            <div class="b-feed-item__raiting"><i></i>{{ raiting }}</div>
         {{/if}}
 
-        {{#if fields.raiting}}
-            <div class="b-feed-item__raiting"><i></i>{{ fields.raiting }}</div>
+        <!-- Like block -->
+
+
+        {{#if comment_cnt}}
+            <div class="b-feed-item__comments"><i></i>{{ comment_cnt }}</div>
+            <!-- Comments list. FIXME -->
+            <div class="b-feed-item__comments-list">
+                {{#each comments}}
+                    <div class="b-comment">
+                        {{ comment }}
+                    </div>
+                {{/each}}
+            </div>
         {{/if}}
+
+
+        <!-- Comment form -->
+        <div class="b-feed-item__comment-form">
+            <!-- On click we have to open form -->
+            <a href="#">Комментировать</a>
+        </div>
     </li>
 </script>
 {% endverbatim %}

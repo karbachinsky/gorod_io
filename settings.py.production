@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'easy_thumbnails',
     #'captcha',
+    'rest_framework',
     'smart_selects',
     'django_mptt_admin',
     'django.contrib.flatpages',

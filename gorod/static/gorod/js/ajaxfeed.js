@@ -16,7 +16,7 @@
 		var appendedHtml= $(''),
 		curElem;
 
-		$.each(data.feed,function(index, elem){
+		$.each(data.feed, function(index, elem){
 			curElem = $(template(elem));
 			appendedHtml = appendedHtml.add(curElem);
 		});
@@ -27,7 +27,7 @@
 	},
 	uploadNew = function(){
 		getData(curPage,LIMIT).done(appendElems).done(function(data){
-
+            console.log(data);
 			$('.b-feed').height('auto');
 			pagesLen = data.total%LIMIT > 0 ? parseInt(data.total/LIMIT)+1 : parseInt(data.total/LIMIT);
 

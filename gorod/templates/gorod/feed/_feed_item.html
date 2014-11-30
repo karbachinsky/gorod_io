@@ -28,13 +28,32 @@
             <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
         </div>
 
-        {{#if comment_cnt}}
-            <div class="b-feed-item__comments"><i></i>{{ comment_cnt }}</div>
-        {{/if}}
 
         {{#if raiting}}
             <div class="b-feed-item__raiting"><i></i>{{ raiting }}</div>
         {{/if}}
+
+        <!-- Like block -->
+
+
+        {{#if comment_cnt}}
+            <div class="b-feed-item__comments"><i></i>{{ comment_cnt }}</div>
+            <!-- Comments list. FIXME -->
+            <div class="b-feed-item__comments-list">
+                {{#each comments}}
+                    <div class="b-comment">
+                        {{ comment }}
+                    </div>
+                {{/each}}
+            </div>
+        {{/if}}
+
+
+        <!-- Comment form -->
+        <div class="b-feed-item__comment-form">
+            <!-- On click we have to open form -->
+            <a href="#">Комментировать</a>
+        </div>
     </li>
 </script>
 {% endverbatim %}

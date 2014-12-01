@@ -16,7 +16,6 @@ from django.db import IntegrityError
 
 from gorod.utils.exceptions import DONCError
 import gorod.models.article
-import gorod.models.hub
 from gorod.models.donc import DONC
 
 import comments
@@ -162,28 +161,6 @@ class ArticleNegativeLikesCounter(ArticlePositiveLikesCounter):
     from copy import deepcopy
     donc_filter = deepcopy(ArticlePositiveLikesCounter.donc_filter)
     donc_filter['field_name'] = 'negative_likes_cnt'
-
-
-class HubQuestionAnswersCounter(DONCCounterBase):
-    """
-        Count number of answers for questions
-    """
-    depending_model = gorod.models.hub.HubAnswer
-    model = gorod.models.hub.HubQuestion
-
-    def depending_model_related_pk(self, depending_object):
-        return depending_object.question.id
-
-    content_type = ContentType.objects.get_for_model(model)
-
-    required_depending_model_filter = dict(
-        is_published=False,
-    )
-
-    donc_filter = dict(
-        field_name='answer_cnt',
-        content_type=content_type
-    )
 
 
 class GroupArticlesCounter(DONCCounterBase):

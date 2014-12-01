@@ -1,15 +1,23 @@
 (window.ajaxFeed = function(){
 	var getData = function(page,limit){
+
+        var data = {
+            limit : limit,
+            page : page,
+            city : globals.cityName,
+            rubric : globals.rubric,
+            filter : globals.group_filter,
+            user : globals.userId
+		};
+
+        if (globals.profileUserId) {
+            // Filtering by author
+            data['author'] = globals.profileUserId;
+        }
+
 		return $.ajax({
 			url : '/api/feed/',
-			data : {
-				limit : limit,
-				page : page,
-				city : globals.cityName,
-				rubric : globals.rubric,
-                filter : globals.group_filter,
-				user : globals.profileUserId
-			}
+			data : data
 		});
 	},
 	appendElems = function(data){	

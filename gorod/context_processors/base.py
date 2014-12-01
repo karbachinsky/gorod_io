@@ -28,5 +28,8 @@ def base_params(request):
     if current_url_params.get('rubric'):
         context['article_rubric'] = current_url_params['article_rubric']           
 
+    if request.user.is_authenticated:
+        context['notifications'] = request.user.get_last_notifications()
+
     return context
 

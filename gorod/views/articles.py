@@ -201,6 +201,7 @@ class FeedAPIView(View):
         rubric_name = request.GET.get('rubric')
         filter_name = request.GET.get('filter')
         user_id = request.GET.get('user')
+        author_id = request.GET.get('author')
 
         page = int(request.GET.get('page', 0))
         limit = int(request.GET.get('limit', 15))
@@ -217,8 +218,8 @@ class FeedAPIView(View):
             rubric = get_object_or_404(ArticleRubric, name=rubric_name, city__name=city_name)
             filters['rubric'] = rubric.id
 
-        if user_id:
-            filters['user'] = user_id
+        if author_id:
+            filters['user'] = author_id
 
         # Applying group filter
         if filter_name:
@@ -229,11 +230,11 @@ class FeedAPIView(View):
 
         # Apply default filters
         articles = articles.filter(**filters)\
-                           .select_related('rubric, user, donc_data')\
+                           .select_related('rubric', 'user', 'donc_data', 'comments')\
 
         try:
             # TODO: rewrite on queryset input when will be necessary
-            json_response = Article.objects.construct_json_feed(articles, page, limit)
+            json_response = Article.objects.construct_json_feed(articles, page, limit, user_id)
         except FeedError:
             return HttpResponse("{}", mimetype='application/json', status=404)
 

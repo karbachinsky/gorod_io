@@ -104,8 +104,9 @@ class ArticleManager(models.Manager):
     """
         Queryset manager for Article model.
         articles is querySet
+        Allows personalized feed
     """
-    def construct_json_feed(self, articles, page=0, limit=15):
+    def construct_json_feed(self, articles, page=0, limit=15, user_id=None):
         """
             Article list in json format
         """

@@ -13,24 +13,21 @@
         {% if rubric.description %}
             <div class="b-feed__rubric-description">{{rubric.description}}</div>
         {% endif %}
-        {% group_filters rubric %}
     </div>
 {% endblock %}
 
 {% block content %}
-    <div class="b-feed__wrapper">    
-        {% include "gorod/feed/_feed_item.html" %}
-        <script>
-            $(function(){
-                window.ajaxFeed();
-            });
-        </script>
-        <div class="b-feed">
-            <ul class="b-feed__list">
-            </ul>
-            <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
-           
-        </div>
+    {% include "gorod/feed/_feed_item.html" %}
+    <script>
+        $(function(){
+            window.ajaxFeed();
+        });
+    </script>
+    <div class="b-feed">
+        {% group_filters rubric %}
+        <ul class="b-feed__list">
+        </ul>
+        <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
     </div>
 {% endblock %}
 

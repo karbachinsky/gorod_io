@@ -1,66 +1,26 @@
 {% extends 'gorod/layout.html' %}
 
 {% load staticfiles %}
-{% block body-class %}not-adaptive-935{% endblock %}
-{% block content %}
-	<div class="b-profile__wrapper">
-		<div class="b-profile">
-			<div class="b-profile__avatar">
-                {% if user_info.avatar %}
-                    <img src="{{ user_info.avatar }}" />
-                {% else %}
-                    <img src="{% static 'gorod/img/userava.png' %}" />
-                {% endif %}
-            </div>
-			<div class="b-profile__text">
-			    <span class="b-profile__name">
-                    {{ user_info.human_name }}
-                </span>
-                {% if user_info == user %}
-			        <a class="b-profile__logout" href="{% url 'logout' %}">Выйти</a>
-                {% endif %}
-		    </div>
-		    <div class="clear"></div>
-		</div>
-	</div>
-    <div class="notifications">
-        {% if notifications %}
-            {% for notification in notifications %}
-                <p>
-                    <b>{{ notification.ctime }}</b>
-                        Пользователь
-                        <a href="{{ notification.target_user.profile_url }}">
-                            {{ notification.target_user }}
-                        </a>
-                        оставил
-                        {% if notification.action == 'add-comment'  %}
-                        комменатрий
-                        {% elif notification.action == 'add-like' %}
-                        лайк
-                        {% endif %}
-                        на ваш материал
-                        <a href="{{ notification.content_object.url }}">
-                            {{ notification.content_object }}
-                        </a>
-                </p>
-            {% endfor %}
-        {% endif %}
-    </div>
-	<div class="b-feed__wrapper">
-        {% include "gorod/feed/_feed_item.html" %}
-        <script>
-            $(function(){
-                window.ajaxFeed();
-            });
-        </script>
-        <div class="b-feed">
-            <ul class="b-feed__list">
-                <div class="grid-sizer"></div>
-                <div class="gutter-sizer"></div>
-            </ul>
-            <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
-           
-        </div>
-    </div>
+{% load user %}
 
+{% block header-content %}
+    <div class="b-profile">
+        {% user user_info %}
+        <div class="clear"></div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    {% include "gorod/feed/_feed_item.html" %}
+    <script>
+        $(function(){
+            window.ajaxFeed();
+        });
+    </script>
+    <div class="b-feed">
+        <ul class="b-feed__list">
+        </ul>
+        <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
+    </div>
 {% endblock %}

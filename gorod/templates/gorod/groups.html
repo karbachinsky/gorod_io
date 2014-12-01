@@ -6,26 +6,22 @@
 {% block meta_title %}Городской сайт {{ city.title_gent }}{% endblock %}
 
 {% block meta_description %}{{ city.title }} — новости, события, организации, вопросы и ответы{% endblock %}
-{% block body-class %}{% endblock %}
+
+{% block header-content %}
+    <h1 class="b-groups__city">{{ city.title }}</h1>
+{% endblock %}
 
 {% block content %}
     <div class="b-groups">
-        <span class="b-groups__title">Группы</span>
         {% for rubric in rubrics %}
-            <a href="{% url 'gorod:feed-rubric' city.name rubric.name %}" class="b-groups-item" style="background:{{rubric.color}}">
-                <div class="b-groups-item__content">
-                    {% if rubric.picture %}
-                        <div class="b-groups-item__picture" style="float:left">
-                            <img src="{{rubric.picture.url}}" title="{{ rubric.title }}"/>
-                        </div>
-                    {% endif %}
-                    <div class="b-groups-item__name">{{rubric.title}}</div>
-                    <div class="b-groups-item__feeds-cnt"><i></i>{{ rubric.articles_cnt }}</div>
-                    <div class="clear"></div>
-                    {% if rubric.description %}
-                        <div class="b-groups-item__description">{{rubric.description}}</div>
-                    {% endif %}
-                </div>
+            <a href="{% url 'gorod:feed-rubric' city.name rubric.name %}" class="b-groups-item">
+                <div class="b-groups-item__feeds-cnt"><i></i>{{ rubric.articles_cnt }}</div>
+                <div class="clear"></div>
+                <div class="b-groups-item__name">{{rubric.title}}</div>
+                <div class="clear"></div>
+                {% if rubric.description %}
+                    <div class="b-groups-item__description">{{rubric.description}}</div>
+                {% endif %}
             </a>
         {% endfor %}
     </div>

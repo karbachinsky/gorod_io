@@ -1,13 +1,19 @@
 .b-header{
 	background: $green-color;
-	padding-top:100px;
-	height: 91px;
+	/*padding-top:100px;
+	height: 91px;*/
 	position: relative;
 
 }
+.b-header__content{
+	max-width: 1050px;
+	padding: 20px;
+	margin: auto;
+}
 .b-header__menu-btn{
 	position: absolute;
-	top: 20px;
+	top: 50%;
+	margin-top: -9px;
 	left: 20px;
 	cursor: pointer;
 	width:23px;

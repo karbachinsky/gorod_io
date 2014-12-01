@@ -11,6 +11,14 @@ $gray-color: #969696;
 $gray-color-light: #cccccc;
 $gray-color-dark: #444444;
 
+$icons-sprite: sprite-map("icons/*.png");
+
+@mixin gorod-sprite($sprite, $name) {
+	background-image: sprite-url($sprite);
+	background-position: sprite-position($sprite, $name);
+	background-repeat: no-repeat; 
+}
+
 @mixin default-text() {
 	font-size: 16px;
 	line-height: 25px;

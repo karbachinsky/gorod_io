@@ -1,26 +1,6 @@
 {% verbatim %}
 <script id="feed-item-template" type="text/x-handlebars-template">
     <li class="b-feed-item  b-feed-item_{{rubric.name}}" >
-        <div class="b-feed-item__top" style="background: {{rubric.color}}"></div>
-        <div class="b-feed-item__info">
-            <a class="b-feed-item__rubric" href="{{ rubric.url }}" style="color:{{rubric.color}}">
-                {{ rubric.title }}
-            </a>
-        </div>
-
-        <a class="b-feed-item__link" href="{{ url }}">
-            <h2 class="b-feed-item__title">{{ title }}</h2>
-            {{#if text}}
-                <p class="b-feed-item__text">
-                    {{{ text }}}
-                </p>
-            {{/if}} 
-
-            {{#if thumbnail }}
-                <img class="b-feed-item__picture" src="{{ thumbnail }}" />
-            {{/if}} 
-        </a>
-
         <div class='b-user'>
             <a href="{{ user.profile_url }}" class="b-user__avatar">
                 <img src="{{ user.full_avatar }}" />
@@ -28,7 +8,16 @@
             <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
         </div>
 
+        {{#if text}}
+            <div class="b-feed-item__text">
+                {{{ text }}}
+            </div>
+        {{/if}} 
 
+        {{#if thumbnail }}
+            <img class="b-feed-item__picture" src="{{ thumbnail }}" />
+        {{/if}} 
+        
         {{#if raiting}}
             <div class="b-feed-item__raiting"><i></i>{{ raiting }}</div>
         {{/if}}

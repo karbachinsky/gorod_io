@@ -87,7 +87,7 @@
 			width:13px;
 			height:18px;
 			margin-right: 5px;
-			background: url(../img/sprite.png) no-repeat 0 -175px;
+			@include gorod-sprite($icons-sprite, comments); 
 			content: "";
 		}
 	}

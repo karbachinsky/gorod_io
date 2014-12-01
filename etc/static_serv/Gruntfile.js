@@ -9,6 +9,8 @@ module.exports = function(grunt) {
 					basePath:'../../gorod/static/gorod/',
 					sassDir:'scss',
 					cssDir:'css',
+					imagesDir : 'img',
+					httpPath : '/static/gorod/',
 					outputStyle:'compressed',
 					sourcemap: true
 				}

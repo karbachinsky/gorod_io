@@ -19,12 +19,14 @@
 <body class="{% block body-class %}{% endblock %}">
     {% include "gorod/incl/_menu.html" %}
     <div class="b-content">
+        {% if city %}
         <div class="b-header">
             {% include "gorod/incl/_header.html" %}
             <div class="b-header__content">
                 {% block header-content %}{% endblock %}
             </div>
         </div>
+        {% endif %}
 
     
         {% block content %}{% endblock %}

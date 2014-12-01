@@ -94,8 +94,6 @@
 }
 
 .b-feed-item__comments{
-	float: left;
-	margin-left: 12px;
 	margin-top: 6px;
 	color:$gray-color;
 	font-size: 11px;
@@ -108,23 +106,6 @@
 		width:16px;
 		height:14px;
 		@include gorod-sprite($icons-sprite, comments); 
-		margin-right: 4px;
-	}
-}
-
-.b-feed-item__raiting{
-	margin-top: 6px;
-	color:$gray-color;
-	font-size: 11px;
-	text-transform: uppercase;
-	font-weight: 600;
-	text-decoration: none;
-	cursor: default;
-	i{
-		@include inline-block;
-		width:16px;
-		height:14px;
-		/* FIXME: background: url(../img/sprite.png) no-repeat 0 -200px; */
 		margin-right: 4px;
 	}
 }

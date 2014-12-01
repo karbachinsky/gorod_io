@@ -45,6 +45,7 @@
 				$('.b-feed__more').hide();
 			}
 			curPage++;
+			$('.b-like').Like();
 		});
 	},
 	source   = $("#feed-item-template").html(),

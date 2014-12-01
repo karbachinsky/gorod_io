@@ -67,13 +67,6 @@
     Like.prototype.appendHTMLSceleton = function() {
         var self = this;
 
-        // Adding raiting
-        $("<span>").addClass(self.raitingClass)
-                       .text(self.raiting)
-                       .appendTo(self.$likeBlock);
-
-        self.$raitingBlock = self.$likeBlock.find('.' + self.raitingClass);
-
         // Adding like button
         if (self.options.like) {
             $("<span>").addClass(self.likeClass)
@@ -81,6 +74,13 @@
                        .appendTo(self.$likeBlock);
             self.$likeButton = self.$likeBlock.find('.' + self.likeClass);
         }
+
+        // Adding raiting
+        $("<span>").addClass(self.raitingClass)
+                       .text(self.raiting)
+                       .appendTo(self.$likeBlock);
+
+        self.$raitingBlock = self.$likeBlock.find('.' + self.raitingClass);
 
         // Adding dislike button
         if (self.options.dislike) {

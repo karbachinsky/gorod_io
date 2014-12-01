@@ -1,40 +1,39 @@
 
 
 .b-like {
-  padding: 28px 5px 0 30px;
-  float: left;
+	padding: 20px 0;
 
-  .like {
-    margin: 0 5px;
-    border: 1px solid green;
-    color: green;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 0 7px;
-  }
+	.like {
+		border: 1px solid green;
+		color: green;
+		font-weight: bold;
+		cursor: pointer;
+		padding: 0 7px;
+	}
 
-  .dislike {
-    border: 1px solid indianred;
-    color: indianred;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 0 8px;
-  }
+	.dislike {
+		border: 1px solid indianred;
+		color: indianred;
+		font-weight: bold;
+		cursor: pointer;
+		padding: 0 8px;
+	}
 
-  .raiting {
-    font-size: 1.1em;
-    font-weight: bold;
-  }
+	.raiting {
+		font-size: 1.1em;
+		font-weight: bold;
+		margin: 0 10px;
+	}
 }
 
 .positive-like {
-  color: green;
+	color: green;
 }
 
 .negative-like {
-    color: indianred;
+		color: indianred;
 }
 
 .neitral-like {
-    color: gray;
+		color: gray;
 }

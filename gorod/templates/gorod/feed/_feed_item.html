@@ -17,31 +17,32 @@
         {{#if thumbnail }}
             <img class="b-feed-item__picture" src="{{ thumbnail }}" />
         {{/if}} 
-        
-        {{#if raiting}}
-            <div class="b-feed-item__raiting"><i></i>{{ raiting }}</div>
-        {{/if}}
 
         <!-- Like block -->
-
+        <div class="b-like"
+             data-object-pk="{{ id }}"
+             data-content_type="gorod.article"
+             data-raiting="{{ raiting }}"
+             data-was-already-liked="false"
+             >
+        </div>
 
         {{#if comment_cnt}}
             <div class="b-feed-item__comments"><i></i>{{ comment_cnt }}</div>
             <!-- Comments list. FIXME -->
-            <div class="b-feed-item__comments-list">
+            <div class="b-comments__list">
                 {{#each comments}}
                     <div class="b-comment">
-                        {{ comment }}
+                        <p class="b-comment__text">{{ comment }}</p>
                     </div>
                 {{/each}}
             </div>
         {{/if}}
-
-
+        
         <!-- Comment form -->
         <div class="b-feed-item__comment-form">
             <!-- On click we have to open form -->
-            <a href="#">Комментировать</a>
+            <span>Комментировать</span>
         </div>
     </li>
 </script>

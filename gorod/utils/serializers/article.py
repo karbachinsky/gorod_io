@@ -21,6 +21,7 @@ class ArticleFeedSerializer(serializers.Serializer):
     """
     Article serializer for feed
     """
+    id = serializers.IntegerField()
     user = UserSerializer()
     title = serializers.CharField()
     text = serializers.CharField()

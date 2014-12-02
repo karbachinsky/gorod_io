@@ -2,12 +2,12 @@
     /*
      * Comments handler
      */
-    var Comments = function(){
+    var Comments = function($commentForm, options){
         var self = this;
 
         self.defaultErrorMsg = "Произошла неизвестная ошибка. Попробуйте позже!";
 
-        self.$commentForm = $(".b-comments__add-form");
+        self.$commentForm = $commentForm;
         self.$commentFormError = self.$commentForm.find(".error");
         self.$commentFormSubmitButton = self.$commentForm.find("[type=submit]");
         self.$commentFormInput = self.$commentForm.find("[name=comment]");
@@ -97,5 +97,24 @@
     };
 
     window.Comments = Comments;
+
+    /**
+     * Wrapper for JQuery
+     * @param {Object} params
+     * @return Comments object
+     */
+    $.fn.Comments = function(options) {
+        var self = this;
+
+        var commentsObjs = [];
+        self.each(function() {
+            commentsObjs.push(
+                new Comments($(this), options)
+            );
+        });
+
+        return commentsObjs;
+    };
+
 
 })(jQuery);

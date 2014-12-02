@@ -2,14 +2,15 @@
 }
 
 .b-comments__list {
-	margin: 20px 0;
+	margin: 20px 0 0;
 }
 .b-comment {
-	padding: 20px 0;
+	margin-top: 20px;
+	padding: 20px 0 0;
     border-top: 1px solid #f4f4f4;
 }
 .b-comment__user {
-    float: left;
+	@extend .b-user_small;
 }
 
 .b-comment__date {

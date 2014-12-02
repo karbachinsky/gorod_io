@@ -43,11 +43,11 @@
 		@include box-shadow(0px 2px 0px #bbb);
 	}
 
-	.b-user{
-		padding-bottom: 8px;
-	}
+	
 }
-
+.b-feed-item__user{
+	padding-bottom: 8px;
+}
 .b-feed-item__link{
 	display: block;
 	text-decoration: none;

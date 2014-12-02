@@ -1,7 +1,7 @@
 {% verbatim %}
 <script id="feed-item-template" type="text/x-handlebars-template">
     <li class="b-feed-item  b-feed-item_{{rubric.name}}" >
-        <div class='b-user'>
+        <div class='b-user b-feed-item__user'>
             <a href="{{ user.profile_url }}" class="b-user__avatar">
                 <img src="{{ user.full_avatar }}" />
             </a>
@@ -28,11 +28,18 @@
         </div>
 
         {{#if comment_cnt}}
-            <div class="b-feed-item__comments"><i></i>{{ comment_cnt }}</div>
+            <div class="b-feed-item__comments">{{ comment_cnt }} комментари(-й/-ев)</div>
             <!-- Comments list. FIXME -->
             <div class="b-comments__list">
                 {{#each comments}}
                     <div class="b-comment">
+                        <div class='b-user  b-comment__user'>
+                            <a href="{{ user.profile_url }}" class="b-user__avatar">
+                                <img src="{{ user.full_avatar }}" />
+                            </a>
+                            <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
+                        </div>
+                        <span>{{ submit_date }}</span>
                         <p class="b-comment__text">{{ comment }}</p>
                     </div>
                 {{/each}}
@@ -42,7 +49,7 @@
         <!-- Comment form -->
         <div class="b-feed-item__comment-form">
             <!-- On click we have to open form -->
-            <span>Комментировать</span>
+
         </div>
     </li>
 </script>

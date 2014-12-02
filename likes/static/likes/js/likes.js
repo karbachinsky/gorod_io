@@ -212,9 +212,11 @@
 
         var likes = [];
         self.each(function() {
-            likes.push(
-                new Like($(this), options)
-            );
+            if($.trim($(this).html())==''){
+                likes.push(
+                    new Like($(this), options)
+                );
+            }
         });
 
         return likes;

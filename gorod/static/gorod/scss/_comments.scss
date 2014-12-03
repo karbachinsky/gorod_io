@@ -33,28 +33,19 @@
 #id_honeypot {
     display: none;
 }
-.b-comments__add {
-	font-size: 14px;
-	color:$gray-color-dark;
-	margin: 0;
-	padding-top: 15px;
-    border-top: 1px solid #f4f4f4;
-    
+.b-comments__add-form{
+	padding-top: 20px;
+	border-top: 1px solid #f4f4f4;
     textarea{
-    	margin-left: 40px;
     	border: none;
     	height:80px;
     	resize:none;
-    	width: 90%;
+    	width: 100%;
     	font-size: 14px;
     	color:$gray-color;
     	font-weight: 300;
+    	background: #f3f3f3;
     }
-    input[type="submit"]{
-		@extend .btn;
-		border: none;
-		margin-left: 42px;
-	}
 }
 .b-comments-add__login-link{
 	font-size: 11px;	

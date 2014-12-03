@@ -35,7 +35,6 @@
 	},
 	uploadNew = function(){
 		getData(curPage,LIMIT).done(appendElems).done(function(data){
-            console.log(data);
 			$('.b-feed').height('auto');
 			pagesLen = data.total%LIMIT > 0 ? parseInt(data.total/LIMIT)+1 : parseInt(data.total/LIMIT);
 

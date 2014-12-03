@@ -23,6 +23,11 @@
             window.ajaxFeed();
         });
     </script>
+
+    <div class="b-add-form">
+        {% include "gorod/forms/article_add.html" with form=add_form %}
+    </div>
+
     <div class="b-feed">
         {% group_filters rubric %}
         <ul class="b-feed__list">

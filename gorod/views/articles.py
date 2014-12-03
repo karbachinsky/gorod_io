@@ -20,9 +20,10 @@ class FeedView(View):
         Show list of articles for the certain city and rubric.
     """
     def dispatch(self, request, city_name, rubric_name=None, filter_name='last'):
+        city = get_object_or_404(City, name=city_name)
         rubric = None
         if rubric_name:
-            rubric = get_object_or_404(ArticleRubric.objects.select_related('donc_data'),
+            rubric = get_object_or_404(ArticleRubric.objects.select_related('donc_data', 'city'),
                                        name=rubric_name,
                                        city__name=city_name)
 
@@ -30,6 +31,11 @@ class FeedView(View):
             'rubric': rubric,
             'group_filter': filter_name,
         }
+
+        if request.user.is_authenticated():
+            add_form = ArticleAddForm()
+            add_form.patch_rubrics_qs(city)
+            context['add_form'] = add_form
 
         return render(request, 'gorod/feed.html', context)
 
@@ -115,14 +121,11 @@ class ArticleAddView(View):
 
     def _display_form(self):
         form = ArticleAddForm()
-        self._patch_rubrics_qs(form)
+        form.patch_rubrics_qs(self.city)
 
         return render(self.request, 'gorod/forms/article_add.html', {
             'form': form,
         })
-
-    def _patch_rubrics_qs(self, form):
-        form.fields["rubric"].queryset = ArticleRubric.objects.filter(city=self.city)
 
     def _save_form(self, form):
         user = self.request.user
@@ -164,7 +167,7 @@ class ArticleEditView(ArticleAddView):
 
     def _display_form(self):
         form = ArticleAddForm(instance=self.article)
-        self._patch_rubrics_qs(form)
+        form.patch_rubrics_qs(self.city)
 
         return render(self.request, 'gorod/forms/article_add.html', {
             'form': form,

@@ -36,3 +36,9 @@ class ArticleAddForm(ModelForm):
             return False
 
         return True
+
+    def patch_rubrics_qs(self, city):
+        """
+        Update groups list for certain city
+        """
+        self.fields["rubric"].queryset = ArticleRubric.objects.filter(city=city)

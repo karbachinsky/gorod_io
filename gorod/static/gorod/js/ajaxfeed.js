@@ -46,8 +46,10 @@
 			}
 			curPage++;
 			$('.b-like').Like();
+			$('.b-comments__add-form').Comments();
 		});
 	},
+
 	source   = $("#feed-item-template").html(),
 	template = Handlebars.compile(source),
 	curPage=0,

@@ -45,14 +45,36 @@
                 {{/each}}
             </div>
         {{/if}}
-        
-        <!-- Comment form 
+
+        <!-- Comment form   -->
         <div class="b-feed-item__comment-form">
-            <form class="b-comments__add-form">
-                <textarea></textarea>
+            <form class="b-comments__add-form" action="" method="POST">
+            <input type="hidden" name="csrfmiddlewaretoken" value="ANmqN6ZJpQPUv1ahED7ceXgaV8BRi7X2">
+            <input id="id_honeypot" name="honeypot" type="text">
+            <input id="id_object_pk" name="object_pk" type="hidden" value="{{ id }}">
+            <input id="id_timestamp" name="timestamp" type="hidden" value="1417558581">
+            <input id="id_security_hash" name="security_hash" type="hidden" value="bcb8862ea094c01da56bd46589fc64c2a806a62b">
+
+            <p class="error"></p>
+            <div class="b-comment__user">
+                <!-- USER DUPLICATE. FIXME -->
+                <div class='b-user b-feed-item__user'>
+                    <a href="{{ user.profile_url }}" class="b-user__avatar">
+                        <img src="{{ user.full_avatar }}" />
+                    </a>
+                    <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <textarea cols="40" id="id_comment" name="comment" placeholder="Введите комментарий" rows="10"></textarea>
+
+            <input type="hidden" name="next" value="" />
+            <p>
                 <input type="submit" value="Ответить" id="id_submit" />
-            </form>
-        </div>-->
+            </p>
+        </form>
+        </div>
     </li>
 </script>
 {% endverbatim %}

@@ -1,10 +1,10 @@
 (window.addPopup = function(e){
 
-	var $popup = $('.b-popup-add'),
-	$window = $popup.find('.b-popup__window'),
-	$addBtn = $('.b-header__add'),
+	var /*$popup = $('.b-popup-add'),*/
+	$window = $('.b-add-form'),
+	$addBtn = $('.btn_add-form'),
     $header = $('.b-header'),
-    $wrapper = $window.find('#b-form__wrapper'),
+    $wrapper = $('#b-form__wrapper'),
     $editLink  = $('.edit-link_article'),
 	shownClass = 'b-popup_shown',
     formAjaxUrls = window.getEnv('formAjaxUrls'),
@@ -22,11 +22,11 @@
 
 
     bindHandlers=function(){
-        closeHandlers();
-        headerListHandlers();
+        //closeHandlers();
+        openHandlers();
         previwHandlers();
         submitFormHadlers();
-        editFormHandlers();
+        //editFormHandlers();
     },
 
 
@@ -79,16 +79,14 @@
     },
 
 
-    headerListHandlers = function(){
+    openHandlers = function(){
         $addBtn.on('click',function(e){
             url = window.getEnv('articleAddUrl');
             getFormHtml(url, 'add');
             formType = 'add';
-            $header.removeClass('active');
-
         });
     },
-    editFormHandlers = function(){
+    /*editFormHandlers = function(){
         $editLink.on('click',function(){
             url = window.getEnv('articleEditUrl');
             getFormHtml(url, 'edit');
@@ -98,7 +96,7 @@
             location.href=window.getEnv('articleDeleteUrl');
         });
 
-    },
+    },*/
 
     getFormHtml = function(url, type){
         $wrapper.html(''); 
@@ -115,7 +113,7 @@
                 $popup.find('.b-form__del').show();
             }
         });
-        openPopup();
+        //openPopup();
     },
     
     

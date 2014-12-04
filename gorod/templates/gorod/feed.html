@@ -21,14 +21,13 @@
     <script>
         $(function(){
             window.ajaxFeed();
+            window.addPopup();
         });
     </script>
 
-    <div class="b-add-form">
-        {% include "gorod/forms/article_add.html" with form=add_form %}
-    </div>
-
     <div class="b-feed">
+        <div class="b-add-form"><div id="b-form__wrapper"></div></div>
+        <span class="btn btn_add-form">Добавить</span>
         {% group_filters rubric %}
         <ul class="b-feed__list">
         </ul>

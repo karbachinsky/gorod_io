@@ -49,11 +49,12 @@
         <!-- Comment form   -->
         <div class="b-feed-item__comment-form">
             <form class="b-comments__add-form" action="" method="POST">
-                <input type="hidden" name="csrfmiddlewaretoken" value="ANmqN6ZJpQPUv1ahED7ceXgaV8BRi7X2">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ comment_form_data.csrf_token }}">
                 <input id="id_honeypot" name="honeypot" type="text">
                 <input id="id_object_pk" name="object_pk" type="hidden" value="{{ id }}">
-                <input id="id_timestamp" name="timestamp" type="hidden" value="1417558581">
-                <input id="id_security_hash" name="security_hash" type="hidden" value="bcb8862ea094c01da56bd46589fc64c2a806a62b">
+                <input id="id_timestamp" name="timestamp" type="hidden" value="{{ comment_form_data.timestamp }}">
+                <input id="id_security_hash" name="security_hash" type="hidden" value="{{ comment_form_data.security_hash }}">
+                <input id="id_content_type" name="content_type" type="hidden" value="{{ comment_form_data.content_type }}">
 
                 <p class="error"></p>
                 <div class="b-comment__user">

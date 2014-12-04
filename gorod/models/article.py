@@ -9,6 +9,7 @@ from django.utils.translation import ugettext as _
 
 from easy_thumbnails.templatetags.thumbnail import thumbnail_url
 from ckeditor.fields import RichTextField
+from django.core.context_processors import csrf
 
 from gorod.models import City
 from gorod.models.donc import DONC
@@ -24,6 +25,8 @@ from rest_framework.renderers import JSONRenderer
 from smart_selects.db_fields import ChainedForeignKey
 
 from likes.models import Like
+
+from time import time
 
 
 class ArticleRubric(models.Model):
@@ -124,8 +127,17 @@ class ArticleManager(models.Manager):
 
         serializer = ArticleFeedSerializer(articles, many=True)
 
+        from comments import get_form
+
+        csrf_token_dict = csrf(request)
+
         for i, article in enumerate(articles):
+            comment_add_from = get_form()(article)
+            security_data = comment_add_from.generate_security_data()
+            security_data.update(csrf_token_dict)
+
             serializer.data[i]['was_already_liked'] = article.is_already_liked_by_user(request.user)
+            serializer.data[i]['comment_form_data'] = security_data
 
         json_response = '{"total": %d, "feed": %s}' % (total_cnt, JSONRenderer().render(serializer.data))
 

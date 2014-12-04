@@ -237,7 +237,7 @@ class FeedAPIView(View):
 
         try:
             # TODO: rewrite on queryset input when will be necessary
-            json_response = Article.objects.construct_json_feed(articles, page, limit, user_id)
+            json_response = Article.objects.construct_json_feed(request, articles, page, limit)
         except FeedError:
             return HttpResponse("{}", mimetype='application/json', status=404)
 

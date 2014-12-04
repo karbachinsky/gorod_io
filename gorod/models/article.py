@@ -14,6 +14,7 @@ from gorod.models import City
 from gorod.models.donc import DONC
 from gorod.utils.exceptions import FeedError, DONCError
 from gorod.templatetags.stringutils import smart_truncate
+
 from gorod.utils.serializers.article import ArticleFeedSerializer
 
 from comments import get_model as get_comments_model
@@ -27,7 +28,7 @@ from likes.models import Like
 
 class ArticleRubric(models.Model):
     """
-        ArticleRubric class
+    ArticleRubric class
     """
     FILTERS = (
         ('last',    _(u'Последние')),
@@ -106,7 +107,7 @@ class ArticleManager(models.Manager):
         articles is querySet
         Allows personalized feed
     """
-    def construct_json_feed(self, articles, page=0, limit=15, user_id=None):
+    def construct_json_feed(self, request, articles, page=0, limit=15):
         """
             Article list in json format
         """
@@ -122,6 +123,9 @@ class ArticleManager(models.Manager):
         articles = articles.all()[lim_start:lim_end]
 
         serializer = ArticleFeedSerializer(articles, many=True)
+
+        for i, article in enumerate(articles):
+            serializer.data[i]['was_already_liked'] = article.is_already_liked_by_user(request.user)
 
         json_response = '{"total": %d, "feed": %s}' % (total_cnt, JSONRenderer().render(serializer.data))
 

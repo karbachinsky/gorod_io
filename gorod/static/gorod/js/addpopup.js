@@ -2,7 +2,7 @@
 
 	var /*$popup = $('.b-popup-add'),*/
 	$window = $('.b-add-form'),
-	$addBtn = $('.btn_add-form'),
+	$addBtn = $('.add-form-btn'),
     $header = $('.b-header'),
     $wrapper = $('#b-form__wrapper'),
     $editLink  = $('.edit-link_article'),

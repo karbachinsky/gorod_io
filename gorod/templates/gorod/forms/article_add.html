@@ -1,15 +1,6 @@
 {% load user %}
-<i class="b-form__close"></i>
-<div class="b-form__header">
-	<span class="b-form__type"><span></span></span>
-	<div class="b-form__user">
-		{%  user user %}
-	</div>
-	<div class="clear"></div>
-</div>
 <form action="" method="post" enctype="multipart/form-data" class="b-form b-beauty-form">
-    {% csrf_token %}
-	
+    {% csrf_token %}	
 	<div class="b-form__title">
 		{% if form.title.errors %}
 			<span class="b-form__error">{{ form.title.errors }}</span>

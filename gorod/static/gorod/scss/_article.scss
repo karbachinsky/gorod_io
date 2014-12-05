@@ -35,7 +35,7 @@
 
 .b-article__descr{
 	float: left;
-	line-height: 14px;
+	line-height: 14px;  
 
 }
 .b-article__rubric{
@@ -64,34 +64,7 @@
 .b-article__service{
 	margin: 40px 0 0;
 }
-.b-hub-question__share{
-	float: left;
-	&>div{
-		margin-top: 5px;
-		margin-left: -4px;
-	}
-}
 
-.b-hub-question__complaint{
-	float: right;
-	padding-top: 28px;
-	a{
-		color:$gray-color;
-		font-size: 11px;	
-		line-height: 18px;
-		text-transform: uppercase;
-		font-weight: 600;
-		text-decoration: none;
-		i{
-			@include inline-block;
-			width:13px;
-			height:18px;
-			margin-right: 5px;
-			@include gorod-sprite($icons-sprite, comments); 
-			content: "";
-		}
-	}
-}
 
 .b-article__comments {
     margin-top: 20px; 

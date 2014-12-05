@@ -9,6 +9,7 @@
 		font-weight: bold;
 		cursor: pointer;
 		padding: 0 7px;
+		margin-right: 10px;
 	}
 
 	.dislike {
@@ -17,12 +18,21 @@
 		font-weight: bold;
 		cursor: pointer;
 		padding: 0 8px;
+		margin-left: 10px;
 	}
 
 	.raiting {
 		font-size: 1.1em;
 		font-weight: bold;
-		margin: 0 10px;
+		&:before{
+			content:'';
+			@include inline-block;
+			width:24px;
+			height: 24px;
+			margin-right: 5px;
+			@include gorod-sprite($icons-sprite, thumb-up);  
+			margin-top: -7px;
+		}
 	}
 }
 

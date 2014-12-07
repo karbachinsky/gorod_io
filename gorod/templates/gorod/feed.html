@@ -13,6 +13,7 @@
         {% if rubric.description %}
             <div class="b-feed__rubric-description">{{rubric.description}}</div>
         {% endif %}
+        <span class="add-form-btn">+</span>
     </div>
 {% endblock %}
 
@@ -27,7 +28,6 @@
 
     <div class="b-feed">
         <div class="b-add-form"><div id="b-form__wrapper"></div></div>
-        <span class="btn btn_add-form">Добавить</span>
         {% group_filters rubric %}
         <ul class="b-feed__list">
         </ul>

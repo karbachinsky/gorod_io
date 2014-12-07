@@ -8,6 +8,15 @@
             <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
         </div>
 
+        <div class="b-feed-item__date">
+            {{ human_add_date }}
+        </div>
+
+        <a class="b-feed-item__title" href="{{ url }}">
+            {{ title }}
+        </a>
+
+
         {{#if text}}
             <div class="b-feed-item__text">
                 {{{ text }}}
@@ -28,7 +37,7 @@
         </div>
 
         {{#if comment_cnt}}
-            <div class="b-comments__count">{{ comment_cnt }} комментари(-й/-ев)</div>
+            <div class="b-comments__count">{{ comment_cnt }} {{ comment_cnt_plural_form }}</div>
             <!-- Comments list. FIXME -->
             <div class="b-comments__list">
                 {{#each comments}}
@@ -39,7 +48,7 @@
                             </a>
                             <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
                         </div>
-                        <span>{{ submit_date }}</span>
+                        <span>{{ human_add_date }}</span>
                         <p class="b-comment__text">{{ comment }}</p>
                     </div>
                 {{/each}}
@@ -49,6 +58,7 @@
         <!-- Comment form   -->
         <div class="b-feed-item__comment-form">
             <form class="b-comments__add-form" action="" method="POST">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ comment_form_data.csrf_token }}">
                 <input type="hidden" name="csrfmiddlewaretoken" value="{{ comment_form_data.csrf_token }}">
                 <input id="id_honeypot" name="honeypot" type="text">
                 <input id="id_object_pk" name="object_pk" type="hidden" value="{{ id }}">

@@ -1,6 +1,8 @@
 from django.contrib.comments.models import Comment
 from mptt.models import MPTTModel, TreeForeignKey
 
+from django.contrib.humanize.templatetags.humanize import naturalday
+
 
 class MPTTComment(MPTTModel, Comment):
     """ Threaded comments - Add support for the parent comment store and MPTT traversal"""
@@ -15,3 +17,10 @@ class MPTTComment(MPTTModel, Comment):
         ordering = ['tree_id', 'lft']
         verbose_name = 'comment'
         verbose_name_plural = 'comments'
+
+    @property
+    def human_add_date(self):
+        """
+            Add date in human readable format
+        """
+        return naturalday(self.submit_date)

@@ -15,7 +15,7 @@ from gorod.models import City
 from gorod.models.donc import DONC
 from gorod.utils.exceptions import FeedError, DONCError
 from gorod.templatetags.stringutils import smart_truncate
-
+from gorod.templatetags.rupluralize import rupluralize
 from gorod.utils.serializers.article import ArticleFeedSerializer
 
 from comments import get_model as get_comments_model
@@ -66,7 +66,7 @@ class ArticleRubric(models.Model):
     @property
     def articles_cnt(self):
         """
-            Number of articles
+        Number of articles
         """
         try:
             return self.donc_data.filter(field_name='articles_cnt')[0].count
@@ -76,7 +76,7 @@ class ArticleRubric(models.Model):
     @staticmethod
     def is_valid_filter(name):
         """
-            Checks whether filter name is ok
+        Checks whether filter name is ok
         """
         for filter_name, filter_value in ArticleRubric.FILTERS:
             if filter_name == name:
@@ -106,13 +106,13 @@ class ArticleRubric(models.Model):
 
 class ArticleManager(models.Manager):
     """
-        Queryset manager for Article model.
-        articles is querySet
-        Allows personalized feed
+    Queryset manager for Article model.
+    articles is querySet
+    Allows personalized feed
     """
     def construct_json_feed(self, request, articles, page=0, limit=15):
         """
-            Article list in json format
+        Article list in json format
         """
 
         if page < 0 or limit <= 0:
@@ -162,7 +162,7 @@ class ArticleManager(models.Manager):
 
 class Article(models.Model):
     """
-        Article class
+    Article class
     """
     # Size of truncated text preview in article list
     _SHORT_TEXT_LENGTH = 120
@@ -212,7 +212,7 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         """
-            Http Link to this article object
+        Http Link to this article object
         """
         return reverse('gorod:article', kwargs={
             'city_name': self.city.name,
@@ -225,7 +225,7 @@ class Article(models.Model):
     @transaction.atomic
     def add_comment_hook(self, comment):
         """
-            Called when someone adds comment to this article
+        Called when someone adds comment to this article
         """
         from gorod.utils.donc import ArticleCommentsCounter
 
@@ -246,7 +246,7 @@ class Article(models.Model):
     @transaction.atomic
     def add_like_hook(self, like):
         """
-            Called when someone likes this article
+        Called when someone likes this article
         """
         from gorod.utils.donc import ArticlePositiveLikesCounter, ArticleNegativeLikesCounter
 
@@ -273,7 +273,7 @@ class Article(models.Model):
     @property
     def comment_cnt(self):
         """
-            Number of comments
+        Number of comments
         """
         try:
             return self.donc_data.filter(field_name='comment_cnt')[0].count
@@ -282,7 +282,7 @@ class Article(models.Model):
 
     def likes_cnt(self, is_positive=True):
         """
-            Number of positive and negative likes
+        Number of positive and negative likes
         """
         field_name = 'positive_likes_cnt' if is_positive else 'negative_likes_cnt'
         try:
@@ -292,14 +292,14 @@ class Article(models.Model):
 
     def is_already_liked_by_user(self, user):
         """
-            Check whether user has already liked this
+        Check whether user has already liked this
         """
         return Like.objects.has_user_liked_material(user, self)
 
     @property
     def thumbnail(self):
         """
-            Picture thumbnail url
+        Picture thumbnail url
         """
         if self.picture:
             return thumbnail_url(self.picture, 'feed_image')
@@ -312,22 +312,26 @@ class Article(models.Model):
 
     def _set_short_text(self):
         """
-            Sets short text (brief) for article preview
+        Sets short text (brief) for article preview
         """
         self.short_text = smart_truncate(self.text, self._SHORT_TEXT_LENGTH)
 
     @property
     def human_add_date(self):
         """
-            Add date in human readable format
+        Add date in human readable format
         """
         from django.contrib.humanize.templatetags.humanize import naturalday
         return naturalday(self.add_date)
 
     def can_user_modify(self, user):
         """
-            Check if user can edit/delete current article object
+        Check if user can edit/delete current article object
         """
         return user.is_superuser or self.user == user
+
+    def comment_cnt_plural_form(self):
+        """ """
+        return rupluralize(self.comment_cnt, _(u'комментарий,комментария,комментариев'))
 
 

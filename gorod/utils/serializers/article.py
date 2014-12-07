@@ -34,6 +34,7 @@ class ArticleFeedSerializer(serializers.Serializer):
     user = UserSerializer()
     rubric = ArticleRubricSerializer()
     url = serializers.CharField()
+    comment_cnt_plural_form = serializers.CharField()
 
     def __init__(self, *args, **kwargs):
         self.was_already_liked = True

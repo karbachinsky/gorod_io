@@ -11,4 +11,4 @@ class CommentSerializer(serializers.Serializer):
     """
     user = UserSerializer()
     comment = serializers.CharField()
-    submit_date = serializers.CharField()
+    human_add_date = serializers.CharField()

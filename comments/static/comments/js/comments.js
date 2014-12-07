@@ -5,7 +5,17 @@
     var Comments = function($commentForm, options){
         var self = this;
 
-        self.defaultErrorMsg = "Произошла неизвестная ошибка. Попробуйте позже!";
+        console.log('options', options);
+
+        self.options = {
+            like: true,
+            dislike: true,
+            defaultErrorMsg: "Произошла неизвестная ошибка. Попробуйте позже!",
+            formRequestSuccessCallback: function () { self._defaultFormSuccessAnswerProcessing.apply(self, arguments); },
+            formRequestFailCallback: function () { self._defaultFormFailAnswerProcessing.apply(self, arguments); }
+        };
+
+        $.extend(self.options, options);
 
         self.$commentForm = $commentForm;
         self.$commentFormError = self.$commentForm.find(".error");
@@ -52,22 +62,22 @@
             });
 
             Deferred.done(function(json) {
-                        self._formSuccessAnswerProcessing(json);
+                        self.options.formRequestSuccessCallback(json);
                     })
                     .fail(function(jqXHR, textStatus, errorThrown) {
-                        self._formFailAnswerProcessing(jqXHR, textStatus, errorThrown);
+                        self.options.formRequestFailCallback(jqXHR, textStatus, errorThrown);
                     });
 
         });
     };
 
     /*
-     * Process json request from server on success comment adding.
+     * Default json response processing from server on success comment adding.
      *
      * @param {json} json
      *
      */
-    Comments.prototype._formSuccessAnswerProcessing = function(json) {
+    Comments.prototype._defaultFormSuccessAnswerProcessing = function(json) {
         var self = this;
 
         location.reload();
@@ -79,7 +89,7 @@
      * @param ...
      * ...
      */
-    Comments.prototype._formFailAnswerProcessing = function(jqXHR, textStatus, errorThrown) {
+    Comments.prototype._defaultFormFailAnswerProcessing = function(jqXHR, textStatus, errorThrown) {
         var self = this;
 
         var errorText;
@@ -89,7 +99,7 @@
             errorText = error['error'][0][1][0];
         }
         catch (e) {
-            errorText = self.defaultErrorMsg;
+            errorText = self.options.defaultErrorMsg;
         }
         self.$commentFormError.text(errorText);
         self.$commentFormError.show();
@@ -101,10 +111,13 @@
     /**
      * Wrapper for JQuery
      * @param {Object} params
+     * @param {Object} options
      * @return Comments object
      */
     $.fn.Comments = function(options) {
         var self = this;
+
+        console.log('opop', arguments);
 
         var commentsObjs = [];
         self.each(function() {

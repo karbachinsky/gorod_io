@@ -11,18 +11,18 @@
     name,
     formType,
     $previewTools,
-    openPopup = function(){
+    /*openPopup = function(){
         $popup.addClass(shownClass);
         $('body').addClass('body-block');
     },
     closePopup = function(){
         $popup.removeClass(shownClass);
         $('body').removeClass('body-block');
-    },
+    },*/
 
 
     bindHandlers=function(){
-        //closeHandlers();
+        closeHandlers();
         openHandlers();
         previwHandlers();
         submitFormHadlers();
@@ -31,20 +31,8 @@
 
 
     closeHandlers = function(){
-        $popup.on('click',function(e){
-            if($(e.target).hasClass('b-popup-add')){
-                closePopup();
-            }
-        });
-
-        $(document).keydown(function(e) {
-            if( e.keyCode === 27 ) {
-                closePopup();
-                return false;
-            }
-        });
-        $window.on('click', '.b-form__close', function(){
-            closePopup();
+        $wrapper.on('click','.close',function(){
+            $wrapper.html('');
         });
     },
 
@@ -69,7 +57,7 @@
                 reader.onloadend = function(){ // set image data as background of div
                     $('.b-form__preview').css("background-image", "url("+this.result+")");
 
-                    $previewTools = $popup.find('.b-form__preview-tools');
+                    $previewTools = $wrapper.find('.b-form__preview-tools');
                     $previewTools.addClass('b-form__preview-tools_active');
                     $('#picture-clear_id').removeAttr('checked');
                 }

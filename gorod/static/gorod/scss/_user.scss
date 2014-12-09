@@ -1,9 +1,8 @@
 
 .b-user__name{
-	color:$gray-color;
-	font-size: 11px;
-	text-transform: uppercase;
-	font-weight: 600;
+	color:#000;
+	font-size: 12.5px;
+	font-weight: normal;
 	text-decoration: none;
 }
 .b-user__avatar{
@@ -21,7 +20,7 @@
 }
 .b-user_small{
 	.b-user__name{
-		font-size: 10px;
+		font-size: 11px;
 	}
 	.b-user__avatar{
 		border-radius: 14px;

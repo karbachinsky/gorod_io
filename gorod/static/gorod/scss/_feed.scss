@@ -18,14 +18,14 @@
 	bottom: -45px;
 	width: 50px;
 	height: 50px;
-	border: 2px solid $green-color;
+	@include box-shadow(0px 1px 2px #666);
 	background: #fff;
-	color:$green-color;
+	color:$yellow-color;
 	@include border-radius(30px);
 	text-align: center;
 	line-height: 50px;
 	cursor: pointer;
-	font-size: 40px;
+	font-size: 35px;
 
 }
 
@@ -57,29 +57,31 @@
 	display: block;
 	background: #fff;
 	margin-bottom: 35px;
-	padding: 20px;
 	position: relative;
-	@include box-shadow(0px 1px 0px #bbb);
+	@include box-shadow(0px 1px 1px #ddd);
 
 	&:hover{
-		@include box-shadow(0px 2px 0px #bbb);
+		@include box-shadow(0px 2px 1px #ddd);
 	}
 
 	
 }
-.b-feed-item__user{
-	padding-bottom: 8px;
+.b-feed-item__post{
+	padding: 35px 35px 30px;
 }
-.b-feed-item__link{
-	display: block;
-	text-decoration: none;
-	padding: 6px 0 5px;
-
-	&:hover {
-		.b-feed-item__title, .b-feed-item__text{
-			color:$gray-color;
-		}
+.b-feed-item__user{
+	.b-user__name{
+		margin-top: -2px;
+		@include inline-block(top);
 	}
+}
+.b-feed-item__date{
+	padding-left: 43px;
+	font-size: 12px;
+	color:$gray-color;
+	@include inline-block(top);
+	margin-top: -18px;
+	float: left;
 }
 
 .b-feed-item__title{
@@ -90,7 +92,9 @@
 	text-decoration: none;
 	font-size: 18px;
 	font-weight: 600;
-	margin-bottom: 3px;
+	margin-bottom: 8px;
+	@include inline-block;
+	margin-top: 15px;
 
 	
 }
@@ -103,10 +107,10 @@
 }
 .b-feed-item__text{
 	margin:0 ;
-	font-size: 13px;
+	font-size: 14.5px;
 	text-decoration: none;
 	color:$gray-color-dark;
-	line-height: 20px;
+	line-height: 21px;
 	word-break: break-word;
 	padding: 0 0 3px;
 	

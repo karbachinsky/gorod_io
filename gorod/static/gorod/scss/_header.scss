@@ -9,26 +9,38 @@
 	max-width: 1050px;
 	padding: 20px 50px;
 	margin: auto;
+	color:#fff;
 }
-.b-header__menu-btn{
+@mixin header-ico() {
 	position: absolute;
 	top: 50%;
-	margin-top: -9px;
 	left: 20px;
 	cursor: pointer;
+}
+
+.b-header__menu-btn{
+	@include header-ico();
+	margin-top: -9px;
 	width:23px;
 	height:11px;
-	border-top: 3px solid #fff;
-	border-bottom: 3px solid #fff;
+	border-top: 3px solid $green-color-dark;
+	border-bottom: 3px solid $green-color-dark;
 	&:after{
 		content:"";
 		width: 100%;
 		height: 3px;
-		background: #fff;
+		background: $green-color-dark;
 		position: absolute;
 		top:4px;
 		left:0;
 	}
 }
-
+.b-header__back-arrow{
+	@include header-ico();
+	margin-top: -8px;
+	width:16px;
+	height:16px;
+	text-decoration: none;
+	@include gorod-sprite($icons-sprite, back-arr);  
+}
 

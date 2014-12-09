@@ -1,90 +1,84 @@
 {% verbatim %}
 <script id="feed-item-template" type="text/x-handlebars-template">
     <li class="b-feed-item  b-feed-item_{{rubric.name}}" >
-        <div class='b-user b-feed-item__user'>
-            <a href="{{ user.profile_url }}" class="b-user__avatar">
-                <img src="{{ user.full_avatar }}" />
+        <div class="b-feed-item__post">
+            <div class='b-user b-feed-item__user'>
+                <a href="{{ user.profile_url }}" class="b-user__avatar">
+                    <img src="{{ user.full_avatar }}" />
+                </a>
+                <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
+            </div>
+
+            <div class="b-feed-item__date">
+                {{ human_add_date }}
+            </div>
+
+            <a class="b-feed-item__title" href="{{ url }}">
+                {{ title }}
             </a>
-            <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
-        </div>
-
-        <div class="b-feed-item__date">
-            {{ human_add_date }}
-        </div>
-
-        <a class="b-feed-item__title" href="{{ url }}">
-            {{ title }}
-        </a>
 
 
-        {{#if text}}
-            <div class="b-feed-item__text">
-                {{{ text }}}
+            {{#if text}}
+                <div class="b-feed-item__text">
+                    {{{ text }}}
+                </div>
+            {{/if}} 
+
+            {{#if thumbnail }}
+                <img class="b-feed-item__picture" src="{{ thumbnail }}" />
+            {{/if}} 
+
+            <!-- Like block -->
+            <div class="b-like"
+                 data-object-pk="{{ id }}"
+                 data-content_type="gorod.article"
+                 data-raiting="{{ raiting }}"
+                 data-was-already-liked="{{ was_already_liked }}"
+                 >
             </div>
-        {{/if}} 
-
-        {{#if thumbnail }}
-            <img class="b-feed-item__picture" src="{{ thumbnail }}" />
-        {{/if}} 
-
-        <!-- Like block -->
-        <div class="b-like"
-             data-object-pk="{{ id }}"
-             data-content_type="gorod.article"
-             data-raiting="{{ raiting }}"
-             data-was-already-liked="{{ was_already_liked }}"
-             >
         </div>
-
-        {{#if comment_cnt}}
-            <div class="b-comments__count">{{ comment_cnt }} {{ comment_cnt_plural_form }}</div>
-            <!-- Comments list. FIXME -->
-            <div class="b-comments__list">
-                {{#each comments}}
-                    <div class="b-comment">
-                        <div class='b-user  b-comment__user'>
-                            <a href="{{ user.profile_url }}" class="b-user__avatar">
-                                <img src="{{ user.full_avatar }}" />
-                            </a>
-                            <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
+        <div class="b-comments">
+            {{#if comment_cnt}}
+                <div class="b-comments__count">{{ comment_cnt }} {{ comment_cnt_plural_form }}</div>
+                <!-- Comments list. FIXME -->
+                <div class="b-comments__list">
+                    {{#each comments}}
+                        <div class="b-comment">
+                            <div class='b-user b-comment__user'>
+                                <a href="{{ user.profile_url }}" class="b-user__avatar">
+                                    <img src="{{ user.full_avatar }}" />
+                                </a>
+                                <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
+                            </div>
+                            <span class='b-comment__date'>{{ human_add_date }}</span>
+                            <div class="clear"></div>
+                            <div class="b-comment__text">{{ comment }}</div>
+                            <div class="clear"></div>
                         </div>
-                        <span>{{ human_add_date }}</span>
-                        <p class="b-comment__text">{{ comment }}</p>
-                    </div>
-                {{/each}}
-            </div>
-        {{/if}}
-
-        <!-- Comment form   -->
-        <div class="b-feed-item__comment-form">
-            <form class="b-comments__add-form" action="" method="POST">
-                <input type="hidden" name="csrfmiddlewaretoken" value="{{ comment_form_data.csrf_token }}">
-                <input type="hidden" name="csrfmiddlewaretoken" value="{{ comment_form_data.csrf_token }}">
-                <input id="id_honeypot" name="honeypot" type="text">
-                <input id="id_object_pk" name="object_pk" type="hidden" value="{{ id }}">
-                <input id="id_timestamp" name="timestamp" type="hidden" value="{{ comment_form_data.timestamp }}">
-                <input id="id_security_hash" name="security_hash" type="hidden" value="{{ comment_form_data.security_hash }}">
-                <input id="id_content_type" name="content_type" type="hidden" value="{{ comment_form_data.content_type }}">
-
-                <p class="error"></p>
-                <div class="b-comment__user">
-                    <!-- USER DUPLICATE. FIXME -->
-                    <div class='b-user  b-comment__user'>
-                        <a href="{{ user.profile_url }}" class="b-user__avatar">
-                            <img src="{{ user.full_avatar }}" />
-                        </a>
-                        <a href="{{ user.profile_url }}" class="b-user__name">{{ user.human_name }}</a>
-                    </div>
+                    {{/each}}
                 </div>
-                <div class="clear"></div>
+            {{/if}}
 
-                <textarea cols="40" id="id_comment" name="comment" placeholder="Введите комментарий" rows="10"></textarea>
+            <!-- Comment form   -->
+            <div class="b-feed-item__comment-form">
+                <form class="b-comments__add-form" action="" method="POST">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ comment_form_data.csrf_token }}">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ comment_form_data.csrf_token }}">
+                    <input id="id_honeypot" name="honeypot" type="text">
+                    <input id="id_object_pk" name="object_pk" type="hidden" value="{{ id }}">
+                    <input id="id_timestamp" name="timestamp" type="hidden" value="{{ comment_form_data.timestamp }}">
+                    <input id="id_security_hash" name="security_hash" type="hidden" value="{{ comment_form_data.security_hash }}">
+                    <input id="id_content_type" name="content_type" type="hidden" value="{{ comment_form_data.content_type }}">
 
-                <input type="hidden" name="next" value="" />
-                <div>
+                    <p class="error"></p>
+
+                    <textarea id="id_comment" name="comment" placeholder="Комментарий"></textarea>
+
+                    <input type="hidden" name="next" value="" />
                     <input class="btn" type="submit" value="Ответить" id="id_submit" />
-                </div>
-            </form>
+                    <div class="clear"></div>
+                </form>
+            </div>
         </div>
     </li>
 </script>

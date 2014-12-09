@@ -1,7 +1,8 @@
 .b-comments{
+    border-top: 1px solid $gray-color-light;
+	padding: 20px 35px;
 }
 .b-comments__count{
-	margin-top: 20px;
 	color:$gray-color;
 	font-size: 11px;
 	text-transform: uppercase;
@@ -13,51 +14,54 @@
 	margin: 20px 0 0;
 }
 .b-comment {
-	margin-top: 20px;
-	padding: 20px 0 0;
-    border-top: 1px solid #f4f4f4;
+	margin: 15px auto 25px;
 }
 .b-comment__user {
-	@extend .b-user_small;
+	float: left;
+	.b-user__name{
+		@include inline-block(top);
+		margin-top: 2px;
+	}
 }
-
-.b-comment__date {
-	@include inline-block;
-	padding-top: 10px;
-    font-size: 11px;	
-	text-transform: uppercase;
-	font-weight: 600;
-	color:$gray-color-light;
-	margin-left: 12px;
-
+.b-comment__date{
+	padding-left: 10px;
+	font-size: 12px;
+	color:$gray-color;
+	@include inline-block(top);
+	margin-top: 2px;
+	float: left;
 }
 
 .b-comment__text {
     font-size: 12px;
 	color:$gray-color-dark;
-	margin: 0;
+	margin: -13px 0 0 43px;
+	float: left;
 }
 
 #id_honeypot {
     display: none;
 }
 .b-comments__add-form{
-	padding-top: 20px;
-	border-top: 1px solid #f4f4f4;
     textarea{
     	border: none;
-    	height:80px;
+    	height:60px;
     	resize:none;
     	width: 100%;
+    	padding: 5px;
+    	@include box-sizing(border-box);
     	font-size: 14px;
     	color:$gray-color;
     	font-weight: 300;
     	background: #f3f3f3;
-    	margin: 10px 0;
+    	margin: 0 0 10px;
 
     }
     p{
     	margin: 0;
+    }
+    .btn{
+    	float: right;
     }
 }
 .b-comments-add__login-link{

@@ -1,1 +1,7 @@
-<div class="b-header__menu-btn"></div>
+{% if rubric %}
+	<a href="{% url 'gorod:city-main-page' city.name %}" class="b-header__back-arrow"></a>
+{% elif article.rubric %}
+	<a href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}" class="b-header__back-arrow"></a>
+{% else %}
+	<div class="b-header__menu-btn"></div>
+{% endif %}

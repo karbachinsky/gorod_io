@@ -99,8 +99,15 @@
     },*/
 
     getFormHtml = function(url, type){
-        $wrapper.html(''); 
-        $.get(url, function(html){
+        $wrapper.html('');
+
+        var data = {};
+
+        if(window.getEnv('rubric')) {
+            data['rubric'] = window.getEnv('rubric');
+        }
+
+        $.get(url, data, function(html){
             $wrapper.html(html); 
             $wrapper.find('#id_title').attr('placeholder', 'Введите заголовок');
 
@@ -116,8 +123,6 @@
         //openPopup();
     },
     
-    
-
 
     submitFormHadlers = function(){
         $window.on('submit', 'form', function(e){

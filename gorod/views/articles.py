@@ -104,6 +104,11 @@ class ArticleAddView(View):
         self.city = get_object_or_404(City, name=city_name)
         self.request = request
 
+        rubric_name = request.GET.get('rubric')
+
+        if rubric_name:
+            self.rubric = get_object_or_404(ArticleRubric, name=rubric_name, city=self.city)
+
         # TODO: check is user trying to add article to his city
         if request.method == 'POST':
             instance = self.article if hasattr(self, 'article') and self.article is not None else None
@@ -122,6 +127,9 @@ class ArticleAddView(View):
     def _display_form(self):
         form = ArticleAddForm()
         form.patch_rubrics_qs(self.city)
+
+        if self.rubric:
+            form.initial['rubric'] = self.rubric
 
         return render(self.request, 'gorod/forms/article_add.html', {
             'form': form,

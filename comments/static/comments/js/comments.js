@@ -117,7 +117,7 @@
     $.fn.Comments = function(options) {
         var self = this;
 
-        console.log('opop', arguments);
+        console.log('opop', options);
 
         var commentsObjs = [];
         self.each(function() {

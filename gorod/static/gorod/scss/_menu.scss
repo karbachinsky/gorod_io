@@ -31,3 +31,47 @@
 		@include transition(opacity 0.4s);
 	}
 }
+.b-menu__top{
+	background: $green-color;
+	padding: 25px;
+	position: relative;
+
+	.b-user__name{
+		color:#fff;
+		font-size: 14px;
+	}
+}
+.b-menu__logout{
+	@include gorod-sprite($icons-sprite, logout);
+	position: absolute;
+	height: 21px;
+	width:21px;
+	display: block;
+	right: 25px;
+	top: 33px;
+}
+
+.b-notifications{
+
+}
+.b-notification__item{
+	padding: 25px;
+	border-top: 1px solid $gray-color-light;
+	color:#000;
+	font-size: 14px;
+	a{
+		text-decoration: none;
+		color:#000;
+		font-weight: 600;
+	}
+	.b-notification__date{
+		color:$gray-color;
+		margin-top: 3px;
+	}
+}
+
+
+
+
+
+

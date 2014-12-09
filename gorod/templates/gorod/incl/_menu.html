@@ -1,27 +1,30 @@
+{% load user %}
+
 <div class="b-menu">
+	<div class="b-menu__top">
+		{% if user %}
+			{% user user %}
+		{% endif %}
+		<a href="{% url 'logout' %}" class="b-menu__logout"></a>
+	</div>
+
 	{% if notifications %}
-	    <div class="notifications">
-	    
+	    <div class="b-notifications">
 	        {% for notification in notifications %}
-	            <p>
-	                <b>{{ notification.ctime }}</b>
-	                    Пользователь
-	                    <a href="{{ notification.target_user.profile_url }}">
-	                        {{ notification.target_user }}
-	                    </a>
-	                    оставил
-	                    {% if notification.action == 'add-comment'  %}
-	                    комменатрий
-	                    {% elif notification.action == 'add-like' %}
-	                    лайк
-	                    {% endif %}
-	                    на ваш материал
-	                    <a href="{{ notification.content_object.url }}">
-	                        {{ notification.content_object }}
-	                    </a>
-	            </p>
+	            <div class="b-notification__item">
+                    <a class="b-notification__user" href="{{ notification.target_user.profile_url }}">{{ notification.target_user }}</a>
+                    {% if notification.action == 'add-comment'  %}
+                    	прокомментировал
+                    {% elif notification.action == 'add-like' %}
+                    	лайкнул
+                    {% endif %}
+                    сообщение
+                    <a class="b-notification__article" href="{{ notification.content_object.url }}">
+                        {{ notification.content_object }}
+                    </a>
+                    <div class="b-notification__date">{{ notification.ctime }}</div>
+	            </div>
 	        {% endfor %}
-	    
 	    </div>
     {% endif %}
 </div>

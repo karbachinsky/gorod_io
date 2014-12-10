@@ -1,6 +1,11 @@
 {% load user %}
+
 <form action="" method="post" enctype="multipart/form-data" class="b-form b-beauty-form">
-    {% csrf_token %}	
+    {% csrf_token %}
+    <div class="b-form__top">	
+	    <h3>Новое сообщение</h3>
+		<span class="close">x</span>
+	</div>
 	<div class="b-form__title">
 		{% if form.title.errors %}
 			<span class="b-form__error">{{ form.title.errors }}</span>

@@ -23,18 +23,18 @@
 		.cke{
 			margin: auto;
 			border:none;
-			border-top: 2px solid #f1f1f1;
-			border-bottom: 2px solid #f1f1f1;
+			border-top:1px solid $gray-color-light;
+			border-bottom:1px solid $gray-color-light;
 			@include box-shadow(none);
 		}
 		.cke_top{
 			background: none;
 			border: none;
-			padding: 12px 10px 5px;
+			padding: 12px 40px 5px;
 		}
 
 		.cke_wysiwyg_frame{
-			margin: -10px;
+			margin: -15px 20px;
 		}
 
 		.cke_toolgroup{
@@ -91,24 +91,41 @@
 #b-form__wrapper{
 	max-width:650px;
 	margin: auto;
-	.b-form{
-		padding: 30px 0 10px;
-		margin-bottom: 40px;
-		background: #fff;
-		&>div{
-			margin: 0 auto 10px;
-		}
+	background: #fff;
 
+	.b-form__top{
+		padding: 20px 40px;
+		border-bottom:1px solid $gray-color-light;
+		position: relative;
+		margin-bottom: 15px;
+
+		h3{
+			margin: 0;
+			font-weight: 500;
+			font-size: 15px;
+		}
+		.close{
+			position: absolute;
+			top:20px;
+			right: 40px;
+			cursor: pointer;
+		}
+	}
+	
+	.b-form{
+		margin-bottom: 40px;
 	}
 	.b-form__title{
 		input{
-			width: 554px;	
+			width: 100%;
+			padding: 0 40px;
+			@include box-sizing(border-box);	
 		}
 	}
 
 	.b-form__preview-wrapper{
 		padding-bottom: 25px;
-		padding-left: 10px;
+		padding-left: 40px;
 		position: relative;
 	}
 	.b-form__preview{
@@ -160,20 +177,10 @@
 	}
 
 	.b-form__submit{
-		padding: 0px 10px 20px;
+		padding: 0px 10px 20px 40px;
 	}
 	.b-form__rubric{
-		padding-left: 10px;	
-		span{
-			font-size: 11px;
-			color:$gray-color-dark;
-			text-transform: uppercase;
-			font-weight: 600;
-			margin-right: 10px;
-		}
-		select{
-			font-size: 14px;
-		}
+		display: none;
 	}
 
 	

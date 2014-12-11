@@ -9,7 +9,9 @@
 
 {% block meta_description %}{{ article.title }} - {{city.title}}{% endblock %}
 
-{% block body-class %}not-adaptive-935{% endblock %}
+{% block header-content %}
+    <div class="b-article__header"></div>
+{% endblock %}
 
 {% block content %}
     <div class="b-article__wrapper">

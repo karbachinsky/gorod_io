@@ -5,20 +5,19 @@
 }
 .b-header__content{
 	max-width: 1050px;
-	padding: 20px 50px;
+	padding: 12px 50px;
 	margin: auto;
 	color:#fff;
 }
 @mixin header-ico() {
 	position: absolute;
-	top: 50%;
+	top: 20px;
 	left: 20px;
 	cursor: pointer;
 }
 
 .b-header__menu-btn{
 	@include header-ico();
-	margin-top: -9px;
 	width:23px;
 	height:11px;
 	border-top: 3px solid $green-color-dark;
@@ -35,7 +34,6 @@
 }
 .b-header__back-arrow{
 	@include header-ico();
-	margin-top: -8px;
 	width:16px;
 	height:16px;
 	text-decoration: none;

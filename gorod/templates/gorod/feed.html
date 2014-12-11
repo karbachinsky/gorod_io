@@ -10,11 +10,13 @@
 {% block header-content %}
     <div class="b-feed__rubric-title">
         <h1>{{ rubric.title }}</h1>
+        <div class="b-feed__rubric-cnt"><i></i>{{rubric.articles_cnt}}</div>
+        <div class="clear"></div>
         {% if rubric.description %}
             <div class="b-feed__rubric-description">{{rubric.description}}</div>
         {% endif %}
 
-        <div class="b-feed__rubric-articles-cnt">Количество статей: {{rubric.articles_cnt}}</div>
+        
 
         <span class="add-form-btn">+</span>
     </div>

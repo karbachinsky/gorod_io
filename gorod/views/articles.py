@@ -86,6 +86,11 @@ class ArticleView(View):
             'article': article,
         }
 
+        if request.user.is_authenticated():
+            context['was_already_liked'] = article.is_already_liked_by_user(request.user)
+        else:
+            context['was_already_liked'] = False
+
         return render(request, 'gorod/article.html', context)
 
 

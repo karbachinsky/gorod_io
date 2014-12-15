@@ -136,7 +136,10 @@ class ArticleManager(models.Manager):
             security_data = comment_add_from.generate_security_data()
             security_data.update(csrf_token_dict)
 
-            serializer.data[i]['was_already_liked'] = article.is_already_liked_by_user(request.user)
+            if request.user.is_authenticated():
+                serializer.data[i]['was_already_liked'] = article.is_already_liked_by_user(request.user)
+            else:
+                serializer.data[i]['was_already_liked'] = True
             serializer.data[i]['comment_form_data'] = security_data
 
         json_response = '{"total": %d, "feed": %s}' % (total_cnt, JSONRenderer().render(serializer.data))

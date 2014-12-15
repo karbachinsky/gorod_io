@@ -41,9 +41,53 @@
         data-was-already-liked="{{ article.was_already_liked }}"
          >
     </div>
+
+    <div class="b-comments">
+        {% if article.comment_cnt %}
+            <div class="b-comments__count">{{ article.comment_cnt }} {{ article.comment_cnt_plural_form }}</div>
+            <div class="b-comments__list">
+                {% for comment in article.comments %}
+                    <div class="b-comment">
+                        <div class='b-user b-comment__user'>
+                            <a href="{{ comment.user.profile_url }}" class="b-user__avatar">
+                                <img src="{{ comment.user.full_avatar }}" />
+                            </a>
+                            <a href="{{ comment.user.profile_url }}" class="b-user__name">{{ comment.user.human_name }}</a>
+                        </div>
+                        <span class='b-comment__date'>{{ comment.human_add_date }}</span>
+                        <div class="clear"></div>
+                        <div class="b-comment__text">{{ comment.comment }}</div>
+                        <div class="clear"></div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Comment form   
+        <div class="b-feed-item__comment-form">
+            <form class="b-comments__add-form" action="" method="POST">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ comment_form_data.csrf_token }}">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ comment_form_data.csrf_token }}">
+                <input id="id_honeypot" name="honeypot" type="text">
+                <input id="id_object_pk" name="object_pk" type="hidden" value="{{ id }}">
+                <input id="id_timestamp" name="timestamp" type="hidden" value="{{ comment_form_data.timestamp }}">
+                <input id="id_security_hash" name="security_hash" type="hidden" value="{{ comment_form_data.security_hash }}">
+                <input id="id_content_type" name="content_type" type="hidden" value="{{ comment_form_data.content_type }}">
+
+                <p class="error"></p>
+
+                <textarea id="id_comment" name="comment" placeholder="Комментарий"></textarea>
+
+                <input type="hidden" name="next" value="" />
+                <input class="btn" type="submit" value="Ответить" id="id_submit" />
+                <div class="clear"></div>
+            </form>
+        </div>-->
+    </div>
+
     <script type="text/javascript">
         $(function(){
-            $('.b-like').Like();
+            window.article();
         });
     </script>
 

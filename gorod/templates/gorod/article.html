@@ -10,112 +10,44 @@
 {% block meta_description %}{{ article.title }} - {{city.title}}{% endblock %}
 
 {% block header-content %}
-    <div class="b-article__header"></div>
+    <div class="b-article__header">{{ article.rubric.title }}</div>
 {% endblock %}
 
 {% block content %}
-    <div class="b-article__wrapper">
-        <div class="b-article b-article_{{article.rubric.name}}">
-            
-            <div class="b-article__content">
-
-                <div class="b-article__info">
-                    <div class="b-article__descr">
-                        <a href="{% url 'gorod:feed-rubric' city.name article.rubric.name %}" class="b-article__rubric" style="color:{{article.rubric.color}}">{{ article.rubric.title }}</a>
-
-                        <span class="b-article__date">{{ article.add_date|naturalday }}</span>
-                    </div>
-                    
-                    {% if user == article.user %}
-                        <span class="edit-link edit-link_article">Редактировать</span>
-                    {% else %}
-                        <div class="b-article__author">
-                            {% user article.user %}
-                        </div>
-                        {% if user.is_superuser %}
-                            <span class="edit-link edit-link_article">Редактировать</span>
-                        {% endif %}
-                    {% endif %}
-                    <div class="clear"></div>
-                </div>
-                
-                <h2 class="b-article__title">{{ article.title }}</h2>
-
-                <div class="b-article__text">
-                    {% autoescape off %}
-                        {{ article.text }} 
-                    {% endautoescape %} 
-                </div>
-
-                {% if article.picture and article.picture.url %}
-                    <img class="b-article__picture" src="{{article.picture.url}}" />
-                {% endif %}
-
-                <div class="clear"></div>
-                <div class="b-article__service">
-                    <div class="b-article__share">
-                        {% include "gorod/incl/_share.html" %}
-                    </div>
-
-                    {% like article user %}
-
-                    <script>
-                        $(function() {
-                            options = {};
-
-                            {% if not user.is_authenticated %}
-                               options = {
-                                   like: false,
-                                   dislike: false
-                               };
-                            {% else %}
-                                options = {};
-                            {% endif %}
-
-                            $('.b-like').Like(options);
-                        });
-                    </script>
-                    <div class="b-article__complaint">
-                        <a href="mailto:hola@gorod.io"><i></i>Пожаловаться</a>
-                    </div>
-
-                    {% with article as object %}
-                    {% include "comments/incl/_comments_cnt.html" %}
-
-                    <div class="clear"></div>
-                    <div class="b-article__comments">
-                        <script src="{% static 'comments/js/comments.js' %}"></script>
-                        <script src="{% static 'gorod/js/comments.js' %}" ></script>
-                        <script>
-                            $(function(){
-                                window.articleComments();
-                            });
-                        </script>
-                        {% include "comments/incl/_comments.html" %}
-                    </div>
-                    {% endwith %}
-
-                    <div class="clear"></div>
-                </div>
-            </div>
+<div class="b-article">
+    <h2 class="b-article__title">{{ article.title }}</h2>
+    <div class="b-article__info">
+        <div class="b-article__author">
+            {% user article.user %}
         </div>
+        <span class="b-article__date">{{ article.add_date|naturalday }}</span>
+        <div class="clear"></div>
     </div>
-    <div class="b-feed__wrapper">
-        {% include "gorod/feed/_feed_item.html" %}
-        <script>
-            $(function(){
-                window.ajaxFeed();
-            });
-        </script>
-        <div class="b-feed">
-            <span class="b-feed__title">Читать также</span>
-            <ul class="b-feed__list">
-                <div class="grid-sizer"></div>
-                <div class="gutter-sizer"></div>
-            </ul>
-            <div class="b-feed__more_wrapper"><span class="b-feed__more">Показать еще</span></div>
-           
-        </div>
+    <div class="b-article__text">
+        {% autoescape off %}
+            {{ article.text }} 
+        {% endautoescape %} 
     </div>
+
+    {% if article.picture and article.picture.url %}
+        <img class="b-article__picture" src="{{article.picture.url}}" />
+    {% endif %}
+
+    <div class="clear"></div>
+    <div class="b-like"
+        data-object-pk="{{ article.id }}"
+        data-content_type="gorod.article"
+        data-raiting="{{ article.raiting }}"
+        data-was-already-liked="{{ article.was_already_liked }}"
+         >
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            $('.b-like').Like();
+        });
+    </script>
+
+    <div class="clear"></div>
+</div>
 {% endblock %}
 

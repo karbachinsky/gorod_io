@@ -2,58 +2,28 @@
 	height: 33px;
 }
 
-.b-article__wrapper{
-	padding:30px 30px 0;
-	background: #f3f3f3;
-}
 .b-article{
+	padding:30px 20px 40px;
+	max-width: 650px;
+	margin:35px auto;
+
 	background: #fff;
 
 }
-
-.b-article__content{
-	max-width: 650px;
-	margin: auto;	
-	padding: 30px 30px 50px;
-}
-.b-article__info{
-	
-	.edit-link{
-		float: right;
-		text-align: right;
-		padding-top: 6px;
-		padding-right:20px;
-	}
-}
-.b-article__author{
-	float: right;
-	text-align: right;
-}
 .b-article__title{
-	margin:45px 0 30px; 
+	margin:0 0 20px; 
 	font-weight: 600;
 	font-size: 26px;
-
-	color:#000;
+	color:$gray-color-dark;
 } 
-
-.b-article__descr{
-	float: left;
-	line-height: 14px;  
-
+.b-article__author{
+	@include inline-block;
 }
-.b-article__rubric{
-	font-size: 11px;	
-	text-transform: uppercase;
-	font-weight: 600;
-	text-decoration: none;
-	color:$violet-color;
 
-}
 .b-article__date{
 	color:$gray-color-light;
 	font-size: 11px;
-	display: block;
+	margin-left: 20px;
 	padding-top: 6px;
 
 }
@@ -61,26 +31,13 @@
 	max-width:100% !important;
 	margin: auto;
 	display: block;
+	margin-top: 15px;
 }
 .b-article__text{
+	margin-top: 20px;
 	@include default-text();
 }
-.b-article__service{
-	margin: 40px 0 0;
-}
-
 
 .b-article__comments {
     margin-top: 20px; 
-    
-}
-@media screen and (max-width: 630px) { 
-	
-	.b-article__wrapper{
-		width: auto;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-	
-
 }
